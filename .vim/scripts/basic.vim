@@ -13,6 +13,9 @@ set laststatus=2
 " Beep音を鳴らさない
 set belloff=all
 
+" swapファイルを作らない
+:set noswapfile
+
 """"""""""""""""""""""""""""""
 " color schema 
 """"""""""""""""""""""""""""""

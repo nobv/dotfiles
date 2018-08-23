@@ -7,6 +7,15 @@ filetype indent on
 " tab to space
 set expandtab
 
+" default shiftwidth
+set shiftwidth=2
+
+" default tabstop
+set tabstop=2
+
+" default softtabstop
+set softtabstop=2
+
 " enable autoindent
 set autoindent
 
@@ -31,3 +40,10 @@ highlight SpecialKey   cterm=underline ctermfg=lightblue guibg=darkgray
 highlight JpSpace      cterm=underline ctermfg=lightblue guibg=darkgray
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
 match ZenkakuSpace /　/
+
+
+" ###################
+" Maps
+" ##################
+
+map <C-n> :NERDTreeToggle<CR>
