@@ -1,9 +1,13 @@
 [include]
-    path = ~/.gitconfig.local
+  path = ~/.gitconfig.local
 
 
 [color]
-    ui = auto
+  ui = auto
 
 [core]
-    editor = vim
+  editor = vim
+
+[alias]
+  diffvim = difftool --tool=vimdiff --no-prompt
+
