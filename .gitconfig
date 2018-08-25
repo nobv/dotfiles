@@ -11,3 +11,5 @@
 [alias]
   diffvim = difftool --tool=vimdiff --no-prompt
 
+[ghq]
+  root = ~/src

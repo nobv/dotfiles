@@ -35,6 +35,9 @@ set ruler
 set list
 set listchars=tab:__,trail:_,nbsp:_,extends:>,precedes:<
 
+" マウスをノーマルモード、ビジュアルモード、挿入モード、コマンドラインモードで有効にする
+set mouse=a
+
 " 全角スペースの表示
 highlight SpecialKey   cterm=underline ctermfg=lightblue guibg=darkgray
 highlight JpSpace      cterm=underline ctermfg=lightblue guibg=darkgray

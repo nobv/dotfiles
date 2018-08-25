@@ -14,11 +14,13 @@ set laststatus=2
 set belloff=all
 
 " swapファイルを作らない
-:set noswapfile
+set noswapfile
+
+set backspace=indent,eol,start
 
 """"""""""""""""""""""""""""""
-" color schema 
+" color schema
 """"""""""""""""""""""""""""""
-" syntax enable
-" set background=dark
-" colorscheme solarized
+syntax enable
+set background=dark
+colorscheme solarized

@@ -2,7 +2,12 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'pangloss/vim-javascript'
+repo = 'altercation/vim-colors-solarized'
 
 [[plugins]]
-repo = 'altercation/vim-colors-solarized'
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+
