@@ -2,16 +2,5 @@
 repo = 'scrooloose/nerdtree'
 
 [[plugins]]
-repo = 'Shougo/neomru.vim'
-depends = ['neomru.vim']
-
-[[plugins]]
-repo = 'Shougo/denite.nvim'
-on_source = ['denite.vim']
-
-#[[plugins]]
-#repo = 'Shougo/deoplete.nvim'
-
-[[plugins]]
 repo = 'pangloss/vim-javascript'
 
