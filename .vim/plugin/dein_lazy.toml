@@ -4,3 +4,6 @@ repo = 'scrooloose/nerdtree'
 [[plugins]]
 repo = 'pangloss/vim-javascript'
 
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = ['go']
