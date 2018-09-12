@@ -18,3 +18,6 @@
 
 [ghq]
   root = ~/src
+
+[commit]
+  template = ~/.commit_template
