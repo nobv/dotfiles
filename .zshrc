@@ -3,7 +3,9 @@ export PATH="/usr/local/bin:$PATH"
 export GOPATH=$HOME/src
 export PATH=$PATH:$GOPATH/bin
 
-alias g='cd $(ghq root)/$(ghq list | peco)'
+if [ -f ~/.aliases ]; then
+    source ~/.aliases
+fi
 
 if [[ -f ~/.zplug/init.zsh ]]; then
   export ZPLUG_LOADFILE=~/.zsh/zplug.zsh
@@ -18,3 +20,5 @@ if [[ -f ~/.zplug/init.zsh ]]; then
   fi
   zplug load
 fi
+
+[[ -z "$TMUX" && ! -z "$PS1" ]] && exec tmux
