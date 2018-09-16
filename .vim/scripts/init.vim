@@ -9,3 +9,6 @@ source ~/.dotfiles/.vim/scripts/editor.vim
 
 " load motion's scripts
 source ~/.dotfiles/.vim/scripts/motion.vim
+
+" load settings scripts
+source ~/.dotfiles/.vim/scripts/settings.vim

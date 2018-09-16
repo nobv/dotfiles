@@ -1,6 +1,3 @@
-""""""""""""""""""""""""""""""
-" dein
-""""""""""""""""""""""""""""""
 if &compatible
   set nocompatible
 endif

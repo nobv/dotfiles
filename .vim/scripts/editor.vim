@@ -49,4 +49,3 @@ match ZenkakuSpace /　/
 " Maps
 " ##################
 
-map <C-n> :NERDTreeToggle<CR>
