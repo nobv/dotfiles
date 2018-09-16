@@ -9,4 +9,5 @@ alias ~="cd ~"
 
 # Shortcuts
 
-
+## peco
+alias g='cd $(ghq root)/$(ghq list | peco)'
