@@ -1,12 +1,18 @@
 
-export PATH="/usr/local/bin:$PATH"
 export GOPATH=$HOME/src
 export PATH=$PATH:$GOPATH/bin
+
+# History
+# TODO: history share
+export HISTSIZE=99999
+export HISTFILESIZE=99999
+
 
 if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
+# zplug setting
 if [[ -f ~/.zplug/init.zsh ]]; then
   export ZPLUG_LOADFILE=~/.zsh/zplug.zsh
   source ~/.zplug/init.zsh
@@ -21,4 +27,5 @@ if [[ -f ~/.zplug/init.zsh ]]; then
   zplug load
 fi
 
+# Start tmux when zsh starts
 [[ -z "$TMUX" && ! -z "$PS1" ]] && exec tmux
