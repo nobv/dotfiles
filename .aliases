@@ -1,11 +1,22 @@
 #!/bin/bash
 
-# Navigation
+# Change directory
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~"
+
+# List
+#alias ls='ls -G'
+alias l='ls -CF -G'
+
+# List long format
+alias ll='ls -laF -G'
+
+
+# Shell
+alias reload="exec $SHELL -l"
 
 # Shortcuts
 
