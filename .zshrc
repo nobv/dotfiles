@@ -1,9 +1,15 @@
-
+# Global
+export DOTFILES=$HOME/.dotfiles
+export PATH="/usr/local/bin:$PATH"
 export GOPATH=$HOME/src
 export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$DOTFILES/bin
+
+# Language
+export LANG=en_US.UTF-8
 
 # History
-# TODO: history share
+export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=99999
 export HISTFILESIZE=99999
 
