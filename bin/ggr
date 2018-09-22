@@ -1,0 +1,26 @@
+#!/bin/bash
+
+ggr() {
+
+  local url="https://www.google.com"
+  local chrome="/Applications/Google Chrome.app"
+
+  local search_words=
+
+  for word in "$@"
+  do
+    if [ -z "$search_words" ]; then
+      search_words+=$word
+    else
+      search_words+="+${word}"
+    fi
+  done
+
+   if [ -n "$search_words" ]; then
+     open "${url}"/search?q="${search_words}" -a "${chrome}"
+   else
+     open "${url}"
+   fi
+}
+
+ggr $@
