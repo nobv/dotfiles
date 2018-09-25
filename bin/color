@@ -1,15 +1,90 @@
 #!/bin/bash
 
-# Deault colors
-COLOR_BLACK="\e[30m"
-COLOR_RED="\e[31m"
-COLOR_GREEN="\e[32m"
-COLOR_YELLOW="\e[33m"
-COLOR_BLUE="\e[34m"
-COLOR_MAGENTA="\e[35m"
-COLOR_CYAN="\e[36m"
-COLOR_WHITE="\e[37m"
+# Foreground colors
+FOREGROUND_BLACK="\e[30m"
+FOREGROUND_RED="\e[31m"
+FOREGROUND_GREEN="\e[32m"
+FOREGROUND_YELLOW="\e[33m"
+FOREGROUND_BLUE="\e[34m"
+FOREGROUND_MAGENTA="\e[35m"
+FOREGROUND_CYAN="\e[36m"
+FOREGROUND_WHITE="\e[37m"
 
+# Background colors
+BACKGROUND_BLACK="\e[40m"
+BACKGROUND_RED="\e[41m"
+BACKGROUND_GREEN="\e[42m"
+BACKGROUND_YELLOW="\e[43m"
+BACKGROUND_BLUE="\e[44m"
+BACKGROUND_MAGENTA="\e[45m"
+BACKGROUND_CYAN="\e[46m"
+BACKGROUND_WHITE="\e[47m"
+
+# Reset color
 COLOR_OFF="\e[m"
 
+list() {
+  clear
+  esc="\e["
+  for fore in 30 31 32 33 34 35 36 37; do
+    line0="${fore}  "
+    line1=";1  "
+    line2=";2  "
+    line4=";4  "
+    line5=";5  "
+    line7=";7  "
+    line8=";8  "
 
+    for back in 40 41 42 43 44 45 46 47; do
+      line0="${line0}${esc}${back};${fore}m Normal      ${esc}m"
+      line1="${line1}${esc}${back};${fore};1m Bold        ${esc}m"
+      line2="${line2}${esc}${back};${fore};2m half-bright ${esc}m"
+      line4="${line4}${esc}${back};${fore};4m Under bar   ${esc}m"
+      line5="${line5}${esc}${back};${fore};5m Blink       ${esc}m"
+      line7="${line7}${esc}${back};${fore};7m Reverse     ${esc}m"
+      line8="${line8}${esc}${back};${fore};8m Concealed   ${esc}m"
+    done
+
+    printf "     40         41         42         43         44         45         46         47\n"
+    printf "${line0}\n"
+    printf "${line1}\n"
+    printf "${line2}\n"
+    printf "${line4}\n"
+    printf "${line5}\n"
+    printf "${line7}\n"
+    printf "${line8}\n"
+  done
+}
+
+for OPT in "$@"
+do
+  case "$OPT" in
+    '-h'|'--help' )
+      usage
+      exit 1
+      ;;
+   '-l'|'--list' )
+      list
+      exit 0
+     ;;
+   '-t'|'--time' )
+      shift 1
+      ;;
+    '--'|'-' )
+      shift 1
+      param+=( "$@" )
+      break
+      ;;
+    -*)
+      echo "$PROGNAME: illegal option -- '$(echo $1 | sed 's/^-*//')'" 1>&2
+      exit 1
+      ;;
+    *)
+      if [[ ! -z "$1" ]] && [[ ! "$1" =~ ^-+ ]]; then
+        #param=( ${param[@]} "$1" )
+        param+=( "$1" )
+        shift 1
+      fi
+      ;;
+  esac
+done
