@@ -1,9 +1,18 @@
 #!/bin/bash
 
-ggr() {
 
-  local url="https://www.google.com"
-  local chrome="/Applications/Google Chrome.app"
+URL="https://www.google.com"
+CHROME="/Applications/Google Chrome.app"
+
+SECOND="&tbs=qdr:s"
+HOUR="&tbs=qdr:h"
+DAY="&tbs=qdr:d"
+WEEK="&tbs=qdr:w"
+MONTH="&tbs=qdr:m"
+YEAR="&tbs=qdr:y"
+
+
+ggr() {
 
   local search_words=
 
@@ -17,10 +26,43 @@ ggr() {
   done
 
    if [ -n "$search_words" ]; then
-     open "${url}"/search?q="${search_words}" -a "${chrome}"
+     open "${URL}"/search?q="${search_words}" -a "${CHROME}"
    else
-     open "${url}"
+     open "${URL}"
    fi
 }
+
+for OPT in "$@"
+do
+  case "$OPT" in
+    '-h'|'--help' )
+      usage
+      exit 1
+      ;;
+   '-l'|'--list' )
+      list
+      exit 0
+     ;;
+   '-t'|'--time' )
+      shift 1
+      ;;
+    '--'|'-' )
+      shift 1
+      param+=( "$@" )
+      break
+      ;;
+    -*)
+      echo "$PROGNAME: illegal option -- '$(echo $1 | sed 's/^-*//')'" 1>&2
+      exit 1
+      ;;
+    *)
+      if [[ ! -z "$1" ]] && [[ ! "$1" =~ ^-+ ]]; then
+        #param=( ${param[@]} "$1" )
+        param+=( "$1" )
+        shift 1
+      fi
+      ;;
+  esac
+done
 
 ggr $@
