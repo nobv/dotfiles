@@ -23,7 +23,24 @@ BACKGROUND_WHITE="\e[47m"
 # Reset color
 COLOR_OFF="\e[m"
 
-list() {
+# Echo usage
+function usage() {
+  cat <<EOF
+$(basename ${0}) is a tool for ...
+
+Usage:
+  $(basename ${0}) [command] [<options>]
+
+Options:
+  --list, -l        print color list
+  --help, -h        print this
+EOF
+
+}
+
+
+# Echo color list
+function list() {
   clear
   esc="\e["
   for fore in 30 31 32 33 34 35 36 37; do
@@ -56,35 +73,19 @@ list() {
   done
 }
 
-for OPT in "$@"
-do
-  case "$OPT" in
-    '-h'|'--help' )
-      usage
-      exit 1
-      ;;
-   '-l'|'--list' )
-      list
-      exit 0
-     ;;
-   '-t'|'--time' )
-      shift 1
-      ;;
-    '--'|'-' )
-      shift 1
-      param+=( "$@" )
-      break
-      ;;
-    -*)
-      echo "$PROGNAME: illegal option -- '$(echo $1 | sed 's/^-*//')'" 1>&2
-      exit 1
-      ;;
-    *)
-      if [[ ! -z "$1" ]] && [[ ! "$1" =~ ^-+ ]]; then
-        #param=( ${param[@]} "$1" )
-        param+=( "$1" )
-        shift 1
-      fi
-      ;;
-  esac
-done
+# Only when there are arguments...
+if [ "$#" -ne 0 ]; then
+  for OPT in "$@"
+  do
+    case "$OPT" in
+      '-h'|'--help' )
+        usage
+        exit
+        ;;
+      '-l'|'--list' )
+        list
+        exit
+        ;;
+    esac
+  done
+fi
