@@ -1,12 +1,12 @@
 [include]
   path = ~/.gitconfig.local
 
-
 [color]
   ui = auto
 
 [core]
   editor = vim
+  excludesfile = ~/.gitignore_global
 
 [alias]
   dv = difftool --tool=vimdiff --no-prompt
