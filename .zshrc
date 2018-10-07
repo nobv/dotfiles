@@ -1,14 +1,21 @@
 # Global
+## Dotfile
 export DOTFILES=$HOME/.dotfiles
 export PATH="/usr/local/bin:$PATH"
-export GOPATH=$HOME/src
-export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$DOTFILES/bin
 
-# Language
+## Go
+export GOPATH=$HOME/src
+export PATH=$PATH:$GOPATH/bin
+
+## anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+
+## Language
 export LANG=en_US.UTF-8
 
-# History
+## History
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=99999
 export HISTFILESIZE=99999
