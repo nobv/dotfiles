@@ -17,7 +17,7 @@
   add-untracked = ls-files --others --exclude-standard | xargs git add
 
 [ghq]
-  root = ~/src
+  root = ~/src/src
 
 [commit]
   template = ~/.commit_template
