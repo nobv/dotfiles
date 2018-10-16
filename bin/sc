@@ -1,0 +1,5 @@
+#!/bin/bash
+
+SPELL_CHECK="https://github.com/koalaman/shellcheck/wiki/"
+
+open "${SPELL_CHECK}""$*"

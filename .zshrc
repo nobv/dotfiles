@@ -41,4 +41,4 @@ if [[ -f ~/.zplug/init.zsh ]]; then
 fi
 
 # Start tmux when zsh starts
-[[ -z "$TMUX" && ! -z "$PS1" ]] && exec tmux
+#[[ -z "$TMUX" && ! -z "$PS1" ]] && exec tmux
