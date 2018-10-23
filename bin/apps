@@ -4,12 +4,12 @@
 brew_list() {
 
  echo "=> brew list"
- brew list | tr "\t" "\n"
+ brew list | tr "\\t" "\\n"
 }
 
 brew_cask_list() {
   echo "=> brew cask list"
-  brew cask list | tr "\t" "\n"
+  brew cask list | tr "\\t" "\\n"
 }
 
 app_store_list() {
