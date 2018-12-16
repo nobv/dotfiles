@@ -42,3 +42,9 @@ fi
 
 # Start tmux when zsh starts
 #[[ -z "$TMUX" && ! -z "$PS1" ]] && exec tmux
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/nobv/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/nobv/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/nobv/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/nobv/google-cloud-sdk/completion.zsh.inc'; fi

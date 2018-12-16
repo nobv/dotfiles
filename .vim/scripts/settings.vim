@@ -30,3 +30,9 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['html'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['css'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['md'] = ''
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['txt'] = ''
+
+" ------------------------------
+" vim-airline
+" ------------------------------
+let g:airline_theme = 'solarized'
+let g:airline_solarized_bg='dark'
