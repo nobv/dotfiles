@@ -2,7 +2,24 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_add = 'let g:deoplete#enable_at_startup = 1'
+
+[[plugins]]
+repo = 'zchee/deoplete-go'
+on_ft = 'go'
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+
+[[plugins]]
 repo = 'altercation/vim-colors-solarized'
+
+[[plugins]]
+repo = 'tomasr/molokai'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
@@ -20,4 +37,4 @@ repo = 'vim-airline/vim-airline'
 repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
-repo = 'vim-devicons'
+repo = 'easymotion/vim-easymotion'

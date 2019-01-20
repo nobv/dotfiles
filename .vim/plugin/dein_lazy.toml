@@ -10,3 +10,8 @@ on_ft = ['go']
 
 [[plugins]]
 repo = 'nsf/gocode'
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+
+
