@@ -65,3 +65,24 @@ let g:go_gocode_unimported_packages = 1
 " deoplete
 " ------------------------------
 let g:deoplete#enable_at_startup = 1
+
+" ------------------------------
+" vim-airline
+" ------------------------------
+let g:airline#extensions#tabline#enabled = 1
+nmap <C-p> <Plug>AirlineSelectPrevTab
+nmap <C-n> <Plug>AirlineSelectNextTab
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#buffer_idx_format = {
+  \ '0': '0 ',
+  \ '1': '1 ',
+  \ '2': '2 ',
+  \ '3': '3 ',
+  \ '4': '4 ',
+  \ '5': '5 ',
+  \ '6': '6 ',
+  \ '7': '7 ',
+  \ '8': '8 ',
+  \ '9': '9 '
+  \}
+
