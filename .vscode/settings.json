@@ -1,0 +1,33 @@
+{
+    "go.goroot": "/Users/nobv/.anyenv/envs/goenv/versions/1.11.1",
+    "go.gopath": "/Users/nobv/src",
+    "vs-kubernetes": {
+        "vs-kubernetes.helm-path": "/Users/nobv/.vs-kubernetes/tools/helm/darwin-amd64/helm",
+        "vs-kubernetes.draft-path": "/Users/nobv/.vs-kubernetes/tools/draft/darwin-amd64/draft",
+        "vs-kubernetes.minikube-path": "/Users/nobv/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
+    },
+    "workbench.colorTheme": "Monokai",
+    "vim.easymotion": true,
+    "vim.hlsearch": true,
+    "vim.useSystemClipboard": true,
+    "vsnotes.defaultNotePath": "/Users/nobv/src/src/github.com/Nobv/knowledge",
+    "vsnotes.commitPushDefaultCommitMessage": "Add / Update",
+    "vsnotes.defaultNoteTitle": "{title}.{ext}",
+    "vim.sneak": true,
+    "vim.statusBarColorControl": true,
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#434C5E",
+        "statusBar.noFolderBackground": "#434C5E",
+        "statusBar.debuggingBackground": "#434C5E"
+    },
+    "vim.statusBarColors.insert": "#BF616A",
+    "vim.statusBarColors.visual": "#B48EAD",
+    "vim.statusBarColors.visualline": "#B48EAD",
+    "vim.statusBarColors.visualblock": "#A3BE8C",
+    "vim.statusBarColors.replace": "#D08770",
+    "vim.statusBarColors.normal": "#434C5E",
+    "vsnotes.defaultSnippet": {
+        "langId": "markdown",
+        "name": "metadata"
+    }
+}
