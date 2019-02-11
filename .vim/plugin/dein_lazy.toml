@@ -14,4 +14,6 @@ repo = 'nsf/gocode'
 [[plugins]]
 repo = 'SirVer/ultisnips'
 
+[[plugins]]
+repo = 'w0rp/ale'
 

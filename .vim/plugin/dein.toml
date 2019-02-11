@@ -38,3 +38,4 @@ repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
+
