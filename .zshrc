@@ -16,7 +16,7 @@ eval "$(anyenv init -)"
 export LANG=en_US.UTF-8
 
 ## History
-export HISTFILE=$HOME/.zsh_history
+export HISTFILE=~/.zsh_history
 export HISTSIZE=99999
 export HISTFILESIZE=99999
 setopt hist_ignore_dups
