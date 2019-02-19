@@ -54,7 +54,7 @@ battery_color_ansi() {
     else
         # percentage > BATTERY_DANGER
         if [ "${percentage%%%*}" -ge "$BATTERY_DANGER" ]; then
-            echo -e "\033[34m${percentage}\033[0m"
+            echo -e "\033[36m${percentage}\033[0m"
         else
             echo -e "\033[31m${percentage}\033[0m"
         fi
@@ -71,7 +71,7 @@ battery_color_tmux() {
     else
         # percentage > BATTERY_DANGER
         if [ "${percentage%%%*}" -ge "$BATTERY_DANGER" ]; then
-            echo -e "#[fg=blue]${percentage}#[default]"
+            echo -e "#[fg=cyan]${percentage}#[default]"
         else
             echo -e "#[fg=red]${percentage}#[default]"
         fi
