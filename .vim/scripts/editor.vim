@@ -39,9 +39,9 @@ set listchars=tab:__,trail:_,nbsp:_,extends:>,precedes:<
 set mouse=a
 
 " 全角スペースの表示
-highlight SpecialKey   cterm=underline ctermfg=lightblue guibg=darkgray
-highlight JpSpace      cterm=underline ctermfg=lightblue guibg=darkgray
-highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
+highlight SpecialKey   cterm=underline ctermfg=darkgray guibg=darkgray
+highlight JpSpace      cterm=underline ctermfg=darkgray guibg=darkgray
+highlight ZenkakuSpace cterm=underline ctermfg=darkgray guibg=#666666
 match ZenkakuSpace /　/
 
 
