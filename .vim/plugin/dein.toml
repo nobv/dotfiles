@@ -49,3 +49,8 @@ repo = 'vim-airline/vim-airline-themes'
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
 
+[[plugins]]
+repo = 'w0rp/ale'
+
+[[plugins]]
+repo = 'uarun/vim-protobuf'
