@@ -5,13 +5,15 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+
 alias ~="cd ~"
 
 # List
 #alias ls='ls -G'
 alias l='ls -CF -G'
 
-# List long format
+# List
+# long format
 alias ll='ls -laF -G'
 
 
@@ -19,9 +21,8 @@ alias ll='ls -laF -G'
 alias reload="exec $SHELL -l"
 
 # Shortcuts
+alias e='emacsclient -t'
+alias ke="emacsclient -e '(kill-emacs)'"
 
-# gomi
-alias rm="gomi"
-
-## peco
+# peco
 alias g='cd $(ghq root)/$(ghq list | peco)'
