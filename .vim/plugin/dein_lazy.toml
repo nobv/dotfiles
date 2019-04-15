@@ -15,7 +15,4 @@ repo = 'nsf/gocode'
 repo = 'SirVer/ultisnips'
 
 [[plugins]]
-repo = 'w0rp/ale'
-
-[[plugins]]
 repo = 'cespare/vim-toml'

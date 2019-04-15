@@ -1,7 +1,7 @@
 " ------------------------------
 " NERDTree
 " ------------------------------
-map <C-n> :NERDTreeToggle<CR>
+map <C-w><C-t>  :NERDTreeToggle<CR>
 
 let NERDTreeShowHidden = 1
 
@@ -49,6 +49,8 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_generate_tags = 1
+"let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+"let g:go_metalinter_autosave = 1
 
 " ------------------------------
 " molokai
@@ -91,6 +93,10 @@ let g:airline#extensions#tabline#buffer_idx_format = {
 " --------------------------------
 let g:ale_linters = {
 \   'bash': ['shellcheck'],
+\   'go' : ['golangci-lint'],
+\}
+let g:ale_fixers = {
+\   'go' : ['goimports']
 \}
 let g:ale_sign_error = '⨉'
 let g:ale_sign_warning = '⚠'
@@ -100,3 +106,4 @@ let g:ale_sign_column_always = 1
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_sign_column_always = 1

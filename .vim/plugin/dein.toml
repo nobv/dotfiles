@@ -13,7 +13,11 @@ hook_add = '''
 
 [[plugins]]
 repo = 'zchee/deoplete-go'
+build = 'make'
 on_ft = 'go'
+hook_source = '''
+    let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
+'''
 
 [[plugins]]
 repo = 'roxma/nvim-yarp'
@@ -45,3 +49,8 @@ repo = 'vim-airline/vim-airline-themes'
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
 
+[[plugins]]
+repo = 'w0rp/ale'
+
+[[plugins]]
+repo = 'uarun/vim-protobuf'
