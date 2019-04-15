@@ -21,7 +21,15 @@ alias reload="exec $SHELL -l"
 # Shortcuts
 
 # gomi
-alias rm="gomi"
+#alias rm="gomi"
 
 ## peco
 alias g='cd $(ghq root)/$(ghq list | peco)'
+
+function peco-history-selection() {
+    print -z `\history -n 1 | tail -r | peco --prompt "[hs]"`
+    CURSOR=$#BUFFER
+}
+
+zle -N peco-history-selection
+alias hs=' peco-history-selection'
