@@ -3,6 +3,7 @@
 export DOTFILES=$HOME/.dotfiles
 export PATH="/usr/local/bin:$PATH"
 export PATH=$PATH:$DOTFILES/bin
+export TERM="xterm-256color"
 
 ## Go
 export GOPATH=$HOME/src
