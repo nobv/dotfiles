@@ -22,7 +22,7 @@
  '(magit-diff-use-overlays nil)
  '(package-selected-packages
    (quote
-    (init-loader exec-path-from-shell flycheck-golangci-lint go-autocomplete go-dlv go-guru go-imports go-eldoc go-mode molokai-theme package-utils elscreen undo-tree undohist wgrep moccur-edit color-moccur auto-complete solarized-theme color-theme-solarized helm multi-term htmlize)))
+    (magit init-loader exec-path-from-shell flycheck-golangci-lint go-autocomplete go-dlv go-guru go-imports go-eldoc go-mode molokai-theme package-utils elscreen undo-tree undohist wgrep moccur-edit color-moccur auto-complete solarized-theme color-theme-solarized helm multi-term htmlize)))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
  '(vc-annotate-background nil)

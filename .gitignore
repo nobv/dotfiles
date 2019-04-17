@@ -1,2 +1,29 @@
+# tmux
 .tmux/plugins/*
 .tmux/resurrect/*
+
+# emacs
+
+## elpa packages
+.emacs.d/elpa/*
+
+## network security
+.emacs.d/network-security.data
+
+## backup
+.emacs.d/backups/*
+
+## recentf
+.emacs.d/recentf
+
+## undohist
+.emacs.d/undohist
+
+## transient
+.emacs.d/transient/*
+
+## ac-comphist.dat
+.emacs.d/ac-comphist.dat
+
+## auto-save-list
+.emacs.d/auto-save-list/*

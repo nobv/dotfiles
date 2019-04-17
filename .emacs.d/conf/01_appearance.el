@@ -9,7 +9,7 @@
 ;; ----------------------------------------
 (set-face-attribute 'default nil
 		    :family "Hack Regular Nerd Font Complete"
-		    :height 150)
+		    :height 140)
 
 ;; ----------------------------------------
 ;; other
@@ -19,7 +19,7 @@
 (global-linum-mode t)
 
 ;; paren-mode
- (show-paren-mode t)
+ (show-paren-mode 0)
 (setq show-paren-delay 0)
 (setq show-paren-style 'expression)
 (set-face-background 'show-paren-match nil)

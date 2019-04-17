@@ -33,18 +33,32 @@
 ;; install package list
 (defvar installing-package-list
   '(
+    ;; loader
     init-loader
+    ;; helm
     helm
-    auto-complete
+    ;; grep
+    wgrep
+    ;; moccur
     color-moccur
     moccur-edit
-    wgrep
-    undohist
-    elscreen
-    go-mode
+    ;; edit
+    auto-complete
+    ;; lint
     flycheck
-    exec-path-from-shell
+    ;; undo
+    undohist
+    undo-tree
+    ;; git
+    magit
+    ;; go
+    go-mode
     go-autocomplete
+    ;; environment
+    elscreen
+    exec-path-from-shell
+    multi-term
+    ;; theme
     solarized-theme
     monokai-theme
     gruvbox-theme
