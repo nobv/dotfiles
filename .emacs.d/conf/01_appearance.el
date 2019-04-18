@@ -8,8 +8,8 @@
 ;; fonts
 ;; ----------------------------------------
 (set-face-attribute 'default nil
-		    :family "Hack Regular Nerd Font Complete"
-		    :height 140)
+		    :family "Cica"
+		    :height 160)
 
 ;; ----------------------------------------
 ;; other
@@ -23,4 +23,4 @@
 (setq show-paren-delay 0)
 (setq show-paren-style 'expression)
 (set-face-background 'show-paren-match nil)
-(set-face-underline-p 'show-paren-match-expression "syan")
+(set-face-underline-p 'show-paren-match-expression "syan"k)

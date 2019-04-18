@@ -54,6 +54,8 @@
     ;; go
     go-mode
     go-autocomplete
+    flycheck-golangci-lint
+    go-eldoc
     ;; environment
     elscreen
     exec-path-from-shell
