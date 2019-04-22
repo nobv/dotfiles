@@ -49,21 +49,18 @@
 
 ;;; flycheck
 (use-package flycheck
-  :ensure t
-  :defer t)
+  :ensure t)
 
 ;;; undo-tree
 (use-package undo-tree
   :ensure t
-  :defer t
   :bind (("C-'" . undo-tree-redo))
-  :config
+  :init
   (global-undo-tree-mode))
 
 ;;; undohist
 (use-package undohist
   :ensure t
-  :defer t
   :config
   (undohist-initialize))
 
@@ -84,8 +81,13 @@
   (setq auto-save-buffers-interval 3)
   (auto-save-buffers-enhanced t))
 
+;;; exec-path-from-shell
 (use-package exec-path-from-shell
   :ensure t
-  :defer t)
+  :defer t
+  :if (memq window-system '(mac ns))
+  :config
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-envs '("PATH" "GOROOT" "GOPATH")))
 
 

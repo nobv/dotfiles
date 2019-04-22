@@ -13,6 +13,7 @@
 	("C-c d" . godoc)
 	("C-c l" . golint))
   :init
+  (add-hook 'go-mode-hook #'lsp)
   (add-hook 'go-mode-hook
 	    (lambda ()
 	      (setq tab-width 4)
@@ -36,6 +37,7 @@
     :ensure t
     :hook (go-mode . flycheck-golangci-lint-setup))
   (use-package go-guru
+    :disabled t
     :ensure t)
   ;; set
   (setenv "GO111MODULE" "on")
@@ -49,7 +51,3 @@
   (add-to-list 'company-backends '(company-go :with company-dabbrev-code))
   (setq company-transformers '(company-sort-by-backend-importance))
   (add-hook 'before-save-hook 'gofmt-before-save))
-
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-envs '("PATH" "GOROOT" "GOPATH")))
