@@ -1,2 +1,0 @@
-;; Helm
-(require 'helm-config)

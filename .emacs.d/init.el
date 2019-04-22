@@ -1,4 +1,4 @@
-;; load path function
+;;;;; load path function
 (defun add-to-load-path (&rest paths)
   (let (path)
     (dolist (path paths paths)
@@ -7,11 +7,11 @@
 	(add-to-list 'load-path default-directory)
 	(if (fboundp 'normal-top-level-add-subdirs-to-load-path)
 	    (normal-top-level-add-subdirs-to-load-path))))))
-
 ;; add directory to load path 
 (add-to-load-path "elisp" "conf" "public_repos")
 
-;; enable package.el
+
+;;;;; ensure to use package.el
 (require 'package)
 (add-to-list
  'package-archives
@@ -26,52 +26,20 @@
  'package-archives
  '("org" . "http://orgmode.org/elpa/"))
 (package-initialize)
+(package-refresh-contents)
 
-;; update package
-;; (package-refresh-contents)
+;;;;; ensure to use use-package
+(when (not (package-installed-p 'use-package))
+  (package-install 'use-package))
+(require 'use-package)
 
-;; install package list
-(defvar installing-package-list
-  '(
-    ;; loader
-    init-loader
-    ;; helm
-    helm
-    ;; grep
-    wgrep
-    ;; moccur
-    color-moccur
-    moccur-edit
-    ;; edit
-    auto-complete
-    ;; lint
-    flycheck
-    ;; undo
-    undohist
-    undo-tree
-    ;; git
-    magit
-    ;; go
-    go-mode
-    go-autocomplete
-    flycheck-golangci-lint
-    go-eldoc
-    ;; environment
-    elscreen
-    exec-path-from-shell
-    multi-term
-    ;; theme
-    solarized-theme
-    monokai-theme
-    gruvbox-theme
-    ))
+;;;;; init-loader
+(use-package init-loader
+	     :ensure t
+	     :config
+	     (init-loader-load "~/.emacs.d/conf"))
 
-;; install packages
-(unless package-archive-contents (package-refresh-contents))
-(dolist (package installing-package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
-
+;;;;; change tha place for custom
 ;; make custom file into another file
 (setq custom-file (locate-user-emacs-file "custom.el"))
 ;; when not exsits custom file, create custom file
@@ -79,8 +47,3 @@
   (write-region "" nil cusotm-file))
 ;; load custom file
 (load custom-file)
-
-;; init-loader
-(require 'init-loader)
-(setq init-loader-show-log-after-init t)
-(init-loader-load "~/.emacs.d/conf")
