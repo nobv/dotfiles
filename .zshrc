@@ -5,13 +5,15 @@ export PATH="/usr/local/bin:$PATH"
 export PATH=$PATH:$DOTFILES/bin
 export TERM="xterm-256color"
 
-## Go
-export GOPATH=$HOME/src
-export PATH=$PATH:$GOPATH/bin
-
 ## anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
+
+## Go
+export GOPATH=$HOME/src
+export PATH=$PATH:$GOPATH/bin
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 
 ## Language
 export LANG=en_US.UTF-8
