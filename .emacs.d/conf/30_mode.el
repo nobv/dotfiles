@@ -13,7 +13,6 @@
 	("C-c d" . godoc)
 	("C-c l" . golint))
   :init
-  (add-hook 'go-mode-hook #'lsp)
   (add-hook 'go-mode-hook
 	    (lambda ()
 	      (setq tab-width 4)

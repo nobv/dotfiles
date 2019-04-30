@@ -83,11 +83,9 @@
 
 ;;; exec-path-from-shell
 (use-package exec-path-from-shell
-  :ensure t
-  :defer t
-  :if (memq window-system '(mac ns))
+  :custom
+  (exec-path-from-shell-check-startup-files nil)
+  (exec-path-from-shell-variables '("PATH" "GOROOT" "GOPATH"))
   :config
-  (exec-path-from-shell-initialize)
-  (exec-path-from-shell-copy-envs '("PATH" "GOROOT" "GOPATH")))
-
-
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
