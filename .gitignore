@@ -27,3 +27,6 @@
 
 ## auto-save-list
 .emacs.d/auto-save-list/*
+
+## lsp
+.emacs.d/.lsp-session-v1
