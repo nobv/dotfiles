@@ -1,11 +1,11 @@
 ;;;; Generic
 
 ;;; auto-save-buffers-enhanced
-(use-package auto-save-buffers-enhanced
-  :ensure t
-  :config
-  (setq auto-save-buffers-interval 3)
-  (auto-save-buffers-enhanced t))
+;; (use-package auto-save-buffers-enhanced
+;;   :ensure t
+;;   :config
+;;   (setq auto-save-buffers-interval 3)
+;;   (auto-save-buffers-enhanced t))
 
 ;;; exec-path-from-shell
 (use-package exec-path-from-shell
@@ -67,10 +67,40 @@
 
 ;;; flycheck
 (use-package flycheck
-  :ensure t)
+  :ensure t
+  :init (global-flycheck-mode))
+
+;;; golangci-lint
+(use-package flycheck-golangci-lint
+  :ensure t
+  :hook (go-mode . flycheck-golangci-lint-setup))
+
+(use-package posframe)
+(use-package flymake-posframe
+  :hook (flymake-mode . flymake-posframe-mode))
 
 ;;;; Git
 
+(use-package magit
+  :ensure t
+  :custom
+  (magit-auto-revert-mode nil)
+  :bind
+  ("M-g s" . magit-status))
+
+;;;git-gutter
+;; (use-package git-gutter
+;;   :ensure t
+;;   :custom
+;;   (git-gutter:modified-sign "~")		; 
+;;   (git-gutter:added-sign    "+")		; 
+;;   (git-gutter:deleted-sign  "-")		; 
+;;   :custom-face
+;;   (git-gutter:modified ((t (:foreground "#f1fa8c" :background "#f1fa8c"))))
+;;   (git-gutter:added    ((t (:foreground "#50fa7b" :background "#50fa7b"))))
+;;   (git-gutter:deleted  ((t (:foreground "#ff79c6" :background "#ff79c6"))))
+;;   :config
+;;   (global-git-gutter-mode t))
 
 ;;;; UI
 
@@ -83,8 +113,8 @@
   (minimap-window-location 'right)
   (minimap-update-delay 0.2)
   (minimap-minimum-width 20)
-  :bind
-  ("M-t p" . toggle-minimap)
+  ;; :bind
+  ;; ("M-t p" . toggle-minimap)
   :preface
   (defun toggle-minimap ()
     "Toggle minimap for current buffer."
@@ -98,23 +128,80 @@
      ((((background dark)) (:background "#555555555555"))
       (t (:background "#C847D8FEFFFF"))) :group 'minimap)))
 
+;;; hide mode line
+;; (use-package hide-mode-line
+;;    :hook
+;;    ((neotree-mode imenu-list-minor-mode minimap-mode) . hide-mode-line-mode))
 
+;;; neotree
+(use-package neotree
+  :after
+  projectile
+  :commands
+  (neotree-show neotree-hide neotree-dir neotree-find)
+  :custom
+  (neo-theme 'nerd)
+  :bind
+  ("<f8>" . neotree-current-dir-toggle)
+  ("<f9>" . neotree-projectile-toggle)
+  :preface
+  (defun neotree-projectile-toggle ()
+    (interactive)
+    (let ((project-dir
+           (ignore-errors
+           ;;; Pick one: projectile or find-file-in-project
+             (projectile-project-root)
+             ))
+          (file-name (buffer-file-name))
+          (neo-smart-open t))
+      (if (and (fboundp 'neo-global--window-exists-p)
+               (neo-global--window-exists-p))
+          (neotree-hide)
+        (progn
+          (neotree-show)
+          (if project-dir
+              (neotree-dir project-dir))
+          (if file-name
+              (neotree-find file-name))))))
+  (defun neotree-current-dir-toggle ()
+    (interactive)
+    (let ((project-dir
+           (ignore-errors
+             (ffip-project-root)
+             ))
+          (file-name (buffer-file-name))
+          (neo-smart-open t))
+      (if (and (fboundp 'neo-global--window-exists-p)
+               (neo-global--window-exists-p))
+          (neotree-hide)
+        (progn
+          (neotree-show)
+          (if project-dir
+              (neotree-dir project-dir))
+          (if file-name
+              (neotree-find file-name)))))))
 
-;;;; High-Lights
+;;; modeline
+(use-package telephone-line
+  :ensure t
+  :config
+  (telephone-line-mode 1))
+
+;;;; high-Lights
 
 ;;; paren
- (use-package paren
-    :ensure nil
-    :hook
-    (after-init . show-paren-mode)
-    :custom-face
-    (show-paren-match ((nil (:background "#44475a" :foreground "#cccccc"))))
-    :custom
-    (show-paren-style 'mixed)
-    (show-paren-when-point-inside-paren t)
-    (show-paren-when-point-in-periphery t)
-    :config
-    (set-face-underline-p 'show-paren-match-expression "darkgreen"))
+(use-package paren
+  :ensure nil
+  :hook
+  (after-init . show-paren-mode)
+  :custom-face
+  (show-paren-match ((nil (:background "#44475a" :foreground "#cccccc"))))
+  :custom
+  (show-paren-style 'mixed)
+  (show-paren-when-point-inside-paren t)
+  (show-paren-when-point-in-periphery t)
+  :config
+  (set-face-underline-p 'show-paren-match-expression "darkgreen"))
 
 
 ;;; color-moccur
