@@ -18,6 +18,9 @@ export PATH="$GOPATH/bin:$PATH"
 ## Language
 export LANG=en_US.UTF-8
 
+## Stack
+export PATH=~/.local/bin:$PATH
+
 ## History
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000

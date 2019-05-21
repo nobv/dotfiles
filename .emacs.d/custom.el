@@ -8,7 +8,7 @@
     ("bd7b7c5df1174796deefce5debc2d976b264585d51852c962362be83932873d9" default)))
  '(package-selected-packages
    (quote
-    (helm-descbinds minimap go-guru use-package lsp-mode wgrep undohist undo-tree solarized-theme multi-term monokai-theme moccur-edit magit init-loader helm gruvbox-theme go-eldoc go-autocomplete flycheck-golangci-lint exec-path-from-shell elscreen company-go auto-save-buffers-enhanced))))
+    (lsp-haskell helm-descbinds minimap go-guru use-package lsp-mode wgrep undohist undo-tree solarized-theme multi-term monokai-theme moccur-edit magit init-loader helm gruvbox-theme go-eldoc go-autocomplete flycheck-golangci-lint exec-path-from-shell elscreen company-go auto-save-buffers-enhanced))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
