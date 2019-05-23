@@ -30,7 +30,7 @@
 ;;; fonts
 (set-face-attribute 'default nil
 		    :family "Cica"
-		    :height 160)
+		    :height 140)
 
 ;;; for japanese
 ;;(set-language-environment "Japanese")

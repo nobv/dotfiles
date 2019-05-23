@@ -14,12 +14,14 @@
   ;; go-client
   (lsp-clients-go-server-args '("--cache-style=always" "--diagnostics-style=onsave" "--format-style=goimports"))
   :hook
-  ((go-mode c-mode c++-mode) . lsp)
+  ((go-mode c-mode c++-mode haskell-mode-hook) . lsp)
   :bind
   (:map lsp-mode-map
-  ("C-c r"   . lsp-rename))
+	("C-c r"   . lsp-rename)
+	("C-c b"   .'xref-pop-marker-stack))
   :config
   (require 'lsp-clients)
+
   ;; LSP UI tools
   (use-package lsp-ui
     :ensure t
@@ -55,31 +57,31 @@
     (defun ladicle/toggle-lsp-ui-doc ()
       (interactive)
       (if lsp-ui-doc-mode
-        (progn
-          (lsp-ui-doc-mode -1)
-          (lsp-ui-doc--hide-frame))
-         (lsp-ui-doc-mode 1)))
+          (progn
+            (lsp-ui-doc-mode -1)
+            (lsp-ui-doc--hide-frame))
+        (lsp-ui-doc-mode 1)))
     :bind
     (:map lsp-mode-map
-    ("C-c C-r" . lsp-ui-peek-find-references)
-    ("C-c C-j" . lsp-ui-peek-find-definitions)
-    ("C-c i"   . lsp-ui-peek-find-implementation)
-    ("C-c m"   . lsp-ui-imenu)
-    ("C-c s"   . lsp-ui-sideline-mode)
-    ("C-c d"   . ladicle/toggle-lsp-ui-doc))
+	  ("C-c C-r" . lsp-ui-peek-find-references)
+	  ("C-c C-j" . lsp-ui-peek-find-definitions)
+	  ("C-c i"   . lsp-ui-peek-find-implementation)
+	  ("C-c m"   . lsp-ui-imenu)
+	  ("C-c s"   . lsp-ui-sideline-mode)
+	  ("C-c d"   . ladicle/toggle-lsp-ui-doc))
     :hook
     (lsp-mode . lsp-ui-mode))
 
   (lsp-register-client
-    (make-lsp-client :new-connection (lsp-stdio-connection
-                                 (lambda () (cons "bingo"
-                                                  lsp-clients-go-server-args)))
-                :major-modes '(go-mode)
-                :priority 2
-                :initialization-options 'lsp-clients-go--make-init-options
-                :server-id 'go-bingo
-                :library-folders-fn (lambda (_workspace)
-                                      lsp-clients-go-library-directories)))
+   (make-lsp-client :new-connection (lsp-stdio-connection
+                                     (lambda () (cons "bingo"
+                                                      lsp-clients-go-server-args)))
+                    :major-modes '(go-mode)
+                    :priority 2
+                    :initialization-options 'lsp-clients-go--make-init-options
+                    :server-id 'go-bingo
+                    :library-folders-fn (lambda (_workspace)
+					  lsp-clients-go-library-directories)))
 
   ;; Lsp completion
   (use-package company-lsp
@@ -97,11 +99,13 @@
   :mode "\\.go\\'"
   :custom (gofmt-command "goimports")
   :bind (:map go-mode-map
-         ("C-c C-n" . go-run)
-         ("C-c ."   . go-test-current-test)
-         ("C-c f"   . go-test-current-file)
-         ("C-c a"   . go-test-current-project))
+              ("C-c C-n" . go-run)
+              ("C-c ."   . go-test-current-test)
+              ("C-c f"   . go-test-current-file)
+              ("C-c a"   . go-test-current-project))
   :config
   (add-hook 'before-save-hook #'gofmt-before-save))
 
 ;;;; Haskell
+(use-package lsp-haskell
+  :ensure t)
