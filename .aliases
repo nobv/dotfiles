@@ -23,6 +23,7 @@ alias reload="exec $SHELL -l"
 # Shortcuts
 alias e='emacsclient -t'
 alias ke="emacsclient -e '(kill-emacs)'"
+alias emacs='emacs -nw'
 
 # gomi
 #alias rm="gomi"
