@@ -64,8 +64,9 @@ values."
      spell-checking
      syntax-checking
      version-control
-     lsp
-     lsp-ui
+     (lsp :variables
+          lsp-ui-doc-enable nil
+          lsp-ui-sideline-enable nil)
      docker
      git
      yaml
