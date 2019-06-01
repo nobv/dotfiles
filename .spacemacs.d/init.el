@@ -49,6 +49,8 @@ values."
      emacs-lisp
      markdown
      org
+     shell-scripts
+     scala
 
      ;; Tools
      (shell :variables
@@ -239,7 +241,7 @@ values."
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup nil
+   dotspacemacs-fullscreen-at-startup t
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
@@ -278,7 +280,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -319,6 +321,9 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;;scala
+  (add-to-list 'configuration-layer-elpa-archives '("melpa-stable" . "stable.melpa.org/packages/"))
+  (add-to-list 'package-pinned-packages '(ensime . "melpa-stable"))
   )
 
 (defun dotspacemacs/user-config ()
@@ -332,6 +337,14 @@ you should place your code here."
   (add-hook 'haskell-mode-hook #'lsp)
   (require 'go-mode)
   (add-hook 'go-mode #'lsp)
+
+  (setq-default flycheck-scalastylerc "/usr/local/etc/scalastyle_config.xml")
+  (setq-default dotspacemacs-configuration-layers '(
+                                                    (scala :variables scala-enable-eldoc t)))
+  (setq-default dotspacemacs-configuration-layers '(
+                                                    (scala :variables scala-auto-insert-asterisk-in-comments t)))
+  (setq-default dotspacemacs-configuration-layers '(
+                                                    (scala :variables scala-auto-start-ensime t)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
