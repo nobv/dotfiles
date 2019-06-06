@@ -50,10 +50,17 @@ values."
      markdown
      org
      shell-scripts
-     scala
+     (java :variables
+           java-backend 'ensime)
+     (scala :variables
+            scala-enable-eldoc t
+            scala-auto-insert-asterisk-in-comments
+            scala-auto-start-ensime)
+     html
 
      ;; Tools
      (shell :variables
+            shell-default-shell 'eshell
             shell-default-height 30
             shell-default-position 'bottom)
      helm
@@ -70,6 +77,8 @@ values."
      docker
      git
      yaml
+     protobuf
+     sql
      ;; better-defaults
      )
    ;; List of additional packages that will be installed without being
@@ -334,18 +343,28 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  ;; haskell
   (require 'lsp-haskell)
   (add-hook 'haskell-mode-hook #'lsp)
+
+  ;;go
   (require 'go-mode)
   (add-hook 'go-mode #'lsp)
+  (setq flycheck-check-syntax-automatically '(mode-enabled save))
 
+  ;;scala
   (setq-default flycheck-scalastylerc "/usr/local/etc/scalastyle_config.xml")
-  (setq-default dotspacemacs-configuration-layers '(
-                                                    (scala :variables scala-enable-eldoc t)))
-  (setq-default dotspacemacs-configuration-layers '(
-                                                    (scala :variables scala-auto-insert-asterisk-in-comments t)))
-  (setq-default dotspacemacs-configuration-layers '(
-                                                    (scala :variables scala-auto-start-ensime t)))
+
+  ;;ensime
+  (setq ensime-startup-notification nil)
+
+  ;;shell
+  ;;(defadvice multi-term (after advise-multi-term-coding-system)
+  ;;  (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
+  ;;(ad-activate 'multi-term)
+  ;;(prefer-coding-system 'utf-8)
+  ;;(setq system-uses-terminfo nil)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -364,3 +383,23 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (web-mode web-beautify tagedit slim-mode scss-mode sass-mode pug-mode prettier-js impatient-mode simple-httpd helm-css-scss haml-mode emmet-mode counsel-css company-web web-completion-data add-node-modules-path org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot yaml-mode xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help smeargle orgit mmm-mode markdown-toc magit-gitflow magit-popup lsp-haskell lsp-mode markdown-mode ht dash-functional helm-gitignore helm-company helm-c-yasnippet gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip evil-magit magit transient git-commit with-editor diff-hl company-statistics company-go auto-yasnippet auto-dictionary ac-ispell auto-complete haskell-snippets yasnippet flycheck-haskell flycheck company-ghci company-ghc ghc haskell-mode company-cabal company cmm-mode go-guru go-eldoc go-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
