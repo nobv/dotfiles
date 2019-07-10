@@ -42,8 +42,10 @@ values."
          go-tab-width 4
          go-use-golangci-lint t
          go-backend 'lsp
+         ;;go-backend 'go-mode
          go-format-before-save t
          go-test-verbose t
+         godoc-at-point-function 'godoc-gogetdoc
          gofmt-command "goimports")
      (haskell :variables
               haskell-completion-backend 'ghci
@@ -71,7 +73,7 @@ values."
             shell-default-shell 'eshell
             shell-default-height 30
             shell-default-position 'bottom)
-     helm
+     ;;helm
      (auto-completion :variables
                       company-minimum-prefix-length 1
                       auto-completion-idle-delay 0
@@ -320,7 +322,7 @@ values."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("pt" "ack" "grep")
    ;; The default package repository used if no explicit repository has been
    ;; specified with an installed package.
    ;; Not used for now. (default nil)
@@ -359,11 +361,6 @@ you should place your code here."
   (require 'lsp-haskell)
   (add-hook 'haskell-mode-hook #'lsp)
 
-  ;;go
-  (require 'go-mode)
-  (setq flycheck-check-syntax-automatically '(mode-enabled save))
-  (setq go-format-before-save t)
-
   ;;scala
   (setq-default flycheck-scalastylerc "/usr/local/etc/scalastyle_config.xml")
 
@@ -376,6 +373,9 @@ you should place your code here."
   ;;(ad-activate 'multi-term)
   ;;(prefer-coding-system 'utf-8)
   ;;(setq system-uses-terminfo nil)
+
+  ;; flycheck
+  (setq flycheck-check-syntax-automatically '(mode-enabled save))
 
   )
 
