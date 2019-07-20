@@ -42,6 +42,10 @@ values."
          go-tab-width 4
          go-use-golangci-lint t
          go-backend 'lsp
+         ;;go-backend 'go-mode
+         go-format-before-save t
+         go-test-verbose t
+         godoc-at-point-function 'godoc-gogetdoc
          gofmt-command "goimports")
      (haskell :variables
               haskell-completion-backend 'ghci
@@ -360,22 +364,6 @@ you should place your code here."
   ;; haskell
   (require 'lsp-haskell)
   (add-hook 'haskell-mode-hook #'lsp)
-
-  ;;go
-  (require 'go-mode)
-  (add-hook 'go-mode #'lsp)
-  (setq flycheck-check-syntax-automatically '(mode-enabled save))
-  (setq go-format-before-save t)
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection
-                                     (lambda () (cons "bingo"
-                                                      lsp-clients-go-server-args)))
-                    :major-modes '(go-mode)
-                    :priority 2
-                    :initialization-options 'lsp-clients-go--make-init-options
-                    :server-id 'go-bingo
-                    :library-folders-fn (lambda (_workspace)
-                                          lsp-clients-go-library-directories)))
 
   ;;scala
   (setq-default flycheck-scalastylerc "/usr/local/etc/scalastyle_config.xml")
