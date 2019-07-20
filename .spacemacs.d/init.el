@@ -54,7 +54,9 @@ values."
      emacs-lisp
      markdown
      (org :variables
-          org-enable-github-support t)
+          org-enable-github-support t
+          org-enable-reveal-js-support t
+          org-enable-hugo-support t)
      shell-scripts
      (java :variables
            java-backend 'ensime)
@@ -147,7 +149,7 @@ values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotpacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'vim
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -174,6 +176,16 @@ values."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-dark
                          spacemacs-light)
+
+   ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
+   ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
+   ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
+   ;; `vanilla' is default Emacs mode-line. `custom' is a user defined themes,
+   ;; refer to the DOCUMENTATION.org for more info on how to create your own
+   ;; spaceline theme. Value can be a symbol or list with additional properties.
+   ;; (default '(spacemacs :separator wave :separator-scale 1.5))
+   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -365,18 +377,40 @@ you should place your code here."
   (require 'lsp-haskell)
   (add-hook 'haskell-mode-hook #'lsp)
 
-  ;;scala
+  ;; scala
   (setq-default flycheck-scalastylerc "/usr/local/etc/scalastyle_config.xml")
 
-  ;;ensime
+  ;; ensime
   (setq ensime-startup-notification nil)
 
-  ;;shell
+  ;; shell
   ;;(defadvice multi-term (after advise-multi-term-coding-system)
   ;;  (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
   ;;(ad-activate 'multi-term)
   ;;(prefer-coding-system 'utf-8)
   ;;(setq system-uses-terminfo nil)
+
+  ;; org
+
+  ;;; agenda
+  (setq org-directory "~/Google Drive File Stream/My Drive/me/sync/org/")
+  (defconst notes (concat org-directory "notes.org"))
+  (defconst tasks (concat org-directory "tasks.org"))
+  (defconst schedule (concat org-directory "schedule.org"))
+  ;;(setq org-default-notes-file notes)
+  (setq org-agenda-files (list notes))
+
+  ;;; capture
+  (setq org-capture-templates
+        '(("i" "inbox"
+           entry
+           (file+headline notes "Inbox")
+           "* %?\n   Entered on %U"
+           :empty-lines 1)))
+
+  ;;; brain
+  (defconst brain (concat org-directory "brain/"))
+  (setq org-brain-path brain)
 
   )
 
