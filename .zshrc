@@ -3,6 +3,8 @@
 export DOTFILES=$HOME/.dotfiles
 export PATH="/usr/local/bin:$PATH"
 export PATH=$PATH:$DOTFILES/bin
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 export TERM="xterm-256color"
 
 ## anyenv
@@ -21,6 +23,10 @@ export LANG=en_US.UTF-8
 ## Stack
 export PATH=~/.local/bin:$PATH
 export PATH=$(stack path --compiler-bin):$PATH
+
+## direnv
+export EDITOR=emacs
+eval "$(direnv hook zsh)"
 
 ## History
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
