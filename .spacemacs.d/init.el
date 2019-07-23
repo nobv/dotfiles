@@ -399,8 +399,7 @@ you should place your code here."
   (defconst tasks (concat org-directory "tasks.org"))
   (defconst schedule (concat org-directory "schedule.org"))
   (defconst bookmarks (concat org-directory "bookmarks.org"))
-  (defconst wiki-direcoty (concat org-directory "wiki/"))
-
+  (defconst wiki-dir (concat org-directory "wiki/"))
   ;;(setq org-default-notes-file notes)
   (setq org-agenda-files (list notes tasks bookmarks schedule))
 
@@ -435,6 +434,15 @@ you should place your code here."
         ))
 
   ;;; refile-targets
+
+  ;;; journal
+  (defconst journal-dir (concat org-directory "journal/"))
+  (setq org-journal-dir journal-dir)
+  (setq org-journal-file-format "%Y-%m-%d")
+  (setq org-journal-date-prefix "#+TITLE: ")
+  (setq org-journal-date-format "%A, %B %d %Y")
+  (setq org-journal-time-prefix "* ")
+  (setq org-journal-time-format "")
 
 
   ;;; brain
