@@ -465,6 +465,9 @@ you should place your code here."
     (setq org-journal-time-format "")
 
     ;;; pomodoro
+    (when (eq system-type 'darwin)
+      (setq alert-default-style 'osx-notifier))
+    (require 'alert)
     (add-hook 'org-pomodoro-started-hook
               (lambda () (notifications-notify
                           :title "org-pomodoro"
