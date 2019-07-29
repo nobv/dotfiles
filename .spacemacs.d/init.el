@@ -400,7 +400,6 @@ you should place your code here."
     (setq org-directory "~/Google Drive File Stream/My Drive/me/sync/org/")
     (defconst notes (concat org-directory "notes.org"))
     (defconst tasks (concat org-directory "tasks.org"))
-    (defconst schedule (concat org-directory "schedule.org"))
     (defconst bookmarks (concat org-directory "bookmarks.org"))
     (defconst wiki-dir (concat org-directory "wiki/"))
 
@@ -421,7 +420,7 @@ you should place your code here."
 
     ;;; agenda
     ;;(setq org-default-notes-file notes)
-    (setq org-agenda-files (list notes tasks bookmarks schedule))
+    (setq org-agenda-files (list notes tasks bookmarks))
 
     ;;; capture
     (setq org-capture-templates
@@ -430,27 +429,21 @@ you should place your code here."
              (file+headline notes "Inbox")
              "* %?\n   Entered on %U"
              :empty-lines 1)
-            ("t" "Private Tasks"
+            ("t" "Add an private task/event/schedule."
              entry
-             (file+headline tasks "Inbox")
-             "** TODO %?"
-             :empty-lines 1)
+             (file+olp tasks "Tasks" "2019" "Private")
+             "** TODO %?\n   SCHEDULED: <%(org-read-date)>\n"
+             :empty-lines 1 :prepend t)
+            ("T" "Add an work task/event/schedule."
+             entry
+             (file+olp tasks "Tasks" "2019" "Work")
+             "** TODO %?\n   SCHEDULED: <%(org-read-date)>\n"
+             :empty-lines 1 :prepend t)
             ("b" "Bookmarks"
              item
              (file+headline bookmarks "Bookmarks")
              "- %?\n"
              :prepend t)
-            ("s" "Add an event to the private calendar."
-             entry
-             (file+olp schedule "Schedule" "2019" "Private")
-             "** %?\n   SCHEDULED: <%(org-read-date)>\n"
-             :prepend t)
-            ("S" "Add an event to the work calendar."
-             entry
-             (file+olp schedule "Schedule" "2019" "Work")
-             "** %?\n   SCHEDULED: <%(org-read-date)>\n"
-             :prepend t)
-
             ))
 
     ;;; refile-targets
