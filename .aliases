@@ -21,9 +21,11 @@ alias ll='ls -laF -G'
 alias reload="exec $SHELL -l"
 
 # Shortcuts
-alias e='emacsclient -t'
-alias ke="emacsclient -e '(kill-emacs)'"
-alias emacs='emacs -nw'
+alias ss='emacs --daemon=spacemacs' #start spacemacs
+alias cs='emacsclient -nc -s spacemacs'   #connect spacemacs
+alias ks="emacsclient -e '(kill-emacs)'"
+#alias e='emacsclient -t'
+#alias emacs='emacs -nw'
 
 # gomi
 #alias rm="gomi"
