@@ -1,33 +1,56 @@
 {
-    "go.goroot": "/Users/nobv/.anyenv/envs/goenv/versions/1.11.1",
-    "go.gopath": "/Users/nobv/src",
-    "vs-kubernetes": {
-        "vs-kubernetes.helm-path": "/Users/nobv/.vs-kubernetes/tools/helm/darwin-amd64/helm",
-        "vs-kubernetes.draft-path": "/Users/nobv/.vs-kubernetes/tools/draft/darwin-amd64/draft",
-        "vs-kubernetes.minikube-path": "/Users/nobv/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
-    },
-    "workbench.colorTheme": "Monokai",
-    "vim.easymotion": true,
-    "vim.hlsearch": true,
-    "vim.useSystemClipboard": true,
-    "vsnotes.defaultNotePath": "/Users/nobv/src/src/github.com/Nobv/knowledge",
-    "vsnotes.commitPushDefaultCommitMessage": "Add / Update",
+    "editor.renderWhitespace": "all",
+    "vsnotes.defaultNotePath": "/Users/ts-nobuoki.tanaka/src/src/nobv.github.com/Nobv/knowledge",
     "vsnotes.defaultNoteTitle": "{title}.{ext}",
-    "vim.sneak": true,
+    "vsnotes.defaultSnippet": {
+        "langId": "markdown",
+        "name": "metadata"
+    },
+    "vsnotes.commitPushDefaultCommitMessage": "Create / Update",
+    "vim.hlsearch": true,
     "vim.statusBarColorControl": true,
+    "vim.statusBarColors.insert": "#BF616A",
+    "vim.statusBarColors.normal": "#434C5E",
+    "vim.statusBarColors.replace": "#D08770",
+    "vim.statusBarColors.visual": "#B48EAD",
+    "vim.statusBarColors.visualblock": "#A3BE8C",
+    "vim.statusBarColors.visualline": "#B48EAD",
+    "vim.useSystemClipboard": true,
     "workbench.colorCustomizations": {
         "statusBar.background": "#434C5E",
         "statusBar.noFolderBackground": "#434C5E",
         "statusBar.debuggingBackground": "#434C5E"
     },
-    "vim.statusBarColors.insert": "#BF616A",
-    "vim.statusBarColors.visual": "#B48EAD",
-    "vim.statusBarColors.visualline": "#B48EAD",
-    "vim.statusBarColors.visualblock": "#A3BE8C",
-    "vim.statusBarColors.replace": "#D08770",
-    "vim.statusBarColors.normal": "#434C5E",
-    "vsnotes.defaultSnippet": {
-        "langId": "markdown",
-        "name": "metadata"
-    }
+    "swaggerViewer.showOnlyFileName": true,
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.fontFamily": "Hack Nerd Font",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.colorTheme": "Spacemacs - dark",
+    "workbench.editor.enablePreview": false,
+    "go.autocompleteUnimportedPackages": true,
+    "protoc": {
+        "path": "/usr/local/bin/protoc",
+        "options": [
+            "--proto_path=../proto",
+        ]
+    },
+    "go.formatTool": "goimports",
+    "go.lintTool": "golangci-lint",
+    "go.alternateTools": {
+        "go-langserver": "bingo"
+      },
+      "go.languageServerExperimentalFeatures": {
+        "format": true,
+        "autoComplete": true
+    },
+      "go.testFlags": ["-v"],
+    "terminal.integrated.rendererType": "dom",
+    "go.useLanguageServer": true,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 3000,
+    "editor.fontFamily": "Source Code Pro, Menlo, Monaco, 'Courier New', monospace",
+    "editor.fontSize": 13,
+    "editor.fontWeight": "bold"
 }
