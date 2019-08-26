@@ -473,6 +473,18 @@ you should place your code here."
     (defconst brain (concat org-directory "brain/"))
     (setq org-brain-path brain))
 
+  (setq-default flycheck-disabled-checkers
+                '(
+                  go-gofmt
+                  go-golint
+                  go-vet
+                  go-build
+                  go-test
+                  go-errcheck
+                  go-unconvert
+                  go-megacheck
+                  ))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
