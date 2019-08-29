@@ -59,8 +59,8 @@ This function should only modify configuration layer settings."
            java-backend 'ensime)
      (scala :variables
             scala-enable-eldoc t
-            scala-auto-insert-asterisk-in-comments
-            scala-auto-start-ensime)
+            scala-auto-insert-asterisk-in-comments t
+            scala-auto-start-ensime t)
      html
      (javascript :variables
                  javascript-import-tool 'import-js
@@ -74,19 +74,18 @@ This function should only modify configuration layer settings."
             shell-default-shell 'eshell
             shell-default-height 30
             shell-default-position 'bottom)
-     ;;helm
-     ivy
+     helm
+     ;;ivy
      (auto-completion :variables
-                      auto-completion-idle-delay 0.8
+                      auto-completion-idle-delay 0.5
                       company-minimum-prefix-length 1
                       auto-completion-enable-sort-by-usage t)
      spell-checking
      syntax-checking
      version-control
      (lsp :variables
-          lsp-prefer-flymake none
-          lsp-ui-doc-enable nil
-          lsp-ui-sideline-enable nil)
+          lsp-prefer-flymake :none
+          lsp-ui-remap-xref-keybindings t)
      docker
      git
      yaml
