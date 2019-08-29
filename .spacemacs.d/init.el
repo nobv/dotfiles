@@ -84,8 +84,9 @@ This function should only modify configuration layer settings."
      syntax-checking
      version-control
      (lsp :variables
-          lsp-prefer-flymake :none
-          lsp-ui-remap-xref-keybindings t)
+          lsp-prefer-flymake t
+          lsp-ui-doc-enable nil
+          lsp-ui-sideline-enable nil)
      docker
      git
      yaml
