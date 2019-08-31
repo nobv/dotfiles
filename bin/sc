@@ -1,5 +1,5 @@
 #!/bin/bash
 
-SPELL_CHECK="https://github.com/koalaman/shellcheck/wiki/"
+SPELL_CHECK="https://github.com/koalaman/shellcheck/wiki/sc"
 
 open "${SPELL_CHECK}""$*"
