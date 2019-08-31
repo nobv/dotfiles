@@ -520,6 +520,10 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; haskell
+  (require 'lsp-haskell)
+  (add-hook 'haskell-mode-hook #'lsp)
+
   ;; org
   (with-eval-after-load 'org
     (setq org-directory "~/Google Drive File Stream/My Drive/me/sync/org/")
@@ -527,6 +531,13 @@ before packages are loaded."
     (defconst tasks (concat org-directory "tasks.org"))
     (defconst bookmarks (concat org-directory "bookmarks.org"))
     (defconst wiki-dir (concat org-directory "wiki/"))
+
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t)
+       (haskell . t)
+       (python . t)
+       (sh . t))) 
 
     ;;; todo key words
     (setq org-todo-keywords
