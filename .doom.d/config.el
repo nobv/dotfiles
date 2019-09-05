@@ -2,6 +2,7 @@
 
 ;; Place your private configuration here
 
+
 ;; flycheck disable
 (setq-default flycheck-disabled-checkers
               '(
@@ -16,3 +17,10 @@
                 ;;lsp-ui
                 ;;go-staticcheck
                 ))
+
+(setq
+ ;; font
+  doom-font (font-spec :family "Source Code Pro" :size 13))
+
+ ;; projectile
+ ;;projectile-project-search-path '("~/src/src/github.com/nobv/"))
