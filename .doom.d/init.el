@@ -16,7 +16,9 @@
        company           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       ivy               ; a search engine for love and life
+       (ivy
+        +fuzzy
+        +icon)           ; a search engine for love and life
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -47,7 +49,7 @@
        (evil +everywhere); come to the dark side, we have cookies
        file-templates    ; auto-snippets for empty files
        fold              ; (nigh) universal code folding
-       ;;(format +onsave)  ; automated prettiness
+       (format +onsave)  ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
        ;;objed             ; text object editing for the innocent
@@ -57,7 +59,8 @@
        ;;word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
-       dired             ; making dired pretty [functional]
+       (dired
+        +icons)          ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        vc                ; version-control and Emacs, sitting in a tree
 
@@ -76,7 +79,7 @@
        ;;ein               ; tame Jupyter notebooks with emacs
        eval              ; run code, run (also, repls)
        flycheck          ; tasing you for every semicolon you forget
-       ;;flyspell          ; tasing you for misspelling mispelling
+       flyspell          ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
         +docsets)        ; ...or in Dash docsets locally
@@ -134,7 +137,8 @@
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
-       purescript        ; javascript, but functional
+       (purescript
+        +lsp)            ; javascript, but functional
        ;;python            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
