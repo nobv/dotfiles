@@ -5,6 +5,16 @@
 ;;
 ;;; UI
 
+(def-package! doom-themes
+  :custom
+  (doom-themes-enable-italic t)
+  (doom-themes-enable-bold t)
+  :config
+  (load-theme 'doom-dracula t)
+  (setq doom-themes-treemacs-theme "doom-colors")
+  (doom-themes-treemacs-config)
+  (doom-themes-org-config))
+
 ;; fonts
 (setq
   doom-font (font-spec :family "Source Code Pro" :size 13))
