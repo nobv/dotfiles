@@ -25,7 +25,7 @@
 ;;; soft wrapping
 (global-visual-line-mode t)
 
-;;;
+;;
 ;;; Tools
 
 ;; projectile
@@ -64,3 +64,42 @@
 
 ;;; go
 ;;(add-hook! go-mode)
+
+;;; org
+(setq org-directory "~/Google Drive File Stream/My Drive/me/sync/org/")
+
+(after! org-capture
+  (defconst notes (concat org-directory "notes.org"))
+  (defconst tasks (concat org-directory "tasks.org"))
+  (defconst bookmarks (concat org-directory "bookmarks.org"))
+  (defconst wiki-dir (concat org-directory "wiki/"))
+
+  (add-to-list 'org-capture-templates
+               '("i" "Inbox"
+                 entry
+                 (file+headline notes "Inbox")
+                 "* %?\n   Entered on %U"
+                 :empty-lines 1 :kill-buffer t))
+
+  (add-to-list 'org-capture-templates
+               '("t" "Add an private task/event/schedule."
+                 entry
+                 (file+olp tasks "Tasks" "2019" "Private")
+                 "** TODO %?\n   SCHEDULED: <%(org-read-date)>\n"
+                 :empty-lines 1 :prepend t :kill-buffer t))
+
+  (add-to-list 'org-capture-templates
+               '("T" "Add an work task/event/schedule."
+                 entry
+                 (file+olp tasks "Tasks" "2019" "Work")
+                 "** TODO %?\n   SCHEDULED: <%(org-read-date)>\n"
+                 :empty-lines 1 :prepend t :kill-buffer t))
+
+  (add-to-list 'org-capture-templates
+               '("b" "Bookmarks"
+                 item
+                 (file+headline bookmarks "Bookmarks")
+                 "- %?\n"
+                 :prepend t :kill-buffer t))
+
+  )
