@@ -22,6 +22,9 @@
 ;;; modeline
 (setq doom-modeline-buffer-file-name-style 'truncate-all)
 
+;;; soft wrapping
+(global-visual-line-mode t)
+
 ;;;
 ;;; Tools
 
