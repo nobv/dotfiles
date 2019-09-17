@@ -9,3 +9,5 @@
 (package! doom-themes)
 
 (package! flycheck-golangci-lint)
+
+(package! emojify)

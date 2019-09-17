@@ -5,6 +5,7 @@
 ;;
 ;;; UI
 
+;; theme
 (def-package! doom-themes
   :custom
   (doom-themes-enable-italic t)
@@ -24,6 +25,12 @@
 
 ;;; soft wrapping
 (global-visual-line-mode t)
+
+;; emoji
+(def-package! emojify
+  :config
+  (add-hook 'after-init-hook #'global-emojify-mode))
+
 
 ;;
 ;;; Tools
