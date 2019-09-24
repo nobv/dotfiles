@@ -5,6 +5,9 @@
 ;;
 ;;; UI
 
+;; full screen
+(set-frame-parameter nil 'fullscreen 'fullboth)
+
 ;; theme
 (def-package! doom-themes
   :custom
