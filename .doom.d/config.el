@@ -48,13 +48,15 @@
   :config
   (setq flycheck-golangci-lint-fast t)
   (setq-default flycheck-disabled-checkers '(go-gofmt
-                                     go-golint
-                                     go-vet
-                                     go-build
-                                     go-test
-                                     go-errcheck)))
-(def-package! go-gen-test
-  :hook (go-mode . my-go-gen-test-setup))
+                                             go-golint
+                                             go-vet
+                                             go-build
+                                             go-test
+                                             go-errcheck))
+  (use-package! go-gen-test
+    :hook (go-mode . my-go-gen-test-setup))
+  (use-package! godoctor)
+  (use-package! go-tag))
 
 ;;; org
 (setq org-directory "~/Google Drive File Stream/My Drive/me/sync/org/")
