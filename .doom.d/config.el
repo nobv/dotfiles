@@ -2,7 +2,6 @@
 
 ;; Place your private configuration here
 
-;;
 ;;; UI
 
 ;; full screen
@@ -35,28 +34,15 @@
   (add-hook 'after-init-hook #'global-emojify-mode))
 
 
-;;
 ;;; Tools
 
 ;; projectile
 ;;projectile-project-search-path '("~/src/src/github.com/nobv/"))
 
-;;; flycheck
-;; (setq-default flycheck-disabled-checkers
-;;              '(
-;;                ;;go-gofmt
-;;                ;;go-golint
-;;                ;;go-vet
-;;                ;;go-build
-;;                ;;go-test
-;;                go-errcheck
-;;                go-unconvert
-;;                go-megacheck
-;;                ;;lsp-ui
-;;                ;;go-staticcheck
-;;                ))
 
-;; flychk-golangci-lint
+;;; Lang
+
+;; Go
 (def-package! flycheck-golangci-lint
   :hook (go-mode . flycheck-golangci-lint-setup)
   :config
@@ -67,13 +53,8 @@
                                      go-build
                                      go-test
                                      go-errcheck)))
-
-
-;;
-;;; Lang
-
-;;; go
-;;(add-hook! go-mode)
+(def-package! go-gen-test
+  :hook (go-mode . my-go-gen-test-setup))
 
 ;;; org
 (setq org-directory "~/Google Drive File Stream/My Drive/me/sync/org/")

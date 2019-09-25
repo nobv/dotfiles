@@ -6,8 +6,14 @@
 ;; (package! another-package :recipe (:host github :repo "username/repo"))
 ;; (package! builtin-package :disable t)
 
+;;; UI
 (package! doom-themes)
-
-(package! flycheck-golangci-lint)
-
 (package! emojify)
+
+
+;;; Tools
+
+;;; Lang
+;; Go
+(package! go-gen-test)
+(package! flycheck-golangci-lint)
