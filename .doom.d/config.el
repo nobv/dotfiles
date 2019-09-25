@@ -93,6 +93,8 @@
                  item
                  (file+headline bookmarks "Bookmarks")
                  "- %?\n"
-                 :prepend t :kill-buffer t))
+                 :prepend t :kill-buffer t)))
 
-  )
+(def-package! org-bullets
+  :custom (org-bullets-bullet-list '("" "" "" "" "" "" "" "" "" ""))
+  :hook (org-mode . org-bullets-mode))
