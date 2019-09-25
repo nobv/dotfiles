@@ -55,7 +55,7 @@
                                              go-errcheck))
   (use-package! go-gen-test
     :hook (go-mode . my-go-gen-test-setup))
-  (use-package! godoctor)
+  (use-package! go-rename)
   (use-package! go-tag))
 
 ;;; org
