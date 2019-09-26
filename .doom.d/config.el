@@ -53,8 +53,7 @@
                                              go-build
                                              go-test
                                              go-errcheck))
-  (use-package! go-gen-test
-    :hook (go-mode . my-go-gen-test-setup))
+  (use-package! go-gen-test)
   (use-package! go-rename)
   (use-package! go-tag))
 
