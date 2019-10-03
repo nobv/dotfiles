@@ -30,3 +30,7 @@
 
 ## lsp
 .emacs.d/.lsp-session-v1
+
+## spacemacs env
+.spacemacs.d/.spacemacs.env
+
