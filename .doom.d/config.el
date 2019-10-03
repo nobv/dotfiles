@@ -55,7 +55,14 @@
                                              go-errcheck))
   (use-package! go-gen-test)
   (use-package! go-rename)
-  (use-package! go-tag))
+  (use-package! go-tag
+    :config
+    (setq go-tag-args (list "-transform" "camelcase"))
+
+    (map! :map go-mode-map
+          :localleader
+          "a" #'go-tag-add))
+  )
 
 ;;; org
 (setq org-directory "~/Google Drive File Stream/My Drive/me/sync/org/")
