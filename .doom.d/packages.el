@@ -12,6 +12,7 @@
 
 
 ;;; Tools
+(package! org-pomodoro)
 
 ;;; Lang
 ;; Go
