@@ -33,6 +33,13 @@
   :config
   (add-hook 'after-init-hook #'global-emojify-mode))
 
+;;; Emacs
+
+;; Dired
+(after! dired
+  :config
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode))
+
 
 ;;; Tools
 
@@ -89,7 +96,7 @@
   (use-package! go-rename)
   (use-package! go-tag
     :config
-    (setq go-tag-args (list "-transform" "camelcase"))
+    ;; (setq go-tag-args (list "-transform" "camelcase"))
 
     (map! :map go-mode-map
           :localleader
