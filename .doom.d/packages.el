@@ -16,7 +16,6 @@
 
 ;;; Lang
 ;; Go
-(package! go-gen-test)
 (package! flycheck-golangci-lint)
 (package! go-rename)
 (package! go-tag)

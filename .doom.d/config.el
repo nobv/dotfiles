@@ -84,15 +84,6 @@
                                              go-build
                                              go-test
                                              go-errcheck))
-  (use-package! go-gen-test
-    :config
-    (map! :map go-mode-map
-          :localleader
-          (:prefix ("g" . "gen-test")
-            "d" #'go-gen-test-dwim        ;Generate tests for functions you want to.
-            "a" #'go-gen-test-all         ;Generate tests for all functions.
-            "e" #'go-gen-test-exported))) ;Generate tests for all exported functions.
-
   (use-package! go-rename)
   (use-package! go-tag
     :config
