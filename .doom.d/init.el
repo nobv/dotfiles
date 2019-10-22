@@ -28,7 +28,7 @@
        ;;fill-column       ; a `fill-column' indicator
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
-       ;;indent-guides     ; highlighted indent columns
+       indent-guides     ; highlighted indent columns
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink the current line after jumping
        ;;neotree           ; a project drawer, like NERDTree for vim
@@ -182,3 +182,27 @@
        ;; provides a Spacemacs-inspired keybinding scheme and a smartparens
        ;; config. Use it as a reference for your own modules.
        (default +bindings +smartparens))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(doom-themes-enable-bold t nil nil "Customized with use-package doom-themes")
+ '(doom-themes-enable-italic t nil nil "Customized with use-package doom-themes")
+ '(mouse-wheel-progressive-speed nil)
+ '(mouse-wheel-scroll-amount (quote (1 ((shift) . 5) ((control)))))
+ '(org-bullets-bullet-list (quote ("" "" "" "" "" "" "" "" "" "")) t nil "Customized with use-package org-bullets")
+ '(org-pomodoro-ask-upon-killing t t nil "Customized with use-package org-pomodoro")
+ '(org-pomodoro-format "%s" t nil "Customized with use-package org-pomodoro")
+ '(org-pomodoro-long-break-format "%s" t nil "Customized with use-package org-pomodoro")
+ '(org-pomodoro-short-break-format "%s" t nil "Customized with use-package org-pomodoro")
+ '(wakatime-api-key "24e96d1c-4c28-4151-8b82-4230e77c0289")
+ '(wakatime-cli-path "wakatime")
+ '(wakatime-python-bin nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-pomodoro-mode-line ((t (:foreground "#ff5555"))))
+ '(org-pomodoro-mode-line-break ((t (:foreground "#50fa7b")))))
