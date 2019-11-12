@@ -5,10 +5,10 @@
 ;;; UI
 
 ;; full screen
-(set-frame-parameter nil 'fullscreen 'fullboth)
+;;(set-frame-parameter nil 'fullscreen 'fullboth)
 
 ;; theme
-(def-package! doom-themes
+(use-package! doom-themes
   :custom
   (doom-themes-enable-italic t)
   (doom-themes-enable-bold t)
@@ -29,7 +29,7 @@
 (global-visual-line-mode t)
 
 ;; emoji
-(def-package! emojify
+(use-package! emojify
   :config
   (add-hook 'after-init-hook #'global-emojify-mode))
 
@@ -46,44 +46,30 @@
 ;; projectile
 ;;projectile-project-search-path '("~/src/src/github.com/nobv/"))
 
-;; org-pomodoro
-(def-package! org-pomodoro
-  :custom
-  (org-pomodoro-ask-upon-killing t)
-  (org-pomodoro-format "%s") ;;     
-  (org-pomodoro-short-break-format "%s")
-  (org-pomodoro-long-break-format  "%s")
-  :custom-face
-  (org-pomodoro-mode-line ((t (:foreground "#ff5555"))))
-  (org-pomodoro-mode-line-break   ((t (:foreground "#50fa7b"))))
-  :hook
-  (org-pomodoro-started . (lambda () (notifications-notify
-                                      :title "org-pomodoro"
-                                      :body "Let's focus for 25 minutes!")))
-  (org-pomodoro-finished . (lambda () (notifications-notify
-                                       :title "org-pomodoro"
-                                       :body "Well done! Take a break.")))
-  :config
-  (when (eq system-type 'darwin)
-    (setq alert-default-style 'osx-notifier))
-  (require 'alert)
-  :bind (:map org-agenda-mode-map
-          ("p" . org-pomodoro)))
-
 
 ;;; Lang
+(use-package! org
+  :hook
+    ;; (kill-emacs . org-clock-out-and-save-when-exit)
+    (org-clock-in .
+                (lambda ()
+                  (setq org-mode-line-string (task-clocked-time))
+                  (run-at-time 0 60 '(lambda ()
+                                       (setq org-mode-line-string (task-clocked-time))
+                                       (force-mode-line-update)))
+                  (force-mode-line-update))))
 
 ;; Go
-(def-package! flycheck-golangci-lint
+(use-package! flycheck-golangci-lint
   :hook (go-mode . flycheck-golangci-lint-setup)
   :config
   (setq flycheck-golangci-lint-fast t)
-  (setq-default flycheck-disabled-checkers '(go-gofmt
-                                             go-golint
-                                             go-vet
-                                             go-build
-                                             go-test
-                                             go-errcheck))
+  ;; (setq-default flycheck-disabled-checkers '(go-gofmt
+  ;;                                            go-golint
+  ;;                                            go-vet
+  ;;                                            go-build
+  ;;                                            go-test
+  ;;                                            go-errcheck))
   (use-package! go-rename)
   (use-package! go-tag
     :config
@@ -101,6 +87,7 @@
   (defconst notes (concat org-directory "notes.org"))
   (defconst tasks (concat org-directory "tasks.org"))
   (defconst bookmarks (concat org-directory "bookmarks.org"))
+  (defconst books (concat org-directory "books.org"))
   (defconst wiki-dir (concat org-directory "wiki/"))
 
   (add-to-list 'org-capture-templates
@@ -129,8 +116,15 @@
                  item
                  (file+headline bookmarks "Bookmarks")
                  "- %?\n"
-                 :prepend t :kill-buffer t)))
+                 :prepend t :kill-buffer t))
 
-(def-package! org-bullets
+  (add-to-list 'org-capture-templates
+               '("b" "Books"
+                 entry
+                 (file+headline books "Inbox")
+                 "* %?\n   Entered on %U"
+                 :empty-lines 1 :kill-buffer t)))
+
+(use-package! org-bullets
   :custom (org-bullets-bullet-list '("" "" "" "" "" "" "" "" "" ""))
   :hook (org-mode . org-bullets-mode))
