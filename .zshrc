@@ -18,6 +18,10 @@ export PATH=$PATH:$GOPATH/bin
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 
+## Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
+
 ## Language
 export LANG=en_US.UTF-8
 
