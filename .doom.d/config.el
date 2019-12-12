@@ -29,9 +29,9 @@
 (global-visual-line-mode t)
 
 ;; emoji
-(use-package! emojify
-  :config
-  (add-hook 'after-init-hook #'global-emojify-mode))
+;;(use-package! emojify
+;;  :config
+;;  (add-hook 'after-init-hook #'global-emojify-mode))
 
 ;;; Emacs
 
@@ -60,8 +60,7 @@
                   (force-mode-line-update))))
 
 ;; Go
-(use-package! flycheck-golangci-lint
-  :hook (go-mode . flycheck-golangci-lint-setup)
+(after! flycheck-golangci-lint
   :config
   (setq flycheck-golangci-lint-fast t)
   ;; (setq-default flycheck-disabled-checkers '(go-gofmt
@@ -70,15 +69,7 @@
   ;;                                            go-build
   ;;                                            go-test
   ;;                                            go-errcheck))
-  (use-package! go-rename)
-  (use-package! go-tag
-    :config
-    ;; (setq go-tag-args (list "-transform" "camelcase"))
-
-    (map! :map go-mode-map
-          :localleader
-          "a" #'go-tag-add))
-  )
+ )
 
 ;;; org
 (setq org-directory "~/Google Drive File Stream/My Drive/me/sync/org/")

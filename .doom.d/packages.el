@@ -8,14 +8,15 @@
 
 ;;; UI
 (package! doom-themes)
-(package! emojify)
+;;(package! emojify)
 
 
 ;;; Tools
 (package! org-pomodoro)
+(package! wakatime-mode)
 
 ;;; Lang
 ;; Go
-(package! flycheck-golangci-lint)
+;; (package! flycheck-golangci-lint)
 (package! go-rename)
 (package! go-tag)
