@@ -34,3 +34,7 @@
 ## spacemacs env
 .spacemacs.d/.spacemacs.env
 
+
+## vscode
+.vscode/extensions/*
+.vscode/argv.json
