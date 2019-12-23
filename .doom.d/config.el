@@ -71,6 +71,10 @@
   ;;                                            go-errcheck))
  )
 
+;; Rust
+(after! rustic
+  (setq lsp-rust-server 'rust-analyzer))
+
 ;;; org
 (setq org-directory "~/Google Drive File Stream/My Drive/me/sync/org/")
 
