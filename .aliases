@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Change directory
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
+#alias ..="cd .."
+#alias ...="cd ../.."
+#alias ....="cd ../../.."
+#alias .....="cd ../../../.."
 
-alias ~="cd ~"
+#alias ~="cd ~"
 
 # List
 #alias ls='ls -G'
@@ -31,7 +31,9 @@ alias ks="emacsclient -e '(kill-emacs)'"
 #alias rm="gomi"
 
 # peco
-alias g='cd $(ghq root)/$(ghq list | peco)'
+# alias g='cd $(ghq root)/$(ghq list | peco)'
+alias g='REPO=$(ghq list | sort -u | peco);for GHQ_ROOT in $(ghq root -all);do [ -d $GHQ_ROOT/$REPO ] && cd $GHQ_ROOT/$REPO;done'
+alias gh='hub browse $(ghq list | grep github.com | peco | cut -d "/" -f 2,3)'
 
 function peco-history-selection() {
     BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
