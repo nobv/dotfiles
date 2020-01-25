@@ -65,7 +65,7 @@
                '("n" "Note"
                  entry
                  (file+headline notes "Note")
-                 "* %U %^G %?\n %i\n "
+                 "* %U %^G\n %?\n %i\n "
                  :empty-lines 1 :kill-buffer t)))
 
 (use-package! org-bullets
