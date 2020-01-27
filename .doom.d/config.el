@@ -58,15 +58,14 @@
 (setq lsp-rust-server 'rust-analyzer)
 
 ;; org
-(setq org-directory "~/Google Drive File Stream/My Drive/me/sync/org/")
+(setq org-directory "~/Google Drive File Stream/My Drive/me/org/")
 (after! org
   (defconst notes (concat org-directory "notes.org"))
-  (add-to-list 'org-capture-templates
-               '("n" "Note"
-                 entry
-                 (file+headline notes "Note")
-                 "* %U %^G\n %?\n %i\n "
-                 :empty-lines 1 :kill-buffer t)))
+  (setq org-capture-templates
+        '(("n" "Note" entry
+           (file+headline notes "Note")
+           "* %U %^G\n %?\n %i\n "
+           :empty-lines 1 :kill-buffer t))))
 
 (use-package! org-bullets
   :custom (org-bullets-bullet-list '("" "" "" "" "" "" "" "" "" ""))
