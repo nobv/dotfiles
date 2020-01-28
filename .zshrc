@@ -7,8 +7,8 @@ export LC_ALL=en_US.UTF-8
 export TERM="xterm-256color"
 
 # brew
-# export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+# export PATH="/usr/local/sbin:$PATH"
 
 # anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
