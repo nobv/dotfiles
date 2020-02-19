@@ -1,34 +1,47 @@
 #!/bin/bash
 
 # Change directory
-#alias ..="cd .."
-#alias ...="cd ../.."
-#alias ....="cd ../../.."
-#alias .....="cd ../../../.."
+alias ..="cd .."
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../.."
+alias ..5="cd ../../../../.."
 
-#alias ~="cd ~"
+alias ~="cd ~"
 
 # List
-#alias ls='ls -G'
 alias l='ls -CF -G'
+alias ls='ls -G'
 
-# List
-# long format
+## long format
 alias ll='ls -laF -G'
 
+# Remove
+alias rm='rm -i'
 
-# Shell
+# Move
+alias mv='mv -i'
+
+# Copy
+alias cp='cp -i'
+
+# Reload
 alias reload="exec $SHELL -l"
 
-# Shortcuts
+# Emacs
 alias ss='emacs --daemon=spacemacs' #start spacemacs
 alias cs='emacsclient -nc -s spacemacs'   #connect spacemacs
 alias ks="emacsclient -e '(kill-emacs)'"
 #alias e='emacsclient -t'
 #alias emacs='emacs -nw'
+alias ke='pgrep Emacs | xargs kill -9 && open -a Emacs'
+
+# Terraform
+alias tfp='terraform plan'
+alias tfa='terraform apply'
 
 # gomi
-#alias rm="gomi"
+# alias rm="gomi"
 
 # peco
 # alias g='cd $(ghq root)/$(ghq list | peco)'
@@ -36,8 +49,8 @@ alias g='REPO=$(ghq list | sort -u | peco);for GHQ_ROOT in $(ghq root -all);do [
 alias gh='hub browse $(ghq list | grep github.com | peco | cut -d "/" -f 2,3)'
 
 function peco-history-selection() {
-    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
-    CURSOR=$#BUFFER
+    "${BUFFER}"="$(history -n 1 | tail -r  | awk '!a[$0]++' | peco)"
+    "${CURSOR}"=$#BUFFER
     zle reset-prompt
 }
 

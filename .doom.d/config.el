@@ -5,7 +5,7 @@
 
 ;;; UI
 ;; full screen
-;;(set-frame-parameter nil 'fullscreen 'fullboth)
+(set-frame-parameter nil 'fullscreen 'fullboth)
 
 ;; theme
 (use-package! doom-themes
@@ -28,7 +28,6 @@
 ;;; soft wrapping
 (global-visual-line-mode t)
 
-
 ;;; Emacs
 ;; Dired
 (after! dired
@@ -40,6 +39,9 @@
 ;; projectile
 ;;projectile-project-search-path '("~/src/src/github.com/nobv/"))
 
+;; Rust
+(after! rustic
+  (setq rustic-lsp-server 'rust-analyzer))
 
 ;;; Lang
 ;; Go
@@ -54,18 +56,77 @@
 ;;                                              go-errcheck))
 ;;  )
 
-;; Rust
-(setq lsp-rust-server 'rust-analyzer)
-
 ;; org
 (setq org-directory "~/Google Drive File Stream/My Drive/me/org/")
 (after! org
   (defconst notes (concat org-directory "notes.org"))
+  (defconst snippets (concat org-directory "snippets.org"))
+  (defconst task (concat org-directory "tasks.org"))
+  (defconst projects (concat org-directory "projects.org"))
+
   (setq org-capture-templates
-        '(("n" "Note" entry
-           (file+headline notes "Note")
-           "* %U %^G\n %?\n %i\n "
-           :empty-lines 1 :kill-buffer t))))
+        '(("n" "Notes")))
+
+  (add-to-list 'org-capture-templates
+               '("p"
+                 "Projects"
+                 entry
+                 (file+headline projects "Projects")
+                 "* TODO %^{Description} [%]
+:PROPERTIES:
+:SUBJECT: %^{subject}
+:GOAL:    %^{goal}
+:END:
+:RESOURCES:
+:END:
++ REQUIREMENTS:
+  %^{requirements}
++ NOTES:
+  %?
+\** TODO %^{task1}"))
+
+  (add-to-list 'org-capture-templates
+               '("nn"
+                 "Note"
+                 entry
+                 (file+headline notes "Note")
+                 "* %^{description} %^G\n
+:PROPERTIES:
+:CREATED:    %U
+:END:
+
++ NOTES:
+  %?"
+                 :empty-lines 1 :kill-buffer t))
+
+  (add-to-list 'org-capture-templates
+               '("ns"
+                 "Snippet Note"
+                 entry
+                 (file+headline snippets "Index")
+                 "* %^{description} %^G\n
+:PROPERTIES:
+:SOURCE:  %^{source|command|code|usage}
+:END:
+#+BEGIN_SRC %^{lang}
+%?
+#+END_SRC
+"))
+
+  (add-to-list 'org-capture-templates
+               '("nr"
+                 "Snippet Note from region"
+                 entry
+                 (file+headline snippets "Index")
+                 "* %^{description} %^G\n
+:PROPERTIES:
+:SOURCE:  %^{source|command|code|usage}
+:END:
+#+BEGIN_SRC %^{lang}
+%i
+#+END_SRC
+%?
+")))
 
 (use-package! org-bullets
   :custom (org-bullets-bullet-list '("" "" "" "" "" "" "" "" "" ""))
