@@ -36,9 +36,13 @@ alias ks="emacsclient -e '(kill-emacs)'"
 #alias emacs='emacs -nw'
 alias ke='pgrep Emacs | xargs kill -9 && open -a Emacs'
 
+# Doom Emacs
+alias dr='doom refresh && ke'
+
 # Terraform
 alias tfp='terraform plan'
 alias tfa='terraform apply'
+alias tfi='terraform init'
 
 # gomi
 # alias rm="gomi"
