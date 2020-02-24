@@ -7,7 +7,7 @@ alias ..3="cd ../../.."
 alias ..4="cd ../../../.."
 alias ..5="cd ../../../../.."
 
-alias ~="cd ~"
+alias home="cd ~"
 
 # List
 alias l='ls -CF -G'
@@ -53,8 +53,8 @@ alias g='REPO=$(ghq list | sort -u | peco);for GHQ_ROOT in $(ghq root -all);do [
 alias gh='hub browse $(ghq list | grep github.com | peco | cut -d "/" -f 2,3)'
 
 function peco-history-selection() {
-    "${BUFFER}"="$(history -n 1 | tail -r  | awk '!a[$0]++' | peco)"
-    "${CURSOR}"=$#BUFFER
+    BUFFER="$(history -n 1 | tail -r  | awk '!a[$0]++' | peco)"
+    CURSOR=$#BUFFER
     zle reset-prompt
 }
 
