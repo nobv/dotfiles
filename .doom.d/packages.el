@@ -12,6 +12,7 @@
 
 ;;; Tools
 (package! wakatime-mode)
+;; (package! pocket-reader :recipe (:host github :repo "alphapapa/pocket-reader.el"))
 
 ;;; Lang
 ;; Go

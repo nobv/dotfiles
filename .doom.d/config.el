@@ -59,38 +59,45 @@
 ;; org
 (setq org-directory "~/Google Drive File Stream/My Drive/me/org/")
 (after! org
+  (defconst inbox (concat org-directory "inbox.org"))
   (defconst notes (concat org-directory "notes.org"))
   (defconst snippets (concat org-directory "snippets.org"))
-  (defconst task (concat org-directory "tasks.org"))
+  ;; (defconst task (concat org-directory "tasks.org"))
   (defconst projects (concat org-directory "projects.org"))
 
   (setq org-capture-templates
-        '(("n" "Notes")))
+        '(("s" "Snippets")))
 
   (add-to-list 'org-capture-templates
                '("p"
                  "Projects"
                  entry
                  (file+headline projects "Projects")
-                 "* TODO %^{Description} [%]
+                 "* PROJ %^{project name} [%]
 :PROPERTIES:
 :SUBJECT: %^{subject}
 :GOAL:    %^{goal}
 :END:
 :RESOURCES:
 :END:
+
 + REQUIREMENTS:
   %^{requirements}
+
 + NOTES:
   %?
-\** TODO %^{task1}"))
+
++ References
+
+\** [ ] [#B] %^{parent task name}\n%?"
+                 :empty-lines 1 :kill-buffer t))
 
   (add-to-list 'org-capture-templates
-               '("nn"
+               '("n"
                  "Note"
                  entry
-                 (file+headline notes "Note")
-                 "* %^{description} %^G\n
+                 (file+headline notes "Inbox")
+                 "* %^{description} %^G
 :PROPERTIES:
 :CREATED:    %U
 :END:
@@ -100,28 +107,51 @@
                  :empty-lines 1 :kill-buffer t))
 
   (add-to-list 'org-capture-templates
-               '("ns"
-                 "Snippet Note"
+               '("i" "Inbox"
+                 entry
+                 (file+headline inbox "Inbox")
+                 "* %?\n
+:PROPERTIES:
+:CREATED:    %U
+:END:
+"
+                 :empty-lines 1 :kill-buffer t))
+
+
+  (add-to-list 'org-capture-templates
+               '("ss"
+                 "Snippet"
                  entry
                  (file+headline snippets "Index")
-                 "* %^{description} %^G\n
+                 "* %^{description} %^G
 :PROPERTIES:
-:SOURCE:  %^{source|command|code|usage}
+:SOURCE:  %^{type|command|code|usage}
 :END:
+
++ NOTES:
+  %?
+
++ REFERENCES
+
 #+BEGIN_SRC %^{lang}
 %?
 #+END_SRC
 "))
 
   (add-to-list 'org-capture-templates
-               '("nr"
-                 "Snippet Note from region"
+               '("sr"
+                 "Snippet from region"
                  entry
                  (file+headline snippets "Index")
-                 "* %^{description} %^G\n
+                 "* %^{description} %^G
 :PROPERTIES:
-:SOURCE:  %^{source|command|code|usage}
-:END:
+:SOURCE:  %^{type|command|code|usage}
+
++ NOTES:
+  %^{note}
+
++ References
+
 #+BEGIN_SRC %^{lang}
 %i
 #+END_SRC
