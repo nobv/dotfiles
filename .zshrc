@@ -22,7 +22,9 @@ export PATH="$GOPATH/bin:$PATH"
 
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
-
+## starship
+eval "$(starship init zsh)"
+export STARSHIP_CONFIG=~/.starship
 
 # Haskell
 ## Stack
