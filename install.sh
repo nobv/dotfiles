@@ -7,6 +7,9 @@ do
     [[ "$f" == ".bashrc" ]] && continue
     [[ "$f" == ".emacs.d" ]] && continue
 
-    #echo "$f"
+    if [[ "$f" == ".starship.toml" ]]; then
+        ln -snfv ~/.dotfiles/"$f" ~/.starship
+    fi
+
     ln -snfv ~/.dotfiles/"$f" ~/
 done
