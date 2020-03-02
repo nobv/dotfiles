@@ -1,6 +1,6 @@
 # Dotfile
 export DOTFILES=$HOME/.dotfiles
-export DOOM=$HOME/.emacs.d/bin
+export DOOM=$HOME/.emacs.d/doom-emacs/bin
 export PATH=$PATH:$DOTFILES/bin:$DOOM
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -84,4 +84,6 @@ if [ -f '/Users/nobv/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/nobv
 
 # enhancd
 export ENHANCD_HOOK_AFTER_CD=ll
-export ENHANCD_FILTER="peco:fzf"
+export ENHANCD_FILTER="fzf:peco"
+
+complete -o nospace -C /usr/local/Cellar/tfenv/1.0.2/versions/0.12.20/terraform terraform

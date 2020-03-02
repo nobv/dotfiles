@@ -38,6 +38,11 @@ alias ke='pgrep Emacs | xargs kill -9 && open -a Emacs'
 
 # Doom Emacs
 alias dr='doom refresh && ke'
+alias doom='emacs --with-profile doom &'
+
+# Spacemacs
+alias spacemacs='emacs --with-profile spacemacs &'
+
 
 # Terraform
 alias tfp='terraform plan'
@@ -46,6 +51,10 @@ alias tfi='terraform init'
 
 # gomi
 # alias rm="gomi"
+
+# docker-compose
+alias dcu='docker-compose up -d'
+alias dcd='docker-compose down'
 
 # peco
 # alias g='cd $(ghq root)/$(ghq list | peco)'
