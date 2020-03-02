@@ -28,6 +28,12 @@
 ;;; soft wrapping
 (global-visual-line-mode t)
 
+;;; battery
+(display-battery-mode t)
+
+;;; time
+(display-time-mode t)
+
 ;;; Emacs
 ;; Dired
 (after! dired
@@ -73,7 +79,7 @@
                  "Projects"
                  entry
                  (file+headline projects "Projects")
-                 "* PROJ %^{project name} [%]
+                 "* PROJ %^{project name} [0%]
 :PROPERTIES:
 :SUBJECT: %^{subject}
 :GOAL:    %^{goal}
@@ -85,11 +91,18 @@
   %^{requirements}
 
 + NOTES:
-  %?
 
 + References
 
-\** [ ] [#B] %^{parent task name}\n%?"
+\** [ ] Inbox [0%]\n
+
+\** [ ] Anytime [0%]\n
+
+\** [ ] Someday [0%]\n
+
+\** [ ] Projects [0%]\n
+\*** %^{task name} [0%]\n
+  - %?"
                  :empty-lines 1 :kill-buffer t))
 
   (add-to-list 'org-capture-templates
@@ -110,11 +123,7 @@
                '("i" "Inbox"
                  entry
                  (file+headline inbox "Inbox")
-                 "* %?\n
-:PROPERTIES:
-:CREATED:    %U
-:END:
-"
+                 "* %?\n"
                  :empty-lines 1 :kill-buffer t))
 
 
