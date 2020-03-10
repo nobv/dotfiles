@@ -33,32 +33,13 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     pdf
-     (rust :variables lsp-rust-server 'rust-analyzer)
-     yaml
-     sql
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
-     ;; better-defaults
-     emacs-lisp
-     git
-     helm
-     lsp
-     ;; markdown
-     multiple-cursors
-     org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     spell-checking
-     syntax-checking
-     treemacs
-     version-control
 
+     ;; Programming and markup languages
      (go :variables
          go-tab-width 4
          go-use-golangci-lint t
@@ -68,26 +49,65 @@ This function should only modify configuration layer settings."
          go-test-verbose t
          godoc-at-point-function 'godoc-gogetdoc
          gofmt-command "goimports")
-
-     (html :variables
-           web-fmt-tool 'prettier
-           web-mode-indent-style 2)
-
-     react
-     prettier
+     (haskell :variables
+              haskell-completion-backend 'ghci
+              haskell-process-type 'stack-ghci)
+     rust
+     emacs-lisp
+     shell-scripts
+     (java :variables
+           java-backend 'ensime)
+     (scala :variables
+            scala-enable-eldoc t
+            scala-auto-insert-asterisk-in-comments t
+            scala-auto-start-ensime t)
+     html
      (javascript :variables
+                 javascript-import-tool 'import-js
                  javascript-backend 'lsp
-                 javascript-fmt-tool 'prettier
-                 javascript-fmt-on-save t
-                 js2-mode-show-strict-warnings nil
-                 js2-mode-show-parse-errors nil
-                 js-indent-level 2)
-     (typescript :variables
-                 typescript-fmt-on-save t
-                 typescript-backend 'lsp
-                 typescript-fmt-tool 'prettier
-                 typescript-indent-level 2)
-     (terraform :variables terraform-auto-format-on-save t)
+                 javascript-fmt-tool 'prettier)
+     purescript
+     typescript
+
+     ;; Tools
+     (shell :variables
+            shell-default-shell 'eshell
+            shell-default-height 30
+            shell-default-position 'bottom)
+     helm
+     ;;ivy
+     (auto-completion :variables
+                      auto-completion-idle-delay 0.5
+                      company-minimum-prefix-length 1
+                      auto-completion-enable-sort-by-usage t)
+     spell-checking
+     syntax-checking
+     version-control
+     (lsp :variables
+          lsp-prefer-flymake t
+          lsp-ui-doc-enable nil
+          lsp-ui-sideline-enable nil)
+     docker
+     git
+     yaml
+     protobuf
+     sql
+     prettier
+     ;;better-defaults
+     (json :variables
+           json-fmt-tool 'prettier)
+     (ranger :variables
+             ranger-show-preview t)
+     emoji
+     markdown
+     (org :variables
+          org-enable-github-support t
+          org-enable-reveal-js-support t
+          org-enable-hugo-support t
+          org-enable-org-journal-support t)
+     multiple-cursors
+     treemacs
+     dhall
      )
 
    ;; List of additional packages that will be installed without being
@@ -172,7 +192,7 @@ It should only modify the values of Spacemacs settings."
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
    ;; whenever you start Emacs. (default nil)
-   dotspacemacs-check-for-update t
+   dotspacemacs-check-for-update nil
 
    ;; If non-nil, a form that evaluates to a package directory. For example, to
    ;; use different package directories for different Emacs versions, set this
@@ -186,11 +206,6 @@ It should only modify the values of Spacemacs settings."
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
    dotspacemacs-editing-style 'vim
-
-   ;; If non-nil show the version string in the Spacemacs buffer. It will
-   ;; appear as (spacemacs version)@(emacs version)
-   ;; (default t)
-   dotspacemacs-startup-buffer-show-version t
 
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
@@ -247,7 +262,8 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-default-font '("Source Code Pro"
                                :size 13.0
                                :weight normal
-                               :width normal)
+                               :width normal
+                               :powerline-scale 1.1)
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -397,7 +413,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -490,8 +506,6 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (add-to-list 'exec-path "$HOME/.anyenv/envs/nodenv/shims/node" t)
-  (add-to-list 'auto-mode-alist '("\\.tsx\\" . web-mode))
   )
 
 (defun dotspacemacs/user-load ()
@@ -507,6 +521,109 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  ;; haskell
+  (require 'lsp-haskell)
+  (add-hook 'haskell-mode-hook #'lsp)
+
+  ;; org
+  (with-eval-after-load 'org
+    (setq org-directory "~/Google Drive File Stream/My Drive/me/sync/org/")
+    (defconst notes (concat org-directory "notes.org"))
+    (defconst tasks (concat org-directory "tasks.org"))
+    (defconst bookmarks (concat org-directory "bookmarks.org"))
+    (defconst wiki-dir (concat org-directory "wiki/"))
+
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((emacs-lisp . t)
+       (haskell . t)
+       (python . t)
+       (sh . t))) 
+
+    ;;; todo key words
+    (setq org-todo-keywords
+          '((sequence "TODO(t)" "DOING(i)" "BLOCKED(b)" "REVIEW(r)" "|" "DONE(d)" "ARCHIVED(a)")
+            (type "ARTICLE(a)")
+            (type "MEMO(m)")
+            ))
+
+    (setq org-todo-keyword-faces
+          '(("TODO(t)" . "SlateGray")
+            ("DOING(i)" . "DarkOrchid")
+            ("BLOCKED(b)" . "Firebrick")
+            ("REVIEW(t)" . "Teal")
+            ("DONE(d)" . "ForestGreen")
+            ("ARCHIVED(a)" .  "SlateBlue")))
+
+    ;;; agenda
+    ;;(setq org-default-notes-file notes)
+    (setq org-agenda-files (list notes tasks bookmarks))
+
+    ;;; capture
+    (setq org-capture-templates
+          '(("i" "Inbox"
+             entry
+             (file+headline notes "Inbox")
+             "* %?\n   Entered on %U"
+             :empty-lines 1)
+            ("t" "Add an private task/event/schedule."
+             entry
+             (file+olp tasks "Tasks" "2019" "Private")
+             "** TODO %?\n   SCHEDULED: <%(org-read-date)>\n"
+             :empty-lines 1 :prepend t)
+            ("T" "Add an work task/event/schedule."
+             entry
+             (file+olp tasks "Tasks" "2019" "Work")
+             "** TODO %?\n   SCHEDULED: <%(org-read-date)>\n"
+             :empty-lines 1 :prepend t)
+            ("b" "Bookmarks"
+             item
+             (file+headline bookmarks "Bookmarks")
+             "- %?\n"
+             :prepend t)
+            ))
+
+    ;;; refile-targets
+
+    ;;; journal
+    (defconst journal-dir (concat org-directory "journal/"))
+    (setq org-journal-dir journal-dir)
+    (setq org-journal-file-format "%Y-%m-%d")
+    (setq org-journal-date-prefix "#+TITLE: ")
+    (setq org-journal-date-format "%A, %B %d %Y")
+    (setq org-journal-time-prefix "* ")
+    (setq org-journal-time-format "")
+
+    ;;; pomodoro
+    (when (eq system-type 'darwin)
+      (setq alert-default-style 'osx-notifier))
+    (require 'alert)
+    (add-hook 'org-pomodoro-started-hook
+              (lambda () (notifications-notify
+                          :title "org-pomodoro"
+                          :body "Let's focus for 25 minutes!")))
+
+    ;;; brain
+    (defconst brain (concat org-directory "brain/"))
+    (setq org-brain-path brain))
+
+
+
+
+  ;; flycheck disable
+  (setq-default flycheck-disabled-checkers
+                '(
+                  ;;go-gofmt
+                  ;;go-golint
+                  ;;go-vet
+                  ;;go-build
+                  ;;go-test
+                  go-errcheck
+                  go-unconvert
+                  go-megacheck
+                  ;;lsp-ui
+                  ;;go-staticcheck
+                  ))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -523,7 +640,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (toml-mode racer flycheck-rust dap-mode bui cargo rust-mode yaml-mode sqlup-mode sql-indent yasnippet-snippets web-beautify prettier-js nodejs-repl lsp-ui lsp-treemacs livid-mode skewer-mode simple-httpd json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-lsp helm-company helm-c-yasnippet fuzzy flycheck-pos-tip pos-tip company-tern tern company-lsp lsp-mode markdown-mode dash-functional auto-yasnippet ac-ispell auto-complete yasnippet web-mode tide typescript-mode import-js grizzl emmet-mode add-node-modules-path helm-gtags godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc ggtags flycheck-golangci-lint counsel-gtags counsel swiper ivy company-go go-mode company ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen treemacs-projectile treemacs-persp treemacs-evil treemacs ht pfuture toc-org symon symbol-overlay string-inflection spaceline-all-the-icons all-the-icons memoize spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode password-generator paradox spinner overseer org-bullets open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile projectile helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio flycheck-package package-lint flycheck pkg-info epl let-alist flycheck-elsa flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump f dash s devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el org-plus-contrib hydra lv hybrid-mode font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async))))
+    (dhall-mode reformatter wgrep smex ivy-yasnippet ivy-xref ivy-purpose ivy-hydra flyspell-correct-ivy counsel-projectile counsel-css counsel swiper ivy yasnippet-snippets yaml-mode xterm-color ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-evil toml-mode toc-org tide tagedit symon symbol-overlay string-inflection sql-indent spaceline-all-the-icons smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-delimiters racer pug-mode psci psc-ide protobuf-mode prettier-js popwin persp-mode pcre2el password-generator paradox ox-hugo ox-gfm overseer orgit org-re-reveal org-projectile org-present org-pomodoro org-mime org-journal org-download org-cliplink org-bullets org-brain open-junk-file noflet nodejs-repl nameless mvn multi-term move-text mmm-mode meghanada maven-test-mode markdown-toc magit-svn magit-gitflow macrostep lsp-ui lsp-treemacs lsp-java lsp-haskell lorem-ipsum livid-mode link-hint json-navigator js2-refactor js-doc intero insert-shebang indent-guide impatient-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org-rifle helm-org helm-mode-manager helm-make helm-lsp helm-hoogle helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets groovy-mode groovy-imports gradle-mode google-translate golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy font-lock+ flyspell-correct-helm flycheck-rust flycheck-pos-tip flycheck-package flycheck-haskell flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help ensime emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline dockerfile-mode docker diminish diff-hl devdocs define-word dante company-web company-tern company-statistics company-shell company-lsp company-go company-ghci company-ghc company-emoji company-emacs-eclim company-cabal column-enforce-mode cmm-mode clean-aindent-mode centered-cursor-mode cargo browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile attrap aggressive-indent ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

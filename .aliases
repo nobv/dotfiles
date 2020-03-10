@@ -37,11 +37,14 @@ alias ks="emacsclient -e '(kill-emacs)'"
 alias ke='pgrep Emacs | xargs kill -9 && open -a Emacs'
 
 # Doom Emacs
-alias dr='doom refresh && ke'
+alias doom_refresh='doom refresh && doom_kill && doom'
 alias doom='emacs --with-profile doom &'
+alias doom_kill='pgrep -f "Emacs --with-profile doom" | xargs kill -9'
+alias doom_restart='doom_kill && doom'
 
 # Spacemacs
 alias spacemacs='emacs --with-profile spacemacs &'
+alias spacemacs_kill='pgrep -f "Emacs --with-profile spacemacs"  | xargs kill -9'
 
 
 # Terraform
