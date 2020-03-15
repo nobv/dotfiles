@@ -33,32 +33,46 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     pdf
-     (rust :variables lsp-rust-server 'rust-analyzer)
-     yaml
-     sql
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+
+     ;; +checkers
+     spell-checking
+     syntax-checking
+
+     ;; +completion
      auto-completion
-     ;; better-defaults
-     emacs-lisp
-     git
      helm
-     lsp
-     ;; markdown
-     multiple-cursors
-     org
+
+     ;; +emacs
+     ;; better-defaults
+     ;; org
+
+     ;; +filetree
+     treemacs
+
+     ;; +frameworks
+     ;; react
+
+     ;; +fun
+     emoji
+
+     ;; +lang
+     emacs-lisp
+     (c-c++ :variables
+            c-c++-backend 'lsp-clangd
+            c-c++-enable-clang-format-on-save t
+            c-c++-enable-google-style t
+            c-c++-enable-google-newline t
+            c-c++-adopt-subprojects t)
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     spell-checking
-     syntax-checking
-     treemacs
-     version-control
-
+     ;; markdown
+     (rust :variables lsp-rust-server 'rust-analyzer)
      (go :variables
          go-tab-width 4
          go-use-golangci-lint t
@@ -68,13 +82,9 @@ This function should only modify configuration layer settings."
          go-test-verbose t
          godoc-at-point-function 'godoc-gogetdoc
          gofmt-command "goimports")
-
      (html :variables
            web-fmt-tool 'prettier
            web-mode-indent-style 2)
-
-     react
-     prettier
      (javascript :variables
                  javascript-backend 'lsp
                  javascript-fmt-tool 'prettier
@@ -87,7 +97,24 @@ This function should only modify configuration layer settings."
                  typescript-backend 'lsp
                  typescript-fmt-tool 'prettier
                  typescript-indent-level 2)
+     yaml
+     sql
+
+     ;; +misc
+     multiple-cursors
+
+     ;; +readers
+     pdf
+
+     ;; +source-control
+     git
+     version-control
+
+     ;; +tools
+     lsp
+     prettier
      (terraform :variables terraform-auto-format-on-save t)
+
      )
 
    ;; List of additional packages that will be installed without being
@@ -172,7 +199,7 @@ It should only modify the values of Spacemacs settings."
    ;; when the current branch is not `develop'. Note that checking for
    ;; new versions works via git commands, thus it calls GitHub services
    ;; whenever you start Emacs. (default nil)
-   dotspacemacs-check-for-update t
+   dotspacemacs-check-for-update nil
 
    ;; If non-nil, a form that evaluates to a package directory. For example, to
    ;; use different package directories for different Emacs versions, set this
@@ -337,7 +364,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup t
+   dotspacemacs-fullscreen-at-startup nil
 
    ;; If non-nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
@@ -346,7 +373,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
@@ -467,6 +494,13 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
 
+   ;; If non nil activate `clean-aindent-mode' which tries to correct
+   ;; virtual indentation of simple modes. This can interfer with mode specific
+   ;; indent handling like has been reported for `go-mode'.
+   ;; If it does deactivate it here.
+   ;; (default t)
+   dotspacemacs-use-clean-aindent-mode t
+
    ;; Either nil or a number of seconds. If non-nil zone out after the specified
    ;; number of seconds. (default nil)
    dotspacemacs-zone-out-when-idle nil
@@ -490,8 +524,6 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (add-to-list 'exec-path "$HOME/.anyenv/envs/nodenv/shims/node" t)
-  (add-to-list 'auto-mode-alist '("\\.tsx\\" . web-mode))
   )
 
 (defun dotspacemacs/user-load ()
@@ -511,23 +543,3 @@ before packages are loaded."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(defun dotspacemacs/emacs-custom-settings ()
-  "Emacs custom settings.
-This is an auto-generated function, do not modify its content directly, use
-Emacs customize menu instead.
-This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (toml-mode racer flycheck-rust dap-mode bui cargo rust-mode yaml-mode sqlup-mode sql-indent yasnippet-snippets web-beautify prettier-js nodejs-repl lsp-ui lsp-treemacs livid-mode skewer-mode simple-httpd json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-lsp helm-company helm-c-yasnippet fuzzy flycheck-pos-tip pos-tip company-tern tern company-lsp lsp-mode markdown-mode dash-functional auto-yasnippet ac-ispell auto-complete yasnippet web-mode tide typescript-mode import-js grizzl emmet-mode add-node-modules-path helm-gtags godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc ggtags flycheck-golangci-lint counsel-gtags counsel swiper ivy company-go go-mode company ws-butler writeroom-mode visual-fill-column winum volatile-highlights vi-tilde-fringe uuidgen treemacs-projectile treemacs-persp treemacs-evil treemacs ht pfuture toc-org symon symbol-overlay string-inflection spaceline-all-the-icons all-the-icons memoize spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode password-generator paradox spinner overseer org-bullets open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-xref helm-themes helm-swoop helm-purpose window-purpose imenu-list helm-projectile projectile helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio flycheck-package package-lint flycheck pkg-info epl let-alist flycheck-elsa flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state iedit evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens smartparens paredit evil-args evil-anzu anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump f dash s devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup which-key use-package pcre2el org-plus-contrib hydra lv hybrid-mode font-lock+ evil goto-chg undo-tree dotenv-mode diminish bind-map bind-key async))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
