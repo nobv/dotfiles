@@ -40,6 +40,9 @@ eval "$(stack --bash-completion-script stack)"
 export EDITOR=emacs
 eval "$(direnv hook zsh)"
 
+# llvm
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+
 # History
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000
