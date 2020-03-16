@@ -63,21 +63,20 @@ This function should only modify configuration layer settings."
      ;; +lang
      emacs-lisp
      (c-c++ :variables
-            c-c++-backend 'lsp-clangd
             c-c++-enable-clang-format-on-save t
-            c-c++-enable-google-style t
-            c-c++-enable-google-newline t
+            c-c++-enable-auto-newline t
+            c-c++-backend 'lsp-clangd
             c-c++-adopt-subprojects t)
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; markdown
-     (rust :variables lsp-rust-server 'rust-analyzer)
+     (rust :variables
+           lsp-rust-server 'rust-analyzer)
      (go :variables
          go-tab-width 4
          go-use-golangci-lint t
          go-backend 'lsp
-         ;;go-backend 'go-mode
          go-format-before-save t
          go-test-verbose t
          godoc-at-point-function 'godoc-gogetdoc
@@ -99,6 +98,11 @@ This function should only modify configuration layer settings."
                  typescript-indent-level 2)
      yaml
      sql
+     dhall
+     (haskell :variables
+              haskell-completion-backend 'lsp
+              haskell-process-type 'stack-ghci)
+     purescript
 
      ;; +misc
      multiple-cursors
