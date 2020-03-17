@@ -83,7 +83,7 @@ brew "tree"
 # Vi 'workalike' with many additional features
 brew "vim"
 # JavaScript package manager
-brew "yarn"
+brew "yarn", args: ["--ignore-dependencies"]
 # Download YouTube videos from the command-line
 brew "youtube-dl"
 # UNIX shell (command interpreter)
