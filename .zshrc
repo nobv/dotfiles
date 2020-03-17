@@ -1,10 +1,35 @@
 # Dotfile
 export DOTFILES=$HOME/.dotfiles
 export DOOM=$HOME/.emacs.d/doom-emacs/bin
-export PATH=$PATH:$DOTFILES/bin:$DOOM
+export PATH=$DOTFILES/bin:$DOOM:$PATH
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export TERM="xterm-256color"
+
+# zsh
+typeset -U fpath
+fpath=($DOTFILES/.zsh/lib $fpath)
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+
+bindkey -v
+export PATH=$DOTFILES/.zsh/bin:$PATH
+
+## History
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=10000
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history
 
 # brew
 export PATH="/usr/local/bin:$PATH"
@@ -16,7 +41,7 @@ eval "$(anyenv init -)"
 
 # Go
 export GOPATH=$HOME/src
-export PATH=$PATH:$GOPATH/bin
+export PATH=$GOPATH/bin:$PATH
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 
@@ -30,9 +55,6 @@ export STARSHIP_CONFIG=~/.starship
 ## Stack
 export PATH=~/.local/bin:$PATH
 export PATH=$(stack path --compiler-bin):$PATH
-## auto-completion for stack
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
 eval "$(stack --bash-completion-script stack)"
 # [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
 
@@ -43,18 +65,14 @@ eval "$(direnv hook zsh)"
 # llvm
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
-# History
-[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
-HISTSIZE=50000
-SAVEHIST=10000
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_verify
-setopt inc_append_history
-setopt share_history
+# enhancd
+export ENHANCD_HOOK_AFTER_CD=ll
+export ENHANCD_FILTER="fzf:peco"
 
+# Terraform
+complete -o nospace -C /usr/local/Cellar/tfenv/1.0.2/versions/0.12.20/terraform terraform
+
+# aliases
 if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
@@ -83,10 +101,3 @@ if [ -f '/Users/nobv/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/nobv/googl
 
 ## The next line enables shell command completion for gcloud.
 if [ -f '/Users/nobv/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/nobv/google-cloud-sdk/completion.zsh.inc'; fi
-
-
-# enhancd
-export ENHANCD_HOOK_AFTER_CD=ll
-export ENHANCD_FILTER="fzf:peco"
-
-complete -o nospace -C /usr/local/Cellar/tfenv/1.0.2/versions/0.12.20/terraform terraform

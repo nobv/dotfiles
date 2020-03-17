@@ -29,23 +29,13 @@ alias cp='cp -i'
 alias reload="exec $SHELL -l"
 
 # Emacs
-alias ss='emacs --daemon=spacemacs' #start spacemacs
-alias cs='emacsclient -nc -s spacemacs'   #connect spacemacs
-alias ks="emacsclient -e '(kill-emacs)'"
+# alias ss='emacs --daemon=spacemacs' #start spacemacs
+# alias cs='emacsclient -nc -s spacemacs'   #connect spacemacs
+# alias ks="emacsclient -e '(kill-emacs)'"
 #alias e='emacsclient -t'
 #alias emacs='emacs -nw'
-alias ke='pgrep Emacs | xargs kill -9 && open -a Emacs'
-
-# Doom Emacs
-alias doom_refresh='doom refresh && doom_kill && doom'
-alias doom='emacs --with-profile doom &'
-alias doom_kill='pgrep -f "Emacs --with-profile doom" | xargs kill -9'
-alias doom_restart='doom_kill && doom'
-
-# Spacemacs
-alias spacemacs='emacs --with-profile spacemacs &'
-alias spacemacs_kill='pgrep -f "Emacs --with-profile spacemacs"  | xargs kill -9'
-
+#alias ke='pgrep Emacs | xargs kill -9 && open -a Emacs'
+#alias emacs='emacs --with-profile default'
 
 # Terraform
 alias tfp='terraform plan'

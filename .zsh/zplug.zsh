@@ -7,3 +7,5 @@ zplug "b4b4r07/emoji-cli"
 # zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", as:theme, if:"source ~/.powerlevel9k"
  
 zplug "b4b4r07/enhancd", use:init.sh
+
+zplug 'zsh-users/zsh-completions'

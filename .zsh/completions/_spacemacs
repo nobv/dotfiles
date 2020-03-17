@@ -1,0 +1,6 @@
+#compdef _spacemacs spacemacs
+
+function _spacemacs() {
+    _arguments -C "1: :(start restart kill)"
+}
+

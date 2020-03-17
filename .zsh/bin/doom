@@ -1,0 +1,32 @@
+#!/usr/bin/env zsh
+
+function doom() {
+    case $1 in
+        "start") start
+                 ;;
+        "restart") finish && start
+                 ;;
+        "kill") finish
+                 ;;
+        "refresh") refresh
+                 ;;
+        "*" ) echo "wrong argument"
+              ;;
+    esac
+}
+
+function refresh() {
+    $HOME/.emacs.d/doom-emacs/bin/doom refresh && finish && start
+}
+
+function start() {
+    emacs --with-profile doom &
+}
+
+function finish() {
+    pgrep -f 'Emacs --with-profile doom' | xargs kill -9
+}
+
+
+doom $1
+
