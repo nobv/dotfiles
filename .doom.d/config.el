@@ -46,8 +46,8 @@
 ;;projectile-project-search-path '("~/src/src/github.com/nobv/"))
 
 ;; Rust
-(after! rustic
-  (setq rustic-lsp-server 'rust-analyzer))
+;; (after! rustic
+;;   (setq rustic-lsp-server 'rust-analyzer))
 
 ;;; Lang
 ;; Go

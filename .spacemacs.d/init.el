@@ -67,12 +67,13 @@ This function should only modify configuration layer settings."
             c-c++-enable-auto-newline t
             c-c++-backend 'lsp-clangd
             c-c++-adopt-subprojects t)
+     (shell-scripts :variables
+                    shell-scripts-backend 'lsp)
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; markdown
-     (rust :variables
-           lsp-rust-server 'rust-analyzer)
+     rust
      (go :variables
          go-tab-width 4
          go-use-golangci-lint t
