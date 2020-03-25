@@ -72,6 +72,9 @@ export ENHANCD_FILTER="fzf:peco"
 # Terraform
 complete -o nospace -C /usr/local/Cellar/tfenv/1.0.2/versions/0.12.20/terraform terraform
 
+# Android
+export PATH="/Users/nobv/Library/Android/sdk/platform-tools:$PATH"
+
 # aliases
 if [ -f ~/.aliases ]; then
     source ~/.aliases
