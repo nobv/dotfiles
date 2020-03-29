@@ -105,6 +105,7 @@ This function should only modify configuration layer settings."
               haskell-process-type 'stack-ghci)
      purescript
      vimscript
+     kotlin
 
      ;; +misc
      multiple-cursors
