@@ -8,7 +8,7 @@ export TERM="xterm-256color"
 
 # zsh
 typeset -U fpath
-fpath=($DOTFILES/.zsh/lib $fpath)
+fpath=($DOTFILES/.zsh/completions $fpath)
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
