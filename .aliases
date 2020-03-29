@@ -10,8 +10,9 @@ alias ..5="cd ../../../../.."
 alias home="cd ~"
 
 # List
-alias l='ls -CF -G'
-alias ls='ls -G'
+# alias l='ls -CF -G'
+# alias ls='ls -G'
+alias l='exa --long --header --git --icons'
 
 ## long format
 alias ll='ls -laF -G'
@@ -24,6 +25,9 @@ alias mv='mv -i'
 
 # Copy
 alias cp='cp -i'
+
+# Ps
+alias ps='procs'
 
 # Reload
 alias reload="exec $SHELL -l"
