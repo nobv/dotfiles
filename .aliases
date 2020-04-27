@@ -12,10 +12,10 @@ alias home="cd ~"
 # List
 # alias l='ls -CF -G'
 # alias ls='ls -G'
-alias l='exa --long --header --git --icons -a'
 
 ## long format
-alias ll='ls -laF -G'
+#alias ll='ls -laF -G'
+alias ll='exa --long --header --git --icons -a'
 
 # Remove
 alias rm='rm -i'
