@@ -1,22 +1,36 @@
 #!/usr/bin/env zsh
 
+CMD=$HOME/.emacs.d/doom-emacs/bin/doom
+
 function doom() {
     case $1 in
         "start") start
                  ;;
         "restart") finish && start
-                 ;;
+                   ;;
         "kill") finish
-                 ;;
+                ;;
         "refresh") refresh
-                 ;;
+                   ;;
+        "up") upgrade
+              ;;
+        "install") install
+                   ;;
         "*" ) echo "wrong argument"
               ;;
     esac
 }
 
+function install() {
+    $CMD install
+}
+
+function upgrade() {
+    $CMD up
+}
+
 function refresh() {
-    $HOME/.emacs.d/doom-emacs/bin/doom refresh && finish && start
+    $CMD refresh && finish && start
 }
 
 function start() {

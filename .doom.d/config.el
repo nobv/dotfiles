@@ -5,7 +5,8 @@
 
 ;;; UI
 ;; full screen
-(set-frame-parameter nil 'fullscreen 'fullboth)
+;; (set-frame-parameter nil 'fullscreen 'fullboth)
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; theme
 (use-package! doom-themes
