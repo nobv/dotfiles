@@ -65,6 +65,9 @@ eval "$(direnv hook zsh)"
 # llvm
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
+# node
+export PATH="$HOME/.anyenv/envs/nodenv/shims/node:$PATH"
+
 # enhancd
 export ENHANCD_HOOK_AFTER_CD=ll
 export ENHANCD_FILTER="fzf:peco"
@@ -74,6 +77,9 @@ complete -o nospace -C /usr/local/Cellar/tfenv/1.0.2/versions/0.12.20/terraform 
 
 # Android
 export PATH="/Users/nobv/Library/Android/sdk/platform-tools:$PATH"
+
+# navi
+source <(navi widget zsh)
 
 # aliases
 if [ -f ~/.aliases ]; then
