@@ -63,6 +63,9 @@
 ;;                                              go-errcheck))
 ;;  )
 
+;;
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+
 ;; org
 (setq org-directory "~/Google Drive File Stream/My Drive/me/org/")
 (after! org

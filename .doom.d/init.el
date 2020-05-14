@@ -162,7 +162,8 @@
        ;;perl              ; write code no one else can comprehend
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
-       purescript        ; javascript, but functional
+       (purescript        ; javascript, but functional
+        +lsp)
        ;;python            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
@@ -174,7 +175,7 @@
        ;;scala             ; java, but good
        ;;scheme            ; a fully conniving family of lisps
        (sh               ; she sells {ba,z,fi}sh shells on the C xor
-        +zsh)
+        +lsp)
        ;;sml
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
