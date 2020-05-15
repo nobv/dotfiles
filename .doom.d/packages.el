@@ -18,3 +18,6 @@
 ;; Go
 ;; (package! go-rename)
 ;; (package! go-tag)
+
+;; dhall
+(package! dhall-mode)
