@@ -15,9 +15,5 @@
 ;; (package! pocket-reader :recipe (:host github :repo "alphapapa/pocket-reader.el"))
 
 ;;; Lang
-;; Go
-;; (package! go-rename)
-;; (package! go-tag)
-
 ;; dhall
 (package! dhall-mode)
