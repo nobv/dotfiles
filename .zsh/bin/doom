@@ -30,7 +30,7 @@ function upgrade() {
 }
 
 function refresh() {
-    $CMD refresh && finish && start
+    $CMD sync && finish && start
 }
 
 function start() {
