@@ -58,6 +58,9 @@ alias tfi='terraform init'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
 
+# PureScript
+alias pursi='git init && yarn init --yes && yarn add --dev purescript spago parcel-bundler purty && yarn spago init'
+
 # peco
 # alias g='cd $(ghq root)/$(ghq list | peco)'
 alias g='REPO=$(ghq list | sort -u | peco);for GHQ_ROOT in $(ghq root -all);do [ -d $GHQ_ROOT/$REPO ] && cd $GHQ_ROOT/$REPO;done'
