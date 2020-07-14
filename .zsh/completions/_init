@@ -1,0 +1,5 @@
+#compdef _init init
+
+function _init() {
+  _arguments -C "1: :(purs)"
+}

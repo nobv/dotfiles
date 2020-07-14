@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+
+
+function init() {
+    case $1 in
+        "purs")
+            purs
+            ;;
+        "*")
+            echo "wrong argument" 1>&2
+            exit 1
+            ;;
+    esac
+}
+
+function purs() {
+    git init
+    yarn init --yes
+    yarn add --dev purescript spago parcel purty purescript-psa pscid
+    yarn spago init
+    yarn spago build
+}
+
+init $1
