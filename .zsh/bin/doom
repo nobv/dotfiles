@@ -3,42 +3,42 @@
 CMD=$HOME/.emacs.d/doom-emacs/bin/doom
 
 function doom() {
-    case $1 in
-        "start") start
-                 ;;
-        "restart") finish && start
-                   ;;
-        "kill") finish
-                ;;
-        "refresh") refresh
-                   ;;
-        "up") upgrade
-              ;;
-        "install") install
-                   ;;
-        "*" ) echo "wrong argument"
-              ;;
-    esac
+	case $1 in
+		"start") start
+				 ;;
+		"restart") finish && start
+				   ;;
+		"kill") finish
+				;;
+		"refresh") refresh
+				   ;;
+		"up") upgrade
+			  ;;
+		"install") install
+				   ;;
+		"*" ) echo "wrong argument"
+			  ;;
+	esac
 }
 
 function install() {
-    $CMD install
+	$CMD install
 }
 
 function upgrade() {
-    $CMD up
+	$CMD up
 }
 
 function refresh() {
-    $CMD sync && finish && start
+	$CMD sync && finish && start
 }
 
 function start() {
-    emacs --with-profile doom &
+	emacs --with-profile doom &
 }
 
 function finish() {
-    pgrep -f 'Emacs --with-profile doom' | xargs kill -9
+	pgrep -f 'Emacs --with-profile doom' | xargs kill -9
 }
 
 
