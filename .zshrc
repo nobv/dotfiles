@@ -33,7 +33,7 @@ setopt share_history
 
 # brew
 export PATH="/usr/local/bin:$PATH"
-# export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
 
 # anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
