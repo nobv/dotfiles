@@ -40,7 +40,9 @@ This function should only modify configuration layer settings."
 		 ;; ----------------------------------------------------------------
 
 		 ;; +checkers
-		 spell-checking
+     (spell-checking :variables
+                     spell-checking-enable-auto-dictionary t
+                     enable-flyspell-auto-completion t)
 		 syntax-checking
 
 		 ;; +completion
