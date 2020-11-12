@@ -28,8 +28,7 @@ This function should only modify configuration layer settings."
 
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
-   dotspacemacs-configuration-layer-path '( "~/.spacemacs.d/layers"
-                                            )
+   dotspacemacs-configuration-layer-path '( "~/.spacemacs.d/private/")
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
@@ -126,13 +125,20 @@ This function should only modify configuration layer settings."
 
      ;; +tools
      dap
-     lsp
+     (lsp :variables
+          lsp-lens-enable t
+          lsp-headerline-breadcrumb-segments '(symbols)
+          lsp-headerline-breadcrumb-segments '(project file symbols))
      prettier
      (terraform :variables terraform-auto-format-on-save t)
 
      ;; +templates
      (templates :variables
                 templates-private-directory "~/.spacemacs.d/templates")
+
+     ;; private
+     purescript-ex
+     go-ex
      )
 
    ;; List of additional packages that will be installed without being
@@ -142,10 +148,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages
-   '(
-     format-all
-     )
+   dotspacemacs-additional-packages '()
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -552,7 +555,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
-  (require 'format-all)
   )
 
 (defun dotspacemacs/user-config ()
@@ -565,8 +567,6 @@ before packages are loaded."
   ;; disable auto-insert-prompt
   (setq auto-insert-query nil)
 
-  ;; format-all
-  (add-hook 'after-change-major-mode-hook #'format-all-mode)
   ;; enable auto insertion of module templates for Haskell
   (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
 
