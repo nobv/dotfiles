@@ -50,8 +50,9 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior ' cycle)
-     helm
+                      auto-completion-tab-key-behavior ' cycle
+                      auto-completion-use-company-box t)
+     ivy
 
      ;; +emacs
      ;; better-defaults
@@ -136,7 +137,7 @@ This function should only modify configuration layer settings."
      (templates :variables
                 templates-private-directory "~/.spacemacs.d/templates")
 
-     ;; private
+     ;; +private
      purescript-ex
      go-ex
      )
