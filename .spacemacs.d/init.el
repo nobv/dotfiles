@@ -50,7 +50,7 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-sort-by-usage t
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior ' cycle
+                      auto-completion-tab-key-behavior 'cycle
                       auto-completion-use-company-box t)
      ivy
 
@@ -140,6 +140,7 @@ This function should only modify configuration layer settings."
      ;; +private
      purescript-ex
      go-ex
+     haskell-ex
      )
 
    ;; List of additional packages that will be installed without being
@@ -449,7 +450,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -576,6 +577,7 @@ before packages are loaded."
 
   ;;; read again automatically
   (global-auto-revert-mode t)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
