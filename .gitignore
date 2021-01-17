@@ -38,3 +38,6 @@
 ## vscode
 .vscode/extensions/*
 .vscode/argv.json
+
+## misc
+bin/rust-analyzer
