@@ -56,10 +56,12 @@ export STARSHIP_CONFIG=~/.starship
 export PATH=~/.local/bin:$PATH
 export PATH=$(stack path --compiler-bin):$PATH
 eval "$(stack --bash-completion-script stack)"
-# [ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+# ghcup-env
+[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env"
+
 
 # direnv
-export EDITOR=emacs
+export EDITOR=emacsclient
 eval "$(direnv hook zsh)"
 
 # llvm
@@ -76,7 +78,7 @@ export ENHANCD_FILTER="fzf:peco"
 complete -o nospace -C /usr/local/Cellar/tfenv/1.0.2/versions/0.12.20/terraform terraform
 
 # Android
-export PATH="/Users/nobv/Library/Android/sdk/platform-tools:$PATH"
+export PATH="$HOME/Library/Android/sdk/platform-tools:$PATH"
 
 # navi
 source <(navi widget zsh)
@@ -106,7 +108,8 @@ fi
 
 # GCP
 ## The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/nobv/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/nobv/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
 
 ## The next line enables shell command completion for gcloud.
-if [ -f '/Users/nobv/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/nobv/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
+
