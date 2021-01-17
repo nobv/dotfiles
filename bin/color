@@ -73,19 +73,21 @@ function list() {
   done
 }
 
-# Only when there are arguments...
-if [ "$#" -ne 0 ]; then
-  for OPT in "$@"
-  do
-    case "$OPT" in
-      '-h'|'--help' )
-        usage
-        exit
-        ;;
-      '-l'|'--list' )
-        list
-        exit
-        ;;
-    esac
-  done
-fi
+list
+
+# # Only when there are arguments...
+# if [ "$#" -ne 0 ]; then
+#   for OPT in "$@"
+#   do
+#     case "$OPT" in
+#       '-h'|'--help' )
+#         usage
+#         exit
+#         ;;
+#       '-l'|'--list' )
+#         list
+#         exit
+#         ;;
+#     esac
+#   done
+# fi
