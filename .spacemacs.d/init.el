@@ -90,7 +90,9 @@ This function should only modify configuration layer settings."
      (shell-scripts :variables
                     shell-scripts-backend 'lsp)
      markdown
-     (rust :variables rust-backend 'lsp)
+     (rust :variables
+           rust-backend 'lsp
+           rust-format-on-save t)
      (html :variables
            web-fmt-tool 'prettier
            web-mode-indent-style 2)
