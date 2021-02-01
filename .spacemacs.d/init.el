@@ -95,7 +95,10 @@ This function should only modify configuration layer settings."
            rust-format-on-save t)
      (html :variables
            web-fmt-tool 'prettier
-           web-mode-indent-style 2)
+           css-enable-lsp t
+           less-enable-lsp t
+           scss-enable-lsp t
+           html-enable-lsp t)
      (javascript :variables
                  javascript-backend 'lsp
                  javascript-fmt-tool 'prettier
@@ -143,6 +146,7 @@ This function should only modify configuration layer settings."
      purescript-ex
      go-ex
      haskell-ex
+     html-ex
      )
 
    ;; List of additional packages that will be installed without being
