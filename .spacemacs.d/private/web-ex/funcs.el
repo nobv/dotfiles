@@ -1,7 +1,7 @@
-;;; functions.el --- html-ex layer functions file for Spacemacs.
+;;; functions.el --- web-ex layer functions file for Spacemacs.
 
 
-(defun set-html-mode-indent (n)
+(defun set-web-mode-indent (n)
   (setq-default
    ;; js2-mode
    js2-basic-offset n
