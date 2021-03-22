@@ -18,7 +18,8 @@
 	(doom-themes-enable-italic t)
 	(doom-themes-enable-bold t)
 	:config
-	(load-theme 'doom-one t)
+	;; (load-theme 'doom-one t)
+	(load-theme 'doom-dracula t)
 	(setq doom-themes-treemacs-theme "doom-colors")
 	(doom-themes-treemacs-config)
 	(doom-themes-org-config))
@@ -53,6 +54,10 @@
 ;; projectile
 ;;projectile-project-search-path '("~/src/src/github.com/nobv/"))
 
+;; lsp
+(after! lsp-ui
+  (setq lsp-ui-doc-enable t))
+
 ;; Rust
 ;; (after! rustic
 ;;   (setq rustic-lsp-server 'rust-analyzer))
@@ -71,113 +76,113 @@
 ;;  )
 
 ;; React
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
 
 ;; org
-(setq org-directory "~/Google Drive File Stream/My Drive/me/org/")
-(after! org
-	(defconst inbox (concat org-directory "inbox.org"))
-	(defconst notes (concat org-directory "notes.org"))
-	(defconst snippets (concat org-directory "snippets.org"))
-	;; (defconst task (concat org-directory "tasks.org"))
-	(defconst projects (concat org-directory "projects.org"))
+;; (setq org-directory "~/Google Drive File Stream/My Drive/me/org/")
+;; (after! org
+;; 	(defconst inbox (concat org-directory "inbox.org"))
+;; 	(defconst notes (concat org-directory "notes.org"))
+;; 	(defconst snippets (concat org-directory "snippets.org"))
+;; 	;; (defconst task (concat org-directory "tasks.org"))
+;; 	(defconst projects (concat org-directory "projects.org"))
 
-	(setq org-capture-templates
-				'(("s" "Snippets")))
+;; 	(setq org-capture-templates
+;; 				'(("s" "Snippets")))
 
-	(add-to-list 'org-capture-templates
-							 '("p"
-								 "Projects"
-								 entry
-								 (file+headline projects "Projects")
-								 "* PROJ %^{project name} [0%]
-:PROPERTIES:
-:SUBJECT: %^{subject}
-:GOAL:    %^{goal}
-:END:
-:RESOURCES:
-:END:
+;; 	(add-to-list 'org-capture-templates
+;; 							 '("p"
+;; 								 "Projects"
+;; 								 entry
+;; 								 (file+headline projects "Projects")
+;; 								 "* PROJ %^{project name} [0%]
+;; :PROPERTIES:
+;; :SUBJECT: %^{subject}
+;; :GOAL:    %^{goal}
+;; :END:
+;; :RESOURCES:
+;; :END:
 
-+ REQUIREMENTS:
-	%^{requirements}
+;; + REQUIREMENTS:
+;; 	%^{requirements}
 
-+ NOTES:
+;; + NOTES:
 
-+ References
+;; + References
 
-\** [ ] Inbox [0%]\n
+;; \** [ ] Inbox [0%]\n
 
-\** [ ] Anytime [0%]\n
+;; \** [ ] Anytime [0%]\n
 
-\** [ ] Someday [0%]\n
+;; \** [ ] Someday [0%]\n
 
-\** [ ] Projects [0%]\n
-\*** %^{task name} [0%]\n
-	- %?"
-								 :empty-lines 1 :kill-buffer t))
+;; \** [ ] Projects [0%]\n
+;; \*** %^{task name} [0%]\n
+;; 	- %?"
+;; 								 :empty-lines 1 :kill-buffer t))
 
-	(add-to-list 'org-capture-templates
-							 '("n"
-								 "Note"
-								 entry
-								 (file+headline notes "Inbox")
-								 "* %^{description} %^G
-:PROPERTIES:
-:CREATED:    %U
-:END:
+;; 	(add-to-list 'org-capture-templates
+;; 							 '("n"
+;; 								 "Note"
+;; 								 entry
+;; 								 (file+headline notes "Inbox")
+;; 								 "* %^{description} %^G
+;; :PROPERTIES:
+;; :CREATED:    %U
+;; :END:
 
-+ NOTES:
-	%?"
-								 :empty-lines 1 :kill-buffer t))
+;; + NOTES:
+;; 	%?"
+;; 								 :empty-lines 1 :kill-buffer t))
 
-	(add-to-list 'org-capture-templates
-							 '("i" "Inbox"
-								 entry
-								 (file+headline inbox "Inbox")
-								 "* %?\n"
-								 :empty-lines 1 :kill-buffer t))
+;; 	(add-to-list 'org-capture-templates
+;; 							 '("i" "Inbox"
+;; 								 entry
+;; 								 (file+headline inbox "Inbox")
+;; 								 "* %?\n"
+;; 								 :empty-lines 1 :kill-buffer t))
 
 
-	(add-to-list 'org-capture-templates
-							 '("ss"
-								 "Snippet"
-								 entry
-								 (file+headline snippets "Index")
-								 "* %^{description} %^G
-:PROPERTIES:
-:SOURCE:  %^{type|command|code|usage}
-:END:
+;; 	(add-to-list 'org-capture-templates
+;; 							 '("ss"
+;; 								 "Snippet"
+;; 								 entry
+;; 								 (file+headline snippets "Index")
+;; 								 "* %^{description} %^G
+;; :PROPERTIES:
+;; :SOURCE:  %^{type|command|code|usage}
+;; :END:
 
-+ NOTES:
-	%?
+;; + NOTES:
+;; 	%?
 
-+ REFERENCES
+;; + REFERENCES
 
-#+BEGIN_SRC %^{lang}
-%?
-#+END_SRC
-"))
+;; #+BEGIN_SRC %^{lang}
+;; %?
+;; #+END_SRC
+;; "))
 
-	(add-to-list 'org-capture-templates
-							 '("sr"
-								 "Snippet from region"
-								 entry
-								 (file+headline snippets "Index")
-								 "* %^{description} %^G
-:PROPERTIES:
-:SOURCE:  %^{type|command|code|usage}
+;; 	(add-to-list 'org-capture-templates
+;; 							 '("sr"
+;; 								 "Snippet from region"
+;; 								 entry
+;; 								 (file+headline snippets "Index")
+;; 								 "* %^{description} %^G
+;; :PROPERTIES:
+;; :SOURCE:  %^{type|command|code|usage}
 
-+ NOTES:
-	%^{note}
+;; + NOTES:
+;; 	%^{note}
 
-+ References
+;; + References
 
-#+BEGIN_SRC %^{lang}
-%i
-#+END_SRC
-%?
-")))
+;; #+BEGIN_SRC %^{lang}
+;; %i
+;; #+END_SRC
+;; %?
+;; ")))
 
-(use-package! org-bullets
-	:custom (org-bullets-bullet-list '("" "" "" "" "" "" "" "" "" ""))
-	:hook (org-mode . org-bullets-mode))
+;; (use-package! org-bullets
+;; 	:custom (org-bullets-bullet-list '("" "" "" "" "" "" "" "" "" ""))
+;; 	:hook (org-mode . org-bullets-mode))
