@@ -55,6 +55,7 @@
 ;;projectile-project-search-path '("~/src/src/github.com/nobv/"))
 
 ;; lsp
+;; https://www.reddit.com/r/DoomEmacs/comments/kaoxwy/how_can_i_enable_lspuidocmode_by_default/
 (after! lsp-ui
   (setq lsp-ui-doc-enable t))
 
