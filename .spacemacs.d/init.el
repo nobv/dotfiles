@@ -89,7 +89,7 @@ This function should only modify configuration layer settings."
               haskell-enable-hindent t)
      (shell-scripts :variables
                     shell-scripts-backend 'lsp)
-     markdown
+     (markdown :variables markdown-live-preview-engine 'vmd)
      (rust :variables
            rust-backend 'lsp
            rust-format-on-save t)
@@ -105,12 +105,15 @@ This function should only modify configuration layer settings."
                  javascript-fmt-on-save t
                  js2-mode-show-strict-warnings nil
                  js2-mode-show-parse-errors nil
-                 js-indent-level 2)
+                 js-indent-level 2
+                 node-add-modules-path t)
      (typescript :variables
                  typescript-fmt-on-save t
                  typescript-backend 'lsp
                  typescript-fmt-tool 'prettier
-                 typescript-indent-level 2)
+                 typescript-indent-level 2
+                 typescript-linter 'eslint
+                 typescript-lsp-linter nil)
      yaml
      sql
      dhall
@@ -131,6 +134,7 @@ This function should only modify configuration layer settings."
 
      ;; +tools
      dap
+     (docker :variables docker-dockerfile-backend 'lsp)
      (lsp :variables
           lsp-lens-enable t
           lsp-headerline-breadcrumb-segments '(symbols)
@@ -146,7 +150,7 @@ This function should only modify configuration layer settings."
      purescript-ex
      go-ex
      haskell-ex
-     html-ex
+     web-ex
      )
 
    ;; List of additional packages that will be installed without being
@@ -584,6 +588,9 @@ before packages are loaded."
   ;;; read again automatically
   (global-auto-revert-mode t)
 
+  ;;; digdag
+  (add-to-list 'auto-mode-alist '("\\.dig\\'" . yaml-mode))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -593,18 +600,18 @@ before packages are loaded."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-  (custom-set-variables
-   ;; custom-set-variables was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(package-selected-packages
-     (quote
-      (company-statistics yatemplate format-all language-id dap-mode posframe bui vimrc-mode helm-gtags ggtags dactyl-mode counsel-gtags counsel swiper ivy yasnippet-snippets yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-evil toml-mode toc-org tide tagedit symon symbol-overlay string-inflection sql-indent spaceline-all-the-icons smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters racer pug-mode psci psc-ide prettier-js popwin pdf-tools pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file nodejs-repl nameless move-text magit-svn magit-section magit-gitflow macrostep lsp-ui lsp-treemacs lsp-haskell lorem-ipsum livid-mode link-hint json-navigator json-mode js2-refactor js-doc intero insert-shebang indent-guide impatient-mode hybrid-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-purpose helm-projectile helm-mode-manager helm-make helm-lsp helm-ls-git helm-hoogle helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ fuzzy font-lock+ flyspell-correct-helm flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-package flycheck-haskell flycheck-golangci-lint flycheck-elsa flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig dumb-jump dotenv-mode disaster diminish dhall-mode devdocs define-word dante cquery cpp-auto-include company-ycmd company-web company-terraform company-tern company-shell company-rtags company-lsp company-go company-ghci company-ghc company-emoji company-cabal company-c-headers column-enforce-mode cmm-mode clean-aindent-mode clang-format centered-cursor-mode ccls cargo browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile attrap aggressive-indent ace-link ace-jump-helm-line ac-ispell))))
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   )
-  )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
+ '(package-selected-packages
+   '(add-node-modules-path company-statistics yatemplate format-all language-id dap-mode posframe bui vimrc-mode helm-gtags ggtags dactyl-mode counsel-gtags counsel swiper ivy yasnippet-snippets yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-evil toml-mode toc-org tide tagedit symon symbol-overlay string-inflection sql-indent spaceline-all-the-icons smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters racer pug-mode psci psc-ide prettier-js popwin pdf-tools pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file nodejs-repl nameless move-text magit-svn magit-section magit-gitflow macrostep lsp-ui lsp-treemacs lsp-haskell lorem-ipsum livid-mode link-hint json-navigator json-mode js2-refactor js-doc intero insert-shebang indent-guide impatient-mode hybrid-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-purpose helm-projectile helm-mode-manager helm-make helm-lsp helm-ls-git helm-hoogle helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ fuzzy font-lock+ flyspell-correct-helm flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-package flycheck-haskell flycheck-golangci-lint flycheck-elsa flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig dumb-jump dotenv-mode disaster diminish dhall-mode devdocs define-word dante cquery cpp-auto-include company-ycmd company-web company-terraform company-tern company-shell company-rtags company-lsp company-go company-ghci company-ghc company-emoji company-cabal company-c-headers column-enforce-mode cmm-mode clean-aindent-mode clang-format centered-cursor-mode ccls cargo browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile attrap aggressive-indent ace-link ace-jump-helm-line ac-ispell)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
