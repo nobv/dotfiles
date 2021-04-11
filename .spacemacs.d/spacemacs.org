@@ -60,13 +60,13 @@
       (setq create-lockfiles nil)
     #+END_SRC
     - show whitespace
-      #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
-        (setq-default show-trailing-whitespace t)
-      #+END_SRC
+    #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+      (setq-default show-trailing-whitespace t)
+    #+END_SRC
 
 *** Languages
 **** Python
-     need enabled pylint with lsp layer
+     - enable pylint with lsp layer
      https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/#lsp-pyls-plugins-pylint-enabled
      #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
        (setq lsp-pyls-plugins-pylint-enabled t)
@@ -77,7 +77,35 @@
      #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
        (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
      #+END_SRC
+     - use lsp formatter
+     #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+       (add-hook 'before-save-hook (lambda () (when (eq 'haskell-mode major-mode)
+                                                (lsp-format-buffer))))
+     #+END_SRC
 
+**** PureScript
+     - use lsp formatter
+       #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+         (add-hook 'before-save-hook (lambda () (when (eq 'purescript-mode major-mode)
+                                                  (lsp-format-buffer))))
+       #+END_SRC
+
+**** Web
+     - indent
+       #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+         (defun set-web-mode-indent (n)
+           (setq-default
+            ;; js2-mode
+            js2-basic-offset n
+            ;; web-mode
+            css-indent-offset n
+            web-mode-markup-indent-offset n
+            web-mode-css-indent-offset n
+            web-mode-code-indent-offset n
+            web-mode-attr-indent-offset n))
+
+         (set-web-mode-indent 2)
+       #+END_SRC
 
 *** Tools
 **** Digdag

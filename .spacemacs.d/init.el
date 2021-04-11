@@ -156,11 +156,11 @@ This function should only modify configuration layer settings."
      (templates :variables
                 templates-private-directory "~/.spacemacs.d/templates")
 
-     ;; +private
-     purescript-ex
-     go-ex
-     haskell-ex
-     web-ex
+     ;; ;; +private
+     ;; purescript-ex
+     ;; go-ex
+     ;; haskell-ex
+     ;; web-ex
      )
 
    ;; List of additional packages that will be installed without being
