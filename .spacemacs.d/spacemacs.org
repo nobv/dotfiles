@@ -5,6 +5,23 @@
 #+OPTIONS: toc:4 h:4
 #+PROPERTY: header-args:emacs-lisp :comments link
 
+* TOC :TOC:
+- [[#introduction][Introduction]]
+  - [[#initel][init.el]]
+  - [[#spacemacsorg][spacemacs.org]]
+    - [[#general][General]]
+    - [[#languages][Languages]]
+      - [[#python][Python]]
+      - [[#haskell][Haskell]]
+      - [[#purescript][PureScript]]
+      - [[#web][Web]]
+    - [[#tools][Tools]]
+      - [[#digdag][Digdag]]
+- [[#helper-functions][Helper Functions]]
+  - [[#yasnippet-creation][Yasnippet creation]]
+  - [[#find-this-file][Find this file]]
+- [[#local-variables][Local Variables]]
+
 * Introduction
   This is a tangled user-init and user-config file for spacemacs. Place the
   following code in your =~/.spacemacs.d/init.el= file.
