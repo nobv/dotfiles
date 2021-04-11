@@ -1,0 +1,122 @@
+#+TITLE: Spacemacs tangled user configuration
+#+STARTUP: headlines
+#+STARTUP: nohideblocks
+#+STARTUP: noindent
+#+OPTIONS: toc:4 h:4
+#+PROPERTY: header-args:emacs-lisp :comments link
+
+* Introduction
+  This is a tangled user-init and user-config file for spacemacs. Place the
+  following code in your =~/.spacemacs.d/init.el= file.
+
+** init.el
+
+   #+BEGIN_SRC emacs-lisp :tangle no
+     (defun dotspacemacs/user-init ()
+       ;; tangle without actually loading org
+       (let ((src (concat dotspacemacs-directory "spacemacs.org"))
+             (ui (concat dotspacemacs-directory "configs/user-init.el"))
+             (uc (concat dotspacemacs-directory "configs/user-config.el")))
+         (when (or (file-newer-than-file-p src ui) (file-newer-than-file-p src uc))
+           (call-process
+            (concat invocation-directory invocation-name)
+            nil nil t
+            "-q" "--batch" "--eval" "(require 'ob-tangle)"
+            "--eval" (format "(org-babel-tangle-file \"%s\")" src)))
+         (load-file ui)))
+
+     (defun dotspacemacs/user-config ()
+       (load-file (concat dotspacemacs-directory "configs/user-config.el")))
+
+   #+END_SRC
+
+** spacemacs.org
+
+   To add configuration options before Spacemacs loads, insert the following kind
+   of src block in your spacemacs.org file
+
+   #+BEGIN_SRC emacs-lisp :tangle configs/user-init.el
+   #+END_SRC
+
+
+   Alternatively, if the block should be loaded after Spacemacs loads, insert the
+   following test block
+
+*** General
+    - don't create lock file
+    #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+      (setq create-lockfiles nil)
+    #+END_SRC
+    - read again automatically
+    #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+      (global-auto-revert-mode t)
+    #+END_SRC
+    - disable auto-insert-prompt
+    #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+      (setq auto-insert-query nil)
+    #+END_SRC
+    - don't create lock file
+    #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+      (setq create-lockfiles nil)
+    #+END_SRC
+    - show whitespace
+      #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+        (setq-default show-trailing-whitespace t)
+      #+END_SRC
+
+*** Languages
+**** Python
+     need enabled pylint with lsp layer
+     https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/#lsp-pyls-plugins-pylint-enabled
+     #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+       (setq lsp-pyls-plugins-pylint-enabled t)
+     #+END_SRC
+
+**** Haskell
+     - enable auto insertion of module templates for Haskell
+     #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+       (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
+     #+END_SRC
+
+
+*** Tools
+**** Digdag
+     - syntax highlight
+     https://qiita.com/hiroysato/items/d0fe5e2d88c267413a82#73-emacs%E3%81%AE%E5%A0%B4%E5%90%88
+     https://github.com/syohex/emacs-digdag-mode
+     #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+       (add-to-list 'auto-mode-alist '("\\.dig\\'" . yaml-mode))
+     #+END_SRC
+
+     # (setq company-format-margin-function #'company-vscode-light-icons-margin)
+
+
+* Helper Functions
+
+** Yasnippet creation
+
+   To help with creation of your text blocks, there are two snippets defined in the
+   local snippet directory =~/.spacemacs.d/snippets/org-mode/= folder.
+
+   To tangle to the =user-init= file, type =ui=, alternatively =uc= to tangle the =user-config= file.
+
+** Find this file
+   Create binding to spacemacs.org file
+
+   #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+     (defun spacemacs/find-config-file ()
+       (interactive)
+       (find-file (concat dotspacemacs-directory "/spacemacs.org")))
+
+     (spacemacs/set-leader-keys "fec" 'spacemacs/find-config-file)
+
+   #+END_SRC
+
+
+
+
+
+* Local Variables                                                   :ARCHIVE:
+  # Local Variables:
+  # eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
+  # End:

@@ -33,6 +33,7 @@
 
 ## spacemacs env
 .spacemacs.d/.spacemacs.env
+.spacemacs.d/configs/*
 
 
 ## vscode

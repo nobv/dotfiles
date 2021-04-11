@@ -56,7 +56,7 @@ This function should only modify configuration layer settings."
 
      ;; +emacs
      ;; better-defaults
-     ;; org
+     org
 
      ;; +filetree
      treemacs
@@ -122,7 +122,7 @@ This function should only modify configuration layer settings."
                  purescript-backend 'lsp)
      (python :variables
              python-backend 'lsp
-             python-formatter 'lsp
+             python-formatter 'yapf
              python-format-on-save t
              python-sort-imports-on-save t
              python-test-runner 'pytest)
@@ -570,13 +570,26 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  )
+)
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump."
+
+  ;; tangle without actually loading org
+  (let ((src (concat dotspacemacs-directory "spacemacs.org"))
+        (ui (concat dotspacemacs-directory "configs/user-init.el"))
+        (uc (concat dotspacemacs-directory "configs/user-config.el")))
+    (when (or (file-newer-than-file-p src ui)
+              (file-newer-than-file-p src uc))
+      (call-process
+       (concat invocation-directory invocation-name)
+       nil nil t
+       "-q" "--batch" "--eval" "(require 'ob-tangle)"
+       "--eval" (format "(org-babel-tangle-file \"%s\")" src)))
+    (load-file ui))
   )
 
 (defun dotspacemacs/user-config ()
@@ -585,22 +598,7 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
-
-  ;; disable auto-insert-prompt
-  (setq auto-insert-query nil)
-
-  ;; enable auto insertion of module templates for Haskell
-  (add-hook 'haskell-mode-hook 'haskell-auto-insert-module-template)
-
-  ;;; don't create lock file
-  (setq create-lockfiles nil)
-
-  ;;; read again automatically
-  (global-auto-revert-mode t)
-
-  ;;; digdag
-  (add-to-list 'auto-mode-alist '("\\.dig\\'" . yaml-mode))
-
+  (load-file (concat dotspacemacs-directory "configs/user-config.el"))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -617,7 +615,19 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
-   '(protobuf-mode yapfify stickyfunc-enhance sphinx-doc pytest pyenv-mode py-isort poetry pippel pipenv pyvenv pip-requirements nose lsp-python-ms lsp-pyright live-py-mode importmagic epc ctable concurrent helm-pydoc helm-cscope xcscope cython-mode company-anaconda blacken anaconda-mode pythonic add-node-modules-path company-statistics yatemplate format-all language-id dap-mode posframe bui vimrc-mode helm-gtags ggtags dactyl-mode counsel-gtags counsel swiper ivy yasnippet-snippets yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-evil toml-mode toc-org tide tagedit symon symbol-overlay string-inflection sql-indent spaceline-all-the-icons smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters racer pug-mode psci psc-ide prettier-js popwin pdf-tools pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file nodejs-repl nameless move-text magit-svn magit-section magit-gitflow macrostep lsp-ui lsp-treemacs lsp-haskell lorem-ipsum livid-mode link-hint json-navigator json-mode js2-refactor js-doc intero insert-shebang indent-guide impatient-mode hybrid-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-purpose helm-projectile helm-mode-manager helm-make helm-lsp helm-ls-git helm-hoogle helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ fuzzy font-lock+ flyspell-correct-helm flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-package flycheck-haskell flycheck-golangci-lint flycheck-elsa flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig dumb-jump dotenv-mode disaster diminish dhall-mode devdocs define-word dante cquery cpp-auto-include company-ycmd company-web company-terraform company-tern company-shell company-rtags company-lsp company-go company-ghci company-ghc company-emoji company-cabal company-c-headers column-enforce-mode cmm-mode clean-aindent-mode clang-format centered-cursor-mode ccls cargo browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile attrap aggressive-indent ace-link ace-jump-helm-line ac-ispell)))
+   '(orgit-forge orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain gnuplot evil-org protobuf-mode yapfify stickyfunc-enhance sphinx-doc pytest pyenv-mode py-isort poetry pippel pipenv pyvenv pip-requirements nose lsp-python-ms lsp-pyright live-py-mode importmagic epc ctable concurrent helm-pydoc helm-cscope xcscope cython-mode company-anaconda blacken anaconda-mode pythonic add-node-modules-path company-statistics yatemplate format-all language-id dap-mode posframe bui vimrc-mode helm-gtags ggtags dactyl-mode counsel-gtags counsel swiper ivy yasnippet-snippets yaml-mode ws-butler writeroom-mode winum which-key web-mode web-beautify volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-persp treemacs-magit treemacs-evil toml-mode toc-org tide tagedit symon symbol-overlay string-inflection sql-indent spaceline-all-the-icons smeargle slim-mode scss-mode sass-mode restart-emacs rainbow-delimiters racer pug-mode psci psc-ide prettier-js popwin pdf-tools pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file nodejs-repl nameless move-text magit-svn magit-section magit-gitflow macrostep lsp-ui lsp-treemacs lsp-haskell lorem-ipsum livid-mode link-hint json-navigator json-mode js2-refactor js-doc intero insert-shebang indent-guide impatient-mode hybrid-mode hungry-delete hlint-refactor hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-purpose helm-projectile helm-mode-manager helm-make helm-lsp helm-ls-git helm-hoogle helm-gitignore helm-git-grep helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate google-c-style golden-ratio godoctor go-tag go-rename go-impl go-guru go-gen-test go-fill-struct go-eldoc gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ fuzzy font-lock+ flyspell-correct-helm flycheck-ycmd flycheck-rust flycheck-rtags flycheck-pos-tip flycheck-package flycheck-haskell flycheck-golangci-lint flycheck-elsa flycheck-bashate flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu emojify emoji-cheat-sheet-plus emmet-mode elisp-slime-nav editorconfig dumb-jump dotenv-mode disaster diminish dhall-mode devdocs define-word dante cquery cpp-auto-include company-ycmd company-web company-terraform company-tern company-shell company-rtags company-lsp company-go company-ghci company-ghc company-emoji company-cabal company-c-headers column-enforce-mode cmm-mode clean-aindent-mode clang-format centered-cursor-mode ccls cargo browse-at-remote auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile attrap aggressive-indent ace-link ace-jump-helm-line ac-ispell))
+ '(safe-local-variable-values
+   '((eval add-hook 'after-save-hook
+           (lambda nil
+             (org-babel-tangle))
+           nil t)
+     (typescript-backend . tide)
+     (typescript-backend . lsp)
+     (javascript-backend . tide)
+     (javascript-backend . tern)
+     (javascript-backend . lsp)
+     (go-backend . go-mode)
+     (go-backend . lsp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
