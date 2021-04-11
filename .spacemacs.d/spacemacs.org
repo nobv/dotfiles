@@ -10,6 +10,8 @@
   - [[#initel][init.el]]
   - [[#spacemacsorg][spacemacs.org]]
     - [[#general][General]]
+    - [[#completion][Completion]]
+      - [[#company][company]]
     - [[#languages][Languages]]
       - [[#python][Python]]
       - [[#haskell][Haskell]]
@@ -23,6 +25,7 @@
 - [[#local-variables][Local Variables]]
 
 * Introduction
+
   This is a tangled user-init and user-config file for spacemacs. Place the
   following code in your =~/.spacemacs.d/init.el= file.
 
@@ -81,6 +84,13 @@
       (setq-default show-trailing-whitespace t)
     #+END_SRC
 
+*** Completion
+**** company
+     - icons
+     https://www.reddit.com/r/emacs/comments/mn09jw/elisp_completion_with_icons_using_default/
+    #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+      (setq company-format-margin-function #'company-vscode-light-icons-margin)
+    #+END_SRC
 *** Languages
 **** Python
      - enable pylint with lsp layer
@@ -133,7 +143,6 @@
        (add-to-list 'auto-mode-alist '("\\.dig\\'" . yaml-mode))
      #+END_SRC
 
-     # (setq company-format-margin-function #'company-vscode-light-icons-margin)
 
 
 * Helper Functions
