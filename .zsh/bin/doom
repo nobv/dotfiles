@@ -16,6 +16,8 @@ function doom() {
 			  ;;
 		"install") install
 				   ;;
+    "sync") sync
+            ;;
 		"*" ) echo "wrong argument"
 			  ;;
 	esac
@@ -41,6 +43,9 @@ function finish() {
 	pgrep -f 'Emacs --with-profile doom' | xargs kill -9
 }
 
+function sync() {
+    $CMD sync
+}
 
 doom $1
 
