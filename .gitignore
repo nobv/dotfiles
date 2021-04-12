@@ -34,6 +34,7 @@
 ## spacemacs env
 .spacemacs.d/.spacemacs.env
 .spacemacs.d/configs/*
+!.spacemacs.d/configs/.gitkeep
 
 
 ## vscode

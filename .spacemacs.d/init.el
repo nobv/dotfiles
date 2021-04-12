@@ -52,7 +52,8 @@ This function should only modify configuration layer settings."
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'cycle)
                       ;; auto-completion-use-company-box t)
-     ivy
+     (ivy :variables
+          ivy-wrap t)
 
      ;; +emacs
      ;; better-defaults
@@ -149,7 +150,7 @@ This function should only modify configuration layer settings."
      prettier
      (shell :variables
             shell-default-shell 'vterm
-            shell-default-term-shell "/bin/zsh")
+            shell-default-term-shell "/usr/local/bin/zsh")
      (terraform :variables terraform-auto-format-on-save t)
 
      ;; +templates
