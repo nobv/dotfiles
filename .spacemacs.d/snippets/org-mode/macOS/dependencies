@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: dependencies-for-mac
+# key: dfm
+# --
+#+BEGIN_SRC shell :tangle dependencies.zsh
+$1
+#+END_SRC
