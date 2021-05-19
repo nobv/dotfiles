@@ -137,7 +137,8 @@ This function should only modify configuration layer settings."
      pdf
 
      ;; +source-control
-     git
+     (git :variables
+          git-magit-status-fullscreen t)
      version-control
 
      ;; +tools

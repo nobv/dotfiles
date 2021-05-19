@@ -81,7 +81,7 @@
     #+END_SRC
     - show whitespace
     #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
-      (setq-default show-trailing-whitespace t)
+      ;; (setq-default show-trailing-whitespace t)
     #+END_SRC
 
 *** Completion
