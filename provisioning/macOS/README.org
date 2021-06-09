@@ -14,6 +14,8 @@
     - [[#homebrew][Homebrew]]
       - [[#cask-versions][cask-versions]]
       - [[#git][Git]]
+      - [[#mas][mas]]
+      - [[#ghq][ghq]]
       - [[#package-managers][Package Managers]]
         - [[#npm][npm]]
     - [[#nix][Nix]]
@@ -63,35 +65,43 @@
 ** Dependencies
 
 *** Shebang
-    #+BEGIN_SRC shell :tangle dependencies.zsh
+    #+BEGIN_SRC zsh :tangle dependencies.zsh
       #!/bin/zsh
     #+END_SRC
  
 
   
 *** xcode_command_line_tools
-    #+BEGIN_SRC shell :tangle dependencies.zsh
+    #+BEGIN_SRC zsh :tangle dependencies.zsh
       xcode-select --install &> /dev/null
     #+END_SRC
    
    
 *** TODO Homebrew
-    #+BEGIN_SRC shell :tangle dependencies.zsh
+    #+BEGIN_SRC zsh :tangle dependencies.zsh
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     #+END_SRC
     
 **** cask-versions
-     #+BEGIN_SRC shell :tangle dependencies.zsh
+     #+BEGIN_SRC zsh :tangle dependencies.zsh
        brew tap homebrew/cask-versions
      #+END_SRC
      - References
        - [[https://github.com/Homebrew/homebrew-cask-versions][Homebrew/homebrew-cask-versions: 🔢 Alternate versions of Casks]]
  
 **** Git
-     #+BEGIN_SRC shell :tangle dependencies.zsh
+     #+BEGIN_SRC zsh :tangle dependencies.zsh
        brew install git
      #+END_SRC
 
+     
+**** mas
+     #+BEGIN_SRC shell :tangle dependencies.zsh
+       brew install mas
+     #+END_SRC
+     
+ 
+**** TODO ghq
      
 **** TODO Package Managers
 
@@ -101,12 +111,12 @@
    
 ** Spacemacs
 *** Shebang
-    #+BEGIN_SRC shell :tangle install.zsh
+    #+BEGIN_SRC zsh :tangle install.zsh
       #!/bin/zsh
     #+END_SRC
  
 *** Install
-    #+BEGIN_SRC shell :tangle install.zsh
+    #+BEGIN_SRC zsh :tangle install.zsh
       git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d/spacemacs
     #+END_SRC
     
@@ -114,10 +124,10 @@
 *** Layers
 ***** DONE spell-checking
       CLOSED: [2021-05-01 Sat 02:52]
-      #+BEGIN_SRC shell :tangle install.zsh
+      #+BEGIN_SRC zsh :tangle install.zsh
         brew install hunspell
       #+END_SRC
-      #+BEGIN_SRC shell :tangle install.zsh
+      #+BEGIN_SRC zsh :tangle install.zsh
         curl -OL https://raw.githubusercontent.com/LibreOffice/dictionaries/master/en/en_US.aff > ~/Library/Spelling/en_US.aff
         curl -OL https://raw.githubusercontent.com/LibreOffice/dictionaries/master/en/en_US.dic > ~/Library/Spelling/en_US.dic
       #+END_SRC
@@ -158,6 +168,18 @@
 ***** TODO prettier
 ***** TODO shell
 ***** TODO terraform
+      - lsp
+      [[https://github.com/juliosueiras/terraform-lsp][juliosueiras/terraform-lsp: Language Server Protocol for Terraform]]
+      #+BEGIN_SRC shell :tangle install.zsh
+        ghq get https://github.com/juliosueiras/terraform-lsp
+        cd ~/src/src/github.com/juliosueiras/terraform-lsp
+        go mod download
+        make
+        cp ./terraform-lsp ~/src/bin
+        # TODO return work dir
+      #+END_SRC
+ 
+      
 
 * Local Variables                                                   :ARCHIVE:
   # Local Variables:

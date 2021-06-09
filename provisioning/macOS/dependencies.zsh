@@ -7,3 +7,5 @@ xcode-select --install &> /dev/null
 brew tap homebrew/cask-versions
 
 brew install git
+
+brew install mas
