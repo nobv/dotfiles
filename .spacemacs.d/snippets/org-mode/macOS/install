@@ -2,6 +2,6 @@
 # name: install-for-mac
 # key: ifm
 # --
-#+BEGIN_SRC shell :tangle install.zsh
+#+BEGIN_SRC zsh :tangle install.zsh
 $1
 #+END_SRC
