@@ -62,6 +62,11 @@ This function should only modify configuration layer settings."
      ;; +filetree
      treemacs
 
+     ;; +fonts
+     (unicode-fonts :variables
+                    unicode-fonts-force-multi-color-on-mac t
+                    unicode-fonts-enable-ligatures t)
+
      ;; +frameworks
      react
 
@@ -117,7 +122,6 @@ This function should only modify configuration layer settings."
                  typescript-lsp-linter nil)
      yaml
      sql
-     dhall
      protobuf
      (purescript :variables
                  purescript-backend 'lsp)
@@ -152,7 +156,9 @@ This function should only modify configuration layer settings."
      (shell :variables
             shell-default-shell 'vterm
             shell-default-term-shell "/usr/local/bin/zsh")
-     (terraform :variables terraform-auto-format-on-save t)
+     (terraform :variables
+                terraform-backend 'lsp
+                terraform-auto-format-on-save t)
 
      ;; +templates
      (templates :variables
@@ -319,10 +325,15 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
 
    ;; Default font or prioritized list of fonts.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Hasklig"
                                :size 13.0
                                :weight normal
                                :width normal)
+
+   ;; dotspacemacs-default-font '("Source Code Pro"
+   ;;                             :size 13.0
+   ;;                             :weight normal
+   ;;                             :width normal)
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"

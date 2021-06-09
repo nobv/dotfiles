@@ -19,6 +19,7 @@
       - [[#web][Web]]
     - [[#tools][Tools]]
       - [[#digdag][Digdag]]
+      - [[#terragrunt][Terragrunt]]
 - [[#helper-functions][Helper Functions]]
   - [[#yasnippet-creation][Yasnippet creation]]
   - [[#find-this-file][Find this file]]
@@ -82,6 +83,12 @@
     - show whitespace
     #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
       ;; (setq-default show-trailing-whitespace t)
+      ;; (spacemacs/toggle-whitespace-globally-on)
+
+      ;; (set-face-attribute 'whitespace-space nil
+      ;;                     :background nil
+      ;;                     :foreground "gray30")
+
     #+END_SRC
 
 *** Completion
@@ -142,8 +149,10 @@
      #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
        (add-to-list 'auto-mode-alist '("\\.dig\\'" . yaml-mode))
      #+END_SRC
-
-
+**** Terragrunt
+    #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+       (add-to-list 'auto-mode-alist '("\\.hcl\\'" . terraform-mode))
+    #+END_SRC 
 
 * Helper Functions
 
