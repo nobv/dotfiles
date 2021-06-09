@@ -51,6 +51,9 @@ alias tfp='terraform plan'
 alias tfa='terraform apply'
 alias tfi='terraform init'
 
+# Terragrunt
+alias tg='terragrunt'
+
 # gomi
 # alias rm="gomi"
 
@@ -58,6 +61,8 @@ alias tfi='terraform init'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
 
+# chrome
+alias chrome='open -a "Google Chrome"'
 # gsed
 alias sed='gsed'
 
