@@ -79,8 +79,8 @@ This function should only modify configuration layer settings."
             c-c++-enable-auto-newline t
             c-c++-backend 'lsp-clangd
             c-c++-adopt-subprojects t)
-     emacs-lisp
      dhall
+     emacs-lisp
      (go :variables
          go-tab-width 4
          go-use-golangci-lint t
@@ -93,12 +93,6 @@ This function should only modify configuration layer settings."
               haskell-completion-backend 'lsp
               haskell-process-type 'stack-ghci
               haskell-enable-hindent t)
-     (shell-scripts :variables
-                    shell-scripts-backend 'lsp)
-     (markdown :variables markdown-live-preview-engine 'vmd)
-     (rust :variables
-           rust-backend 'lsp
-           rust-format-on-save t)
      (html :variables
            web-fmt-tool 'prettier
            css-enable-lsp t
@@ -113,15 +107,11 @@ This function should only modify configuration layer settings."
                  js2-mode-show-parse-errors nil
                  js-indent-level 2
                  node-add-modules-path t)
-     (typescript :variables
-                 typescript-fmt-on-save t
-                 typescript-backend 'lsp
-                 typescript-fmt-tool 'prettier
-                 typescript-indent-level 2
-                 typescript-linter 'eslint
-                 typescript-lsp-linter nil)
-     yaml
-     sql
+     (json :variables
+           json-backend 'lsp)
+     kotlin
+     (markdown :variables
+               markdown-live-preview-engine 'vmd)
      protobuf
      (purescript :variables
                  purescript-backend 'lsp)
@@ -131,8 +121,22 @@ This function should only modify configuration layer settings."
              python-format-on-save t
              python-sort-imports-on-save t
              python-test-runner 'pytest)
+     (rust :variables
+           rust-backend 'lsp
+           rust-format-on-save t)
+     scala
+     (shell-scripts :variables
+                    shell-scripts-backend 'lsp)
+     sql
+     (typescript :variables
+                 typescript-fmt-on-save t
+                 typescript-backend 'lsp
+                 typescript-fmt-tool 'prettier
+                 typescript-indent-level 2
+                 typescript-linter 'eslint
+                 typescript-lsp-linter nil)
      vimscript
-     kotlin
+     yaml
 
      ;; +misc
      multiple-cursors
