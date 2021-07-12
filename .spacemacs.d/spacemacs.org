@@ -20,6 +20,9 @@
     - [[#tools][Tools]]
       - [[#digdag][Digdag]]
       - [[#terragrunt][Terragrunt]]
+      - [[#dbml][dbml]]
+      - [[#magit][magit]]
+      - [[#conda][conda]]
 - [[#helper-functions][Helper Functions]]
   - [[#yasnippet-creation][Yasnippet creation]]
   - [[#find-this-file][Find this file]]
@@ -104,6 +107,7 @@
      https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/#lsp-pyls-plugins-pylint-enabled
      #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
        (setq lsp-pyls-plugins-pylint-enabled t)
+       ;; (add-to-list 'spacemacs--python-pipenv-mode 'python)
      #+END_SRC
 
 **** Haskell
@@ -153,6 +157,22 @@
     #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
        (add-to-list 'auto-mode-alist '("\\.hcl\\'" . terraform-mode))
     #+END_SRC 
+**** dbml
+     #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+       (load-file "~/.dotfiles/.spacemacs.d/private/dbd-mode/dbdiagram-mode.el")
+     #+END_SRC 
+**** magit
+     #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+       (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+     #+END_SRC 
+**** conda
+     https://github.com/necaris/conda.el
+    #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+      (setq conda-env-home-directory (expand-file-name "~/.anyenv/envs/pyenv/versions/anaconda3-2021.05"))
+      #+END_SRC 
+    #+BEGIN_SRC emacs-lisp :tangle configs/user-init.el
+      ;; (setenv "WORKON_HOME" "~/.anyenv/envs/pyenv/versions/anaconda3-2021.05/envs")
+    #+END_SRC
 
 * Helper Functions
 
