@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+export CONDA_ENV_NAME="$1"
+
+TEMPLATE=~/.dotfiles/conda.yaml.template
+DIST=~/.dotfiles/conda.yaml
+
+cat ${TEMPLATE} | envsubst > ${DIST}
+
+conda env create -f ${DIST}
+
