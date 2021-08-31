@@ -1,6 +1,6 @@
 #compdef _doom doom
 
 function _doom() {
-  _arguments -C "1: :(start restart kill refresh up install sync)"
+  _arguments -C "1: :(start restart kill refresh up install sync doctor)"
 }
 
