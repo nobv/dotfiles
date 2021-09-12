@@ -1,0 +1,82 @@
+#+TITLE: Doom Emacs configuration
+#+STARTUP: headlines
+#+STARTUP: nohideblocks
+#+STARTUP: noindent
+#+OPTIONS: toc:4 h:4
+#+PROPERTY: header-args:emacs-lisp :comments link
+
+* TOC :TOC:
+- [[#requirements][REQUIREMENTS]]
+  - [[#install][Install]]
+  - [[#ui][UI]]
+  - [[#languages][Languages]]
+  - [[#keybindings][Keybindings]]
+
+* REQUIREMENTS
+** Install
+[[https://github.com/politza/pdf-tools/issues/288][pdf-info-check-epdfinfo: pdf-info-epdfinfo-program is not executable · Issue #288 · politza/pdf-tools]]
+
+
+** UI
+*** Fonts
+    #+BEGIN_SRC emacs-lisp :tangle config.el
+    (setq
+     doom-font (font-spec :family "Hasklig" :size 14))
+    #+END_SRC
+*** Theme
+#+begin_src emacs-lisp :tangle config.el
+    (setq doom-theme 'doom-dracula)
+#+end_src
+
+** Languages
+*** Python
+**** anaconda
+    #+BEGIN_SRC emacs-lisp :tangle config.el
+    (setq conda-env-home-directory (expand-file-name "~/.anyenv/envs/pyenv/versions/anaconda3-2021.05"))
+    (setq conda-anaconda-home (expand-file-name "~/.anyenv/envs/pyenv/versions/anaconda3-2021.05"))
+    #+END_SRC
+
+**** pylint
+    Disable pylint
+    #+BEGIN_SRC emacs-lisp :tangle config.el
+    (setq-default flycheck-disabled-checkers '(python-pylint))
+    #+END_SRC
+
+**** black
+    #+BEGIN_SRC emacs-lisp :tangle config.el
+    (after! python
+      :config
+      (add-hook! 'python-mode-hook #'python-black-on-save-mode)
+      ;; Feel free to throw your own personal keybindings here
+      (map! :leader :desc "Blacken Buffer" "m b b" #'python-black-buffer)
+      (map! :leader :desc "Blacken Region" "m b r" #'python-black-region)
+      (map! :leader :desc "Blacken Statement" "m b s" #'python-black-statement))
+    #+END_SRC
+
+**** isort
+    #+begin_src emacs-lisp :tangle config.el
+    (after! python
+      :config
+      (add-hook! 'before-save-hook #'py-isort-before-save))
+    #+end_src
+
+** Keybindings
+*** +lookup/definition-other-window
+    [[https://github.com/ALai57/alai-dotfiles/commit/678884e078f2873ca562e675581a83fe5d66b22e][Add +lookup/*-other-(window|frame) · ALai57/alai-dotfiles@678884e]]
+    [[https://github.com/hlissner/doom-emacs/issues/3397][+lookup/definition results in another window · Issue #3397 · hlissner/doom-emacs]]
+    #+begin_src emacs-lisp :tangle config.el
+    ;; (dolist (fn '(definition references))
+    ;;   (fset (intern (format "+lookup/%s-other-window" fn))
+    ;;         (lambda (identifier &optional arg)
+    ;;           "TODO"
+    ;;           (interactive (list (d)
+    ;;           (let ((pt (point)))
+    ;;             (switch-to-buffer-other-window (current-buffer))
+    ;;             (goto-char pt)
+    ;;             (funcall (intern (format "+lookup/%s" fn)) identifier arg)))))
+    ;; (define-key evil-normal-state-map "gow" '+lookup/definition-other-window)
+    #+end_src
+
+# Local Variables:
+# eval: (add-hook 'after-save-hook (lambda ()(org-babel-tangle)) nil t)
+# End:
