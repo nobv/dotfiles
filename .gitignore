@@ -36,6 +36,10 @@
 .spacemacs.d/configs/*
 !.spacemacs.d/configs/.gitkeep
 
+## doom emacs
+.doom.d/config.el
+.doom.d/packages.el
+
 
 ## vscode
 .vscode/extensions/*
