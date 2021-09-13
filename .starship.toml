@@ -8,3 +8,7 @@ symbol = "☁ 🅰 "
 ap-northeast-1 = "🗼"
 ap-southeast-2 = "au"
 us-east-1 = "va"
+
+[gcloud]
+format = 'on [$symbol$account(@$domain)(\($project\))]($style) '
+symbol = "☁ Ⓖ "
