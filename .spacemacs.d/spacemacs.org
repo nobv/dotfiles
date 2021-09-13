@@ -170,8 +170,8 @@
     #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
       (setq conda-env-home-directory (expand-file-name "~/.anyenv/envs/pyenv/versions/anaconda3-2021.05"))
       #+END_SRC 
-    #+BEGIN_SRC emacs-lisp :tangle configs/user-init.el
-      ;; (setenv "WORKON_HOME" "~/.anyenv/envs/pyenv/versions/anaconda3-2021.05/envs")
+    #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
+      (setq conda-anaconda-home (expand-file-name "~/.anyenv/envs/pyenv/versions/anaconda3-2021.05"))
     #+END_SRC
 
 * Helper Functions

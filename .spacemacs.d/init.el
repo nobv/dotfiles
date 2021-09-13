@@ -117,8 +117,9 @@ This function should only modify configuration layer settings."
                  purescript-backend 'lsp)
      (python :variables
              python-backend 'lsp
+             python-lsp-server 'pyright
              ;; python-backend 'anaconda
-             python-formatter 'yapf
+             python-formatter 'black
              python-format-on-save t
              python-sort-imports-on-save t
              python-test-runner 'pytest)
@@ -166,6 +167,10 @@ This function should only modify configuration layer settings."
                 terraform-backend 'lsp
                 terraform-auto-format-on-save t)
 
+     ;; +spacemacs
+     (spacemacs-layouts :variables
+                        persp-autokill-buffer-on-remove 'kill-weak
+                        spacemacs-layouts-restrict-spc-tab t)
      ;; +templates
      (templates :variables
                 templates-private-directory "~/.spacemacs.d/templates")
