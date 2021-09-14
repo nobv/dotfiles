@@ -1,14 +1,100 @@
+format = """
+[┌──────────────────────────────────────────────────────>](bold green)
+[│](bold green)[on ☁ Ⓐ ](bold bright-yellow)$aws
+[│](bold green)[on ☁ Ⓖ ](bold bright-blue)$gcloud
+[│](bold green)[on ⎈ ](bold red)$kubernetes
+[│](bold green)\
+$username\
+$hostname\
+$shlvl\
+$directory\
+$vcsh\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$kotlin\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$php\
+$purescript\
+$python\
+$red\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$env_var\
+$crystal\
+$custom\
+$cmd_duration\
+$line_break\
+$lua\
+$jobs\
+$battery\
+$time\
+$status\
+$shell
+[│](bold green)$character """
+
+# add_newline = false
+
+[line_break]
+disabled = true
+
 [purescript]
 symbol = "<≡> "
 
 [aws]
-format = 'on [$symbol($profile )(\($region\) )]($style)'
-symbol = "☁ 🅰 "
+format = '[$symbol($profile )(\($region\) )]($style)'
+symbol = ""
 [aws.region_aliases]
 ap-northeast-1 = "🗼"
 ap-southeast-2 = "au"
 us-east-1 = "va"
 
 [gcloud]
-format = 'on [$symbol$account(@$domain)(\($project\))]($style) '
-symbol = "☁ Ⓖ "
+format = '[$symbol$account(@$domain)(\($project\))(\($region\) )]($style) '
+symbol = ""
+[gcloud.region_aliases]
+asia-northeast1 = "🗼"
+
+[character]
+success_symbol = "[➜](bold green) "
+error_symbol = "[✗](bold red) "
+
+[directory]
+truncation_length = 1
+truncation_symbol = "…/"
+
+[kubernetes]
+format = '[$context \($namespace\)]($style) '
+style = "bold red"
+disabled = false
+[kubernetes.context_aliases]
+"gke_.*_(?P<cluster>[\\w-]+)" = "gke-$cluster"
+
+
