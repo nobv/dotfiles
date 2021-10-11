@@ -88,28 +88,56 @@ if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
 
-# zplug
-if [[ -f ~/.zplug/init.zsh ]]; then
-  export ZPLUG_LOADFILE=~/.zsh/zplug.zsh
-  source ~/.zplug/init.zsh
+# zsh-autosuggestions
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-  if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-      echo; zplug install
-    fi
-    echo
-  fi
-  zplug load
-fi
+# poetry
+# fpath+=~/.zfunc
+# poetry completions zsh > ~/.zfunc/_poetry
+
+# zlib
+export LDFLAGS="-L/usr/local/opt/zlib/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include"
+export PKG_CONFIG_PATH="/usr/local/opt/zlib/lib/pkgconfig"
+
+# kubectl
+source <(kubectl completion zsh)
+
+
+# zplug
+# if [[ -f ~/.zplug/init.zsh ]]; then
+#   export ZPLUG_LOADFILE=~/.zsh/zplug.zsh
+#   source ~/.zplug/init.zsh
+
+#   if ! zplug check --verbose; then
+#     printf "Install? [y/N]: "
+#     if read -q; then
+#       echo; zplug install
+#     fi
+#     echo
+#   fi
+#   zplug load
+# fi
 
 # Start tmux when zsh starts
 #[[ -z "$TMUX" && ! -z "$PS1" ]] && exec tmux
 
 # GCP
-## The next line updates PATH for the Google Cloud SDK.
-if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
-## The next line enables shell command completion for gcloud.
-if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
 
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/nobv/.anyenv/envs/pyenv/versions/anaconda3-2021.05/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/nobv/.anyenv/envs/pyenv/versions/anaconda3-2021.05/etc/profile.d/conda.sh" ]; then
+        . "/Users/nobv/.anyenv/envs/pyenv/versions/anaconda3-2021.05/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/nobv/.anyenv/envs/pyenv/versions/anaconda3-2021.05/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<

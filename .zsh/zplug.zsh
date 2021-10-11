@@ -1,11 +1,11 @@
-zplug "zplug/zplug", hook-build:'zplug --self-manage'
+# zplug "zplug/zplug", hook-build:'zplug --self-manage'
 
-zplug "b4b4r07/emoji-cli"
+# zplug "b4b4r07/emoji-cli"
 
 #zplug "themes/wedisagree", from:oh-my-zsh
 
 # zplug "bhilburn/powerlevel9k", use:"powerlevel9k.zsh-theme", as:theme, if:"source ~/.powerlevel9k"
  
-zplug "b4b4r07/enhancd", use:init.sh
+# zplug "b4b4r07/enhancd", use:init.sh
 
-zplug 'zsh-users/zsh-completions'
+# zplug 'zsh-users/zsh-completions'
