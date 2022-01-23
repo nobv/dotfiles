@@ -8,10 +8,11 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    # Applications 
-    # Morgen
-  ];
+  environment = {
+    systemPackages = with pkgs; [];
+
+    darwinConfig = ~/.dotfiles/nix/darwin-configuration.nix
+  }
 
   home-manager = {
     useGlobalPkgs = true;
@@ -19,10 +20,7 @@
 
   nixpkgs = {
     config = {
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        # "google-chrome"
-        # "slack"
-      ];
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [];
       allowUnsupportedSystem = true;
     };
 
