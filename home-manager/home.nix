@@ -4,6 +4,7 @@
   imports = [
     ./modules/nix.nix
     ./modules/emacs.nix
+    ./modules/starship
   ];
 
   home = {
@@ -162,128 +163,6 @@
 
     jq = { enable = true; };
 
-    starship = {
-      enable = true;
-      enableZshIntegration = true;
-      # package = 
-      settings = {
-        format = lib.concatStrings [
-          ''
-            [┌──────────────────────────────────────────────────────>](bold green)
-          ''
-          ''
-            [│](bold green)[on ☁ Ⓐ ](bold bright-yellow)$aws
-          ''
-          ''
-            [│](bold green)[on ☁ Ⓖ ](bold bright-blue)$gcloud
-          ''
-          ''
-            [│](bold green)[on   ⎈ ](bold red)$kubernetes
-          ''
-          "[│](bold green)"
-          "$username"
-          "$hostname"
-          "$shlvl"
-          "$directory"
-          "$vcsh"
-          "$git_branch"
-          "$git_commit"
-          "$git_state"
-          "$git_metrics"
-          "$git_status$hg_branch"
-          "$docker_context"
-          "$package"
-          "$cmake"
-          "$dart"
-          "$deno"
-          "$dotnet"
-          "$elixir"
-          "$elm"
-          "$erlang"
-          "$golang"
-          "$helm"
-          "$java"
-          "$julia"
-          "$kotlin"
-          "$nim"
-          "$nodejs"
-          "$ocaml"
-          "$perl"
-          "$php"
-          "$purescript"
-          "$python"
-          "$red"
-          "$ruby"
-          "$rust"
-          "$scala"
-          "$swift"
-          "$terraform"
-          "$vlang"
-          "$vagrant"
-          "$zig"
-          "$nix_shell"
-          "$conda"
-          "$memory_usage"
-          "$env_var"
-          "$crystal"
-          "$custom"
-          "$cmd_duration"
-          "$line_break"
-          "$lua"
-          "$jobs"
-          "$battery"
-          "$time"
-          "$status"
-          "$shell"
-          "[│](bold green)$character "
-        ];
-
-        line_break = {
-          disabled = true;
-        };
-
-        purescript = {
-          symbol = "<≡> ";
-        };
-
-        aws = {
-          format = "[$symbol($profile )(\($region\) )]($style)";
-          symbol = "";
-          region_aliases = {
-            ap-northeast-1 = "🗼";
-            ap-southeast-2 = "au";
-            us-east-1 = "va";
-          };
-        };
-
-        gcloud = {
-          format = "[$symbol$account(@$domain)(\($project\))(\($region\) )]($style) ";
-          symbol = "";
-          region_aliases = {
-            asia-northeast1 = "🗼";
-          };
-        };
-
-        character = {
-          success_symbol = "[➜](bold green) ";
-          error_symbol = "[✗](bold red) ";
-        };
-
-        directory = {
-          truncation_length = 1;
-          truncation_symbol = "…/";
-        };
-
-        kubernetes = {
-          format = "[$context \($namespace\)]($style) ";
-          style = "bold red";
-          disabled = false;
-          context_aliases = {
-            "gke_.*_(?P<cluster>[''\w-]+)" = "gke-$cluster";
-          };
-        };
-      };
-    };
 
     tmux = {
       enable = true;
