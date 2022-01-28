@@ -1,6 +1,11 @@
 { config, pkgs, lib, ... }:
 
 {
+  imports = [
+    ./modules/nix.nix
+    ./modules/emacs.nix
+  ];
+
   home = {
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
@@ -10,17 +15,17 @@
     packages = with pkgs; [
       aws
       bats
+      # black
+      # mypy
       clang
       clang-tools
       coreutils
-      # docker
       editorconfig-core-c
-      # emacs
-      # firefox
       fd
       git
       gh
       ghq
+      gopls
       google-cloud-sdk
       hub
       hunspell
@@ -28,7 +33,11 @@
       kubectl
       kubectx
       kustomize
-      lastpass-cli
+      # lastpass-cli
+      # hasklig v1.1 doesn't work in VSCode well.
+      # For some reason, this PR was closed.
+      # https://github.com/NixOS/nixpkgs/pull/135938
+      # hasklig
       (nerdfonts.override {
         fonts = [
           "SourceCodePro"
@@ -37,9 +46,10 @@
           "FiraCode"
         ];
       })
-      nixpkgs-fmt
+      # nixpkgs-fmt
       navi
       nodejs
+      nodePackages.prettier
       parallel
       peco
       protobuf
@@ -49,56 +59,14 @@
       terraform
       terragrunt
       tig
-      tmux
       tree
       youtube-dl
     ];
 
-    file = {
-      ".emacs-profiles.el" = {
-        text = builtins.readFile ~.dotfiles/.emacs-profiles.el;
-      };
 
-      ".emacs" = {
-        recursive = true;
-        source = pkgs.fetchFromGitHub {
-          owner = "plexus";
-          repo = "chemacs2";
-          rev = "ef82118824fac2b2363d3171d26acbabe1738326";
-          sha256 = "1gg4aa6dxc4k9d78j8mrrhy0mvhqmly7jxby69518xs9njxh00dq";
-        };
-      };
-
-      ".doom.d" = {
-        recursive = true;
-        source = builtins.readDir ~./dotfiles/.doom.d;
-      };
-
-      "doom-emacs" = {
-        recursive = true;
-        target = ".emacs.d/doom-emacs";
-        source = pkgs.fetchFromGitHub {
-          owner = "hlissner";
-          repo = "doom-emacs";
-          rev = "94c38f289c5bbebd8158dd24ed222c707423a7d5";
-          sha256 = "18fmpkspf1fgayg29c18q1ggg9lz68r1g6cqjmj34qi6zcpdr5yf";
-        };
-      };
-
-      "spacemacs" = {
-        recursive = true;
-        target = ".emacs.d/spacemacs";
-        source = pkgs.fetchFromGitHub {
-          owner = "syl20bnr";
-          repo = "spacemacs";
-          rev = "1541eed6bdaee3e67fc1f9dacf3f21f8494aab68";
-          sha256 = "0a0imykbwvq7dga75gzvmx2654l14rfbxc8znpp3q0qqb3m6ldkp";
-        };
-      };
-    };
   };
 
-  fonts = { fontconfig = { enable = true; }; };
+  #fonts = { fontconfig = { enable = true; }; };
 
   programs = {
     bat = {
@@ -110,7 +78,7 @@
       enableZshIntegration = true;
     };
 
-    emacs = { enable = true; };
+    # emacs = { enable = true; };
 
     exa = { enable = true; };
 
@@ -170,10 +138,6 @@
         ".spacemacs.d/configs/*"
         "!.spacemacs.d/configs/.gitkeep"
 
-        ## doom emacs
-        ".doom.d/config.el"
-        ".doom.d/packages.el"
-
         ## vscode
         ".vscode/extensions/*"
         ".vscode/argv.json"
@@ -182,7 +146,7 @@
         "bin/rust-analyzer"
         "conda.yaml"
       ];
-      userEmail = "6e6f6276@gmail.com";
+      userEmail = "36393714+nobv@users.noreply.github.com";
       userName = "nobv";
     };
 
@@ -323,8 +287,12 @@
 
     tmux = {
       enable = true;
-      extraConfig = "";
+      baseIndex = 1;
+      customPaneNavigationAndResize = true;
+      keyMode = "vi";
       prefix = "C-a";
+      extraConfig = builtins.readFile ~/.dotfiles/configs/tmux/.tmux.conf;
+      historyLimit = 10000;
       plugins = with pkgs; [
         {
           plugin = tmuxPlugins.resurrect;
@@ -342,21 +310,25 @@
           '';
         }
       ];
+      terminal = "screen-256color";
     };
 
     vim = { enable = true; };
 
-    vscode = {
-      enable = true;
-      extensions = with pkgs.vscode-extensions; [
-        bbenoist.nix
-        b4dm4n.vscode-nixpkgs-fmt
-      ];
-      userSettings = {
-        "workbench.colorTheme" = "Default Dark+";
-        "editor.formatOnSave" = true;
-      };
-    };
+    # vscode = {
+    #   enable = true;
+    #   extensions = with pkgs.vscode-extensions; [
+    #     # Nix
+    #     bbenoist.nix
+    #     b4dm4n.vscode-nixpkgs-fmt
+    #     # Lisp
+    #     # mattn.lisp
+    #   ];
+    #   userSettings = {
+    #     "workbench.colorTheme" = "Default Dark+";
+    #     "editor.formatOnSave" = true;
+    #   };
+    # };
 
     zsh = {
       enable = true;
@@ -364,7 +336,7 @@
       enableAutosuggestions = true;
       enableCompletion = true;
       enableSyntaxHighlighting = true;
-      dotDir = "~/.zsh";
+      # dotDir = ".dotfiles/.zsh";
       history = {
         expireDuplicatesFirst = true;
         extended = true;
@@ -404,6 +376,7 @@
         l = "exa --git --icons -a";
         ll = "exa --long --header --git --icons -a";
         lf = "exa -a | fzf";
+        lt = "exa --tree";
 
         # misc
         reload = "exec $SHELL -l";
@@ -416,6 +389,11 @@
         # for github cli
         eval "$(gh completion -s zsh)"
       '';
+      # plugins = {
+      #   "doom" = {
+      #       name = 
+      #   };
+      # };
     };
   };
 

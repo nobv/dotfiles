@@ -3,16 +3,17 @@
 {
   imports = [
     <home-manager/nix-darwin>
-    ./modules/homebrew.nix
+    ./homebrew
   ];
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment = {
-    systemPackages = with pkgs; [];
+    systemPackages = with pkgs; [ ];
 
-    darwinConfig = ~/.dotfiles/nix/darwin-configuration.nix
-  }
+    # TODO:
+    darwinConfig = ~/.dotfiles/darwin/darwin-configuration.nix;
+  };
 
   home-manager = {
     useGlobalPkgs = true;
@@ -20,18 +21,18 @@
 
   nixpkgs = {
     config = {
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [];
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
       allowUnsupportedSystem = true;
     };
 
-    overlays =
-      let path = ./overlays; in
-      with builtins;
-      map (n: import (path + ("/" + n)))
-        (filter
-          (n: match ".*\\.nix" n != null ||
-            pathExists (path + ("/" + n + "/default.nix")))
-          (attrNames (readDir path)));
+    # overlays =
+    #   let path = ./overlays; in
+    #   with builtins;
+    #   map (n: import (path + ("/" + n)))
+    #     (filter
+    #       (n: match ".*\\.nix" n != null ||
+    #         pathExists (path + ("/" + n + "/default.nix")))
+    #       (attrNames (readDir path)));
   };
 
   # Use a custom configuration.nix location.
