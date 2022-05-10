@@ -1,10 +1,10 @@
 ;; [[file:doom.org::*Fonts][Fonts:1]]
-;;(setq
-;; doom-font (font-spec :family "Hasklig" :size 14))
+(setq
+ doom-font (font-spec :family "Hasklig" :size 14))
 ;; Fonts:1 ends here
 
 ;; [[file:doom.org::*Theme][Theme:2]]
-;;(setq doom-theme 'doom-dracula)
+(setq doom-theme 'doom-dracula)
 ;; (setq doom-theme 'spacemacs-dark)
 ;; Theme:2 ends here
 
