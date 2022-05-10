@@ -64,6 +64,7 @@
       "librsvg"
       "little-cms2"
       "texinfo"
+      "svn"
     ];
 
     extraConfig = ''
