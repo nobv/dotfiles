@@ -53,11 +53,11 @@
 
   # Create /etc/bashrc that loads the nix-darwin environment.
   # programs.fish.enable = true;
-  programs = {
-    zsh = {
-      enable = true; # default shell on catalina
-    };
-  };
+  # programs = {
+  #   zsh = {
+  #     enable = true; # default shell on catalina
+  #   };
+  # };
 
   system = {
     defaults = {

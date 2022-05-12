@@ -2,9 +2,9 @@
 
 {
   imports = [
-    ./modules/nix.nix
-    ./modules/emacs.nix
-    ./modules/starship
+    # ../configs/lang/nix
+    # ../configs/editor/emacs
+    # ../configs/term/starship
   ];
 
   home = {
