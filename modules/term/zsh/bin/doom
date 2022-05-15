@@ -42,7 +42,7 @@ function start() {
 }
 
 function finish() {
-    pgrep -f 'Emacs --with-profile doom' | xargs kill -9
+    pgrep -f 'emacs --with-profile doom' | xargs kill -9
 }
 
 function sync() {

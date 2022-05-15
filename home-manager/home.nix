@@ -3,8 +3,8 @@
 {
   imports = [
     # ../configs/lang/nix
-    # ../configs/editor/emacs
-    # ../configs/term/starship
+    ../modules/editor/emacs
+    ../modules/term/starship
   ];
 
   home = {
@@ -170,7 +170,7 @@
       customPaneNavigationAndResize = true;
       keyMode = "vi";
       prefix = "C-a";
-      extraConfig = builtins.readFile ~/.dotfiles/configs/tmux/.tmux.conf;
+      extraConfig = builtins.readFile ~/.dotfiles/modules/tools/tmux/.tmux.conf;
       historyLimit = 10000;
       plugins = with pkgs; [
         {
@@ -232,8 +232,9 @@
 
         ## exports
         export DOTFILES=$HOME/.dotfiles
-        export DOOM=$HOME/.emacs.d/doom-emacs/bin
-        export PATH=$DOTFILES/bin:$DOOM:$PATH
+        export DOOM=$DOTFILES/modules/editor/emacs/.doom.d/doom-emacs/bin
+        export ZSH=$DOTFILES/modules/term/zsh/bin
+        export PATH=$DOTFILES/bin:$DOOM:$ZSH:$PATH
 
 
         ## fzf

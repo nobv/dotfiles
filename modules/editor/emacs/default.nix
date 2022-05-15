@@ -2,12 +2,12 @@
 {
   home.file = {
     ".emacs-profiles.el" = {
-      text = builtins.readFile ~/.dotfiles/configs/emacs/.emacs-profiles.el;
+      text = builtins.readFile ~/.dotfiles/modules/editor/emacs/.emacs-profiles.el;
     };
 
     "emacs" = {
       recursive = true;
-      target = ".config/emacs";
+      target = ".emacs.d";
       source = pkgs.fetchFromGitHub {
         owner = "plexus";
         repo = "chemacs2";
@@ -16,16 +16,16 @@
       };
     };
 
-    "doom" = {
-      recursive = true;
-      target = ".config/doom";
-      source = ~/.dotfiles/configs/emacs/.doom.d;
-    };
+    #   "doom" = {
+    #     recursive = true;
+    #     target = ".config/doom";
+    #     source = ~/.dotfiles/configs/emacs/.doom.d;
+    #   };
 
-    "spacemacs" = {
-      recursive = true;
-      target = ".config/spacemacs";
-      source = ~/.dotfiles/configs/emacs/.spacemacs.d;
-    };
+    #   "spacemacs" = {
+    #     recursive = true;
+    #     target = ".config/spacemacs";
+    #     source = ~/.dotfiles/configs/emacs/.spacemacs.d;
+    #   };
   };
 }
