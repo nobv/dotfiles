@@ -16,6 +16,7 @@
     "l": "exa --git --icons -a",
     "ll": "exa --long --header --git --icons -a",
     "ls": "exa",
+    "nix-repl": "nix repl '<nixpkgs>'",
     "mv": "mv -i",
     "ps": "procs",
     "reload": "exec $SHELL -l",
