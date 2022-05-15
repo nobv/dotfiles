@@ -6,6 +6,7 @@
     ../modules/editor/emacs
     ../modules/term/starship
     ../modules/term/zsh
+    ../modules/tools/git
   ];
 
   home = {
@@ -97,60 +98,7 @@
     #     git_protocol = "ssh";
     #   };
 
-    # };
-
-    git = {
-      enable = true;
-      aliases = {
-        dv = "difftool --tool=vimdiff --no-prompt";
-        lg =
-          "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
-        lga =
-          "log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative";
-        untracked = "ls-files --others --exclude-standard";
-        modified = "ls-files --modified";
-        add-untracked = "ls-files --others --exclude-standard | xargs git add";
-      };
-      extraConfig = {
-        color = { ui = "auto"; };
-        core = {
-          editor = "vim";
-          # excludesfile = "~/.gitignore_global"
-        };
-        ghq = { root = "~/src/src"; };
-      };
-      ignores = [
-        # tmux
-        ".tmux/plugins/*"
-        ".tmux/resurrect/*"
-
-        # emacs
-        ".emacs.d/elpa/*"
-        ".emacs.d/network-security.data"
-        ".emacs.d/backups/*"
-        ".emacs.d/recentf"
-        ".emacs.d/undohist"
-        ".emacs.d/transient/*"
-        ".emacs.d/ac-comphist.dat"
-        ".emacs.d/auto-save-list/*"
-        ".emacs.d/.lsp-session-v1"
-
-        ## spacemacs
-        ".spacemacs.d/.spacemacs.env"
-        ".spacemacs.d/configs/*"
-        "!.spacemacs.d/configs/.gitkeep"
-
-        ## vscode
-        ".vscode/extensions/*"
-        ".vscode/argv.json"
-
-        ## misc
-        "bin/rust-analyzer"
-        "conda.yaml"
-      ];
-      userEmail = "36393714+nobv@users.noreply.github.com";
-      userName = "nobv";
-    };
+    # }; 
 
     go = {
       enable = true;

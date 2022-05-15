@@ -1,0 +1,14 @@
+{
+    "color": {
+        "ui": "auto"
+    },
+    "core": {
+        "editor": "vim"
+    },
+    "ghq": {
+        "root": "~/src/src"
+    },
+    "commit": {
+        "template": "~/.dotfiles/modules/tools/git/commit_template"
+    }
+}
