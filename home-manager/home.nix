@@ -25,7 +25,6 @@
       coreutils
       editorconfig-core-c
       fd
-      git
       gh
       ghq
       gopls
@@ -36,7 +35,6 @@
       kubectl
       kubectx
       kustomize
-      # lastpass-cli
       # hasklig v1.1 doesn't work in VSCode well.
       # For some reason, this PR was closed.
       # https://github.com/NixOS/nixpkgs/pull/135938
@@ -142,21 +140,6 @@
     };
 
     vim = { enable = true; };
-
-    # vscode = {
-    #   enable = true;
-    #   extensions = with pkgs.vscode-extensions; [
-    #     # Nix
-    #     bbenoist.nix
-    #     b4dm4n.vscode-nixpkgs-fmt
-    #     # Lisp
-    #     # mattn.lisp
-    #   ];
-    #   userSettings = {
-    #     "workbench.colorTheme" = "Default Dark+";
-    #     "editor.formatOnSave" = true;
-    #   };
-    # };
 
 
   };
