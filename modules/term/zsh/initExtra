@@ -1,0 +1,35 @@
+# Extra commands that should be added to .zshrc. 
+
+# history
+setopt hist_ignore_all_dups
+setopt auto_pushd
+setopt pushd_ignore_dups
+
+# exports
+export DOTFILES=$HOME/.dotfiles
+export DOOM=$DOTFILES/modules/editor/emacs/.doom.d/doom-emacs/bin
+export ZSH=$DOTFILES/modules/term/zsh/bin
+export PATH=$DOTFILES/bin:$DOOM:$ZSH:$PATH
+
+
+# fzf
+
+## history search
+function select-history() {
+  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  CURSOR=$#BUFFER
+}
+zle -N select-history
+bindkey '^r' select-history
+
+# peco
+
+## history search
+# function peco-history-selection() {
+#   BUFFER="$(history -n 1 | tail -r  | awk '!a[$0]++' | peco)"
+#   CURSOR=$#BUFFER
+#   zle reset-prompt
+# }
+# zle -N peco-history-selection
+# bindkey '^R' peco-history-selection
+

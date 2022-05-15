@@ -2,9 +2,10 @@
 
 {
   imports = [
-    # ../configs/lang/nix
+    ../modules/lang/nix
     ../modules/editor/emacs
     ../modules/term/starship
+    ../modules/term/zsh
   ];
 
   home = {
@@ -209,72 +210,7 @@
     #   };
     # };
 
-    zsh = {
-      enable = true;
-      autocd = true;
-      enableAutosuggestions = true;
-      enableCompletion = true;
-      enableSyntaxHighlighting = true;
-      # dotDir = ".dotfiles/.zsh";
-      history = {
-        expireDuplicatesFirst = true;
-        extended = true;
-        ignoreDups = true;
-        ignoreSpace = true;
-        ignorePatterns = [ "ll" ];
-      };
-      initExtra = ''
-        # initExtra
-        ## history
-        setopt hist_ignore_all_dups
-        setopt auto_pushd
-        setopt pushd_ignore_dups
 
-        ## exports
-        export DOTFILES=$HOME/.dotfiles
-        export DOOM=$DOTFILES/modules/editor/emacs/.doom.d/doom-emacs/bin
-        export ZSH=$DOTFILES/modules/term/zsh/bin
-        export PATH=$DOTFILES/bin:$DOOM:$ZSH:$PATH
-
-
-        ## fzf
-
-        ### history search
-        function select-history() {
-          BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
-          CURSOR=$#BUFFER
-        }
-        zle -N select-history
-        bindkey '^r' select-history
-      '';
-      shellAliases = {
-        # change directory
-        home = "cd ~";
-
-        # list
-        ls = "exa";
-        l = "exa --git --icons -a";
-        ll = "exa --long --header --git --icons -a";
-        lf = "exa -a | fzf";
-        lt = "exa --tree";
-
-        # misc
-        reload = "exec $SHELL -l";
-
-      };
-      profileExtra = ''
-        # for homebrew
-        eval $(/opt/homebrew/bin/brew shellenv)
-
-        # for github cli
-        eval "$(gh completion -s zsh)"
-      '';
-      # plugins = {
-      #   "doom" = {
-      #       name = 
-      #   };
-      # };
-    };
   };
 
   nixpkgs = {
