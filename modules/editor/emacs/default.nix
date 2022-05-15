@@ -5,6 +5,8 @@
       text = builtins.readFile ~/.dotfiles/modules/editor/emacs/.emacs-profiles.el;
     };
 
+    # https://github.com/plexus/chemacs2
+    # Emacs profile switcher
     "emacs" = {
       recursive = true;
       target = ".emacs.d";
