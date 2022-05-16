@@ -2,19 +2,37 @@
 
 {
   imports = [
+    ../modules/checkers
     ../modules/editor/emacs
     ../modules/editor/vim
+    ../modules/font
+    ../modules/lang/c
     ../modules/lang/go
+    ../modules/lang/javascript
     ../modules/lang/nix
+    ../modules/lang/protobuf
+    ../modules/lang/python
+    ../modules/lang/shellscript
     ../modules/term/starship
     ../modules/term/zsh
+    ../modules/tools/aws
     ../modules/tools/bat
     ../modules/tools/direnv
     ../modules/tools/exa
+    ../modules/tools/fd
     ../modules/tools/fzf
+    ../modules/tools/gcp
     ../modules/tools/git
     ../modules/tools/jq
+    ../modules/tools/kubernetes
+    ../modules/tools/navi
+    ../modules/tools/parallel
+    ../modules/tools/peco
+    ../modules/tools/ripgrep
+    ../modules/tools/terraform
     ../modules/tools/tmux
+    ../modules/tools/tree
+    ../modules/tools/youtube-dl
 
   ];
 
@@ -24,64 +42,11 @@
     username = "nobv";
     homeDirectory = "/Users/nobv";
 
-    packages = with pkgs; [
-      aws
-      bats
-      clang
-      clang-tools
-      coreutils
-      editorconfig-core-c
-      fd
-      gh
-      ghq
-      google-cloud-sdk
-      hub
-      hunspell
-
-      # hasklig v1.1 doesn't work in VSCode well.
-      # For some reason, this PR was closed.
-      # https://github.com/NixOS/nixpkgs/pull/135938
-      # hasklig
-      (nerdfonts.override {
-        fonts = [
-          "SourceCodePro"
-          "Hack"
-          "Hasklig"
-          "FiraCode"
-        ];
-      })
-      navi
-      parallel
-      peco
-      protobuf
-      ripgrep
-      shellcheck
-      stern
-      terraform
-      terragrunt
-      tig
-      tree
-      youtube-dl
-    ];
-
-
   };
 
-  #fonts = { fontconfig = { enable = true; }; };
 
   programs = {
     # emacs = { enable = true; };
-
-
-    # comment out until resolive this issue.
-    # https://github.com/nix-community/home-manager/issues/1654
-    # gh = {
-    #   enable = true;
-    #   settings = {
-    #     git_protocol = "ssh";
-    #   };
-
-    # }; 
 
     # Let Home Manager install and manage itself.
     home-manager = {
@@ -98,6 +63,7 @@
         # "obsidian"
       ];
       allowUnsupportedSystem = true;
+      allowBroken = true; 
     };
   };
 
