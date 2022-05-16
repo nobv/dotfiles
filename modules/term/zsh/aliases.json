@@ -25,5 +25,6 @@
     "tfa": "terraform apply",
     "tfi": "teffaform init",
     "tfp": "terraform plan",
-    "tg": "terragrunt"
+    "tg": "terragrunt",
+    "ta": "tmux a -t"
 }

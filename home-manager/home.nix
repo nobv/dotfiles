@@ -2,11 +2,20 @@
 
 {
   imports = [
-    ../modules/lang/nix
     ../modules/editor/emacs
+    ../modules/editor/vim
+    ../modules/lang/go
+    ../modules/lang/nix
     ../modules/term/starship
     ../modules/term/zsh
+    ../modules/tools/bat
+    ../modules/tools/direnv
+    ../modules/tools/exa
+    ../modules/tools/fzf
     ../modules/tools/git
+    ../modules/tools/jq
+    ../modules/tools/tmux
+
   ];
 
   home = {
@@ -18,8 +27,6 @@
     packages = with pkgs; [
       aws
       bats
-      # black
-      # mypy
       clang
       clang-tools
       coreutils
@@ -27,14 +34,10 @@
       fd
       gh
       ghq
-      gopls
       google-cloud-sdk
       hub
       hunspell
-      kind
-      kubectl
-      kubectx
-      kustomize
+
       # hasklig v1.1 doesn't work in VSCode well.
       # For some reason, this PR was closed.
       # https://github.com/NixOS/nixpkgs/pull/135938
@@ -47,10 +50,7 @@
           "FiraCode"
         ];
       })
-      # nixpkgs-fmt
       navi
-      nodejs
-      nodePackages.prettier
       parallel
       peco
       protobuf
@@ -70,23 +70,8 @@
   #fonts = { fontconfig = { enable = true; }; };
 
   programs = {
-    bat = {
-      enable = true;
-    };
-
-    direnv = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-
     # emacs = { enable = true; };
 
-    exa = { enable = true; };
-
-    fzf = {
-      enable = true;
-      enableZshIntegration = true;
-    };
 
     # comment out until resolive this issue.
     # https://github.com/nix-community/home-manager/issues/1654
@@ -98,48 +83,10 @@
 
     # }; 
 
-    go = {
-      enable = true;
-      goPath = "~/src";
-    };
-
     # Let Home Manager install and manage itself.
     home-manager = {
       enable = true;
     };
-
-    jq = { enable = true; };
-
-
-    tmux = {
-      enable = true;
-      baseIndex = 1;
-      customPaneNavigationAndResize = true;
-      keyMode = "vi";
-      prefix = "C-a";
-      extraConfig = builtins.readFile ~/.dotfiles/modules/tools/tmux/.tmux.conf;
-      historyLimit = 10000;
-      plugins = with pkgs; [
-        {
-          plugin = tmuxPlugins.resurrect;
-          extraConfig = ''
-            set -g @resurrect-capture-pane-contents 'on'
-          '';
-        }
-        {
-          plugin = tmuxPlugins.continuum;
-          extraConfig = ''
-            set -g @continuum-boot 'on'
-            set -g @continuum-boot-options 'iterm'
-            set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '1'
-          '';
-        }
-      ];
-      terminal = "screen-256color";
-    };
-
-    vim = { enable = true; };
 
 
   };
