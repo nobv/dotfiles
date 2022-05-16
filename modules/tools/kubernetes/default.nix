@@ -6,6 +6,7 @@
       kubectl
       kubectx
       kustomize
+      stern
     ];
   };
 }
