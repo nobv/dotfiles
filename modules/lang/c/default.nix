@@ -1,9 +1,12 @@
 { config, pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
-    clang
-    clang-tools
-    coreutils
-    editorconfig-core-c
+    # clang
+    # gcc
+    # clang-tools
+    # coreutils
+    # editorconfig-core-c
+    # libiconv
+    # libiconvReal
   ];
 }
