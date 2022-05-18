@@ -9,8 +9,10 @@ setopt pushd_ignore_dups
 export DOTFILES=$HOME/.dotfiles
 export DOOM=$DOTFILES/modules/editor/emacs/.doom.d/doom-emacs/bin
 export ZSH=$DOTFILES/modules/term/zsh/bin
-export PATH=$DOTFILES/bin:$DOOM:$ZSH:$PATH
-
+## https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1030877541
+export NIX=$HOME/.nix-profile/bin:/run/current-system/sw/bin
+export PATH=$DOTFILES/bin:$DOOM:$ZSH:$NIX:$PATH
+typeset -U PATH
 
 # fzf
 
