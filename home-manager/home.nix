@@ -11,7 +11,9 @@
     ../modules/lang/javascript
     ../modules/lang/nix
     ../modules/lang/protobuf
+    ../modules/lang/purescript
     ../modules/lang/python
+    ../modules/lang/rust
     ../modules/lang/shellscript
     ../modules/term/starship
     ../modules/term/zsh
@@ -23,8 +25,11 @@
     ../modules/tools/fzf
     ../modules/tools/gcp
     ../modules/tools/git
+    ../modules/tools/httpie
+    ../modules/tools/imagemagic
     ../modules/tools/jq
     ../modules/tools/kubernetes
+    ../modules/tools/make
     ../modules/tools/navi
     ../modules/tools/parallel
     ../modules/tools/peco
@@ -63,7 +68,7 @@
         # "obsidian"
       ];
       allowUnsupportedSystem = true;
-      allowBroken = true; 
+      # allowBroken = true;
     };
   };
 
