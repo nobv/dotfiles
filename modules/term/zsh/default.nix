@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
 
+let
+  aliases = import ./aliases.nix;
+in
 {
   programs = {
     zsh = {
@@ -17,7 +20,7 @@
         ignorePatterns = [ "ll" ];
       };
       initExtra = builtins.readFile ./initExtra;
-      shellAliases = builtins.fromJSON (builtins.readFile ./aliases.json);
+      shellAliases = aliases;
       profileExtra = builtins.readFile ./profileExtra;
       # plugins = {
       #   "doom" = {
