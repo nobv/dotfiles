@@ -2,14 +2,12 @@
 
 {
   format = ''
-  [┌──────────────────────────────────────────────────────>](bold green)
-  [│](bold green)[on ☁ Ⓐ ](bold bright-yellow)$aws
-  [│](bold green)[on ☁ Ⓖ ](bold bright-blue)$gcloud
-  [│](bold green)[on   ⎈ ](bold red)$kubernetes
-  [│](bold green)\\
-  $all
-  [│](bold green)$character 
-'';
+    [┌──────────────────────────────────────────────────────>](bold green)
+    [│](bold green)[on ☁ Ⓐ ](bold bright-yellow)$aws
+    [│](bold green)[on ☁ Ⓖ ](bold bright-blue)$gcloud
+    [│](bold green)[on   ⎈ ](bold red)$kubernetes
+    $all
+    [│](bold green)$character '';
 
   aws = {
     format = "[$symbol($profile )(\\($region\\) )]($style)";
