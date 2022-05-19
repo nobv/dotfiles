@@ -19,6 +19,8 @@
 
   # docker
   dc = "docker compose";
+  dcps = "dc ps";
+  dcdown = "dc down";
 
   # exa
   ## use exa instead of ls
