@@ -25,6 +25,7 @@
       "kensingtonworks"
       "logseq"
       "notion"
+      "obsidian"
       "postman"
       "raycast"
       "slack"
