@@ -8,6 +8,7 @@
     ../modules/font
     ../modules/lang/c
     ../modules/lang/go
+    ../modules/lang/haskell
     ../modules/lang/javascript
     ../modules/lang/nix
     ../modules/lang/protobuf
