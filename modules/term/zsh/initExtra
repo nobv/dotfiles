@@ -14,6 +14,11 @@ export NIX=$HOME/.nix-profile/bin:/run/current-system/sw/bin
 export PATH=$DOTFILES/bin:$DOOM:$ZSH:$NIX:$PATH
 typeset -U PATH
 
+typeset -U fpath
+fpath=($DOTFILES/modules/term/zsh/completions $fpath)
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+
 # fzf
 
 # ## history search
