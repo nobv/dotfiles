@@ -42,6 +42,9 @@
 
   # peco
   g = "REPO=$(ghq list | sort -u | peco);for GHQ_ROOT in $(ghq root -all);do [ -d $GHQ_ROOT/$REPO ] && cd $GHQ_ROOT/$REPO;done";
+  app = ''
+    open "$(ls ~/Applications | peco | awk '{print $3}')"
+  '';
 
   # procs
   ## use procs instead of ps
@@ -50,10 +53,6 @@
   # rm
   rm = "rm -i";
   rmrf = "rm -rf";
-
-  # gsed
-  # use gsed instead of sed
-  sed = "gsed";
 
   # terraform
   tfa = "terraform apply";
