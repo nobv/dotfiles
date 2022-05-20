@@ -1,15 +1,15 @@
 { pkgs, ... }:
 {
+  programs.emacs = {
+    enable = true;
+  };
+
   home = {
     packages = with pkgs; [
       emacs28Packages.lsp-pyright
     ];
 
     file = {
-      ".emacs-profiles.el" = {
-        text = builtins.readFile ~/.dotfiles/modules/editor/emacs/.emacs-profiles.el;
-      };
-
       # https://github.com/plexus/chemacs2
       # Emacs profile switcher
       "emacs" = {
@@ -23,17 +23,10 @@
         };
       };
 
-      #   "doom" = {
-      #     recursive = true;
-      #     target = ".config/doom";
-      #     source = ~/.dotfiles/configs/emacs/.doom.d;
-      #   };
+      ".emacs-profiles.el" = {
+        text = builtins.readFile ~/.dotfiles/modules/editor/emacs/.emacs-profiles.el;
+      };
 
-      #   "spacemacs" = {
-      #     recursive = true;
-      #     target = ".config/spacemacs";
-      #     source = ~/.dotfiles/configs/emacs/.spacemacs.d;
-      #   };
     };
   };
 
