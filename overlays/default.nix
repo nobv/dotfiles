@@ -47,4 +47,19 @@ self: super: {
       homepage = "https://morgen.so";
     };
 
+  HTTPie = self.installApplication
+    rec {
+      name = "HTTPie";
+      version = "2022.8.0";
+      sourceRoot = "HTTPie.app";
+      src = super.fetchurl {
+        name = "HTTPie-${version}-arm64.dmg";
+        url = "https://github.com/httpie/desktop/releases/download/v${version}/HTTPie-${version}-arm64.dmg";
+        sha256 = "sha256-0ceSXjIga5SKX0+AHjLucqcLIiEw7IQJEQuGCyGTqgI=";
+      };
+      description = ''
+        HTTPIE WEB & DESKTOP APP
+      '';
+      homepage = "https://httpie.io/product";
+    };
 }

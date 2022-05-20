@@ -11,6 +11,7 @@
   environment = {
     systemPackages = with pkgs; [
       Morgen
+      HTTPie
     ];
 
     # TODO:
