@@ -3,7 +3,7 @@
 {
   imports = [
     <home-manager/nix-darwin>
-    ./homebrew
+    ../modules/tools/homebrew
   ];
 
   # List packages installed in system profile. To search by name, run:
