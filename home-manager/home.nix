@@ -26,6 +26,7 @@
     ../modules/tools/fzf
     ../modules/tools/gcp
     ../modules/tools/git
+    ../modules/tools/gnused
     ../modules/tools/httpie
     ../modules/tools/imagemagic
     ../modules/tools/jq
