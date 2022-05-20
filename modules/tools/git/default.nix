@@ -1,5 +1,9 @@
 { config, pkgs, lib, ... }:
 
+let
+  extraConfig = import ./extraConfig.nix;
+  aliases = import ./aliases.nix;
+in
 {
   home.packages = with pkgs; [
     gh
@@ -11,8 +15,8 @@
   programs = {
     git = {
       enable = true;
-      aliases = builtins.fromJSON (builtins.readFile ./aliases.json);
-      extraConfig = builtins.fromJSON (builtins.readFile ./extraConfig.json);
+      aliases = aliases;
+      extraConfig = extraConfig;
       ignores = lib.splitString "\n" (builtins.readFile ./.gitignore_global);
       userEmail = "36393714+nobv@users.noreply.github.com";
       userName = "nobv";
