@@ -1,7 +1,13 @@
 { config, lib, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    procs
-  ];
+  home = {
+
+    # file = { };
+
+    packages = with pkgs; [
+      procs
+    ];
+
+  };
 }
