@@ -1,27 +1,27 @@
 # tmux
-".tmux/plugins/*"
-".tmux/resurrect/*"
+.tmux/plugins/*
+.tmux/resurrect/*
 
 # emacs
-".emacs.d/elpa/*"
-".emacs.d/network-security.data"
-".emacs.d/backups/*"
-".emacs.d/recentf"
-".emacs.d/undohist"
-".emacs.d/transient/*"
-".emacs.d/ac-comphist.dat"
-".emacs.d/auto-save-list/*"
-".emacs.d/.lsp-session-v1"
+modules/editor/emacs/.emacs.d/elpa/*
+modules/editor/emacs/.emacs.d/network-security.data
+modules/editor/emacs/.emacs.d/backups/*
+modules/editor/emacs/.emacs.d/recentf
+modules/editor/emacs/.emacs.d/undohist
+modules/editor/emacs/.emacs.d/transient/*
+modules/editor/emacs/.emacs.d/ac-comphist.dat
+modules/editor/emacs/.emacs.d/auto-save-list/*
+modules/editor/emacs/.emacs.d/.lsp-session-v1
 
 ## spacemacs
-".spacemacs.d/.spacemacs.env"
-".spacemacs.d/configs/*"
-"!.spacemacs.d/configs/.gitkeep"
+modules/editor/emacs/.spacemacs.d/.spacemacs.env
+modules/editor/emacs/.spacemacs.d/configs/*
+!modules/editor/emacs/.spacemacs.d/configs/.gitkeep
 
 ## vscode
-".vscode/extensions/*"
-".vscode/argv.json"
+.vscode/extensions/*
+.vscode/argv.json
 
 ## misc
-"bin/rust-analyzer"
-"conda.yaml"
+bin/rust-analyzer
+conda.yaml
