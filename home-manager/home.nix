@@ -35,6 +35,7 @@
     ../modules/tools/navi
     ../modules/tools/parallel
     ../modules/tools/peco
+    ../modules/tools/procs
     ../modules/tools/ripgrep
     ../modules/tools/terraform
     ../modules/tools/tmux
