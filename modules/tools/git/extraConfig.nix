@@ -10,4 +10,8 @@
   ghq = {
     root = [ "~/src/src" ];
   };
+
+  push = {
+    default = "current";
+  };
 }
