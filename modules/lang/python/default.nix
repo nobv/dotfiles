@@ -4,6 +4,7 @@ let
   stable = import <nixpkgs-stable> { };
 in
 {
+  # https://github.com/NixOS/nixpkgs/blob/a0dbe47318/doc/languages-frameworks/python.section.md
   home.packages = with pkgs; [
     unstable.python310
     unstable.python310Packages.pytest

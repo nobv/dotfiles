@@ -4,10 +4,16 @@ let
   stable = import <nixpkgs-stable> { };
 in
 {
-  home.packages = with pkgs; [
-    haskell.compiler.ghc922
-    haskellPackages.haskell-language-server
-    haskellPackages.dhall-lsp-server
-    haskellPackages.stack
-  ];
+  # https://github.com/NixOS/nixpkgs/blob/a0dbe47318/doc/languages-frameworks/haskell.section.md
+  home = {
+    file = { };
+
+    packages = with pkgs; [
+      haskell.compiler.ghc922
+      haskellPackages.haskell-language-server
+      haskellPackages.dhall-lsp-server
+      haskellPackages.stack
+    ];
+  };
+
 }
