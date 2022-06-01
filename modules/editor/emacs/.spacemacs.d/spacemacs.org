@@ -159,7 +159,7 @@
     #+END_SRC 
 **** dbml
      #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
-       (load-file "~/.dotfiles/.spacemacs.d/private/dbd-mode/dbdiagram-mode.el")
+       ;;(load-file "~/.dotfiles/.spacemacs.d/private/dbd-mode/dbdiagram-mode.el")
      #+END_SRC 
 **** magit
      #+BEGIN_SRC emacs-lisp :tangle configs/user-config.el
