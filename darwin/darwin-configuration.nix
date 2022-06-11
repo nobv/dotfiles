@@ -15,7 +15,7 @@
     ];
 
     # TODO:
-    darwinConfig = ~/.dotfiles/darwin/darwin-configuration.nix;
+    # darwinConfig = ~/.dotfiles/darwin/darwin-configuration.nix;
   };
 
   home-manager = {

@@ -5,7 +5,7 @@ in
 {
   home.file = {
     "settings" = {
-      target = "./Library/Application Support/Code/User/settings.json";
+      target = "Library/Application Support/Code/User/settings.json";
       text = builtins.toJSON settings;
     };
   };

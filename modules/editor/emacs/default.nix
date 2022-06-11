@@ -24,7 +24,7 @@
       };
 
       ".emacs-profiles.el" = {
-        text = builtins.readFile ~/.dotfiles/modules/editor/emacs/.emacs-profiles.el;
+        text = builtins.readFile ./.emacs-profiles.el;
       };
 
     };

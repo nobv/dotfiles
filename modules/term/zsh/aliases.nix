@@ -15,6 +15,7 @@
 
   # logseq = "cd ~/Library/Mobile\\ Documents//iCloud~com~logseq~logseq/Documents/logseq";
   logseq = "cd ~/Google\\ Drive/My\\ Drive/me/notes/logseq";
+  dots = "cd ~/.dotfiles";
 
   # cp
   cp = "cp -i";
