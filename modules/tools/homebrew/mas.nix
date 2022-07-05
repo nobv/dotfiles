@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   # `mas` not working on Monterrey
   homebrew.masApps = {
-    "1Password 7" = 1333542190;
+    # "1Password 7" = 1333542190;
     "Amphetamine" = 937984704;
     "Disk Diag" = 672206759;
     "Endel" = 1484348796;

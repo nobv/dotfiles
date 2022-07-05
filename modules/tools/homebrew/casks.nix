@@ -6,7 +6,9 @@
       "homebrew/cask-fonts"
     ];
     casks = [
+      "1password"
       "asana"
+      "dbeaver-community"
       "discord"
       "docker"
       "figma"
