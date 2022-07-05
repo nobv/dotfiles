@@ -38,11 +38,11 @@
     ../modules/tools/peco
     ../modules/tools/procs
     ../modules/tools/ripgrep
+    ../modules/tools/sops
     ../modules/tools/terraform
     ../modules/tools/tmux
     ../modules/tools/tree
     ../modules/tools/youtube-dl
-
   ];
 
   home = {
