@@ -36,6 +36,8 @@
 
   # kubernetes
   k = "kubectl";
+  kx = "kubectx";
+  kn = "kubens";
 
   # nix
   nix-repl = "nix repl '<nixpkgs>'";
