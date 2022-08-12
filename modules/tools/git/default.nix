@@ -3,6 +3,8 @@
 let
   extraConfig = import ./extraConfig.nix;
   aliases = import ./aliases.nix;
+
+  unstable = import <nixpkgs-unstable> { };
 in
 {
   home.packages = with pkgs; [
@@ -20,6 +22,7 @@ in
       ignores = lib.splitString "\n" (builtins.readFile ./.gitignore_global);
       userEmail = "36393714+nobv@users.noreply.github.com";
       userName = "nobv";
+      package = unstable.git;
     };
 
     # comment out until resolive this issue.

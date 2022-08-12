@@ -12,7 +12,8 @@
     root = [ "~/src/src" ];
   };
 
-  # push = {
-  #   default = "current";
-  # };
+  push = {
+    default = "current";
+    autoSetupRemote = true;
+  };
 }
