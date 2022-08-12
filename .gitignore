@@ -3,43 +3,20 @@
 .tmux/resurrect/*
 
 # emacs
+modules/editor/emacs/.emacs.d/elpa/*
+modules/editor/emacs/.emacs.d/network-security.data
+modules/editor/emacs/.emacs.d/backups/*
+modules/editor/emacs/.emacs.d/recentf
+modules/editor/emacs/.emacs.d/undohist
+modules/editor/emacs/.emacs.d/transient/*
+modules/editor/emacs/.emacs.d/ac-comphist.dat
+modules/editor/emacs/.emacs.d/auto-save-list/*
+modules/editor/emacs/.emacs.d/.lsp-session-v1
 
-## elpa packages
-.emacs.d/elpa/*
-
-## network security
-.emacs.d/network-security.data
-
-## backup
-.emacs.d/backups/*
-
-## recentf
-.emacs.d/recentf
-
-## undohist
-.emacs.d/undohist
-
-## transient
-.emacs.d/transient/*
-
-## ac-comphist.dat
-.emacs.d/ac-comphist.dat
-
-## auto-save-list
-.emacs.d/auto-save-list/*
-
-## lsp
-.emacs.d/.lsp-session-v1
-
-## spacemacs env
-.spacemacs.d/.spacemacs.env
-.spacemacs.d/configs/*
-!.spacemacs.d/configs/.gitkeep
-
-## doom emacs
-.doom.d/config.el
-.doom.d/packages.el
-
+## spacemacs
+modules/editor/emacs/.spacemacs.d/.spacemacs.env
+modules/editor/emacs/.spacemacs.d/configs/*
+!modules/editor/emacs/.spacemacs.d/configs/.gitkeep
 
 ## vscode
 .vscode/extensions/*
