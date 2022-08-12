@@ -1,6 +1,5 @@
 { config, pkgs, lib, ... }:
 let
-  unstable = import <nixpkgs-unstable> { };
   stable = import <nixpkgs-stable> { };
 in
 {
