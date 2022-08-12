@@ -9,7 +9,7 @@ in
     # file = { };
 
     packages = with pkgs; [
-      haskell.compiler.ghc922
+      haskell.compiler.ghc924
       haskellPackages.haskell-language-server
       haskellPackages.dhall-lsp-server
       haskellPackages.stack
