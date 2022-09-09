@@ -5,7 +5,7 @@
     ../modules/checkers
     ../modules/editor/emacs
     ../modules/editor/vim
-    ../modules/editor/vscode
+    # ../modules/editor/vscode
     ../modules/font
     ../modules/lang/c
     ../modules/lang/go
