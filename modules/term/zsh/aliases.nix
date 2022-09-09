@@ -14,7 +14,7 @@
   "......" = "cd ../../../../..";
 
   # logseq = "cd ~/Library/Mobile\\ Documents//iCloud~com~logseq~logseq/Documents/logseq";
-  logseq = "cd ~/Google\\ Drive/My\\ Drive/me/notes/logseq";
+  logseq = "cd ~/Google\\ Drive/My\\ Drive/me/notes/logseq/log";
   dots = "cd ~/.dotfiles";
 
   # cp
