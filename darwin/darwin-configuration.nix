@@ -70,7 +70,7 @@
       trackpad = { Clicking = true; };
 
       NSGlobalDomain = {
-        "com.apple.trackpad.scaling" = "3.0";
+        "com.apple.trackpad.scaling" = 3.0;
         "com.apple.mouse.tapBehavior" = 1;
         InitialKeyRepeat = 15;
         KeyRepeat = 2;
