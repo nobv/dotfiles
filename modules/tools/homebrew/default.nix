@@ -12,7 +12,7 @@
     cleanup = "zap";
     global = {
       brewfile = true;
-      noLock = true;
+      lockfiles = true;
     };
 
   };

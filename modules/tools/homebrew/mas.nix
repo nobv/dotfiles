@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   homebrew.masApps = {
+    "LINE" = 539883307;
     "Amphetamine" = 937984704;
     "Disk Diag" = 672206759;
     "Endel" = 1484348796;
@@ -10,7 +11,7 @@
     "MarginNote 3" = 1423522373;
     "Messenger" = 1480068668;
     "Notability" = 736189492;
-    "Noted․" = 1446580517;
+    "Noted." = 1446580517;
     "Slack" = 803453959;
     "Spark" = 1176895641;
     "Telegram" = 747648890;
