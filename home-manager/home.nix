@@ -43,6 +43,7 @@
     ../modules/tools/terraform
     ../modules/tools/tmux
     ../modules/tools/tree
+    ../modules/tools/trivy
     ../modules/tools/youtube-dl
   ];
 
