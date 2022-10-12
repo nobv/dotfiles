@@ -22,6 +22,7 @@
     ../modules/tools/aws
     ../modules/tools/bat
     ../modules/tools/direnv
+    ../modules/tools/docker
     ../modules/tools/exa
     ../modules/tools/fd
     ../modules/tools/fzf
