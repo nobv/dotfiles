@@ -21,6 +21,9 @@
   cp = "cp -i";
 
   # docker
+  d = "docker";
+
+  # docker compose
   dc = "docker compose";
   dcps = "dc ps";
   dcdown = "dc down";
