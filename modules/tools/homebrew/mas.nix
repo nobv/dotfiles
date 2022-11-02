@@ -19,5 +19,6 @@
     "TextSniper" = 1528890965;
     "The Unarchiver" = 425424353;
     "iThoughtsX" = 720669838;
+    "辞書 by 物書堂" = 1380563956;
   };
 }
