@@ -4,5 +4,7 @@
   home.packages = with pkgs; [
     nodejs
     nodePackages.prettier
+
+    yarn
   ];
 }
