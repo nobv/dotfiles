@@ -8,10 +8,9 @@ in
     # file = { };
 
     packages = with pkgs; [
-      haskell.compiler.ghc924
-      haskellPackages.haskell-language-server
-      haskellPackages.dhall-lsp-server
-      haskellPackages.stack
+      haskell.compiler.ghc94
+      haskell-language-server
+      stack
     ];
   };
 

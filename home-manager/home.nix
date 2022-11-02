@@ -8,6 +8,7 @@
     # ../modules/editor/vscode
     ../modules/font
     ../modules/lang/c
+    ../modules/lang/dhall
     ../modules/lang/go
     ../modules/lang/haskell
     ../modules/lang/javascript
