@@ -4,5 +4,6 @@
     purescript
     spago
     nodePackages.purescript-language-server
+    nodePackages.purty
   ];
 }
