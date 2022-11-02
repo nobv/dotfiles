@@ -33,6 +33,12 @@
 (setq doom-theme 'doom-dracula)
 ;; (setq doom-theme 'spacemacs-dark)
 #+end_src
+*** Line numbers
+#+begin_src emacs-lisp :tangle config.el
+(setq display-line-numbers-type 'relative)
+;; (setq doom-theme 'spacemacs-dark)
+#+end_src
+
 
 ** Languages
 *** Python
