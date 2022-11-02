@@ -20,6 +20,8 @@ function doom() {
                   ;;
         "sync") sync
                 ;;
+        "purge") purge
+                 ;;
         "*" ) echo "wrong argument"
               ;;
     esac
@@ -51,6 +53,10 @@ function sync() {
 
 function doctor() {
     $CMD doctor
+}
+
+function purge() {
+    $COMD purge -g
 }
 
 doom $1
