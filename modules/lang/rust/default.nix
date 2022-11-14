@@ -7,5 +7,6 @@
     rust-analyzer
     rustc
     rustfmt
+    # cargo-tauri
   ];
 }
