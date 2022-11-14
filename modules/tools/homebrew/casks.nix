@@ -22,6 +22,7 @@
       "google-drive"
       "google-japanese-ime"
       "iterm2"
+      "karabiner-elements"
       "kensingtonworks"
       "krisp"
       "logseq"
@@ -43,4 +44,3 @@
 
   };
 }
-
