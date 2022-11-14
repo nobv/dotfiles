@@ -12,6 +12,7 @@
     systemPackages = with pkgs; [
       Morgen
       HTTPie
+      ClickUp
     ];
 
     # TODO:

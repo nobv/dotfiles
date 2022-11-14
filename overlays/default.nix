@@ -62,4 +62,21 @@ self: super: {
       '';
       homepage = "https://httpie.io/product";
     };
+
+  ClickUp = self.installApplication
+    rec {
+      name = "ClickUp";
+      version = "3.1.2";
+      sourceRoot = "ClickUp.app";
+      src = super.fetchurl {
+        name = "ClickUp ${version}-arm64.dmg";
+        url = "https://desktop.clickup.com/mac/dmg/arm64";
+        sha256 = "sha256-Znt62EO9dHngDmc3jRI1R4qpyBgnJLyAIEgQG9ltSqw=";
+      };
+      description = ''
+        One app to replace them all.
+        All of your work in one place: Tasks, Docs, Chat, Goals, & more.
+      '';
+      homepage = "https://clickup.com/";
+    };
 }
