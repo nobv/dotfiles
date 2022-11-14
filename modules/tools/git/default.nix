@@ -8,9 +8,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    gh
     ghq
-    # hub
     tig
   ];
 
@@ -25,17 +23,5 @@ in
       # package = unstable.git;
     };
 
-    # comment out until resolive this issue.
-    # https://github.com/nix-community/home-manager/issues/1654
-    # gh = {
-    #   enable = true;
-    #   settings = {
-    #     git_protocol = "ssh";
-    #   };
-
-    # }; 
   };
-
 }
-
-

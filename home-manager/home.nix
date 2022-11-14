@@ -29,6 +29,7 @@
     ../modules/tools/fzf
     ../modules/tools/gcp
     ../modules/tools/git
+    ../modules/tools/github
     ../modules/tools/gnused
     ../modules/tools/httpie
     ../modules/tools/imagemagic
@@ -89,5 +90,3 @@
   # changes in each release.
   home.stateVersion = "21.11";
 }
-
-
