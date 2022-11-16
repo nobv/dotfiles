@@ -16,9 +16,14 @@ function init() {
 function purs() {
     git init
     yarn init --yes
-    yarn add --dev purescript spago parcel purty purescript-psa pscid
-    yarn spago init
-    yarn spago build
+    yarn add --dev purescript spago parcel purescript-psa purs-tidy purs-backend-es
+    spago init
+    spago install react-basic react-basic-dom react-basic-hooks
+    spago build
+}
+
+function git() {
+    git init
 }
 
 init $1

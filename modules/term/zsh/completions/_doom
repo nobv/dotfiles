@@ -1,7 +1,7 @@
 #compdef _doom doom
 
 function _doom() {
-  cmds=( ${(uf)"$(< ${DOTFILES}/modules/term/zsh/completions/doom_completion_list)"} )
+  cmds=( ${(uf)"$(< ${DOTFILES}/modules/term/zsh/completions/doom_completions)"} )
   _values '_' $cmds
 }
 

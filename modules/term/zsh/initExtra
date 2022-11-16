@@ -12,6 +12,10 @@ export ZSH=$DOTFILES/modules/term/zsh/bin
 ## https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1030877541
 export NIX=$HOME/.nix-profile/bin:/run/current-system/sw/bin
 export PATH=$DOTFILES/bin:$DOOM:$ZSH:$NIX:$PATH
+
+
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
 typeset -U PATH
 
 typeset -U fpath
