@@ -79,4 +79,20 @@ self: super: {
       '';
       homepage = "https://clickup.com/";
     };
+
+  JupyterLab = self.installApplication
+    rec {
+      name = "JupyterLab";
+      version = "";
+      sourceRoot = "JupyterLab.app";
+      src = super.fetchurl {
+        name = "JupyterLab-Setup-macOS.dmg";
+        url = "https://github.com/jupyterlab/jupyterlab-desktop/releases/latest/download/JupyterLab-Setup-macOS.dmg";
+        sha256 = "sha256-9LDxHlTM/7Wc0Wyw+FU9yvBxtPmKCgi628+B9yUbGKc=";
+      };
+      description = ''
+        A desktop application for JupyterLab, based on Electron.
+      '';
+      homepage = "https://github.com/jupyterlab/jupyterlab-desktop";
+    };
 }

@@ -13,6 +13,7 @@
       Morgen
       HTTPie
       ClickUp
+      JupyterLab
     ];
 
     # TODO:
