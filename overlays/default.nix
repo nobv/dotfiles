@@ -34,12 +34,12 @@ self: super: {
   Morgen = self.installApplication
     rec {
       name = "Morgen";
-      version = "2.6.1";
+      version = "2.6.2";
       sourceRoot = "Morgen.app";
       src = super.fetchurl {
         name = "Morgen ${version}-arm64.dmg";
         url = "https://dl.todesktop.com/210203cqcj00tw1/mac/dmg/arm64";
-        sha256 = "sha256-SCnhhpZJxdI05OMcTGCFuawRx+SYcEf4cqmf34z1BVE=";
+        sha256 = "sha256-lEd2tmC3d7eQZd7iqr+QYiYrXLzLbCv+LyaxUhahH7c=";
       };
       description = ''
         Make the most out of your time
