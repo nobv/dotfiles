@@ -22,6 +22,7 @@
 
   # docker
   d = "docker";
+
   dprune = "docker system prune --all --volumes --force && docker builder prune --all --force";
 
   # docker compose
@@ -71,3 +72,4 @@
   # terragrunt
   tg = "terragrunt";
 }
+
