@@ -17,6 +17,7 @@ in
     # エラーが解消されたら unstable にしたい
     # unstable.python310Packages.black
     stable.black
+    nodePackages.pyright
 
     #   (ps:
     #     with ps; [
