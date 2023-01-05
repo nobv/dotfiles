@@ -14,6 +14,7 @@
       HTTPie
       ClickUp
       JupyterLab
+      Spark
     ];
 
     # TODO:
