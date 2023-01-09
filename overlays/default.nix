@@ -50,12 +50,12 @@ self: super: {
   HTTPie = self.installApplication
     rec {
       name = "HTTPie";
-      version = "2022.8.0";
+      version = "2023.1.0";
       sourceRoot = "HTTPie.app";
       src = super.fetchurl {
         name = "HTTPie-${version}-arm64.dmg";
         url = "https://github.com/httpie/desktop/releases/download/v${version}/HTTPie-${version}-arm64.dmg";
-        sha256 = "sha256-0ceSXjIga5SKX0+AHjLucqcLIiEw7IQJEQuGCyGTqgI=";
+        sha256 = "sha256-dYXWnOf72RLoD4AY1EAVZ7231j59zHjlFab9tmKS1Mk=";
       };
       description = ''
         HTTPIE WEB & DESKTOP APP
