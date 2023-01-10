@@ -1,9 +1,15 @@
+-- disable for nvim-tree.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+
 vim.cmd([[
     packloadall
     silent! helptags ALL
 ]])
 
 local opt = vim.opt
+
 
 -- line numbers
 opt.number = true
@@ -21,7 +27,6 @@ opt.wrap = false
 -- search settings
 opt.ignorecase = true
 opt.smartcase = true
-
 
 -- cursor line
 opt.cursorline = true
@@ -48,3 +53,9 @@ opt.foldmethod = "indent"
 
 -- fonts
 opt.guifont = { "Hasklig", ":h16" }
+
+-- backup
+opt.backup = false
+opt.writebackup = false
+
+opt.updatetime = 300

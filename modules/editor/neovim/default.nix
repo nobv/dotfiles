@@ -1,9 +1,16 @@
 { config, pkgs, lib, ... }:
 
 {
-  xdg.configFile."nvim/lua" = {
-    source = ./lua;
-    recursive = true;
+  xdg.configFile = {
+    "nvim/after" = {
+      source = ./after;
+      recursive = true;
+    };
+
+    "nvim/lua" = {
+      source = ./lua;
+      recursive = true;
+    };
   };
 
   programs = {
@@ -14,7 +21,7 @@
       vimdiffAlias = true;
       extraConfig = "source ~/.config/nvim/lua/init.lua";
       coc = import ./lua/plugins/coc.nix;
-      plugins = (import ./lua/plugins.nix pkgs).plugins;
+      plugins = (import ./lua/plugins pkgs).plugins;
     };
 
   };
