@@ -24,7 +24,7 @@
       "iterm2"
       "karabiner-elements"
       "kensingtonworks"
-      "krisp"
+      # "krisp"
       "logseq"
       "notion"
       "obsidian"
