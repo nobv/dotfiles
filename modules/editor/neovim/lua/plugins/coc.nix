@@ -4,7 +4,36 @@
 
   # https://github.com/neoclide/coc.nvim/wiki/Using-the-configuration-file
   settings = {
+
+    coc = {
+      preferences = {
+        formatOnSave = true;
+        formatOnSaveFiletypes = [
+          "go"
+          "haskell"
+          "javascript"
+          "json"
+          "nix"
+          "python"
+          "rust"
+          "typescript"
+          "yaml"
+        ];
+      };
+    };
+
+
     Lua.telemetry.enable = false;
+
+    python = {
+      formatting = {
+        provider = "black";
+        blackPath = "~/.nix-profile/bin/black";
+      };
+      linting = {
+        mypyEnabled = true;
+      };
+    };
 
     suggest = {
       noselect = true;
@@ -60,6 +89,13 @@
             enable = true;
           };
         };
+        rootPatterns = [ "pyproject.toml" "main.py" ];
+      };
+
+      rust = {
+        command = "rust-analyzer";
+        filetypes = [ "rust" ];
+        rootPatterns = [ "Cargo.toml" ];
       };
 
     };
