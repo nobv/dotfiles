@@ -61,6 +61,12 @@
         filetypes = [ "lua" ];
       };
 
+      golang = {
+        command = "gopls";
+        rootPatterns = [ "go.mod" ];
+        filetypes = [ "go" ];
+      };
+
       nix = {
         command = "rnix-lsp";
         filetypes = [ "nix" ];
