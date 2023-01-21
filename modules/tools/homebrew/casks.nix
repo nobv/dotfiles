@@ -31,6 +31,7 @@
       "postman"
       "rambox"
       "raycast"
+      "readdle-spark"
       "slack"
       "spotify"
       "visual-studio-code"
