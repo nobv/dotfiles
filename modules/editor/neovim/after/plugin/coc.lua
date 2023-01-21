@@ -172,3 +172,7 @@ vim.api.nvim_create_autocmd("User", {
 -- keyset("n", "<space>k", ":<C-u>CocPrev<cr>", opts)
 -- -- Resume latest coc list
 -- keyset("n", "<space>p", ":<C-u>CocListResume<cr>", opts)
+
+
+-- Install extensions
+vim.g.coc_global_extensions = { 'coc-json', 'coc-yaml', 'coc-pyright', 'coc-docker' }

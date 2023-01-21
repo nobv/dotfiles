@@ -87,21 +87,35 @@
         };
       };
 
-      python = {
-        command = "pyright";
-        filetypes = [ "python" ];
-        settings = {
-          pyright = {
-            enable = true;
-          };
-        };
-        rootPatterns = [ "pyproject.toml" "main.py" ];
-      };
-
       rust = {
         command = "rust-analyzer";
         filetypes = [ "rust" ];
         rootPatterns = [ "Cargo.toml" ];
+      };
+
+      haskell = {
+        command = "haskell-language-server-wrapper";
+        args = [ "--lsp" ];
+        rootPatterns = [ "*.cabal" "stack.yaml" "cabal.project" "package.yaml" "hie.yaml" ];
+        filetypes = [ "haskell" "lhaskell" ];
+        settings = {
+          haskell = {
+            checkParents = "CheckOnSave";
+            checkProject = true;
+            maxCompletions = 40;
+            formattingProvider = "ormolu";
+            plugin = {
+              stan = { globalOn = true; };
+            };
+          };
+        };
+      };
+
+      terraform = {
+        command = "terraform-ls";
+        args = [ "serve" ];
+        filetypes = [ "terraform" "tf" ];
+        initializationOptions = { };
       };
 
     };
