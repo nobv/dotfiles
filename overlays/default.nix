@@ -80,36 +80,48 @@ self: super: {
       homepage = "https://clickup.com/";
     };
 
-  JupyterLab = self.installApplication
-    rec {
-      name = "JupyterLab";
-      version = "";
-      sourceRoot = "JupyterLab.app";
-      src = super.fetchurl {
-        name = "JupyterLab-Setup-macOS.dmg";
-        url = "https://github.com/jupyterlab/jupyterlab-desktop/releases/latest/download/JupyterLab-Setup-macOS.dmg";
-        sha256 = "sha256-9LDxHlTM/7Wc0Wyw+FU9yvBxtPmKCgi628+B9yUbGKc=";
-      };
-      description = ''
-        A desktop application for JupyterLab, based on Electron.
-      '';
-      homepage = "https://github.com/jupyterlab/jupyterlab-desktop";
-    };
+  # JupyterLab = self.installApplication
+  #   rec {
+  #     name = "JupyterLab";
+  #     version = "";
+  #     sourceRoot = "JupyterLab.app";
+  #     src = super.fetchurl {
+  #       name = "JupyterLab-Setup-macOS.dmg";
+  #       url = "https://github.com/jupyterlab/jupyterlab-desktop/releases/latest/download/JupyterLab-Setup-macOS.dmg";
+  #       sha256 = "sha256-9LDxHlTM/7Wc0Wyw+FU9yvBxtPmKCgi628+B9yUbGKc=";
+  #     };
+  #     description = ''
+  #       A desktop application for JupyterLab, based on Electron.
+  #     '';
+  #     homepage = "https://github.com/jupyterlab/jupyterlab-desktop";
+  #   };
 
-  Spark = self.installApplication
-    rec {
-      name = "Spark Desktop";
-      version = "3.2.2.40859";
-      sourceRoot = "Spark Desktop.app";
-      src = super.fetchurl {
-        name = "Spark Desktop 3.2.2-universal.dmg";
-        url = "https://downloads.sparkmailapp.com/Spark3/mac/dist/${version}/Spark.dmg";
-        sha256 = "sha256-A5JQfU8Dxk7DKR9GtKxJXkTJRdrUVJ+HC8zgffCrmJM=";
+  Spark =
+    let
+      currentVersion = {
+        major = "3";
+        minor = "3";
+        patch = "3";
+        build = "42968";
       };
-      description = ''
-        Smart. Focused. Email.
-        Fast, cross-platform email designed to filter out the noise - so you can focus on what's important.
-      '';
-      homepage = "https://sparkmailapp.com/";
-    };
+
+      semanticVerion = with currentVersion; "${major}.${minor}.${patch}";
+      currentVersionStr = with currentVersion; "${major}.${minor}.${patch}.${build}";
+    in
+    self.installApplication
+      rec {
+        name = "Spark Desktop";
+        version = currentVersionStr;
+        sourceRoot = "Spark Desktop.app";
+        src = super.fetchurl {
+          name = "Spark Desktop ${semanticVerion}-universal.dmg";
+          url = "https://downloads.sparkmailapp.com/Spark3/mac/dist/${version}/Spark.dmg";
+          sha256 = "sha256-DUYSqQhwXR0tMbHQXf6GOrl+7Hs3PGciYId8SdltV2Y=";
+        };
+        description = ''
+          Smart. Focused. Email.
+          Fast, cross-platform email designed to filter out the noise - so you can focus on what's important.
+        '';
+        homepage = "https://sparkmailapp.com/";
+      };
 }
