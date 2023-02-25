@@ -38,6 +38,7 @@
       "workflowy"
       "zappy"
       "zoom"
+      "zotero"
       # "alfred"
       # "fluid"
       # "gyazo"
