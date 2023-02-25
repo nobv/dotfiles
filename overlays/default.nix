@@ -66,12 +66,12 @@ self: super: {
   ClickUp = self.installApplication
     rec {
       name = "ClickUp";
-      version = "3.1.2";
+      version = "3.2.8";
       sourceRoot = "ClickUp.app";
       src = super.fetchurl {
         name = "ClickUp ${version}-arm64.dmg";
         url = "https://desktop.clickup.com/mac/dmg/arm64";
-        sha256 = "sha256-Znt62EO9dHngDmc3jRI1R4qpyBgnJLyAIEgQG9ltSqw=";
+        sha256 = "sha256-0/lBxTYNl3Yfxgcm/f7zEfZUeW7TZFBaddmqpsHrKvs=";
       };
       description = ''
         One app to replace them all.
