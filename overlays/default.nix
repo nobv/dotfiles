@@ -63,22 +63,22 @@ self: super: {
       homepage = "https://httpie.io/product";
     };
 
-  ClickUp = self.installApplication
-    rec {
-      name = "ClickUp";
-      version = "3.2.8";
-      sourceRoot = "ClickUp.app";
-      src = super.fetchurl {
-        name = "ClickUp ${version}-arm64.dmg";
-        url = "https://desktop.clickup.com/mac/dmg/arm64";
-        sha256 = "sha256-0/lBxTYNl3Yfxgcm/f7zEfZUeW7TZFBaddmqpsHrKvs=";
-      };
-      description = ''
-        One app to replace them all.
-        All of your work in one place: Tasks, Docs, Chat, Goals, & more.
-      '';
-      homepage = "https://clickup.com/";
-    };
+  # ClickUp = self.installApplication
+  #   rec {
+  #     name = "ClickUp";
+  #     version = "3.2.8";
+  #     sourceRoot = "ClickUp.app";
+  #     src = super.fetchurl {
+  #       name = "ClickUp ${version}-arm64.dmg";
+  #       url = "https://desktop.clickup.com/mac/dmg/arm64";
+  #       sha256 = "sha256-0/lBxTYNl3Yfxgcm/f7zEfZUeW7TZFBaddmqpsHrKvs=";
+  #     };
+  #     description = ''
+  #       One app to replace them all.
+  #       All of your work in one place: Tasks, Docs, Chat, Goals, & more.
+  #     '';
+  #     homepage = "https://clickup.com/";
+  #   };
 
   # JupyterLab = self.installApplication
   #   rec {
@@ -96,32 +96,51 @@ self: super: {
   #     homepage = "https://github.com/jupyterlab/jupyterlab-desktop";
   #   };
 
-  Spark =
-    let
-      currentVersion = {
-        major = "3";
-        minor = "3";
-        patch = "3";
-        build = "42968";
-      };
+  #Spark =
+  #  let
+  #    currentVersion = {
+  #      major = "3";
+  #      minor = "3";
+  #      patch = "3";
+  #      build = "42968";
+  #    };
 
-      semanticVerion = with currentVersion; "${major}.${minor}.${patch}";
-      currentVersionStr = with currentVersion; "${major}.${minor}.${patch}.${build}";
-    in
-    self.installApplication
-      rec {
-        name = "Spark Desktop";
-        version = currentVersionStr;
-        sourceRoot = "Spark Desktop.app";
-        src = super.fetchurl {
-          name = "Spark Desktop ${semanticVerion}-universal.dmg";
-          url = "https://downloads.sparkmailapp.com/Spark3/mac/dist/${version}/Spark.dmg";
-          sha256 = "sha256-DUYSqQhwXR0tMbHQXf6GOrl+7Hs3PGciYId8SdltV2Y=";
-        };
-        description = ''
-          Smart. Focused. Email.
-          Fast, cross-platform email designed to filter out the noise - so you can focus on what's important.
-        '';
-        homepage = "https://sparkmailapp.com/";
+  #    semanticVerion = with currentVersion; "${major}.${minor}.${patch}";
+  #    currentVersionStr = with currentVersion; "${major}.${minor}.${patch}.${build}";
+  #  in
+  #  self.installApplication
+  #    rec {
+  #      name = "Spark Desktop";
+  #      version = currentVersionStr;
+  #      sourceRoot = "Spark Desktop.app";
+  #      src = super.fetchurl {
+  #        name = "Spark Desktop ${semanticVerion}-universal.dmg";
+  #        url = "https://downloads.sparkmailapp.com/Spark3/mac/dist/${version}/Spark.dmg";
+  #        sha256 = "sha256-DUYSqQhwXR0tMbHQXf6GOrl+7Hs3PGciYId8SdltV2Y=";
+  #      };
+  #      description = ''
+  #        Smart. Focused. Email.
+  #        Fast, cross-platform email designed to filter out the noise - so you can focus on what's important.
+  #      '';
+  #      homepage = "https://sparkmailapp.com/";
+  #    };
+
+  Rize = self.installApplication
+    rec {
+      name = "Rize";
+      version = "0.18.15";
+      sourceRoot = "Rize.app";
+      src = super.fetchurl {
+        name = "rize-${version}-arm64.dmg";
+        url = "https://app.rize.io/downloads/macos?arch=arm64&pid=rJUE1wFg8AzpZuarzCAFRZp7";
+        sha256 = "sha256-GrL6OlwFfA/ZkrTxNooVQ5oyYauEQqQEHA05Vp+DNb4=";
       };
+      description = ''
+        Maximize Your Productivity
+        Rize is a smart time tracker that improves your focus and helps you build better work habits.
+      '';
+      homepage = "https://rize.io/";
+
+    };
+
 }

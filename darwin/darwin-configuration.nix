@@ -12,9 +12,10 @@
     systemPackages = with pkgs; [
       Morgen
       HTTPie
-      ClickUp
-      JupyterLab
-      Spark
+      # ClickUp
+      # JupyterLab
+      # Spark
+      Rize
     ];
 
     # TODO:

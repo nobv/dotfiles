@@ -11,11 +11,12 @@
     "Messenger" = 1480068668;
     # "Noted." = 1446580517;
     "Slack" = 803453959;
-    "Spark" = 1176895641;
+    # "Spark" = 1176895641;
     "Telegram" = 747648890;
     "TextSniper" = 1528890965;
     "The Unarchiver" = 425424353;
     "iThoughtsX" = 720669838;
     "辞書 by 物書堂" = 1380563956;
+    "Toggl Track" = 1291898086;
   };
 }

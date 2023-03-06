@@ -9,6 +9,7 @@
       "1password"
       "asana"
       "dbeaver-community"
+      "clickup"
       "discord"
       "docker"
       "figma"
