@@ -5,6 +5,7 @@
     ../modules/checkers
     ../modules/editor/emacs
     ../modules/editor/vim
+    ../modules/editor/neovim
     # ../modules/editor/vscode
     ../modules/font
     ../modules/lang/c
@@ -12,6 +13,7 @@
     ../modules/lang/go
     ../modules/lang/haskell
     ../modules/lang/javascript
+    ../modules/lang/lua
     ../modules/lang/nix
     ../modules/lang/protobuf
     ../modules/lang/purescript
@@ -46,7 +48,8 @@
     ../modules/tools/tmux
     ../modules/tools/tree
     ../modules/tools/trivy
-    ../modules/tools/youtube-dl
+    ../modules/tools/yt-dlp
+    ../modules/tools/zotfile
   ];
 
   home = {
