@@ -10,6 +10,7 @@
     nvim-tree-lua # https://github.com/nvim-tree/nvim-tree.lua
     which-key-nvim # https://github.com/folke/which-key.nvim
     comment-nvim # https://github.com/numToStr/Comment.nvim
+    nvim-autopairs # https://github.com/windwp/nvim-autopairs/
 
     # Languages
     vim-nix # https://github.com/LnL7/vim-nix
