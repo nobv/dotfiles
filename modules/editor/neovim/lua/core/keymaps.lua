@@ -9,7 +9,7 @@ keyset("i", "jk", "<ESC>") -- exit insert mode with jk
 
 
 -- normal mode
-keyset("n", "<leader>nh", ":hohl<CR>") -- clear search highlight
+keyset("n", "<leader>nh", ":noh<CR>") -- clear search highlight
 keyset("n", "x", '"_x"') -- don't copy by x
 keyset("n", "<leader>+", "<C-a>") -- increment
 keyset("n", "<leader>-", "<C-x>") -- decrement
@@ -29,10 +29,4 @@ keyset("n", "<leader>tx", ":tabclose<CR>") -- close current tab
 keyset("n", "<leader>tn", ":tabn<CR>") -- go to next tab
 keyset("n", "<leader>tp", ":tabp<CR>") -- go to previous tab
 
--- telescope
-local telescope_builtin = require('telescope.builtin')
-keyset('n', '<leader>f', telescope_builtin.find_files)
-keyset('n', '<leader>g', telescope_builtin.live_grep)
-keyset('n', '<leader>b', telescope_builtin.buffers)
-keyset('n', '<leader>h', telescope_builtin.help_tags)
 
