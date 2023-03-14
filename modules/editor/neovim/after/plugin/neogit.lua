@@ -1,5 +1,5 @@
-local state, neogit = pcall(require, "neogit")
-if (not state) then
+local status, neogit = pcall(require, "neogit")
+if (not status) then
   print("neogit not found.")
   return
 end

@@ -4,9 +4,12 @@
   plugins = with pkgs.vimPlugins; [
     # Tools
     telescope-nvim # https://github.com/nvim-telescope/telescope.nvim
+    telescope-file-browser-nvim # https://github.com/nvim-telescope/telescope-file-browser.nvim
+
     vim-easymotion # https://github.com/easymotion/vim-easymotion/
     nvim-tree-lua # https://github.com/nvim-tree/nvim-tree.lua
     which-key-nvim # https://github.com/folke/which-key.nvim
+    comment-nvim # https://github.com/numToStr/Comment.nvim
 
     # Languages
     vim-nix # https://github.com/LnL7/vim-nix

@@ -1,5 +1,5 @@
-local state, nvim_tree = pcall(require, "nvim-tree")
-if (not state) then
+local status, nvim_tree = pcall(require, "nvim-tree")
+if (not status) then
   print("nvim-tree not found.")
   return
 end

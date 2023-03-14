@@ -1,5 +1,5 @@
-local state, gitsigns = pcall(require, "gitsigns")
-if (not state) then
+local status, gitsigns = pcall(require, "gitsigns")
+if (not status) then
   print("gitsigns not found.")
   return
 end
