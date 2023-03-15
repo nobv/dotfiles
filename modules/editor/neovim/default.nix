@@ -1,5 +1,7 @@
 { config, pkgs, lib, ... }:
-
+let
+  plugins = (import ./lua/plugins pkgs);
+in
 {
   xdg.configFile = {
     "nvim/after" = {
@@ -21,7 +23,7 @@
       vimdiffAlias = true;
       extraConfig = "source ~/.config/nvim/lua/init.lua";
       coc = import ./lua/plugins/coc.nix;
-      plugins = (import ./lua/plugins pkgs).plugins;
+      plugins = plugins.vimPlugins;
     };
 
   };
