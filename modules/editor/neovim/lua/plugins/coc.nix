@@ -13,6 +13,7 @@
           "haskell"
           "javascript"
           "json"
+          "lua"
           "nix"
           "python"
           "rust"
@@ -57,7 +58,8 @@
       };
 
       lua = {
-        command = "lua-lsp";
+        command = "lua-language-server";
+        rootPatterns = [ ".git" ];
         filetypes = [ "lua" ];
       };
 
