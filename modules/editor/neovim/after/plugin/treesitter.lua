@@ -1,0 +1,9 @@
+-- local status, treesitter = pcall(require, "nvim-treesitter")
+-- if (not status) then
+--   print("nvim-treesitter not found.")
+--   return
+-- end
+--
+-- local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+-- ts_update()
+--
