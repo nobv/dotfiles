@@ -26,6 +26,15 @@ javascript: (async function () {
     - Repository Owner:: [[${document.querySelector("#repository-container-header > div.d-flex.flex-wrap.flex-justify-end.mb-3.px-3.px-md-4.px-lg-5 > div > div > span.author.flex-self-stretch > a").innerText}]]`;
       break;
 
+    case "gist.github.com":
+      tana_paste += `
+- ${time}\n
+  - [ ] ${document.querySelector("#gist-pjax-container > div.container-lg.px-3 > div > div > div:nth-child(1)").innerText} #github\n
+    - Title:: ${document.title}\n
+    - URL:: ${location.href}\n
+    - Repository Owner:: [[${document.querySelector("#gist-pjax-container > div.gisthead.pagehead.pb-0.pt-3.mb-4 > div > div.mb-3.d-flex.px-3.px-md-3.px-lg-5 > div > div > div.d-flex.flex-column.width-full > div.d-flex.flex-row.width-full > h1 > span.author > a").innerText}]]`;
+      break;
+
     case "ja.wikipedia.org":
     case "en.wikipedia.org":
       tana_paste += `
