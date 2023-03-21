@@ -1,4 +1,7 @@
 javascript: (async function () {
+  const player = document.getElementById("ytd-player");
+  player.pause();
+
   const video = document.getElementsByTagName("video");
   const current_time = parseInt(video[0].currentTime);
   const current_time_str = document.getElementsByClassName("ytp-time-current")[0].innerText;
