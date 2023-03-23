@@ -7,9 +7,10 @@ javascript: (async function () {
 
   const tana_paste = `
 %%tana%%\n
-- ${document.title} #service\n
-  - Title:: ${document.title}\n
-  - URL:: ${location.href}\n`;
+- ${time}\n
+  - [ ] ${document.title} #service\n
+    - Title:: ${document.title}\n
+    - URL:: ${location.href}\n`;
 
   try {
     await navigator.permissions.query({name: "clipboard-write"});
