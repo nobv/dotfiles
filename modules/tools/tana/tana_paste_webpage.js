@@ -5,11 +5,32 @@ javascript: (async function () {
 
   const time = `${formattedHours}:${formattedMinutes}`;
 
-  let tana_paste = "%%tana%%\n";
+  const readwiseContainer = document.querySelector("body > readwise-tooltip-container").shadowRoot.querySelectorAll("a");
+  let reader, readwise, highlights;
+  let highlightsStr = "";
+  if (readwiseContainer.length > 0) {
+    [reader, readwise] = readwiseContainer;
+    highlights = [...document.querySelectorAll("rw-highlight")].reduce((a, c) => {
+      const id = c.dataset.highlightId;
+      if (!a[id]) {
+        a[id] = c.innerText;
+      } else {
+        a[id] += c.innerText;
+      }
+      return a
+    }, {});
+    highlightsStr = `\n
+    - Highlights::\n
+      - Readwise Reader:: ${reader.href}\n
+      - Readwise:: ${readwise.href}\n
+${Object.values(highlights).map(v => `      - ^^${v}^^`).join("\n      ")}`;
+  }
+
+  let tanaPaste = "%%tana%%\n";
   switch (location.hostname) {
 
     case "www.youtube.com":
-      tana_paste += `
+      tanaPaste += `
 - ${time}\n
   - [ ] ${document.title} #youtube\n
     - Title:: ${document.title}\n
@@ -26,7 +47,7 @@ javascript: (async function () {
         repository_name = document.querySelector("#repository-container-header > div.d-flex.flex-wrap.flex-justify-end.mb-3.px-3.px-md-4.px-lg-5 > div > div > strong > a");
       }
 
-      tana_paste += `
+      tanaPaste += `
 - ${time}\n
   - [ ] ${repository_name.innerText} #github\n
     - Title:: ${document.title}\n
@@ -35,7 +56,7 @@ javascript: (async function () {
       break;
 
     case "gist.github.com":
-      tana_paste += `
+      tanaPaste += `
 - ${time}\n
   - [ ] ${document.querySelector("#gist-pjax-container > div.container-lg.px-3 > div > div > div:nth-child(1)").innerText} #github\n
     - Title:: ${document.title}\n
@@ -45,7 +66,7 @@ javascript: (async function () {
 
     case "ja.wikipedia.org":
     case "en.wikipedia.org":
-      tana_paste += `
+      tanaPaste += `
 - ${time}\n
   - [ ] ${document.querySelector("#firstHeading > span").innerText} #wiki\n
     - Title:: ${document.title}\n
@@ -53,31 +74,32 @@ javascript: (async function () {
       break;
 
     case "developer.mozilla.org":
-      tana_paste += `
+      tanaPaste += `
  - ${time}\n
   - [ ] ${document.querySelector("h1").innerText} #[[Web APIs]]\n
     - Title:: ${document.title}\n
     - Description:: ${document.querySelector("#content > article > div.section-content > p").innerText}\n
-    - URL:: ${location.href}\n`;
+    - URL:: ${location.href}\n
+    ${readwiseContainer.length !== 0 ? highlightsStr : ""}`;
+
       break;
 
     default:
-      tana_paste += `
+      tanaPaste += `
 - ${time}\n
   - [ ] ${document.title} #[[web page]]\n
     - Title:: ${document.title}\n
-    - URL:: ${location.href}\n`;
+    - URL:: ${location.href}\n
+    ${readwiseContainer.length !== 0 ? highlightsStr : ""}`;
       break;
   }
 
   try {
     await navigator.permissions.query({name: "clipboard-write"});
-    await navigator.clipboard.writeText(tana_paste);
+    await navigator.clipboard.writeText(tanaPaste);
     console.log("copy to clipboard success.");
   } catch (err) {
     console.error("copy to clipboard error:", err);
   }
 })();
 
-
-Keeping your Home Manager home.nix in ~/.config/nixpkgs is deprecated, please move it to ~/.config/home-manager
