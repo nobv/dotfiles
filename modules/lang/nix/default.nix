@@ -3,6 +3,6 @@
   home.packages = with pkgs; [
     nix
     nixpkgs-fmt
-    rnix-lsp
+    rnix-lsp # https://github.com/nix-community/rnix-lsp
   ];
 }

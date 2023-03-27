@@ -22,6 +22,7 @@
 
   logseq = "cd ~/src/src/github.com/nobv/logs";
   dots = "cd ~/.dotfiles";
+  ide = ". ~/.dotfiles/bin/ide.sh";
 
   ## cp
   cp = "cp -i";
