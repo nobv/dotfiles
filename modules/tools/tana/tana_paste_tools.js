@@ -8,7 +8,7 @@ javascript: (async function () {
   const tana_paste = `
 %%tana%%\n
 - ${time}\n
-  - [ ] ${document.title} #service\n
+  - [ ] ${document.title} #tools\n
     - Title:: ${document.title}\n
     - URL:: ${location.href}\n`;
 
