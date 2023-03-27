@@ -5,6 +5,7 @@
     # For some reason, this PR was closed.
     # https://github.com/NixOS/nixpkgs/pull/135938
     # hasklig
+    jetbrains-mono
     (nerdfonts.override {
       fonts = [
         "SourceCodePro"
