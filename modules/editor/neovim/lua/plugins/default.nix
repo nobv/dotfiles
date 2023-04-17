@@ -13,13 +13,29 @@
     gitsigns-nvim # https://github.com/lewis6991/gitsigns.nvim
     plenary-nvim # https://github.com/nvim-lua/plenary.nvim
     neogit # https://github.com/TimUntersberger/neogit
+    undotree # https://github.com/mbbill/undotree
 
     # Languages
     vim-nix # https://github.com/LnL7/vim-nix
     purescript-vim # https://github.com/purescript-contrib/purescript-vim
     dhall-vim # https://github.com/vmchale/dhall-vim
-    ## LSP
-    coc-pyright # https://github.com/fannheyward/coc-pyright
+
+    ## LSP 
+    # lsp-zero-nvim #https://github.com/VonHeikemen/lsp-zero.nvim/
+    nvim-lspconfig # https://github.com/neovim/nvim-lspconfig/
+    mason-nvim # https://github.com/williamboman/mason.nvim/
+    mason-lspconfig-nvim # https://github.com/williamboman/mason-lspconfig.nvim
+    lspsaga-nvim-original # https://github.com/nvimdev/lspsaga.nvim/
+
+    nvim-cmp # https://github.com/hrsh7th/nvim-cmp/
+    cmp-nvim-lsp # https://github.com/hrsh7th/cmp-nvim-lsp
+    cmp-buffer # https://github.com/hrsh7th/cmp-buffer/
+    cmp-path # https://github.com/hrsh7th/cmp-path/
+    luasnip # https://github.com/l3mon4d3/luasnip/
+    cmp_luasnip # https://github.com/saadparwaiz1/cmp_luasnip/
+    null-ls-nvim # https://github.com/jose-elias-alvarez/null-ls.nvim/
+    lspkind-nvim # https://github.com/onsails/lspkind.nvim/
+    fidget-nvim # https://github.com/j-hui/fidget.nvim/
 
     # UI
     dracula-vim # https://github.com/dracula/vim/
@@ -28,7 +44,9 @@
     nvim-web-devicons # https://github.com/nvim-tree/nvim-web-devicons/
     nvim-colorizer-lua # https://github.com/norcalli/nvim-colorizer.lua
     indent-blankline-nvim # https://github.com/lukas-reineke/indent-blankline.nvim
-    # nvim-treesitter # https://github.com/nvim-treesitter/nvim-treesitter
+
+    # see: https://nixos.org/manual/nixpkgs/unstable/#vim:~:text=for%20some%20plugins-,Treesitter,-By%20default
+    nvim-treesitter.withAllGrammars # https://github.com/nvim-treesitter/nvim-treesitter
 
 
     # Editing
@@ -38,6 +56,10 @@
 
     # Buffer
     bufferline-nvim # https://github.com/akinsho/bufferline.nvim/
+
+    # Other
+    vim-tmux-navigator # https://github.com/christoomey/vim-tmux-navigator/
+    copilot-vim # https://github.com/github/copilot.vim/
   ];
 
   # tree-sitter-grammars = with pkgs.tree-sitter-grammars; [
@@ -45,5 +67,5 @@
   #   tree-sitter-go
   #   tree-sitter-nix
   #   tree-sitter-python
-  # ];
+  # ]
 }
