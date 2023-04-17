@@ -22,7 +22,6 @@ in
       vimAlias = true;
       vimdiffAlias = true;
       extraConfig = "source ~/.config/nvim/lua/init.lua";
-      coc = import ./lua/plugins/coc.nix;
       plugins = plugins.vimPlugins;
     };
 
