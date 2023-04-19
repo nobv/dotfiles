@@ -21,7 +21,6 @@
     dhall-vim # https://github.com/vmchale/dhall-vim
 
     ## LSP 
-    # lsp-zero-nvim #https://github.com/VonHeikemen/lsp-zero.nvim/
     nvim-lspconfig # https://github.com/neovim/nvim-lspconfig/
     mason-nvim # https://github.com/williamboman/mason.nvim/
     mason-lspconfig-nvim # https://github.com/williamboman/mason-lspconfig.nvim
@@ -38,7 +37,6 @@
     fidget-nvim # https://github.com/j-hui/fidget.nvim/
 
     # UI
-    dracula-vim # https://github.com/dracula/vim/
     dracula-nvim # https://github.com/Mofiqul/dracula.nvim/
     lualine-nvim # https://github.com/nvim-lualine/lualine.nvim
     nvim-web-devicons # https://github.com/nvim-tree/nvim-web-devicons/
@@ -61,11 +59,4 @@
     vim-tmux-navigator # https://github.com/christoomey/vim-tmux-navigator/
     copilot-vim # https://github.com/github/copilot.vim/
   ];
-
-  # tree-sitter-grammars = with pkgs.tree-sitter-grammars; [
-  #   tree-sitter-lua # https://github.com/MunifTanjim/tree-sitter-lua
-  #   tree-sitter-go
-  #   tree-sitter-nix
-  #   tree-sitter-python
-  # ]
 }
