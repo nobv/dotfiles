@@ -8,9 +8,9 @@ javascript: (async function () {
   const tana_paste = `
 %%tana%%\n
 - ${time}\n
-  - [ ] ${document.title} #tools\n
+  - [ ] ${document.title} #tool\n
     - Title:: ${document.title}\n
-    - URL:: ${location.href}\n`;
+    - Web site:: ${location.href}\n`;
 
   try {
     await navigator.permissions.query({name: "clipboard-write"});

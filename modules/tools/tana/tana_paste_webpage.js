@@ -22,7 +22,7 @@ javascript: (async function () {
     highlightsStr = `\n
     - Highlights::\n
       - Readwise Reader:: ${reader.href}\n
-      - Readwise:: ${readwise.href}\n
+      - Readwise:: ${readwise?.href ?? ""}\n
 ${Object.values(highlights).map(v => `      - ^^${v}^^`).join("\n      ")}`;
   }
 
@@ -35,7 +35,7 @@ ${Object.values(highlights).map(v => `      - ^^${v}^^`).join("\n      ")}`;
   - [ ] ${document.title} #youtube\n
     - Title:: ${document.title}\n
     - URL:: ${location.href}\n
-    - Created by:: [[${document.querySelector("#text > a").innerHTML}]]`;
+    - Created by:: [[${document.querySelector("#upload-info > #channel-name > #container > #text-container > #text > a").innerHTML}]]`;
       break;
 
     case "github.com":
@@ -75,22 +75,31 @@ ${Object.values(highlights).map(v => `      - ^^${v}^^`).join("\n      ")}`;
 
     case "developer.mozilla.org":
       tanaPaste += `
- - ${time}\n
-  - [ ] ${document.querySelector("h1").innerText} #[[Web APIs]]\n
+- ${time}\n
+  - [ ] ${document.querySelector("h1").innerText} #web_apis\n
     - Title:: ${document.title}\n
     - Description:: ${document.querySelector("#content > article > div.section-content > p").innerText}\n
     - URL:: ${location.href}\n
     ${readwiseContainer.length !== 0 ? highlightsStr : ""}`;
+      break;
 
+    case "qiita.com":
+      tanaPaste += `
+- ${time}\n
+  - [ ] ${document.title} #qiita\n
+    - Title:: ${document.title}\n
+    - URL:: ${location.href}\n
+    - Author:: ${location.pathname.split("/").filter(x => x).shift()}
+    ${readwiseContainer.length !== 0 ? highlightsStr : ""}`;
       break;
 
     default:
       tanaPaste += `
-- ${time}\n
-  - [ ] ${document.title} #[[web page]]\n
-    - Title:: ${document.title}\n
-    - URL:: ${location.href}\n
-    ${readwiseContainer.length !== 0 ? highlightsStr : ""}`;
+- ${time} \n
+  - [] ${document.title} #web_page\n
+    - Title:: ${document.title} \n
+    - URL:: ${location.href} \n
+    ${readwiseContainer.length !== 0 ? highlightsStr : ""} `;
       break;
   }
 
@@ -102,4 +111,5 @@ ${Object.values(highlights).map(v => `      - ^^${v}^^`).join("\n      ")}`;
     console.error("copy to clipboard error:", err);
   }
 })();
+
 
