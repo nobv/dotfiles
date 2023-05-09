@@ -16,6 +16,7 @@
       # JupyterLab
       # Spark
       Rize
+      ThingsHelper
     ];
 
     # TODO:
