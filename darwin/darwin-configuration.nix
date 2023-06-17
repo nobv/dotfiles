@@ -11,11 +11,11 @@
   environment = {
     systemPackages = with pkgs; [
       Morgen
-      HTTPie
+      # HTTPie
       # ClickUp
       # JupyterLab
       # Spark
-      Rize
+      # Rize
       ThingsHelper
     ];
 

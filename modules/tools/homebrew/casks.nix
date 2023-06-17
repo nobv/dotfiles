@@ -4,12 +4,13 @@
       "homebrew/cask"
       "homebrew/cask-drivers"
       "homebrew/cask-fonts"
+      # "railwaycat/emacsmacport"
     ];
+
     casks = [
       "1password"
-      "asana"
-      "dbeaver-community"
       "clickup"
+      "dbeaver-community"
       "discord"
       "docker"
       "figma"
@@ -22,15 +23,14 @@
       "google-chrome"
       "google-drive"
       "google-japanese-ime"
+      "httpie"
       "iterm2"
       "karabiner-elements"
       "kensingtonworks"
-      # "krisp"
       "logseq"
-      "notion"
+      "multipass"
       "obsidian"
       "postman"
-      "rambox"
       "raycast"
       "readdle-spark"
       "slack"
@@ -41,9 +41,16 @@
       "zoom"
       "zotero"
       # "alfred"
+      # "asana"
       # "fluid"
       # "gyazo"
+      # "krisp"
+      # "notion"
+      # "rambox"
     ];
 
+    # extraConfig = ''
+    #   brew "emacs-mac", args:["with-modules"], link: true
+    # '';
   };
 }

@@ -34,12 +34,12 @@ self: super: {
   Morgen = self.installApplication
     rec {
       name = "Morgen";
-      version = "2.7.0";
+      version = "2.7.3";
       sourceRoot = "Morgen.app";
       src = super.fetchurl {
         name = "Morgen ${version}-arm64.dmg";
         url = "https://dl.todesktop.com/210203cqcj00tw1/mac/dmg/arm64";
-        sha256 = "sha256-K7603m+LbxmveefOlQPd6MiSR4eulsKUHD7eNbtit1I=";
+        sha256 = "sha256-z4//vNzeZ8nUXM+Vd4SJkPE+u5IA/JAK0SX7EsYk5L4=";
       };
       description = ''
         Make the most out of your time
@@ -47,22 +47,22 @@ self: super: {
       homepage = "https://morgen.so";
     };
 
-  HTTPie = self.installApplication
-    rec {
-      name = "HTTPie";
-      version = "2023.1.0";
-      sourceRoot = "HTTPie.app";
-      src = super.fetchurl {
-        name = "HTTPie-${version}-arm64.dmg";
-        url = "https://github.com/httpie/desktop/releases/download/v${version}/HTTPie-${version}-arm64.dmg";
-        sha256 = "sha256-dYXWnOf72RLoD4AY1EAVZ7231j59zHjlFab9tmKS1Mk=";
-      };
-      description = ''
-        HTTPIE WEB & DESKTOP APP
-      '';
-      homepage = "https://httpie.io/product";
-    };
-
+  # HTTPie = self.installApplication
+  #   rec {
+  #     name = "HTTPie";
+  #     version = "2023.1.0";
+  #     sourceRoot = "HTTPie.app";
+  #     src = super.fetchurl {
+  #       name = "HTTPie-${version}-arm64.dmg";
+  #       url = "https://github.com/httpie/desktop/releases/download/v${version}/HTTPie-${version}-arm64.dmg";
+  #       sha256 = "sha256-dYXWnOf72RLoD4AY1EAVZ7231j59zHjlFab9tmKS1Mk=";
+  #     };
+  #     description = ''
+  #       HTTPIE WEB & DESKTOP APP
+  #     '';
+  #     homepage = "https://httpie.io/product";
+  #   };
+  #
   # ClickUp = self.installApplication
   #   rec {
   #     name = "ClickUp";
@@ -125,24 +125,24 @@ self: super: {
   #      homepage = "https://sparkmailapp.com/";
   #    };
 
-  Rize = self.installApplication
-    rec {
-      name = "Rize";
-      version = "0.18.15";
-      sourceRoot = "Rize.app";
-      src = super.fetchurl {
-        name = "rize-${version}-arm64.dmg";
-        url = "https://app.rize.io/downloads/macos?arch=arm64&pid=rJUE1wFg8AzpZuarzCAFRZp7";
-        sha256 = "sha256-GrL6OlwFfA/ZkrTxNooVQ5oyYauEQqQEHA05Vp+DNb4=";
-      };
-      description = ''
-        Maximize Your Productivity
-        Rize is a smart time tracker that improves your focus and helps you build better work habits.
-      '';
-      homepage = "https://rize.io/";
-
-    };
-
+  # Rize = self.installApplication
+  #   rec {
+  #     name = "Rize";
+  #     version = "0.18.15";
+  #     sourceRoot = "Rize.app";
+  #     src = super.fetchurl {
+  #       name = "rize-${version}-arm64.dmg";
+  #       url = "https://app.rize.io/downloads/macos?arch=arm64&pid=rJUE1wFg8AzpZuarzCAFRZp7";
+  #       sha256 = "sha256-GrL6OlwFfA/ZkrTxNooVQ5oyYauEQqQEHA05Vp+DNb4=";
+  #     };
+  #     description = ''
+  #       Maximize Your Productivity
+  #       Rize is a smart time tracker that improves your focus and helps you build better work habits.
+  #     '';
+  #     homepage = "https://rize.io/";
+  #
+  #   };
+  #
   ThingsHelper = self.installApplication
     rec{
       name = "ThingsHelper";
