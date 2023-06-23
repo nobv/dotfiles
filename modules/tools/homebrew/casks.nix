@@ -35,6 +35,7 @@
       "readdle-spark"
       "slack"
       "spotify"
+      "utm"
       "visual-studio-code"
       "workflowy"
       "zappy"
