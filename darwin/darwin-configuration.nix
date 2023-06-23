@@ -79,6 +79,8 @@
         "com.apple.mouse.tapBehavior" = 1;
         InitialKeyRepeat = 15;
         KeyRepeat = 2;
+        AppleShowAllExtensions = true;
+        AppleShowAllFiles = true;
       };
     };
 
