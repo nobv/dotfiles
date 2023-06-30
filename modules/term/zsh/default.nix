@@ -10,7 +10,9 @@ in
       autocd = true;
       enableAutosuggestions = true;
       enableCompletion = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting = {
+        enable = true;
+      };
       # dotDir = ".dotfiles/.zsh";
       history = {
         expireDuplicatesFirst = true;

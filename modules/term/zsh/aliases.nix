@@ -23,6 +23,7 @@
   logseq = "cd ~/src/src/github.com/nobv/logs";
   dots = "cd ~/.dotfiles";
   ide = ". ~/.dotfiles/bin/ide.sh";
+  mp = "multipass";
 
   ## cp
   cp = "cp -i";

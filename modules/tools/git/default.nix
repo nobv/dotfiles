@@ -4,7 +4,6 @@ let
   extraConfig = import ./extraConfig.nix;
   aliases = import ./aliases.nix;
 
-  stable = import <nixpkgs-stable> { };
 in
 {
   home.packages = with pkgs; [

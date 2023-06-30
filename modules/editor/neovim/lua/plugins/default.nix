@@ -57,6 +57,6 @@
 
     # Other
     vim-tmux-navigator # https://github.com/christoomey/vim-tmux-navigator/
-    copilot-vim # https://github.com/github/copilot.vim/
+    # copilot-vim # https://github.com/github/copilot.vim/
   ];
 }
