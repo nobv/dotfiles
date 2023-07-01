@@ -45,11 +45,12 @@
           system = system;
           modules = [
             home-manager.darwinModules.home-manager
-            # {
-            #   home-manager.useGlobalPkgs = true;
-            #   home-manager.useUserPackages = true;
-            #   # home-manager.users.nobv = import ./home-manager/home.nix;
-            # }
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              # home-manager.extraSpecialArgs = userName;
+              home-manager.users.nobv = import ./machines/macmini2020/home.nix;
+            }
           ] ++ extraModules;
           # inputs = { inherit darwin nixpkgs inputs overlays; };
           specialArgs = {
