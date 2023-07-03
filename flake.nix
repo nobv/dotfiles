@@ -49,7 +49,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               # home-manager.extraSpecialArgs = userName;
-              home-manager.users.nobv = import ./machines/macmini2020/home.nix;
+              home-manager.users.${userName} = import ./machines/macmini2020/home.nix;
             }
           ] ++ extraModules;
           # inputs = { inherit darwin nixpkgs inputs overlays; };

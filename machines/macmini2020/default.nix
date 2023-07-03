@@ -3,8 +3,8 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      Morgen
-      ThingsHelper
+      # Morgen
+      # ThingsHelper
     ];
 
     darwinConfig = ./default.nix;
@@ -49,6 +49,8 @@
       remapCapsLockToControl = true;
     };
   };
+
+  users.users.${userName}.home = "/Users/${userName}";
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
