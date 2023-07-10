@@ -34,7 +34,16 @@
     cmp_luasnip # https://github.com/saadparwaiz1/cmp_luasnip/
     null-ls-nvim # https://github.com/jose-elias-alvarez/null-ls.nvim/
     lspkind-nvim # https://github.com/onsails/lspkind.nvim/
-    fidget-nvim # https://github.com/j-hui/fidget.nvim/
+    {
+      plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
+        name = "fidget-nvim";
+        src = pkgs.fetchurl {
+          url = "https://github.com/j-hui/fidget.nvim/archive/refs/tags/legacy.tar.gz";
+          hash = "sha256-piJgAosA2LoF3gaF1EvcgTDYlkBmT5dKlSrTp0yG+vg=";
+        };
+      };
+    }
+    # fidget-nvim # https://github.com/j-hui/fidget.nvim/
 
     # UI
     dracula-nvim # https://github.com/Mofiqul/dracula.nvim/
