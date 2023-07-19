@@ -18,6 +18,19 @@ which_key.register({
     -- t = { "<cmd>Lspsaga goto_type_definition<CR>", "Go to type definition" }
   },
   K = { "<cmd>Lspsaga hover_doc ++keep<CR>", "Hover Doc" },
+  t = {
+    name = "Neotest",
+    a = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach" },
+    f = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "Run File" },
+    F = { "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", "Debug File" },
+    l = { "<cmd>lua require('neotest').run.run_last()<cr>", "Run Last" },
+    L = { "<cmd>lua require('neotest').run.run_last({ strategy = 'dap' })<cr>", "Debug Last" },
+    n = { "<cmd>lua require('neotest').run.run()<cr>", "Run Nearest" },
+    N = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Debug Nearest" },
+    o = { "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "Output" },
+    S = { "<cmd>lua require('neotest').run.stop()<cr>", "Stop" },
+    s = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Summary" },
+  },
   ["<leader>"] = {
     [":"] = { ":Telescope commands<CR>", "List available commands and run" },
     ["<TAB>"] = { ":b#<CR>", "Last buffer" },
@@ -101,7 +114,7 @@ which_key.register({
       s = { ":Telescope current_buffer_fuzzy_find<CR>", "Swipe" }
     },
 
-    t = {
+    tg = {
       name = "+toggle",
       h = { ":noh<CR>", "Clear search highlight" },
       t = { ":Twilight<CR>", "Twilight" },

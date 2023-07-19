@@ -78,6 +78,28 @@
     # Buffer
     bufferline-nvim # https://github.com/akinsho/bufferline.nvim/
 
+    # Tests
+    FixCursorHold-nvim # https://github.com/antoinemadec/FixCursorHold.nvim/
+    neotest # https://github.com/nvim-neotest/neotest
+    neotest-plenary # https://github.com/nvim-neotest/neotest-plenary/
+    neotest-python # https://github.com/nvim-neotest/neotest-python/
+    neotest-rust # https://github.com/rouge8/neotest-rust/
+    neotest-go # https://github.com/nvim-neotest/neotest-go/
+    neotest-haskell # https://github.com/MrcJkb/neotest-haskell/
+    {
+      plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
+        name = "neotest-vim-test";
+        # https://github.com/nvim-neotest/neotest-vim-test
+        src = pkgs.fetchFromGitHub {
+          owner = "nvim-neotest";
+          repo = "neotest-vim-test";
+          rev = "master";
+          hash = "sha256-fFm5Yt2Sus5jLSapHUtLlDkBWPLLKfWsj2NSXD8NPYo=";
+        };
+      };
+    }
+    vim-test # https://github.com/vim-test/vim-test/
+
     # Other
     vim-tmux-navigator # https://github.com/christoomey/vim-tmux-navigator/
     # copilot-vim # https://github.com/github/copilot.vim/
