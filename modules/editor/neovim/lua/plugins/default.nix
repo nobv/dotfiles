@@ -9,6 +9,20 @@
     vim-easymotion # https://github.com/easymotion/vim-easymotion/
     nvim-tree-lua # https://github.com/nvim-tree/nvim-tree.lua
     which-key-nvim # https://github.com/folke/which-key.nvim
+    {
+      plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
+        name = "lf-nvim";
+        src = pkgs.fetchFromGitHub {
+          owner = "lmburns";
+          repo = "lf.nvim";
+          rev = "master";
+          hash = "sha256-Zl9eIzNNklPAyQbS1jPavRvZ1NVmCTxw0R0so67wapM=";
+        };
+      };
+
+    }
+    toggleterm-nvim # https://github.com/akinsho/toggleterm.nvim/
+
     ##Git
     gitsigns-nvim # https://github.com/lewis6991/gitsigns.nvim
     plenary-nvim # https://github.com/nvim-lua/plenary.nvim
