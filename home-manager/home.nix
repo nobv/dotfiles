@@ -2,11 +2,11 @@
 
 {
   imports = [
+    # ../modules/editor/vscode
     ../modules/checkers
     ../modules/editor/emacs
-    ../modules/editor/vim
     ../modules/editor/neovim
-    # ../modules/editor/vscode
+    ../modules/editor/vim
     ../modules/font
     ../modules/lang/c
     ../modules/lang/dhall
@@ -37,6 +37,7 @@
     ../modules/tools/imagemagic
     ../modules/tools/jq
     ../modules/tools/kubernetes
+    ../modules/tools/lf
     ../modules/tools/make
     ../modules/tools/navi
     ../modules/tools/parallel
@@ -91,5 +92,5 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 }
