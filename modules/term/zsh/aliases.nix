@@ -24,6 +24,7 @@
   dots = "cd ~/.dotfiles";
   ide = ". ~/.dotfiles/bin/ide.sh";
   mp = "multipass";
+  ta = "tmux a -t";
 
   ## cp
   cp = "cp -i";

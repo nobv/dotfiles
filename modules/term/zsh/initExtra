@@ -10,7 +10,7 @@ export DOTFILES=$HOME/.dotfiles
 export DOOM=$DOTFILES/modules/editor/emacs/.doom.d/doom-emacs/bin
 export ZSH=$DOTFILES/modules/term/zsh/bin
 ## https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1030877541
-export NIX=$HOME/.nix-profile/bin:/run/current-system/sw/bin
+export NIX=$HOME/.nix-profile/bin:/run/current-system/sw/bin:/etc/profiles/per-user/$USER/bin
 export PATH=$DOTFILES/bin:$DOOM:$ZSH:$NIX:$PATH
 
 
