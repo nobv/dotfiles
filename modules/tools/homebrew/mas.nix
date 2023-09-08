@@ -15,6 +15,7 @@
     "The Unarchiver" = 425424353;
     "Things 3" = 904280696;
     "Toggl Track" = 1291898086;
+    "Xcode" = 497799835;
     "iThoughtsX" = 720669838;
     "辞書 by 物書堂" = 1380563956;
     # "Disk Diag" = 672206759;

@@ -9,6 +9,7 @@
 
     casks = [
       "1password"
+      "alfred"
       "clickup"
       "dbeaver-community"
       "discord"
@@ -41,7 +42,6 @@
       "zappy"
       "zoom"
       "zotero"
-      # "alfred"
       # "asana"
       # "fluid"
       # "gyazo"
