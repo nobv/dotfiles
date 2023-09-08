@@ -25,3 +25,8 @@ modules/editor/emacs/.spacemacs.d/configs/*
 ## misc
 bin/rust-analyzer
 conda.yaml
+.log
+
+
+## flakes
+result

@@ -5,7 +5,7 @@ export PATH=$DOTFILES/bin:$DOOM:$PATH
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export TERM="xterm-256color"
-
+export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels:$NIX_PATH
 # zsh
 typeset -U fpath
 fpath=($DOTFILES/.zsh/completions $fpath)

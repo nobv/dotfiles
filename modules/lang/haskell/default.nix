@@ -1,6 +1,5 @@
 { config, pkgs, lib, ... }:
 let
-  unstable = import <nixpkgs-unstable> { };
   stable = import <nixpkgs-stable> { };
 in
 {
@@ -9,10 +8,9 @@ in
     # file = { };
 
     packages = with pkgs; [
-      haskell.compiler.ghc922
-      haskellPackages.haskell-language-server
-      haskellPackages.dhall-lsp-server
-      haskellPackages.stack
+      haskell.compiler.ghc94
+      haskell-language-server
+      stack
     ];
   };
 

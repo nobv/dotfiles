@@ -7,6 +7,8 @@
       kubectx
       kustomize
       stern
+      sonobuoy
+      kube-capacity
     ];
   };
 }

@@ -114,6 +114,7 @@ This function should only modify configuration layer settings."
                markdown-live-preview-engine 'vmd)
      protobuf
      (purescript :variables
+                 purescript-fmt-tool 'purs-tidy
                  purescript-backend 'lsp)
      (python :variables
              python-backend 'lsp
@@ -195,7 +196,8 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(
+                                    evil-ediff )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.

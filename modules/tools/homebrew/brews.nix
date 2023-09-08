@@ -4,6 +4,8 @@
       "homebrew/core"
     ];
 
-    brews = [ ];
+    brews = [
+      "tidy-html5"
+    ];
   };
 }

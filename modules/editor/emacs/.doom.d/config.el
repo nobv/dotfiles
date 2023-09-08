@@ -8,6 +8,11 @@
 ;; (setq doom-theme 'spacemacs-dark)
 ;; Theme:2 ends here
 
+;; [[file:doom.org::*Line numbers][Line numbers:1]]
+(setq display-line-numbers-type 'relative)
+;; (setq doom-theme 'spacemacs-dark)
+;; Line numbers:1 ends here
+
 ;; [[file:doom.org::*anaconda][anaconda:1]]
 (setq conda-env-home-directory (expand-file-name "~/.anyenv/envs/pyenv/versions/anaconda3-2021.05"))
 (setq conda-anaconda-home (expand-file-name "~/.anyenv/envs/pyenv/versions/anaconda3-2021.05"))

@@ -1,5 +1,6 @@
 #compdef _init init
 
 function _init() {
-  _arguments -C "1: :(purs)"
+  cmds=( ${(uf)"$(< ${DOTFILES}/modules/term/zsh/completions/init_completions)"} )
+  _values '_' $cmds
 }
