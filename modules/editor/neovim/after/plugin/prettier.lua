@@ -22,9 +22,6 @@ prettier.setup({
   cli_options = {
     -- https://prettier.io/docs/en/cli.html#--config-precedence
     config_precedence = "prefer-file", -- or "cli-override" or "file-override"
-    --
-    max_line_length = 80,              -- default
-    tab_width = 2,                     --default
-    semi = true                        -- default
+    -- I can set Prettire's options if needed. see: https://prettier.io/docs/en/options.html
   },
 })
