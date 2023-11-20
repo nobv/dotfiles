@@ -11,10 +11,10 @@
   ## procs (instead of ps)
   ps = "procs";
 
-  ## exa (instead of ls)
-  l = "exa --git --icons -a";
-  ll = "exa --long --header --git --icons -a";
-  ls = "exa";
+  # eza (instead of ls)
+  l = "eza --git --icons -a";
+  ll = "eza --classify --long --header --git --icons -a";
+  ls = "eza";
 
   ## }}}
 

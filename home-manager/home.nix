@@ -11,22 +11,22 @@
     ../modules/lang/c
     ../modules/lang/dhall
     ../modules/lang/go
-    ../modules/lang/haskell
+    # ../modules/lang/haskell
     ../modules/lang/javascript
     ../modules/lang/lua
     ../modules/lang/nix
     ../modules/lang/protobuf
-    ../modules/lang/purescript
+    # ../modules/lang/purescript
     ../modules/lang/python
     ../modules/lang/rust
     ../modules/lang/shellscript
     ../modules/term/starship
     ../modules/term/zsh
-    ../modules/tools/aws
+    # ../modules/tools/aws
     ../modules/tools/bat
     ../modules/tools/direnv
     ../modules/tools/docker
-    ../modules/tools/exa
+    ../modules/tools/eza
     ../modules/tools/fd
     ../modules/tools/fzf
     ../modules/tools/gcp
@@ -78,6 +78,7 @@
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "vscode"
         # "obsidian"
+        "terraform"
       ];
       allowUnsupportedSystem = true;
       # allowBroken = true;

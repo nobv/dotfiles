@@ -16,7 +16,7 @@
           owner = "lmburns";
           repo = "lf.nvim";
           rev = "master";
-          hash = "sha256-Zl9eIzNNklPAyQbS1jPavRvZ1NVmCTxw0R0so67wapM=";
+          hash = "sha256-ys3kgXtgaE5OGyNYZ2PuqM9FDGjxfIjRgXBUDBVIjUM=";
         };
       };
 
@@ -38,7 +38,7 @@
     nvim-lspconfig # https://github.com/neovim/nvim-lspconfig/
     mason-nvim # https://github.com/williamboman/mason.nvim/
     mason-lspconfig-nvim # https://github.com/williamboman/mason-lspconfig.nvim
-    lspsaga-nvim-original # https://github.com/nvimdev/lspsaga.nvim/
+    lspsaga-nvim # https://github.com/nvimdev/lspsaga.nvim/
 
     nvim-cmp # https://github.com/hrsh7th/nvim-cmp/
     cmp-nvim-lsp # https://github.com/hrsh7th/cmp-nvim-lsp
