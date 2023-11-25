@@ -59,3 +59,6 @@ opt.backup = false
 opt.writebackup = false
 
 opt.updatetime = 300
+
+-- noswapfile
+opt.swapfile = false
