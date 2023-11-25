@@ -33,6 +33,7 @@
     vim-nix # https://github.com/LnL7/vim-nix
     purescript-vim # https://github.com/purescript-contrib/purescript-vim
     dhall-vim # https://github.com/vmchale/dhall-vim
+    neodev-nvim # https://github.com/folke/neodev.nvim
 
     ## LSP 
     nvim-lspconfig # https://github.com/neovim/nvim-lspconfig/
