@@ -74,6 +74,7 @@
     # Editing
     twilight-nvim # https://github.com/folke/twilight.nvim
     comment-nvim # https://github.com/numToStr/Comment.nvim
+    nvim-ts-context-commentstring # https://github.com/joosepalviste/nvim-ts-context-commentstring/
     nvim-autopairs # https://github.com/windwp/nvim-autopairs/
     nvim-ts-autotag # https://github.com/windwp/nvim-ts-autotag
 
