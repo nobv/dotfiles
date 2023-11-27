@@ -6,6 +6,7 @@ end
 
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
+local code_actions = null_ls.builtins.code_actions
 
 local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
 local event = "BufWritePre" -- or "BufWritePost"
@@ -57,7 +58,9 @@ null_ls.setup({
     -- "markdown.mdx",
     -- "graphql",
     -- "handlebars"
-    formatting.prettier
+    formatting.prettier,
+    diagnostics.eslint,
+    code_actions.eslint
   },
 
 })

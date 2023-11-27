@@ -49,7 +49,7 @@ opt.splitbelow = true
 opt.iskeyword:append("-")
 
 -- fold
-opt.foldmethod = "indent"
+-- opt.foldmethod = "indent"
 
 -- fonts
 opt.guifont = { "Hasklig", ":h16" }

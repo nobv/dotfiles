@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
-
+let
+  stable = import <nixpkgs-stable> { };
+  stablePkgs = with stable.vimPlugins; [ ];
+in
 {
   vimPlugins = with pkgs.vimPlugins; [
     # Tools
@@ -28,6 +31,7 @@
     plenary-nvim # https://github.com/nvim-lua/plenary.nvim
     neogit # https://github.com/TimUntersberger/neogit
     undotree # https://github.com/mbbill/undotree
+    lazygit-nvim # https://github.com/kdheepak/lazygit.nvim/
 
     # Languages
     vim-nix # https://github.com/LnL7/vim-nix
@@ -60,11 +64,17 @@
     }
     # fidget-nvim # https://github.com/j-hui/fidget.nvim/
 
+    # Dap
+    nvim-dap # https://github.com/mfussenegger/nvim-dap/
+    nvim-dap-ui # https://github.com/rcarriga/nvim-dap-ui/
+    nvim-dap-python # https://github.com/mfussenegger/nvim-dap-python/
+
+
     # UI
     dracula-nvim # https://github.com/Mofiqul/dracula.nvim/
     lualine-nvim # https://github.com/nvim-lualine/lualine.nvim
     nvim-web-devicons # https://github.com/nvim-tree/nvim-web-devicons/
-    nvim-colorizer-lua # https://github.com/norcalli/nvim-colorizer.lua
+    nvim-colorizer-lua # https://github.com/nvchad/nvim-colorizer.lua/
     indent-blankline-nvim # https://github.com/lukas-reineke/indent-blankline.nvim
 
     # see: https://nixos.org/manual/nixpkgs/unstable/#vim:~:text=for%20some%20plugins-,Treesitter,-By%20default
@@ -106,5 +116,5 @@
     # Other
     vim-tmux-navigator # https://github.com/christoomey/vim-tmux-navigator/
     # copilot-vim # https://github.com/github/copilot.vim/
-  ];
+  ] ++ stablePkgs;
 }
