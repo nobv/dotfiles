@@ -22,7 +22,7 @@
 *** Fonts
 #+begin_src emacs-lisp :tangle config.el
 (setq
- doom-font (font-spec :family "Hasklig" :size 14))
+ doom-font (font-spec :family "Hasklig" :size 16))
 #+end_src
 *** Theme
 #+begin_src emacs-lisp :tangle packages.el
@@ -35,7 +35,7 @@
 #+end_src
 *** Line numbers
 #+begin_src emacs-lisp :tangle config.el
-(setq display-line-numbers-type 'relative)
+;; (setq display-line-numbers-type 'relative)
 ;; (setq doom-theme 'spacemacs-dark)
 #+end_src
 

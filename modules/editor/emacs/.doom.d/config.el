@@ -1,6 +1,6 @@
 ;; [[file:doom.org::*Fonts][Fonts:1]]
 (setq
- doom-font (font-spec :family "Hasklig" :size 14))
+ doom-font (font-spec :family "Hasklig" :size 16))
 ;; Fonts:1 ends here
 
 ;; [[file:doom.org::*Theme][Theme:2]]
@@ -9,7 +9,7 @@
 ;; Theme:2 ends here
 
 ;; [[file:doom.org::*Line numbers][Line numbers:1]]
-(setq display-line-numbers-type 'relative)
+;; (setq display-line-numbers-type 'relative)
 ;; (setq doom-theme 'spacemacs-dark)
 ;; Line numbers:1 ends here
 
