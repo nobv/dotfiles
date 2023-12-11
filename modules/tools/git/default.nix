@@ -9,6 +9,7 @@ in
   home.packages = with pkgs; [
     ghq
     tig
+    lazygit
   ];
 
   programs = {
