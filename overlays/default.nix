@@ -31,55 +31,6 @@ self: super: {
         };
       };
 
-  Morgen = self.installApplication
-    rec {
-      name = "Morgen";
-      version = "3.0.0";
-      sourceRoot = "Morgen.app";
-      src = super.fetchurl {
-        name = "Morgen ${version}-arm64.dmg";
-        url = "https://dl.todesktop.com/210203cqcj00tw1/mac/dmg/arm64";
-        sha256 = "sha256-FzKDISB5/zyFmTd3CVcZoWvHUQEidXRkWrRos6bbpq0=";
-      };
-      description = ''
-        Make the most out of your time
-      '';
-      homepage = "https://morgen.so";
-    };
-
-  # HTTPie = self.installApplication
-  #   rec {
-  #     name = "HTTPie";
-  #     version = "2023.1.0";
-  #     sourceRoot = "HTTPie.app";
-  #     src = super.fetchurl {
-  #       name = "HTTPie-${version}-arm64.dmg";
-  #       url = "https://github.com/httpie/desktop/releases/download/v${version}/HTTPie-${version}-arm64.dmg";
-  #       sha256 = "sha256-dYXWnOf72RLoD4AY1EAVZ7231j59zHjlFab9tmKS1Mk=";
-  #     };
-  #     description = ''
-  #       HTTPIE WEB & DESKTOP APP
-  #     '';
-  #     homepage = "https://httpie.io/product";
-  #   };
-  #
-  # ClickUp = self.installApplication
-  #   rec {
-  #     name = "ClickUp";
-  #     version = "3.2.8";
-  #     sourceRoot = "ClickUp.app";
-  #     src = super.fetchurl {
-  #       name = "ClickUp ${version}-arm64.dmg";
-  #       url = "https://desktop.clickup.com/mac/dmg/arm64";
-  #       sha256 = "sha256-0/lBxTYNl3Yfxgcm/f7zEfZUeW7TZFBaddmqpsHrKvs=";
-  #     };
-  #     description = ''
-  #       One app to replace them all.
-  #       All of your work in one place: Tasks, Docs, Chat, Goals, & more.
-  #     '';
-  #     homepage = "https://clickup.com/";
-  #   };
-
   # JupyterLab = self.installApplication
   #   rec {
   #     name = "JupyterLab";
@@ -96,53 +47,7 @@ self: super: {
   #     homepage = "https://github.com/jupyterlab/jupyterlab-desktop";
   #   };
 
-  #Spark =
-  #  let
-  #    currentVersion = {
-  #      major = "3";
-  #      minor = "3";
-  #      patch = "3";
-  #      build = "42968";
-  #    };
 
-  #    semanticVerion = with currentVersion; "${major}.${minor}.${patch}";
-  #    currentVersionStr = with currentVersion; "${major}.${minor}.${patch}.${build}";
-  #  in
-  #  self.installApplication
-  #    rec {
-  #      name = "Spark Desktop";
-  #      version = currentVersionStr;
-  #      sourceRoot = "Spark Desktop.app";
-  #      src = super.fetchurl {
-  #        name = "Spark Desktop ${semanticVerion}-universal.dmg";
-  #        url = "https://downloads.sparkmailapp.com/Spark3/mac/dist/${version}/Spark.dmg";
-  #        sha256 = "sha256-DUYSqQhwXR0tMbHQXf6GOrl+7Hs3PGciYId8SdltV2Y=";
-  #      };
-  #      description = ''
-  #        Smart. Focused. Email.
-  #        Fast, cross-platform email designed to filter out the noise - so you can focus on what's important.
-  #      '';
-  #      homepage = "https://sparkmailapp.com/";
-  #    };
-
-  # Rize = self.installApplication
-  #   rec {
-  #     name = "Rize";
-  #     version = "0.18.15";
-  #     sourceRoot = "Rize.app";
-  #     src = super.fetchurl {
-  #       name = "rize-${version}-arm64.dmg";
-  #       url = "https://app.rize.io/downloads/macos?arch=arm64&pid=rJUE1wFg8AzpZuarzCAFRZp7";
-  #       sha256 = "sha256-GrL6OlwFfA/ZkrTxNooVQ5oyYauEQqQEHA05Vp+DNb4=";
-  #     };
-  #     description = ''
-  #       Maximize Your Productivity
-  #       Rize is a smart time tracker that improves your focus and helps you build better work habits.
-  #     '';
-  #     homepage = "https://rize.io/";
-  #
-  #   };
-  #
   ThingsHelper = self.installApplication
     rec{
       name = "ThingsHelper";
