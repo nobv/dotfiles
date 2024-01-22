@@ -1,18 +1,9 @@
-{ lib, system, ... }:
-let
-  pkgs = import <nixpkgs> {
-    # inherit system;
-    config = {
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "webstorm"
-        "rust-rover"
-      ];
-    };
+{ pkgs, ... }: {
+  homebrew = {
+    casks = [
+      "webstorm"
+      "rustrover"
+      "pycharm"
+    ];
   };
-in
-{
-  home.packages = with pkgs.jetbrains; [
-    webstorm
-    rust-rover
-  ];
 }

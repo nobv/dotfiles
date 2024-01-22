@@ -3,6 +3,7 @@
 {
   imports = [
     <home-manager/nix-darwin>
+    ../modules/app/jetbrains
     ../modules/tools/homebrew
   ];
 
@@ -10,12 +11,6 @@
   # $ nix-env -qaP | grep wget
   environment = {
     systemPackages = with pkgs; [
-      Morgen
-      # HTTPie
-      # ClickUp
-      # JupyterLab
-      # Spark
-      # Rize
       ThingsHelper
     ];
 
@@ -69,7 +64,7 @@
     defaults = {
       dock = {
         autohide = true;
-        orientation = "left";
+        orientation = "bottom";
       };
 
       trackpad = { Clicking = true; };
@@ -88,7 +83,13 @@
       enableKeyMapping = true;
       remapCapsLockToControl = true;
     };
+
   };
+
+  security = {
+    pam.enableSudoTouchIdAuth = true;
+  };
+
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
