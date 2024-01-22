@@ -75,11 +75,7 @@
 
   nixpkgs = {
     config = {
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "vscode"
-        # "obsidian"
-        "terraform"
-      ];
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
       allowUnsupportedSystem = true;
       # allowBroken = true;
     };
