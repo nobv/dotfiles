@@ -1,11 +1,7 @@
 { pkgs, ... }: {
   homebrew = {
-    taps = [
-      "homebrew/core"
-    ];
+    taps = [ ];
 
-    brews = [
-      "tidy-html5"
-    ];
+    brews = [ ];
   };
 }

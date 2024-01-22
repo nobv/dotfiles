@@ -1,15 +1,14 @@
 { pkgs, ... }: {
   homebrew = {
     taps = [
-      "homebrew/cask"
       "homebrew/cask-drivers"
       "homebrew/cask-fonts"
-      # "railwaycat/emacsmacport"
     ];
 
     casks = [
       "1password"
       "alfred"
+      "arc"
       "dbeaver-community"
       "discord"
       "docker"
@@ -30,6 +29,7 @@
       "logseq"
       "morgen"
       "multipass"
+      "notion"
       "obsidian"
       "postman"
       "raycast"
@@ -51,9 +51,5 @@
       # "notion"
       # "rambox"
     ];
-
-    # extraConfig = ''
-    #   brew "emacs-mac", args:["with-modules"], link: true
-    # '';
   };
 }

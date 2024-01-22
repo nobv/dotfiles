@@ -4,6 +4,8 @@
     "DaisyDisk" = 411643860;
     "Day One" = 1055511498;
     "Evernote" = 406056744;
+    "Fantastical" = 975937182;
+    "Goodnotes 6" = 1444383602;
     "Kindle" = 405399194;
     "LINE" = 539883307;
     "Magnet" = 441258766;
@@ -18,13 +20,5 @@
     "Xcode" = 497799835;
     "iThoughtsX" = 720669838;
     "辞書 by 物書堂" = 1380563956;
-    # "Be Focused Pro - Focus Timer" = 961632517;
-    # "Disk Diag" = 672206759;
-    # "Endel" = 1484348796;
-    # "Highlights" = 1498912833;
-    # "LiquidText" = 922765270;
-    # "Noted." = 1446580517;
-    # "Spark" = 1176895641;
-    # "Toggl Track" = 1291898086;
   };
 }
