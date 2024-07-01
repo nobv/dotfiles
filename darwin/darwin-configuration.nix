@@ -11,7 +11,7 @@
   # $ nix-env -qaP | grep wget
   environment = {
     systemPackages = with pkgs; [
-      ThingsHelper
+      # ThingsHelper
     ];
 
     # TODO:
@@ -64,7 +64,7 @@
     defaults = {
       dock = {
         autohide = true;
-        orientation = "bottom";
+        orientation = "left";
       };
 
       trackpad = { Clicking = true; };
