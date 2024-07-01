@@ -48,17 +48,17 @@ self: super: {
   #   };
 
 
-  ThingsHelper = self.installApplication
-    rec{
-      name = "ThingsHelper";
-      version = "3.33";
-      sourceRoot = "ThingsMacSandboxHelper.app";
-      src = super.fetchurl {
-        name = "ThingsHelper.zip";
-        url = "https://static.culturedcode.com/things/thingssandboxhelper/${version}/ThingsHelper.zip";
-        sha256 = "sha256-LdxQkbIWqJ+d96KLpLAp4qafGILjRhrpnjGyti7xndw=";
-      };
-      description = "";
-      homepage = "https://culturedcode.com/things/mac/help/things-sandboxing-helper-things3/";
-    };
+  # ThingsHelper = self.installApplication
+  #   rec{
+  #     name = "ThingsHelper";
+  #     version = "3.39";
+  #     sourceRoot = "ThingsMacSandboxHelper.app";
+  #     src = super.fetchurl {
+  #       name = "ThingsHelper.zip";
+  #       url = "https://static.culturedcode.com/things/thingssandboxhelper/${version}/ThingsHelper.zip";
+  #       sha256 = "sha256-LdxQkbIWqJ+d96KLpLAp4qafGILjRhrpnjGyti7xndw=";
+  #     };
+  #     description = "";
+  #     homepage = "https://culturedcode.com/things/mac/help/things-sandboxing-helper-things3/";
+  #   };
 }
