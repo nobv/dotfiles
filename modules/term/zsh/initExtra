@@ -1,5 +1,8 @@
 # Extra commands that should be added to .zshrc. 
 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # history
 setopt hist_ignore_all_dups
 setopt auto_pushd
@@ -11,7 +14,8 @@ export DOOM=$DOTFILES/modules/editor/emacs/.doom.d/doom-emacs/bin
 export ZSH=$DOTFILES/modules/term/zsh/bin
 ## https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1030877541
 export NIX=$HOME/.nix-profile/bin:/run/current-system/sw/bin:/etc/profiles/per-user/$USER/bin
-export PATH=$DOTFILES/bin:$DOOM:$ZSH:$NIX:$PATH
+export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels
+export PATH=$HOME/.cargo/bin:/usr/local/bin:$DOTFILES/bin:$DOOM:$ZSH:$NIX:$PATH
 
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True

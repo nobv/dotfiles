@@ -5,6 +5,10 @@
     nodejs
     nodePackages.prettier
 
+    # Package managers
     yarn
+    volta
+
+    nest-cli
   ];
 }

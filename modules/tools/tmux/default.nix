@@ -3,15 +3,15 @@
 {
   programs = {
     tmux = {
-      package = pkgs.tmux.overrideAttrs (_: rec {
-        version = "3.3";
-        src = pkgs.fetchFromGitHub {
-          owner = "tmux";
-          repo = "tmux";
-          rev = version;
-          sha256 = "sha256-Sxj2vXkbbPNRrqJKeIYwI7xdBtwRbl6a6a3yZr7UWW0=";
-        };
-      });
+      #package = pkgs.tmux.overrideAttrs (_: rec {
+      #  version = "3.3";
+      #  src = pkgs.fetchFromGitHub {
+      #    owner = "tmux";
+      #    repo = "tmux";
+      #    rev = version;
+      #    sha256 = "sha256-Sxj2vXkbbPNRrqJKeIYwI7xdBtwRbl6a6a3yZr7UWW0=";
+      #  };
+      #});
       enable = true;
       baseIndex = 1;
       customPaneNavigationAndResize = true;
