@@ -12,10 +12,11 @@ setopt pushd_ignore_dups
 export DOTFILES=$HOME/.dotfiles
 export DOOM=$DOTFILES/modules/editor/emacs/.doom.d/doom-emacs/bin
 export ZSH=$DOTFILES/modules/term/zsh/bin
+export NPM_PACKAGES=$HOME/.npm-packages/bin
 ## https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1030877541
 export NIX=$HOME/.nix-profile/bin:/run/current-system/sw/bin:/etc/profiles/per-user/$USER/bin
 export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels
-export PATH=$HOME/.cargo/bin:/usr/local/bin:$DOTFILES/bin:$DOOM:$ZSH:$NIX:$PATH
+export PATH=$HOME/.cargo/bin:/usr/local/bin:$DOTFILES/bin:$DOOM:$ZSH:$NIX:$NPM_PACKAGES:$PATH
 
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
