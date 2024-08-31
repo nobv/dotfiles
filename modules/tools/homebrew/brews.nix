@@ -2,6 +2,9 @@
   homebrew = {
     taps = [ ];
 
-    brews = [ ];
+    brews = [
+      "mdbook"
+      "pre-commit"
+    ];
   };
 }
