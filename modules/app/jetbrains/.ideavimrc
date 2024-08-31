@@ -47,6 +47,9 @@ map <leader>w <Plug>(easymotion-bd-w)  " word
 map <leader>s <Plug>(easymotion-bd-f2) " search
 map <leader>l <Plug>(easymotion-bd-jk) " line
 
+" vim-surround
+set surround
+
 
 " Window
 nmap <C-h> <C-w>h
