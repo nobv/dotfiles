@@ -23,6 +23,7 @@
     ../modules/term/starship
     ../modules/term/zsh
     # ../modules/tools/aws
+    ../modules/tools/aerospace
     ../modules/tools/bat
     ../modules/tools/direnv
     ../modules/tools/docker

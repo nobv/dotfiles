@@ -3,10 +3,12 @@
     taps = [
       "homebrew/cask-fonts"
       # "homebrew/cask"
+      "nikitabobko/tap"
     ];
 
     casks = [
       "1password"
+      "aerospace"
       "alfred"
       "anki"
       "appcleaner"
