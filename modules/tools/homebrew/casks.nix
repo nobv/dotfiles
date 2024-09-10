@@ -50,6 +50,7 @@
       "spotify"
       "utm"
       "visual-studio-code"
+      "wezterm"
       "wireshark"
       "workflowy"
       "zappy"
