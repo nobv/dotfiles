@@ -17,7 +17,7 @@
     ../modules/lang/nix
     ../modules/lang/protobuf
     # ../modules/lang/purescript
-    ../modules/lang/python
+    #../modules/lang/python
     ../modules/lang/rust
     ../modules/lang/shellscript
     ../modules/term/starship
