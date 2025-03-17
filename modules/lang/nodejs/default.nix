@@ -4,13 +4,17 @@
   home =
     {
       packages = with pkgs; [
-        nodejs
-        nodePackages.prettier
-
+        # Runtime
+        # nodejs_22
+        # nodejs_23
+        # nodePackages.prettier
+        # nodePackages.node-gyp
         # Package managers
-        yarn
+        # yarn
+        node-gyp
         volta
-        corepack
+        # corepack
+        # pnpm
 
         nest-cli
       ];

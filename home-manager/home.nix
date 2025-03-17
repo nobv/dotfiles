@@ -12,7 +12,8 @@
     ../modules/lang/dhall
     ../modules/lang/go
     # ../modules/lang/haskell
-    ../modules/lang/javascript
+    ../modules/lang/nodejs
+    ../modules/lang/deno
     ../modules/lang/lua
     ../modules/lang/nix
     ../modules/lang/protobuf
