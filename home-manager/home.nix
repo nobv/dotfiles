@@ -29,6 +29,7 @@
     ../modules/tools/docker
     ../modules/tools/eza
     ../modules/tools/fd
+    ../modules/tools/ffmpeg
     ../modules/tools/fzf
     ../modules/tools/gcp
     ../modules/tools/git
