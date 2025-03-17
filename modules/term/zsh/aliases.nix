@@ -41,7 +41,15 @@
 
   ##  docker {{{
   d = "docker";
-  dprune = "docker system prune --all --volumes --force && docker builder prune --all --force";
+  dprune = ''
+    docker ps -a -q | xargs -r docker stop && \
+    docker ps -a -q | xargs -r docker rm && \
+    docker images -a -q | xargs -r docker rmi -f && \
+    docker volume ls -q | xargs -r docker volume rm && \
+    docker network ls -q -f type=custom | xargs -r docker network rm && \
+    docker builder prune --all --force && \
+    docker system prune --all --volumes --force
+  '';
   ## }}}
 
   ##  kubernetes {{{

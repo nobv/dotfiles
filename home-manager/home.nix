@@ -53,8 +53,8 @@
     ../modules/tools/tmux
     ../modules/tools/tree
     ../modules/tools/trivy
-    ../modules/tools/yt-dlp
     ../modules/tools/wezterm
+    ../modules/tools/yt-dlp
     ../modules/tools/zotfile
   ];
 

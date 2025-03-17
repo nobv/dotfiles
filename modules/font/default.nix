@@ -6,14 +6,10 @@
     # https://github.com/NixOS/nixpkgs/pull/135938
     # hasklig
     jetbrains-mono
-    (nerdfonts.override {
-      fonts = [
-        "SourceCodePro"
-        "Hack"
-        "Hasklig"
-        "FiraCode"
-      ];
-    })
+    nerd-fonts.sauce-code-pro
+    nerd-fonts.hack
+    nerd-fonts.hasklug
+    nerd-fonts.fira-code
   ];
   #fonts = { fontconfig = { enable = true; }; };
 }

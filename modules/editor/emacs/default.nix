@@ -6,7 +6,7 @@
 
   home = {
     packages = with pkgs; [
-      emacs28Packages.lsp-pyright
+      # emacs28Packages.lsp-pyright
     ];
 
     file = {
