@@ -49,7 +49,7 @@
   # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
 
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  # services.nix-daemon.enable = true;
   # nix.package = pkgs.nix;
 
   # Create /etc/bashrc that loads the nix-darwin environment.
@@ -86,14 +86,14 @@
 
   };
 
-  security = {
-    pam.enableSudoTouchIdAuth = true;
-  };
-
+  # security = {
+  #   pam.enableSudoTouchIdAuth = true;
+  # };
+  #
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  system.stateVersion = 5;
 
 }
 
