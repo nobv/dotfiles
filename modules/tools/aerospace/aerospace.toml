@@ -12,7 +12,7 @@ after-login-command = []
 after-startup-command = []
 
 # Start AeroSpace at login
-start-at-login = true
+start-at-login = false
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -50,12 +50,12 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 5
-inner.vertical =   5
-outer.left =       5
-outer.bottom =     5
-outer.top =        5
-outer.right =      5
+inner.horizontal = 10
+inner.vertical =   10
+outer.left =       10
+outer.bottom =     10
+outer.top =        10
+outer.right =      10
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -173,10 +173,17 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
+[[on-window-detected]]
+if.app-id = 'com.flexibits.fantastical2.mac'
+run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
-if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace T'
+if.app-id = 'com.culturedcode.ThingsMac'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.reminders'
+run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
@@ -188,6 +195,10 @@ run = 'move-node-to-workspace C'
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace C'
+
+[[on-window-detected]]
+if.app-id = 'jp.naver.line.mac'
 run = 'move-node-to-workspace C'
 
 [[on-window-detected]]
@@ -209,3 +220,19 @@ run = 'move-node-to-workspace R'
 [[on-window-detected]]
 if.app-id = 'com.amazon.Lassen'
 run = 'move-node-to-workspace R'
+
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace T'
+
+[[on-window-detected]]
+if.app-id = 'ai.perplexity.mac'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.1password.1password'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.agiletortoise.Drafts-OSX'
+run = 'layout floating'
