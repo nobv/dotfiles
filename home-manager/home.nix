@@ -37,6 +37,7 @@
     ../modules/tools/httpie
     ../modules/tools/imagemagic
     ../modules/tools/jq
+    ../modules/tools/k6
     ../modules/tools/kubernetes
     ../modules/tools/lf
     ../modules/tools/make
