@@ -42,14 +42,23 @@
               $DRY_RUN_CMD ${pkgs.nodejs}/bin/npm config set prefix "$NPM_GLOBAL_DIR"
             fi
         '';
-        installAdminJSCli = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        # installAdminJSCli = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+        #   HOME_DIR="$HOME"
+        #   NPM_GLOBAL_DIR="$HOME_DIR/.npm-packages"
+        #   if [ ! -f "$NPM_GLOBAL_DIR/bin/adminjs" ]; then
+        #     run echo "Installing AdminJS CLI..."
+        #     $DRY_RUN_CMD ${pkgs.nodejs}/bin/npm install -g @adminjs/cli
+        #   fi
+        # '';
+        installClaude-code = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           HOME_DIR="$HOME"
           NPM_GLOBAL_DIR="$HOME_DIR/.npm-packages"
-          if [ ! -f "$NPM_GLOBAL_DIR/bin/adminjs" ]; then
-            run echo "Installing AdminJS CLI..."
-            $DRY_RUN_CMD ${pkgs.nodejs}/bin/npm install -g @adminjs/cli
+          if [ ! -f "$NPM_GLOBAL_DIR/bin/claude" ]; then
+            run echo "Installing @anthropic-ai/claude-code..."
+            $DRY_RUN_CMD $HOME_DIR/.volta/bin/npm install -g @anthropic-ai/claude-code
           fi
         '';
+
       };
 
     };
