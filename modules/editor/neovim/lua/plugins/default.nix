@@ -12,18 +12,7 @@ in
     vim-easymotion # https://github.com/easymotion/vim-easymotion/
     nvim-tree-lua # https://github.com/nvim-tree/nvim-tree.lua
     which-key-nvim # https://github.com/folke/which-key.nvim
-    {
-      plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
-        name = "lf-nvim";
-        src = pkgs.fetchFromGitHub {
-          owner = "lmburns";
-          repo = "lf.nvim";
-          rev = "master";
-          hash = "sha256-ys3kgXtgaE5OGyNYZ2PuqM9FDGjxfIjRgXBUDBVIjUM=";
-        };
-      };
-
-    }
+    lf-vim # https://github.com/ptzz/lf.vim/
     toggleterm-nvim # https://github.com/akinsho/toggleterm.nvim/
 
     ##Git
@@ -54,7 +43,7 @@ in
     null-ls-nvim # https://github.com/jose-elias-alvarez/null-ls.nvim/
     lspkind-nvim # https://github.com/onsails/lspkind.nvim/
     {
-      plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
+      plugin = pkgs.vimUtils.buildVimPlugin {
         name = "fidget-nvim";
         src = pkgs.fetchurl {
           url = "https://github.com/j-hui/fidget.nvim/archive/refs/tags/legacy.tar.gz";
@@ -99,18 +88,18 @@ in
     neotest-rust # https://github.com/rouge8/neotest-rust/
     neotest-go # https://github.com/nvim-neotest/neotest-go/
     neotest-haskell # https://github.com/MrcJkb/neotest-haskell/
-    {
-      plugin = pkgs.vimUtils.buildVimPluginFrom2Nix {
-        name = "neotest-vim-test";
-        # https://github.com/nvim-neotest/neotest-vim-test
-        src = pkgs.fetchFromGitHub {
-          owner = "nvim-neotest";
-          repo = "neotest-vim-test";
-          rev = "master";
-          hash = "sha256-fFm5Yt2Sus5jLSapHUtLlDkBWPLLKfWsj2NSXD8NPYo=";
-        };
-      };
-    }
+    # {
+    #   plugin = pkgs.vimUtils.buildVimPlugin {
+    #     name = "neotest-vim-test";
+    #     # https://github.com/nvim-neotest/neotest-vim-test
+    #     src = pkgs.fetchFromGitHub {
+    #       owner = "nvim-neotest";
+    #       repo = "neotest-vim-test";
+    #       rev = "master";
+    #       hash = "sha256-fFm5Yt2Sus5jLSapHUtLlDkBWPLLKfWsj2NSXD8NPYo=";
+    #     };
+    #   };
+    # }
     vim-test # https://github.com/vim-test/vim-test/
 
     # Other
