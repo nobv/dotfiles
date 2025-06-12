@@ -15,7 +15,7 @@
     ];
 
     # TODO:
-    # darwinConfig = ~/.dotfiles/darwin/darwin-configuration.nix;
+    darwinConfig = ~/.dotfiles/darwin/darwin-configuration.nix;
   };
 
   home-manager = {
@@ -61,6 +61,7 @@
   # };
 
   system = {
+    primaryUser = "nobv";
     defaults = {
       dock = {
         autohide = true;
@@ -93,7 +94,7 @@
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 5;
+  system.stateVersion = 6;
 
 }
 
