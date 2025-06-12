@@ -50,6 +50,14 @@ map <leader>l <Plug>(easymotion-bd-jk) " line
 " vim-surround
 set surround
 
+" which-key
+set which-key
+
+" disable the timeout option
+set notimeout
+
+" increase the timeoutlen (default: 1000), don't add space around the equal sign
+set timeoutlen=5000
 
 " Window
 nmap <C-h> <C-w>h
