@@ -6,6 +6,14 @@ Uses the [Determinate Systems Nix installer](https://github.com/DeterminateSyste
 
 ## Quick Install
 
+One-liner installation:
+
+```bash
+bash -c "$(curl -L https://raw.githubusercontent.com/nobv/dotfiles/master/install)"
+```
+
+Or manual installation:
+
 ```bash
 git clone https://github.com/nobv/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
