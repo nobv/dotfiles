@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 {
   # Work machine-specific Darwin system configuration
@@ -29,7 +29,7 @@
   };
 
   system = {
-    primaryUser = "nobv";
+    primaryUser = "";
     defaults = {
       dock = {
         autohide = true;
@@ -58,5 +58,5 @@
     stateVersion = 6;
   };
 
-  users.users.nobv.home = "/Users/nobv";
+  users.users.${username}.home = "/Users/${username}";
 }

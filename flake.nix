@@ -19,7 +19,7 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-stable, darwin, home-manager }:
     let
       system = "aarch64-darwin";
-      username = "nobv";
+      username = builtins.getEnv "USER";
       
       pkgs = import nixpkgs {
         inherit system;

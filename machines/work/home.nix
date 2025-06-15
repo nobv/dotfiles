@@ -1,13 +1,13 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users.nobv = {
+    users.${username} = {
       home = {
-        username = "nobv";
-        homeDirectory = "/Users/nobv";
+        username = username;
+        homeDirectory = "/Users/${username}";
         stateVersion = "23.05";
       };
 
