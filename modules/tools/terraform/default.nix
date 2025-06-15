@@ -1,20 +1,20 @@
-{ lib, system, ... }:
+{ config, pkgs, lib, ... }:
+
+with lib;
+
 let
-  pkgs = import <nixpkgs> {
-    config = {
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "terraform"
-      ];
-    };
-  };
+  cfg = config.modules.tools.terraform;
 in
 {
-  home.packages = with pkgs;
-    [
+  options.modules.tools.terraform = {
+    enable = mkEnableOption "Terraform infrastructure as code";
+  };
+
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
       terraform
       terragrunt
       terraform-ls
     ];
-
-
+  };
 }

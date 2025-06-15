@@ -1,6 +1,18 @@
 { config, pkgs, lib, ... }:
+
+with lib;
+
+let
+  cfg = config.modules.tools.ffmpeg;
+in
 {
-  home.packages = with pkgs; [
-    ffmpeg
-  ];
+  options.modules.tools.ffmpeg = {
+    enable = mkEnableOption "FFmpeg multimedia framework";
+  };
+
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      ffmpeg
+    ];
+  };
 }
