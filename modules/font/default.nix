@@ -18,8 +18,6 @@ in
       nerd-fonts.hasklug
       nerd-fonts.fira-code
     ];
-    
-    fonts.fontconfig.enable = true;
   };
 }
 

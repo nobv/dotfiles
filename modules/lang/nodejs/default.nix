@@ -41,24 +41,6 @@ in
         prefix=~/.npm-packages
       '';
 
-      home.activation = {
-        setupNpmPackage = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          HOME_DIR="$HOME"
-          NPM_GLOBAL_DIR="$HOME_DIR/.npm-packages"
-            if [ ! -d "$NPM_GLOBAL_DIR" ]; then
-              $DRY_RUN_CMD mkdir -p "$NPM_GLOBAL_DIR"
-              $DRY_RUN_CMD ${pkgs.nodejs}/bin/npm config set prefix "$NPM_GLOBAL_DIR"
-            fi
-        '';
-        installClaude-code = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-          HOME_DIR="$HOME"
-          NPM_GLOBAL_DIR="$HOME_DIR/.npm-packages"
-          if [ ! -f "$NPM_GLOBAL_DIR/bin/claude" ]; then
-            run echo "Installing @anthropic-ai/claude-code..."
-            $DRY_RUN_CMD $HOME_DIR/.volta/bin/npm install -g @anthropic-ai/claude-code
-          fi
-        '';
-      };
     };
   };
 }

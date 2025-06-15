@@ -14,13 +14,14 @@ in
   config = mkIf cfg.enable {
     # https://github.com/NixOS/nixpkgs/blob/a0dbe47318/doc/languages-frameworks/python.section.md
     environment.systemPackages = with pkgs; [
+/*
       python310
       python310Packages.pytest
       python310Packages.isort
-      python310Packages.nose
       python310Packages.pyflakes
       python310Packages.mypy
       python310Packages.black
+*/
 
       # stable.python310Packages.jupyterlab
 
@@ -28,7 +29,7 @@ in
       # エラーが解消されたら unstable にしたい
       # unstable.python310Packages.black
       # stable.black
-      nodePackages.pyright
+#      pyright
 
       #   (ps:
       #     with ps; [
