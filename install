@@ -35,7 +35,23 @@ echo ""
 
 # Step 1: System Updates and Command Line Tools
 log_info "Installing Xcode Command Line Tools..."
-xcode-select --install 2>/dev/null || log_info "Xcode Command Line Tools already installed"
+if ! xcode-select -p 1>/dev/null 2>&1; then
+    log_info "Xcode Command Line Tools not found. Installing non-interactively..."
+    tmp_file=/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+    touch "$tmp_file"
+    
+    label=$(softwareupdate -l | grep -B 1 -E 'Command Line Tools' | awk -F: '/Label:/ {print $2}' | sed 's/^ *//' | tail -1)
+    if [[ -n "$label" ]]; then
+        log_info "Installing: $label"
+        softwareupdate -i "$label" --verbose
+    else
+        log_error "Could not find Command Line Tools in software updates"
+    fi
+    
+    rm -f "$tmp_file"
+else
+    log_info "Xcode Command Line Tools already installed"
+fi
 
 log_info "Updating macOS system..."
 sudo softwareupdate --install --all --install-rosetta --agree-to-license || log_info "Some system updates may have been skipped"
