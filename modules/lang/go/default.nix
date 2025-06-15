@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 with lib;
 
@@ -11,18 +11,19 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.go = {
-      enable = true;
-      # goPath = "src";
-    };
-
-    # https://github.com/NixOS/nixpkgs/blob/a0dbe47318/doc/languages-frameworks/go.section.md
-    home.packages = with pkgs; [
+    environment.systemPackages = with pkgs; [
+      go
       gopls
       delve
       golangci-lint
       protoc-gen-go
       protoc-gen-connect-go
     ];
+
+    # Go configuration should be in Home Manager context
+    home-manager.users.${username}.programs.go = {
+      enable = true;
+      # goPath = "src";
+    };
   };
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 with lib;
 
@@ -11,11 +11,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.emacs = {
+    home-manager.users.${username}.programs.emacs = {
       enable = true;
     };
 
-    home = {
+    home-manager.users.${username}.home = {
       packages = with pkgs; [
         # emacs28Packages.lsp-pyright
       ];

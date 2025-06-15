@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 with lib;
 
@@ -11,7 +11,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.file.".wezterm.lua" = {
+    home-manager.users.${username}.home.file.".wezterm.lua" = {
       source = ./wezterm.lua;
     };
   };

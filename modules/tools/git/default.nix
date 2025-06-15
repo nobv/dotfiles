@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 with lib;
 
@@ -13,13 +13,14 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    environment.systemPackages = with pkgs; [
       ghq
       tig
       lazygit
     ];
 
-    programs.git = {
+    # Git configuration should be in Home Manager context
+    home-manager.users.${username}.programs.git = {
       enable = true;
       aliases = aliases;
       extraConfig = extraConfig;
