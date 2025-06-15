@@ -1,6 +1,18 @@
 { config, pkgs, lib, ... }:
+
+with lib;
+
+let
+  cfg = config.modules.tools.make;
+in
 {
-  home.packages = with pkgs; [
-    cmake
-  ];
+  options.modules.tools.make = {
+    enable = mkEnableOption "CMake build system";
+  };
+
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      cmake
+    ];
+  };
 }

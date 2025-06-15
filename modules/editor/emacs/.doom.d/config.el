@@ -1,12 +1,17 @@
 ;; [[file:doom.org::*Fonts][Fonts:1]]
 (setq
- doom-font (font-spec :family "Hasklig" :size 14))
+ doom-font (font-spec :family "Hasklig" :size 16))
 ;; Fonts:1 ends here
 
 ;; [[file:doom.org::*Theme][Theme:2]]
 (setq doom-theme 'doom-dracula)
 ;; (setq doom-theme 'spacemacs-dark)
 ;; Theme:2 ends here
+
+;; [[file:doom.org::*Line numbers][Line numbers:1]]
+;; (setq display-line-numbers-type 'relative)
+;; (setq doom-theme 'spacemacs-dark)
+;; Line numbers:1 ends here
 
 ;; [[file:doom.org::*anaconda][anaconda:1]]
 (setq conda-env-home-directory (expand-file-name "~/.anyenv/envs/pyenv/versions/anaconda3-2021.05"))

@@ -19,6 +19,10 @@
     };
   };
 
+  battery = {
+    disabled = true;
+  };
+
   character = {
     error_symbol = "[✗](bold red) ";
     success_symbol = "[➜](bold green) ";

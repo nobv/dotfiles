@@ -1,13 +1,18 @@
 { config, lib, pkgs, ... }:
 
+with lib;
+
+let
+  cfg = config.modules.tools.procs;
+in
 {
-  home = {
+  options.modules.tools.procs = {
+    enable = mkEnableOption "procs process viewer";
+  };
 
-    # file = { };
-
-    packages = with pkgs; [
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
       procs
     ];
-
   };
 }

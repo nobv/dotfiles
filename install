@@ -1,0 +1,93 @@
+#!/bin/bash
+
+# One-liner installer for nobv's dotfiles
+# Usage: bash -c "$(curl -L https://raw.githubusercontent.com/nobv/dotfiles/master/install)"
+
+set -e
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+NC='\033[0m'
+
+log_info() {
+    echo -e "${BLUE}[INFO]${NC} $1"
+}
+
+log_success() {
+    echo -e "${GREEN}[SUCCESS]${NC} $1"
+}
+
+log_error() {
+    echo -e "${RED}[ERROR]${NC} $1"
+}
+
+# Check if we're on macOS
+if [[ "$(uname)" != "Darwin" ]]; then
+    log_error "This installer is only for macOS"
+    exit 1
+fi
+
+echo ""
+log_info "nobv's dotfiles installer"
+echo ""
+
+# Check if dotfiles already exist
+DOTFILES_DIR="$HOME/.dotfiles"
+if [[ -d "$DOTFILES_DIR" ]]; then
+    log_info "Dotfiles directory already exists at $DOTFILES_DIR"
+    cd "$DOTFILES_DIR"
+    git pull origin master || log_error "Failed to update existing dotfiles"
+else
+    log_info "Cloning dotfiles repository..."
+    git clone https://github.com/nobv/dotfiles.git "$DOTFILES_DIR"
+    cd "$DOTFILES_DIR"
+    log_success "Dotfiles cloned successfully"
+fi
+
+# Show available machine configurations
+echo ""
+log_info "Available machine configurations:"
+echo "  macbook - Development-focused setup (tmux, docker, python)"
+echo "  macmini - Desktop setup (emacs, lighter dev tools)"
+echo "  work    - Full development stack"
+echo ""
+
+# Prompt for machine configuration
+while true; do
+    read -p "Which machine configuration? [macbook/macmini/work]: " machine
+    case $machine in
+        macbook|macmini|work)
+            break
+            ;;
+        "")
+            log_error "Please specify a machine configuration"
+            ;;
+        *)
+            log_error "Invalid configuration. Choose from: macbook, macmini, work"
+            ;;
+    esac
+done
+
+# Ask about optional steps
+echo ""
+read -p "Skip system updates? [y/N]: " skip_system
+read -p "Skip Homebrew installation? [y/N]: " skip_homebrew
+
+# Build command arguments
+args="-m $machine"
+if [[ "$skip_system" =~ ^[Yy]$ ]]; then
+    args="$args --skip-system"
+fi
+if [[ "$skip_homebrew" =~ ^[Yy]$ ]]; then
+    args="$args --skip-homebrew"
+fi
+
+echo ""
+log_info "Running installer with configuration: $machine"
+log_info "Command: ./install.sh $args"
+echo ""
+
+# Execute the full installer
+exec ./install.sh $args

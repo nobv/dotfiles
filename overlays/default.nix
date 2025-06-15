@@ -31,35 +31,34 @@ self: super: {
         };
       };
 
-  Morgen = self.installApplication
-    rec {
-      name = "Morgen";
-      version = "2.5.7";
-      sourceRoot = "Morgen.app";
-      src = super.fetchurl {
-        name = "Morgen ${version}-arm64.dmg";
-        url = "https://dl.todesktop.com/210203cqcj00tw1/mac/dmg/arm64";
-        sha256 = "sha256-7LvmJ1lZK/a5AbrblQAsL91lHGH9EkjAX+A/GyBxxC8=";
-      };
-      description = ''
-        Make the most out of your time
-      '';
-      homepage = "https://morgen.so";
-    };
+  # JupyterLab = self.installApplication
+  #   rec {
+  #     name = "JupyterLab";
+  #     version = "";
+  #     sourceRoot = "JupyterLab.app";
+  #     src = super.fetchurl {
+  #       name = "JupyterLab-Setup-macOS.dmg";
+  #       url = "https://github.com/jupyterlab/jupyterlab-desktop/releases/latest/download/JupyterLab-Setup-macOS.dmg";
+  #       sha256 = "sha256-9LDxHlTM/7Wc0Wyw+FU9yvBxtPmKCgi628+B9yUbGKc=";
+  #     };
+  #     description = ''
+  #       A desktop application for JupyterLab, based on Electron.
+  #     '';
+  #     homepage = "https://github.com/jupyterlab/jupyterlab-desktop";
+  #   };
 
-  HTTPie = self.installApplication
-    rec {
-      name = "HTTPie";
-      version = "2022.8.0";
-      sourceRoot = "HTTPie.app";
-      src = super.fetchurl {
-        name = "HTTPie-${version}-arm64.dmg";
-        url = "https://github.com/httpie/desktop/releases/download/v${version}/HTTPie-${version}-arm64.dmg";
-        sha256 = "sha256-0ceSXjIga5SKX0+AHjLucqcLIiEw7IQJEQuGCyGTqgI=";
-      };
-      description = ''
-        HTTPIE WEB & DESKTOP APP
-      '';
-      homepage = "https://httpie.io/product";
-    };
+
+  # ThingsHelper = self.installApplication
+  #   rec{
+  #     name = "ThingsHelper";
+  #     version = "3.39";
+  #     sourceRoot = "ThingsMacSandboxHelper.app";
+  #     src = super.fetchurl {
+  #       name = "ThingsHelper.zip";
+  #       url = "https://static.culturedcode.com/things/thingssandboxhelper/${version}/ThingsHelper.zip";
+  #       sha256 = "sha256-LdxQkbIWqJ+d96KLpLAp4qafGILjRhrpnjGyti7xndw=";
+  #     };
+  #     description = "";
+  #     homepage = "https://culturedcode.com/things/mac/help/things-sandboxing-helper-things3/";
+  #   };
 }

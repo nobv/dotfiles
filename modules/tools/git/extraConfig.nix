@@ -14,5 +14,10 @@
 
   push = {
     default = "current";
+    autoSetupRemote = true;
+  };
+
+  init = {
+    defaultBranch = "main";
   };
 }

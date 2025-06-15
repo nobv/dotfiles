@@ -1,9 +1,0 @@
-* Dotfiles
-
-** Install
-
-#+BEGIN_SRC bash
-git clone https://github.com/nobv/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles
-./install
-#+END_SRC

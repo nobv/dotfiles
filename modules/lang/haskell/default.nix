@@ -1,19 +1,22 @@
 { config, pkgs, lib, ... }:
+
+with lib;
+
 let
-  unstable = import <nixpkgs-unstable> { };
+  cfg = config.modules.lang.haskell;
   stable = import <nixpkgs-stable> { };
 in
 {
-  # https://github.com/NixOS/nixpkgs/blob/a0dbe47318/doc/languages-frameworks/haskell.section.md
-  home = {
-    # file = { };
-
-    packages = with pkgs; [
-      haskell.compiler.ghc922
-      haskellPackages.haskell-language-server
-      haskellPackages.dhall-lsp-server
-      haskellPackages.stack
-    ];
+  options.modules.lang.haskell = {
+    enable = mkEnableOption "Haskell programming language";
   };
 
+  config = mkIf cfg.enable {
+    # https://github.com/NixOS/nixpkgs/blob/a0dbe47318/doc/languages-frameworks/haskell.section.md
+    environment.systemPackages = with pkgs; [
+      haskell.compiler.ghc94
+      haskell-language-server
+      stack
+    ];
+  };
 }

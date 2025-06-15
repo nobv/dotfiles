@@ -1,7 +1,17 @@
 { config, pkgs, lib, ... }:
+
+with lib;
+
+let
+  cfg = config.modules.tools.gnused;
+in
 {
-  home = {
-    packages = with pkgs; [
+  options.modules.tools.gnused = {
+    enable = mkEnableOption "GNU sed text stream editor";
+  };
+
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
       gnused
     ];
   };

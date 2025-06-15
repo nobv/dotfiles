@@ -1,16 +1,27 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
+
+with lib;
 
 let
+  cfg = config.modules.term.zsh;
   aliases = import ./aliases.nix;
 in
 {
-  programs = {
-    zsh = {
+  options.modules.term.zsh = {
+    enable = mkEnableOption "Enable Zsh shell with enhanced configuration";
+  };
+
+  config = mkIf cfg.enable {
+    home-manager.users.${username}.programs.zsh = {
       enable = true;
       autocd = true;
-      enableAutosuggestions = true;
+      autosuggestion = {
+        enable = true;
+      };
       enableCompletion = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting = {
+        enable = true;
+      };
       # dotDir = ".dotfiles/.zsh";
       history = {
         expireDuplicatesFirst = true;
@@ -29,7 +40,6 @@ in
       # };
     };
   };
-
 }
 
 

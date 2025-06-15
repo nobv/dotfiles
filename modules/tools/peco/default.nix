@@ -1,17 +1,26 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
+
+with lib;
+
 let
-  config = import ./config.nix;
+  cfg = config.modules.tools.peco;
+  pecoConfig = import ./config.nix;
 in
 {
-  home = {
-    file = {
-      "config" = {
-        target = ".config/peco/config.json";
-        text = builtins.toJSON config;
-      };
-    };
-    packages = with pkgs; [
+  options.modules.tools.peco = {
+    enable = mkEnableOption "peco interactive filtering tool";
+  };
+
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
       peco
     ];
+    
+    home-manager.users.${username}.home.file = {
+      "config" = {
+        target = ".config/peco/config.json";
+        text = builtins.toJSON pecoConfig;
+      };
+    };
   };
 }

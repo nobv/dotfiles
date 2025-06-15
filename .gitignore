@@ -22,6 +22,14 @@ modules/editor/emacs/.spacemacs.d/configs/*
 .vscode/extensions/*
 .vscode/argv.json
 
+## ide
+.idea/
+
 ## misc
 bin/rust-analyzer
 conda.yaml
+.log
+
+
+## flakes
+result

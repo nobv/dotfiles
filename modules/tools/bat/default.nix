@@ -1,8 +1,17 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
+with lib;
+
+let
+  cfg = config.modules.tools.bat;
+in
 {
-  programs = {
-    bat = {
+  options.modules.tools.bat = {
+    enable = mkEnableOption "Enable bat (cat replacement) tool";
+  };
+
+  config = mkIf cfg.enable {
+    home-manager.users.${username}.programs.bat = {
       enable = true;
     };
   };
