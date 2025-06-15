@@ -1,5 +1,15 @@
-{ config, pkgs, lib, username, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  machineConfig = {
+    username = "";
+    # timezone = "Asia/Tokyo";
+    # locale = "ja_JP.UTF-8";
+    # primaryDisplay = "external";
+    # workProfile = true;
+  };
+  username = machineConfig.username;
+in
 {
   # Work machine-specific Darwin system configuration
   environment = {

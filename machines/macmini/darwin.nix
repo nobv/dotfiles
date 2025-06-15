@@ -1,5 +1,15 @@
-{ config, pkgs, lib, username, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  machineConfig = {
+    username = "nobv";
+    # timezone = "Asia/Tokyo";
+    # locale = "ja_JP.UTF-8";
+    # primaryDisplay = "external";
+    # workProfile = false;
+  };
+  username = machineConfig.username;
+in
 {
   # Mac Mini-specific Darwin system configuration
   environment = {

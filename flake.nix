@@ -55,12 +55,9 @@
         (getModules "tools")
       ];
       
-      # Function to create a Darwin system with machine-specific config
-      mkDarwinSystem = { machine }: 
-        let
-          username = let env_user = builtins.getEnv "USER"; 
-                     in if env_user == "" then "nobv" else env_user;
-        in darwin.lib.darwinSystem {
+      # Function to create a Darwin system with machine-specific config  
+      mkDarwinSystem = { machine, username ? "nobv" }:
+        darwin.lib.darwinSystem {
           inherit system;
           modules = [
             home-manager.darwinModules.home-manager
@@ -75,10 +72,10 @@
     {
       darwinConfigurations = {
         # Machine-specific configurations
-        macbook = mkDarwinSystem { machine = "macbook"; };
-        macmini = mkDarwinSystem { machine = "macmini"; };
-        test = mkDarwinSystem { machine = "test"; };
-        work = mkDarwinSystem { machine = "work"; };
+        macbook = mkDarwinSystem { machine = "macbook"; username = "nobv"; };
+        macmini = mkDarwinSystem { machine = "macmini"; username = "nobv"; };
+        test = mkDarwinSystem { machine = "test"; username = "nobv"; };
+        work = mkDarwinSystem { machine = "work"; username = "nobv"; };
       };
       
       # Development shell for working with the configuration
