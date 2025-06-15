@@ -18,7 +18,6 @@ let
   # Cask definitions with options and packages
   caskApps = [
     { name = "1password"; option = cfg.casks."1password"; package = "1password"; }
-    { name = "aerospace"; option = cfg.casks.aerospace; package = "aerospace"; tap = "nikitabobko/tap"; }
     { name = "anki"; option = cfg.casks.anki; package = "anki"; }
     { name = "appcleaner"; option = cfg.casks.appcleaner; package = "appcleaner"; }
     { name = "arc"; option = cfg.casks.arc; package = "arc"; }
@@ -37,9 +36,6 @@ let
     { name = "firefox"; option = cfg.casks.firefox; package = "firefox"; }
     { name = "flashspace"; option = cfg.casks.flashspace; package = "flashspace"; }
     { name = "flux"; option = cfg.casks.flux; package = "flux"; }
-    { name = "font-hack-nerd-font"; option = cfg.casks.font-hack-nerd-font; package = "font-hack-nerd-font"; }
-    { name = "font-hasklig"; option = cfg.casks.font-hasklig; package = "font-hasklig"; }
-    { name = "font-roboto"; option = cfg.casks.font-roboto; package = "font-roboto"; }
     { name = "fork"; option = cfg.casks.fork; package = "fork"; }
     { name = "google-chrome"; option = cfg.casks.google-chrome; package = "google-chrome"; }
     { name = "google-drive"; option = cfg.casks.google-drive; package = "google-drive"; }
@@ -47,7 +43,6 @@ let
     { name = "heptabase"; option = cfg.casks.heptabase; package = "heptabase"; }
     { name = "httpie"; option = cfg.casks.httpie; package = "httpie"; }
     { name = "istat-menus"; option = cfg.casks.istat-menus; package = "istat-menus"; }
-    { name = "iterm2"; option = cfg.casks.iterm2; package = "iterm2"; }
     { name = "jordanbaird-ice"; option = cfg.casks.jordanbaird-ice; package = "jordanbaird-ice"; }
     { name = "karabiner-elements"; option = cfg.casks.karabiner-elements; package = "karabiner-elements"; }
     { name = "leader-key"; option = cfg.casks.leader-key; package = "leader-key"; }
@@ -62,13 +57,11 @@ let
     { name = "obsidian"; option = cfg.casks.obsidian; package = "obsidian"; }
     { name = "poe"; option = cfg.casks.poe; package = "poe"; }
     { name = "postman"; option = cfg.casks.postman; package = "postman"; }
-    { name = "raycast"; option = cfg.casks.raycast; package = "raycast"; }
     { name = "readdle-spark"; option = cfg.casks.readdle-spark; package = "readdle-spark"; }
     { name = "slack"; option = cfg.casks.slack; package = "slack"; }
     { name = "spotify"; option = cfg.casks.spotify; package = "spotify"; }
     { name = "typora"; option = cfg.casks.typora; package = "typora"; }
     { name = "utm"; option = cfg.casks.utm; package = "utm"; }
-    { name = "visual-studio-code"; option = cfg.casks.visual-studio-code; package = "visual-studio-code"; }
     { name = "wezterm"; option = cfg.casks.wezterm; package = "wezterm"; }
     { name = "wireshark"; option = cfg.casks.wireshark; package = "wireshark"; }
     { name = "zappy"; option = cfg.casks.zappy; package = "zappy"; }
