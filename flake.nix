@@ -19,7 +19,6 @@
   outputs = inputs@{ self, nixpkgs, nixpkgs-stable, darwin, home-manager }:
     let
       system = "aarch64-darwin";
-      username = builtins.getEnv "USER";
       
       pkgs = import nixpkgs {
         inherit system;
@@ -30,15 +29,19 @@
       lib = pkgs.lib;
       modulesPath = ./modules;
       
-      # Get all module directories that have default.nix
+      # Get all modules that have default.nix (both directories and single files)
       getModules = dir:
         let
           contents = builtins.readDir (modulesPath + "/${dir}");
         in
         lib.mapAttrsToList (name: type:
-          modulesPath + "/${dir}/${name}"
+          if type == "directory" then
+            modulesPath + "/${dir}/${name}"
+          else
+            modulesPath + "/${dir}/${name}"
         ) (lib.filterAttrs (name: type: 
-          type == "directory" && builtins.pathExists (modulesPath + "/${dir}/${name}/default.nix")
+          (type == "directory" && builtins.pathExists (modulesPath + "/${dir}/${name}/default.nix")) ||
+          (type == "regular" && name == "default.nix")
         ) contents);
 
       # Auto-discover all modules
@@ -53,17 +56,21 @@
       ];
       
       # Function to create a Darwin system with machine-specific config
-      mkDarwinSystem = { machine }: darwin.lib.darwinSystem {
-        inherit system;
-        modules = [
-          home-manager.darwinModules.home-manager
-          ./machines/${machine}
-        ] ++ allModules;
-        
-        specialArgs = {
-          inherit inputs nixpkgs nixpkgs-stable username machine;
+      mkDarwinSystem = { machine }: 
+        let
+          username = let env_user = builtins.getEnv "USER"; 
+                     in if env_user == "" then "nobv" else env_user;
+        in darwin.lib.darwinSystem {
+          inherit system;
+          modules = [
+            home-manager.darwinModules.home-manager
+            ./machines/${machine}
+          ] ++ allModules;
+          
+          specialArgs = {
+            inherit inputs nixpkgs nixpkgs-stable machine username;
+          };
         };
-      };
     in
     {
       darwinConfigurations = {

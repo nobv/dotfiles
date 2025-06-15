@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 {
   # Mac Mini-specific Darwin system configuration
@@ -29,7 +29,7 @@
   };
 
   system = {
-    primaryUser = "nobv";
+    primaryUser = username;
     defaults = {
       dock = {
         autohide = false;  # Show dock on desktop
@@ -58,5 +58,5 @@
     stateVersion = 6;
   };
 
-  users.users.nobv.home = "/Users/nobv";
+  users.users.${username}.home = "/Users/${username}";
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 {
   # System configuration
@@ -8,8 +8,8 @@
   homebrew.enable = true;
 
   # User configuration
-  users.users.nobv = {
-    name = "nobv";
-    home = /Users/nobv;
+  users.users.${username} = {
+    name = username;
+    home = /Users/${username};
   };
 }
