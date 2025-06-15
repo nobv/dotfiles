@@ -2,35 +2,12 @@
 
 set -e  # Exit on any error
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
-
-# Logging functions
-log_info() {
-    echo -e "${BLUE}[INFO]${NC} $1"
-}
-
-log_success() {
-    echo -e "${GREEN}[SUCCESS]${NC} $1"
-}
-
-log_warning() {
-    echo -e "${YELLOW}[WARNING]${NC} $1"
-}
-
-log_error() {
-    echo -e "${RED}[ERROR]${NC} $1"
-}
+# Source shared utilities
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$script_dir/scripts/lib.sh"
 
 # Check if we're on macOS
-if [[ "$(uname)" != "Darwin" ]]; then
-    log_error "This script is only for macOS"
-    exit 1
-fi
+check_macos
 
 # Parse command line arguments
 MACHINE=""
@@ -151,7 +128,6 @@ else
 fi
 
 # Step 5: Clone dotfiles repository (if not already present)
-DOTFILES_DIR="$HOME/.dotfiles"
 if [[ ! -d "$DOTFILES_DIR" ]]; then
     log_info "Cloning dotfiles repository..."
     git clone https://github.com/nobv/dotfiles.git "$DOTFILES_DIR"

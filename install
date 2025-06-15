@@ -86,8 +86,8 @@ fi
 
 echo ""
 log_info "Running installer with configuration: $machine"
-log_info "Command: ./install.sh $args"
+log_info "Command: ./setup.sh $args"
 echo ""
 
 # Execute the full installer
-exec ./install.sh $args
+exec ./setup.sh $args
