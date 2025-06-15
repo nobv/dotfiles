@@ -16,10 +16,10 @@
     # Tool modules - full development stack
     tools = {
       homebrew.enable = true;
-      tmux.enable = true;
+      tmux.enable = false;
       wezterm.enable = true;
       docker.enable = true;
-      kubernetes.enable = true;
+      kubernetes.enable = false;
       bat.enable = true;
       eza.enable = true;
       fd.enable = true;
@@ -44,7 +44,7 @@
     editor = {
       emacs.enable = false;
       neovim.enable = true;
-      vim.enable = true;
+      vim.enable = false;
     };
     
     # Terminal modules

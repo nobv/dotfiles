@@ -29,7 +29,7 @@
   };
 
   system = {
-    primaryUser = "";
+    primaryUser = username;
     defaults = {
       dock = {
         autohide = true;
