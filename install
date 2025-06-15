@@ -33,6 +33,16 @@ echo ""
 log_info "nobv's dotfiles installer"
 echo ""
 
+# Step 1: System Updates and Command Line Tools
+log_info "Installing Xcode Command Line Tools..."
+xcode-select --install 2>/dev/null || log_info "Xcode Command Line Tools already installed"
+
+log_info "Updating macOS system..."
+sudo softwareupdate --install --all --install-rosetta --agree-to-license || log_info "Some system updates may have been skipped"
+
+log_success "System preparation completed"
+echo ""
+
 # Check if dotfiles already exist
 DOTFILES_DIR="$HOME/.dotfiles"
 if [[ -d "$DOTFILES_DIR" ]]; then
@@ -72,14 +82,10 @@ done
 
 # Ask about optional steps
 echo ""
-read -p "Skip system updates? [y/N]: " skip_system
 read -p "Skip Homebrew installation? [y/N]: " skip_homebrew
 
 # Build command arguments
 args="-m $machine"
-if [[ "$skip_system" =~ ^[Yy]$ ]]; then
-    args="$args --skip-system"
-fi
 if [[ "$skip_homebrew" =~ ^[Yy]$ ]]; then
     args="$args --skip-homebrew"
 fi

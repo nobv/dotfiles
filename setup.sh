@@ -11,7 +11,6 @@ check_macos
 
 # Parse command line arguments
 MACHINE=""
-SKIP_SYSTEM_UPDATE=false
 SKIP_HOMEBREW=false
 
 show_help() {
@@ -23,13 +22,12 @@ Install nobv's dotfiles with Nix Darwin and Home Manager
 OPTIONS:
     -m, --machine MACHINE    Machine configuration to use (required)
                             Available: macbook, macmini, work
-    -s, --skip-system       Skip macOS system updates
     --skip-homebrew         Skip Homebrew installation
     -h, --help              Show this help message
 
 EXAMPLES:
     $0 -m macbook          Install MacBook configuration
-    $0 -m work --skip-system   Install work config, skip system updates
+    $0 -m work             Install work configuration
     $0 -m macmini --skip-homebrew   Install Mac Mini config, skip Homebrew
 
 EOF
@@ -40,10 +38,6 @@ while [[ $# -gt 0 ]]; do
         -m|--machine)
             MACHINE="$2"
             shift 2
-            ;;
-        -s|--skip-system)
-            SKIP_SYSTEM_UPDATE=true
-            shift
             ;;
         --skip-homebrew)
             SKIP_HOMEBREW=true
@@ -78,17 +72,7 @@ fi
 
 log_info "Starting installation with machine configuration: $MACHINE"
 
-# Step 1: System Updates
-if [[ "$SKIP_SYSTEM_UPDATE" == false ]]; then
-    log_info "Updating macOS and installing Xcode Command Line Tools..."
-    sudo softwareupdate --install --all --install-rosetta --agree-to-license || log_warning "Some system updates may have failed"
-    xcode-select --install 2>/dev/null || log_info "Xcode Command Line Tools already installed"
-    log_success "System updates completed"
-else
-    log_info "Skipping system updates"
-fi
-
-# Step 2: Install Nix using Determinate Systems installer
+# Step 1: Install Nix using Determinate Systems installer
 if ! command -v nix &> /dev/null; then
     log_info "Installing Nix package manager using Determinate Systems installer..."
     curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate
@@ -102,14 +86,14 @@ else
     log_info "Nix already installed"
 fi
 
-# Step 3: Enable Nix flakes and check installation
+# Step 2: Enable Nix flakes and check installation
 log_info "Checking Nix installation..."
 nix --version || {
     log_error "Nix installation failed"
     exit 1
 }
 
-# Step 4: Install Homebrew (if not skipped)
+# Step 3: Install Homebrew (if not skipped)
 if [[ "$SKIP_HOMEBREW" == false ]]; then
     if ! command -v brew &> /dev/null; then
         log_info "Installing Homebrew..."
@@ -127,7 +111,7 @@ else
     log_info "Skipping Homebrew installation"
 fi
 
-# Step 5: Clone dotfiles repository (if not already present)
+# Step 4: Clone dotfiles repository (if not already present)
 if [[ ! -d "$DOTFILES_DIR" ]]; then
     log_info "Cloning dotfiles repository..."
     git clone https://github.com/nobv/dotfiles.git "$DOTFILES_DIR"
@@ -140,7 +124,7 @@ fi
 
 cd "$DOTFILES_DIR"
 
-# Step 6: Fix /run directory issue (common on macOS)
+# Step 5: Fix /run directory issue (common on macOS)
 if [[ ! -d /run ]]; then
     log_info "Creating /run directory symlink..."
     printf 'run\tprivate/var/run\n' | sudo tee -a /etc/synthetic.conf
@@ -150,7 +134,7 @@ if [[ ! -d /run ]]; then
     log_success "/run directory configured"
 fi
 
-# Step 7: Build and apply Nix Darwin configuration
+# Step 6: Build and apply Nix Darwin configuration
 log_info "Building Nix Darwin configuration for machine: $MACHINE"
 nix build ".#darwinConfigurations.$MACHINE.system" --extra-experimental-features "nix-command flakes"
 
@@ -159,12 +143,12 @@ sudo ./result/sw/bin/darwin-rebuild switch --flake ".#$MACHINE"
 
 log_success "Nix Darwin configuration applied successfully!"
 
-# Step 8: Final instructions
+# Step 7: Final instructions
 echo ""
 log_success "Installation completed successfully!"
 echo ""
 log_info "Next steps:"
-echo "  1. Restart your terminal or run: exec \$SHELL -l"
+echo "  1. Restart your terminal or run: reload"
 echo "  2. Configure any remaining manual settings"
 echo "  3. Log into App Store for MAS apps (if using homebrew module)"
 echo ""
