@@ -1,5 +1,16 @@
-{ config, pkgs, lib, username, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  machineConfig = {
+    username = "nobv";
+    # 将来的に追加可能な設定例：
+    # timezone = "Asia/Tokyo";
+    # locale = "ja_JP.UTF-8";
+    # primaryDisplay = "internal";
+    # workProfile = false;
+  };
+  username = machineConfig.username;
+in
 {
   home-manager = {
     useGlobalPkgs = true;
@@ -12,11 +23,6 @@
       };
 
       programs.home-manager.enable = true;
-
-      nixpkgs.config = {
-        allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
-        allowUnsupportedSystem = true;
-      };
     };
   };
 }
