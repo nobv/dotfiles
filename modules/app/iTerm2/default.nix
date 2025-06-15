@@ -3,17 +3,17 @@
 with lib;
 
 let
-  cfg = config.modules.app.jetbrains;
+  cfg = config.modules.app.iTerm2;
 in
 {
-  options.modules.app.jetbrains = {
-    enable = mkEnableOption "JetBrains Toolbox for IDE management";
+  options.modules.app.iTerm2 = {
+    enable = mkEnableOption "iTerm2";
   };
 
   config = mkIf cfg.enable {
     homebrew = {
       casks = [
-        "jetbrains-toolbox"
+        "iterm2"
       ];
     };
   };
