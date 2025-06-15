@@ -34,8 +34,10 @@ Example usage:
 - `darwin-rebuild switch --flake .#work`
 - `darwin-rebuild switch --flake .#macmini`
 
-## Environment Variables
-- `USERNAME`: Configurable username (used in Darwin configuration)
+## Username Configuration
+- Username is automatically detected from `$USER` environment variable
+- Falls back to "nobv" if `$USER` is empty (e.g., during build)
+- No longer hardcoded in flake.nix
 
 ## Module System Architecture
 - **Self-contained machine configs**: Each `machines/<machine>/default.nix` contains complete Darwin + Home Manager config

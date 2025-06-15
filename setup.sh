@@ -124,15 +124,15 @@ fi
 
 cd "$DOTFILES_DIR"
 
-# Step 5: Fix /run directory issue (common on macOS)
-if [[ ! -d /run ]]; then
-    log_info "Creating /run directory symlink..."
-    printf 'run\tprivate/var/run\n' | sudo tee -a /etc/synthetic.conf
-    if [[ -f /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util ]]; then
-        /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t
-    fi
-    log_success "/run directory configured"
-fi
+## Step 5: Fix /run directory issue (common on macOS)
+#if [[ ! -d /run ]]; then
+#    log_info "Creating /run directory symlink..."
+#    printf 'run\tprivate/var/run\n' | sudo tee -a /etc/synthetic.conf
+#    if [[ -f /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util ]]; then
+#        /System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util -t
+#    fi
+#    log_success "/run directory configured"
+#fi
 
 # Step 6: Build and apply Nix Darwin configuration
 log_info "Building Nix Darwin configuration for machine: $MACHINE"

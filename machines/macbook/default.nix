@@ -53,8 +53,8 @@
       zsh.enable = true;
     };
     
-    # Other modules
-    font.enable = true;
+    # Other modules  
     checkers.enable = true;
+    font.enable = true;
   };
 }
