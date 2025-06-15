@@ -12,7 +12,7 @@ in
 
   config = mkIf cfg.enable {
     # https://github.com/NixOS/nixpkgs/blob/a0dbe47318/doc/languages-frameworks/rust.section.md
-    home.packages = with pkgs; [
+    environment.systemPackages = with pkgs; [
       #cargo
       rustup
       #rust-analyzer

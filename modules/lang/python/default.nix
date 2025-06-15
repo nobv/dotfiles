@@ -13,7 +13,7 @@ in
 
   config = mkIf cfg.enable {
     # https://github.com/NixOS/nixpkgs/blob/a0dbe47318/doc/languages-frameworks/python.section.md
-    home.packages = with pkgs; [
+    environment.systemPackages = with pkgs; [
       python310
       python310Packages.pytest
       python310Packages.isort
