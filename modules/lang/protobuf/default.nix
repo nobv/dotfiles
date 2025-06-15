@@ -1,8 +1,20 @@
 { config, pkgs, lib, ... }:
+
+with lib;
+
+let
+  cfg = config.modules.lang.protobuf;
+in
 {
-  home.packages = with pkgs; [
-    protobuf
-    buf
-    grpcurl
-  ];
+  options.modules.lang.protobuf = {
+    enable = mkEnableOption "Protocol Buffers development tools";
+  };
+
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      protobuf
+      buf
+      grpcurl
+    ];
+  };
 }

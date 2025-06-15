@@ -11,16 +11,14 @@ in
   };
 
   config = mkIf cfg.enable {
-    home = {
-      packages = with pkgs; [
-        kind
-        kubectl
-        kubectx
-        kustomize
-        stern
-        sonobuoy
-        kube-capacity
-      ];
-    };
+    environment.systemPackages = with pkgs; [
+      kind
+      kubectl
+      kubectx
+      kustomize
+      stern
+      sonobuoy
+      kube-capacity
+    ];
   };
 }

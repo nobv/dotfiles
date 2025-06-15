@@ -11,8 +11,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs = {
-      jq = { enable = true; };
-    };
+    environment.systemPackages = with pkgs; [
+      jq
+    ];
   };
 }
