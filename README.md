@@ -1,18 +1,20 @@
-* Dotfiles
+# Dotfiles
 
 Nix Darwin configuration with Home Manager for macOS system and user environment management.
 
-** Quick Install
+Uses the [Determinate Systems Nix installer](https://github.com/DeterminateSystems/nix-installer) for reliable Nix installation with flakes and daemon support enabled by default.
 
-#+BEGIN_SRC bash
+## Quick Install
+
+```bash
 git clone https://github.com/nobv/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-./install.sh
-#+END_SRC
+./install.sh -m <machine>  # Choose: macbook, macmini, or work
+```
 
-** Custom Installation
+## Custom Installation
 
-#+BEGIN_SRC bash
+```bash
 # Install with specific machine configuration
 ./install.sh -m macbook      # Development-focused setup
 ./install.sh -m work         # Full development stack
@@ -23,17 +25,24 @@ cd ~/.dotfiles
 
 # See all options
 ./install.sh --help
-#+END_SRC
+```
 
-** Available Machine Configurations
+## Available Machine Configurations
 
-- =default= - Basic configuration with minimal modules
-- =macbook= - Development-focused (tmux, docker, python, kubernetes)
-- =macmini= - Desktop setup (emacs, lighter dev tools, visible dock)
-- =work= - Full development stack (all languages and tools)
+- `macbook` - Development-focused (tmux, docker, python, kubernetes)
+- `macmini` - Desktop setup (emacs, lighter dev tools, visible dock)
+- `work` - Full development stack (all languages and tools)
 
-** Switching Configurations
+## Switching Configurations
 
-#+BEGIN_SRC bash
+```bash
 darwin-rebuild switch --flake ~/.dotfiles#<machine>
-#+END_SRC
+```
+
+## Features
+
+- **Reliable Nix Installation**: Uses Determinate Systems installer with flakes enabled by default
+- **Machine-Specific Configurations**: Easy switching between different setups
+- **Option-Based Modules**: Clean, maintainable module system with conditional loading
+- **Home Manager Integration**: User environment management alongside system configuration
+- **Automated Setup**: One-command installation with progress tracking and error handling
