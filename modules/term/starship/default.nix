@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 with lib;
 
@@ -12,7 +12,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.starship = {
+    home-manager.users.${username}.programs.starship = {
       enable = true;
       enableZshIntegration = true;
       settings = settings;

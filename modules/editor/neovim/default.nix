@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 with lib;
 
@@ -12,20 +12,20 @@ in
   };
 
   config = mkIf cfg.enable {
-    xdg.configFile = {
-      "nvim/after" = {
-        source = ./after;
-        recursive = true;
+    home-manager.users.${username} = {
+      xdg.configFile = {
+        "nvim/after" = {
+          source = ./after;
+          recursive = true;
+        };
+
+        "nvim/lua" = {
+          source = ./lua;
+          recursive = true;
+        };
       };
 
-      "nvim/lua" = {
-        source = ./lua;
-        recursive = true;
-      };
-    };
-
-    programs = {
-      neovim = {
+      programs.neovim = {
         enable = true;
         viAlias = true;
         vimAlias = true;
@@ -33,7 +33,6 @@ in
         extraConfig = "source ~/.config/nvim/lua/init.lua";
         plugins = plugins.vimPlugins;
       };
-
     };
   };
 }

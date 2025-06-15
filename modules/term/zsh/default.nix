@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 with lib;
 
@@ -12,7 +12,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.zsh = {
+    home-manager.users.${username}.programs.zsh = {
       enable = true;
       autocd = true;
       autosuggestion = {
