@@ -1,8 +1,20 @@
 { config, pkgs, lib, ... }:
+
+with lib;
+
+let
+  cfg = config.modules.lang.shellscript;
+in
 {
-  home.packages = with pkgs; [
-    bats
-    shellcheck
-    nodePackages.bash-language-server
-  ];
+  options.modules.lang.shellscript = {
+    enable = mkEnableOption "Shell script development tools and linters";
+  };
+
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      bats
+      shellcheck
+      nodePackages.bash-language-server
+    ];
+  };
 }

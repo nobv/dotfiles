@@ -1,11 +1,18 @@
 { config, pkgs, lib, ... }:
 
+with lib;
+
 let
+  cfg = config.modules.term.zsh;
   aliases = import ./aliases.nix;
 in
 {
-  programs = {
-    zsh = {
+  options.modules.term.zsh = {
+    enable = mkEnableOption "Enable Zsh shell with enhanced configuration";
+  };
+
+  config = mkIf cfg.enable {
+    programs.zsh = {
       enable = true;
       autocd = true;
       autosuggestion = {
@@ -33,7 +40,6 @@ in
       # };
     };
   };
-
 }
 
 

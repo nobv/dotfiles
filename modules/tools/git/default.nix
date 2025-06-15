@@ -1,19 +1,25 @@
 { config, pkgs, lib, ... }:
 
+with lib;
+
 let
+  cfg = config.modules.tools.git;
   extraConfig = import ./extraConfig.nix;
   aliases = import ./aliases.nix;
-
 in
 {
-  home.packages = with pkgs; [
-    ghq
-    tig
-    lazygit
-  ];
+  options.modules.tools.git = {
+    enable = mkEnableOption "Enable Git version control system with enhanced tools";
+  };
 
-  programs = {
-    git = {
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      ghq
+      tig
+      lazygit
+    ];
+
+    programs.git = {
       enable = true;
       aliases = aliases;
       extraConfig = extraConfig;
@@ -22,6 +28,5 @@ in
       userName = "nobv";
       # package = unstable.git;
     };
-
   };
 }
