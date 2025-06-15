@@ -18,6 +18,11 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 - Update flake inputs: `nix flake update`
 - Show flake info: `nix flake show`
 
+## Installation Commands
+- One-liner install: `bash -c "$(curl -L https://raw.githubusercontent.com/nobv/dotfiles/master/install)"`
+- Manual install: `./setup.sh -m <machine>` (after cloning repo)
+- Skip Homebrew: `./setup.sh -m <machine> --skip-homebrew`
+
 ## Machine Configurations
 Available machine configurations:
 - `macbook` - Development-focused setup for MacBook (tmux, docker, python, etc.)
@@ -27,6 +32,10 @@ Available machine configurations:
 Example usage:
 - `darwin-rebuild switch --flake .#macbook`
 - `darwin-rebuild switch --flake .#work`
+- `darwin-rebuild switch --flake .#macmini`
+
+## Environment Variables
+- `USERNAME`: Configurable username (used in Darwin configuration)
 
 ## Module System Architecture
 - **Self-contained machine configs**: Each `machines/<machine>/default.nix` contains complete Darwin + Home Manager config
@@ -50,8 +59,22 @@ Example usage:
 - Examples: `feat(homebrew): add packages`, `fix(wezterm): correct config`, `chore: update .gitignore`
 
 ## Repository Structure
-- flake.nix: Main entry point
-- darwin/: Base darwin configuration
-- machines/: Machine-specific configurations
-- modules/: Reusable configuration modules
-- overlays/: Nixpkgs overlays
+- `flake.nix`: Main entry point with auto-discovery logic
+- `install`: One-liner bootstrap script (curl-compatible)
+- `setup.sh`: Full installation script (sources shared utilities)
+- `scripts/lib.sh`: Shared utilities (logging, macOS check, constants)
+- `machines/`: Machine-specific configurations (each has default.nix, darwin.nix, home.nix)
+- `modules/`: Reusable configuration modules organized by category
+  - `app/`: Application configurations (Chrome, iTerm2, etc.)
+  - `editor/`: Text editors (vim, emacs, neovim, vscode)
+  - `lang/`: Programming language environments
+  - `tools/`: Development tools and CLI utilities
+  - `term/`: Terminal and shell configurations
+  - `font/`: Font management
+  - `checkers/`: Linting and code quality tools
+- `overlays/`: Nixpkgs overlays for custom packages
+
+## Installation Script Architecture
+- `install`: Bootstrap script that handles system preparation (Xcode CLT, system updates) before repo cloning
+- `setup.sh`: Main installer that handles Nix installation, Homebrew, and Darwin configuration
+- Both scripts use shared utilities from `scripts/lib.sh` for consistent logging and error handling
