@@ -11,9 +11,8 @@
     # Core system tools - full development stack
     tools = {
       homebrew.enable = true;
-      tmux.enable = false;
+      tmux.enable = true;
       docker.enable = true;
-      kubernetes.enable = false;
       bat.enable = true;
       eza.enable = true;
       fd.enable = true;
@@ -22,6 +21,14 @@
       jq.enable = true;
       ripgrep.enable = true;
       tree.enable = true;
+      go-task.enable = true;
+      gcp.enable = true;
+      direnv.enable = true;
+      aqua.enable = true;
+      karabiner-elements.enable = true;
+      peco.enable = true;
+      fzf.enable = true;
+      fork.enable = true;
     };
     
     # Programming languages - all programming languages
@@ -29,20 +36,24 @@
       go.enable = true;
       nodejs.enable = true;
       nix.enable = true;
-      python.enable = true;
       rust.enable = true;
-      shellscript.enable = true;
+      shellscript.enable = true; 
+      protobuf.enable = true;
     };
     
     # Applications
     app = {
       jetbrains.enable = true;
       wezterm.enable = true;
+      "1password".enable = true;
+      raycast.enable = true;
+      flux.enable = true;
     };
     
     # Text editors - work-focused
     editor = {
       neovim.enable = true;
+      vscode.enable = true;
     };
     
     # Terminal configuration
