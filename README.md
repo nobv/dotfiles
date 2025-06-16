@@ -82,24 +82,43 @@ Applications and tools are organized by function for intuitive management:
 ## Example Configuration
 
 ```nix
-# Machine-specific module configuration
+# Machine-specific module configuration using actual option paths
 modules = {
-  # Foundation
-  system.homebrew.enable = true;
+  # Core system tools
+  tools = {
+    homebrew.enable = true;
+    docker.enable = true;
+    git.enable = true;
+    tmux.enable = true;
+  };
   
-  # Development
-  development.docker.enable = true;
-  development.git.enable = true;
-  editors.cursor.enable = true;
-  languages.python.enable = true;
+  # Programming languages
+  lang = {
+    python.enable = true;
+    nodejs.enable = true;
+    rust.enable = true;
+  };
   
   # Applications
-  browsers.chrome.enable = true;
-  communication.slack.enable = true;
-  productivity.notion.enable = true;
+  app = {
+    jetbrains.enable = true;
+    wezterm.enable = true;
+  };
   
-  # Security & Utilities
-  security."1password".enable = true;
-  utilities.raycast.enable = true;
+  # Text editors
+  editor = {
+    neovim.enable = true;
+    vim.enable = true;
+  };
+  
+  # Terminal configuration
+  term = {
+    starship.enable = true;
+    zsh.enable = true;
+  };
+  
+  # Code quality and fonts
+  checkers.enable = true;
+  font.enable = true;
 };
 ```

@@ -35,9 +35,11 @@ Example usage:
 - `darwin-rebuild switch --flake .#macmini`
 
 ## Username Configuration
-- Username is automatically detected from `$USER` environment variable
-- Falls back to "nobv" if `$USER` is empty (e.g., during build)
-- No longer hardcoded in flake.nix
+- Each machine has a `config.nix` file containing username configuration
+- Files located at `machines/<machine>/config.nix` with format `{ username = "your-username"; }`
+- Usernames are read during flake evaluation and passed via specialArgs
+- Error thrown if config.nix file is missing for a machine
+- Username setting is now centralized and no longer duplicated across files
 
 ## Module System Architecture
 - **Self-contained machine configs**: Each `machines/<machine>/default.nix` contains complete Darwin + Home Manager config
@@ -45,6 +47,7 @@ Example usage:
 - **Module structure**: Each module in `modules/` defines `options.modules.<category>.<name>` and conditional `config`
 - **Individual app modules**: All applications are split into individual modules for fine-grained control
 - **Homebrew dependency**: Apps using Homebrew wrap their config with `mkIf (config.modules.tools.homebrew.enable or false)`
+- **Machine config structure**: Each machine has `default.nix` (module selections), `darwin.nix` (system config), `home.nix` (user config), and `config.nix` (username)
 - **DRY principle**: No code duplication between machine configs
 
 ## Module Development Guidelines
@@ -66,7 +69,7 @@ Example usage:
 - `install`: One-liner bootstrap script (curl-compatible)
 - `setup.sh`: Full installation script (sources shared utilities)
 - `scripts/lib.sh`: Shared utilities (logging, macOS check, constants)
-- `machines/`: Machine-specific configurations (each has default.nix, darwin.nix, home.nix)
+- `machines/`: Machine-specific configurations (each has default.nix, darwin.nix, home.nix, config.nix)
 - `modules/`: Reusable configuration modules organized by functional categories
 - `overlays/`: Nixpkgs overlays for custom packages
 
@@ -91,35 +94,49 @@ Modules are organized by function for intuitive discovery and management:
 The Homebrew module serves as the foundational package manager:
 - **Base functionality**: Provides core Homebrew configuration (brewPrefix, onActivation, global settings)
 - **Individual app modules**: Each application has its own module with conditional Homebrew dependencies
-- **Dependency pattern**: Apps use `mkIf (config.modules.tools.homebrew.enable or false)` to conditionally enable Homebrew packages
+- **Dependency pattern**: Apps use `mkIf (config.modules.tools.homebrew.enable or false)` to conditionally enable Homebrew packages (system homebrew is at modules.tools.homebrew)
 - **Fine-grained control**: Users can enable/disable individual applications while maintaining Homebrew as the foundation
 
 ## Module Configuration Examples
 ```nix
-# Machine configuration with new module structure
+# Machine configuration using actual option paths defined in modules
 modules = {
-  # System foundation
-  system.homebrew.enable = true;
-  system.aerospace.enable = true;
+  # Core system tools (options.modules.tools.*)
+  tools = {
+    homebrew.enable = true;
+    docker.enable = true;
+    git.enable = true;
+    tmux.enable = true;
+  };
   
-  # Development environment
-  development.docker.enable = true;
-  development.git.enable = true;
-  development.postman.enable = true;
-  editors.cursor.enable = true;
-  editors.vscode.enable = true;
-  languages.python.enable = true;
-  languages.nodejs.enable = true;
+  # Programming languages (options.modules.lang.*)
+  lang = {
+    python.enable = true;
+    nodejs.enable = true;
+    rust.enable = true;
+  };
   
-  # Applications
-  browsers.chrome.enable = true;
-  communication.slack.enable = true;
-  productivity.notion.enable = true;
-  ai.claude.enable = true;
+  # Applications (options.modules.app.*)
+  app = {
+    jetbrains.enable = true;
+    wezterm.enable = true;
+  };
   
-  # Security and utilities
-  security."1password".enable = true;
-  utilities.raycast.enable = true;
+  # Text editors (options.modules.editor.*)
+  editor = {
+    neovim.enable = true;
+    vim.enable = true;
+  };
+  
+  # Terminal configuration (options.modules.term.*)
+  term = {
+    starship.enable = true;
+    zsh.enable = true;
+  };
+  
+  # Code quality and fonts (options.modules.*)
+  checkers.enable = true;
+  font.enable = true;
 };
 ```
 
