@@ -6,18 +6,12 @@
     ./home.nix
   ];
 
-  # Enable modules using the new option-based structure
+  # Enable modules using the actual option paths defined in module files
   modules = {
-    # App modules
-    app = {
-      jetbrains.enable = true;
-    };
-    
-    # Tool modules - lighter setup for desktop
+    # Core system tools - lighter setup for desktop
     tools = {
       homebrew.enable = true;
       tmux.enable = false;  # Less needed on desktop
-      wezterm.enable = true;
       docker.enable = false;  # Less Docker development
       kubernetes.enable = false;
       bat.enable = true;
@@ -30,7 +24,7 @@
       tree.enable = true;
     };
     
-    # Language modules - lighter development setup
+    # Programming languages - lighter development setup
     lang = {
       go.enable = true;
       nodejs.enable = true;
@@ -40,21 +34,27 @@
       shellscript.enable = true;
     };
     
-    # Editor modules - prefer Emacs on desktop
+    # Applications
+    app = {
+      jetbrains.enable = true;
+      wezterm.enable = true;
+    };
+    
+    # Text editors - prefer Emacs on desktop
     editor = {
       emacs.enable = true;
       neovim.enable = true;
       vim.enable = true;
     };
     
-    # Terminal modules
+    # Terminal configuration
     term = {
       starship.enable = true;
       zsh.enable = true;
     };
     
-    # Other modules
-    font.enable = true;
+    # Code quality and fonts
     checkers.enable = true;
+    font.enable = true;
   };
 }
