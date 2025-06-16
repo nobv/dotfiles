@@ -46,17 +46,32 @@
 
       # Auto-discover all modules
       allModules = lib.flatten [
-        (getModules "app")
-        (getModules "checkers") 
-        (getModules "editor")
-        (getModules "font")
-        (getModules "lang")
-        (getModules "term")
-        (getModules "tools")
+        (getModules "ai")
+        (getModules "browsers")
+        (getModules "checkers")
+        (getModules "communication")
+        (getModules "design")
+        (getModules "development")
+        (getModules "editors")
+        (getModules "languages")
+        (getModules "media")
+        (getModules "productivity")
+        (getModules "security")
+        (getModules "system")
+        (getModules "terminal")
+        (getModules "utilities")
       ];
       
       # Function to create a Darwin system with machine-specific config  
-      mkDarwinSystem = { machine, username ? "nobv" }:
+      mkDarwinSystem = { machine }:
+        let
+          machineConfigPath = ./machines/${machine}/config.nix;
+          machineConfig = 
+            if builtins.pathExists machineConfigPath
+            then import machineConfigPath
+            else throw "Missing required config file: machines/${machine}/config.nix";
+          username = machineConfig.username;
+        in
         darwin.lib.darwinSystem {
           inherit system;
           modules = [
@@ -74,8 +89,7 @@
         # Machine-specific configurations
         macbook = mkDarwinSystem { machine = "macbook"; };
         macmini = mkDarwinSystem { machine = "macmini"; };
-        test = mkDarwinSystem { machine = "test"; };
-        work = mkDarwinSystem { machine = "work"; username = ""; };
+        work = mkDarwinSystem { machine = "work"; };
       };
       
       # Development shell for working with the configuration
