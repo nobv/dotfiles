@@ -2,8 +2,7 @@
 
 let
   machineConfig = {
-    username = "nobv";
-    # 将来的に追加可能な設定例：
+    username = "";
     # timezone = "Asia/Tokyo";
     # locale = "ja_JP.UTF-8";
     # primaryDisplay = "external";

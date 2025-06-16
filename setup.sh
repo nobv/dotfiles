@@ -75,7 +75,8 @@ log_info "Starting installation with machine configuration: $MACHINE"
 # Step 1: Install Nix using Determinate Systems installer
 if ! command -v nix &> /dev/null; then
     log_info "Installing Nix package manager using Determinate Systems installer..."
-    curl -fsSL https://install.determinate.systems/nix | sh -s -- install --determinate
+    curl -fsSL https://install.determinate.systems/nix | sh -s -- install
+    # chose no
     log_success "Nix installed successfully"
     
     # Source Nix environment

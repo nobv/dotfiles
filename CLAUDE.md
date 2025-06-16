@@ -43,16 +43,17 @@ Example usage:
 - **Self-contained machine configs**: Each `machines/<machine>/default.nix` contains complete Darwin + Home Manager config
 - **Centralized module discovery**: Module auto-discovery logic is shared in `flake.nix` and applied to all machines
 - **Module structure**: Each module in `modules/` defines `options.modules.<category>.<name>` and conditional `config`
-- **Complex modules**: Some modules (like homebrew) auto-generate options from data structures
+- **Individual app modules**: All applications are split into individual modules for fine-grained control
+- **Homebrew dependency**: Apps using Homebrew wrap their config with `mkIf (config.modules.tools.homebrew.enable or false)`
 - **DRY principle**: No code duplication between machine configs
 
 ## Module Development Guidelines
 - **Module pattern**: Follow the established pattern: function signature → `with lib;` → `cfg` binding → `options` → `config = mkIf cfg.enable`
 - **Option naming**: Use `options.modules.<category>.<name>.enable = mkEnableOption "<description>"`
 - **Conditional config**: Wrap all functionality in `config = mkIf cfg.enable { ... }`
-- **File organization**: Place modules in appropriate subdirectories (app/, editor/, lang/, tools/, term/, font/, checkers/)
-- **Complex modules**: For modules with many sub-options (like homebrew), consider auto-generating options from data structures
-- **Adding new modules**: Simply create the module in appropriate directory - it will be auto-discovered
+- **Homebrew dependency**: For modules using Homebrew, wrap homebrew config with `mkIf (config.modules.tools.homebrew.enable or false)`
+- **File organization**: Place modules in appropriate functional categories (see Module Categories below)
+- **Adding new modules**: Simply create the module in appropriate category directory - it will be auto-discovered
 
 ## Commit Guidelines
 - Use Conventional Commits: `<type>(<optional scope>): <description>`
@@ -66,15 +67,61 @@ Example usage:
 - `setup.sh`: Full installation script (sources shared utilities)
 - `scripts/lib.sh`: Shared utilities (logging, macOS check, constants)
 - `machines/`: Machine-specific configurations (each has default.nix, darwin.nix, home.nix)
-- `modules/`: Reusable configuration modules organized by category
-  - `app/`: Application configurations (Chrome, iTerm2, etc.)
-  - `editor/`: Text editors (vim, emacs, neovim, vscode)
-  - `lang/`: Programming language environments
-  - `tools/`: Development tools and CLI utilities
-  - `term/`: Terminal and shell configurations
-  - `font/`: Font management
-  - `checkers/`: Linting and code quality tools
+- `modules/`: Reusable configuration modules organized by functional categories
 - `overlays/`: Nixpkgs overlays for custom packages
+
+## Module Categories
+Modules are organized by function for intuitive discovery and management:
+- `ai/`: AI applications (claude, chatgpt, perplexity, poe)
+- `browsers/`: Web browsers (chrome, firefox, arc, microsoft-edge)
+- `communication/`: Communication apps (slack, discord, zoom, telegram, deepl)
+- `design/`: Design and creative tools (figma, blender, miro)
+- `development/`: Development tools and CLI utilities (docker, git, postman, xcode, aws, kubernetes, etc.)
+- `editors/`: Text editors (vim, emacs, neovim, vscode, cursor, typora)
+- `languages/`: Programming language environments (python, nodejs, rust, go, etc.)
+- `media/`: Media and entertainment (spotify, kindle)
+- `productivity/`: Productivity tools (notion, obsidian, things3, amphetamine, etc.)
+- `security/`: Security tools (1password, wireguard)
+- `system/`: System-level configurations (homebrew, aerospace, fonts)
+- `terminal/`: Terminal and shell configurations (zsh, starship, wezterm)
+- `utilities/`: General utilities (raycast, karabiner-elements, flux, etc.)
+- `checkers/`: Code quality and linting tools
+
+## Homebrew Module Architecture
+The Homebrew module serves as the foundational package manager:
+- **Base functionality**: Provides core Homebrew configuration (brewPrefix, onActivation, global settings)
+- **Individual app modules**: Each application has its own module with conditional Homebrew dependencies
+- **Dependency pattern**: Apps use `mkIf (config.modules.tools.homebrew.enable or false)` to conditionally enable Homebrew packages
+- **Fine-grained control**: Users can enable/disable individual applications while maintaining Homebrew as the foundation
+
+## Module Configuration Examples
+```nix
+# Machine configuration with new module structure
+modules = {
+  # System foundation
+  system.homebrew.enable = true;
+  system.aerospace.enable = true;
+  
+  # Development environment
+  development.docker.enable = true;
+  development.git.enable = true;
+  development.postman.enable = true;
+  editors.cursor.enable = true;
+  editors.vscode.enable = true;
+  languages.python.enable = true;
+  languages.nodejs.enable = true;
+  
+  # Applications
+  browsers.chrome.enable = true;
+  communication.slack.enable = true;
+  productivity.notion.enable = true;
+  ai.claude.enable = true;
+  
+  # Security and utilities
+  security."1password".enable = true;
+  utilities.raycast.enable = true;
+};
+```
 
 ## Installation Script Architecture
 - `install`: Bootstrap script that handles system preparation (Xcode CLT, system updates) before repo cloning

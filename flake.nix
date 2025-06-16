@@ -72,10 +72,10 @@
     {
       darwinConfigurations = {
         # Machine-specific configurations
-        macbook = mkDarwinSystem { machine = "macbook"; username = "nobv"; };
-        macmini = mkDarwinSystem { machine = "macmini"; username = "nobv"; };
-        test = mkDarwinSystem { machine = "test"; username = "nobv"; };
-        work = mkDarwinSystem { machine = "work"; username = "nobv"; };
+        macbook = mkDarwinSystem { machine = "macbook"; };
+        macmini = mkDarwinSystem { machine = "macmini"; };
+        test = mkDarwinSystem { machine = "test"; };
+        work = mkDarwinSystem { machine = "work"; username = ""; };
       };
       
       # Development shell for working with the configuration
