@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, username, ... }:
 
 with lib;
 
@@ -15,6 +15,13 @@ in
       casks = [
         "jetbrains-toolbox"
       ];
+    };
+
+    # ideavimrc configuration
+    home-manager.users.${username}.home.file = {
+      ".ideavimrc" = {
+        text = builtins.readFile ./.ideavimrc;
+      };
     };
   };
 }

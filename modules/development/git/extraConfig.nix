@@ -9,7 +9,7 @@
   };
 
   ghq = {
-    root = [ "~/src/src" ];
+    root = [ "~/src" ];
   };
 
   push = {

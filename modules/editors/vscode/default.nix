@@ -17,13 +17,13 @@ in
       casks = [ "visual-studio-code" ];
     };
 
-    # Configuration files
-    home-manager.users.${username}.home.file = {
-      "settings" = {
-        target = "Library/Application Support/Code/User/settings.json";
-        text = builtins.toJSON settings;
-      };
-    };
+    # # Configuration files
+    # home-manager.users.${username}.home.file = {
+    #   "settings" = {
+    #     target = "Library/Application Support/Code/User/settings.json";
+    #     text = builtins.toJSON settings;
+    #   };
+    # };
 
     # programs = {
     #   vscode = {
