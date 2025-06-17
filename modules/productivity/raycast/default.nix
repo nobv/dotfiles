@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.utilities.raycast;
+  cfg = config.modules.productivity.raycast;
 in
 {
-  options.modules.utilities.raycast = {
+  options.modules.productivity.raycast = {
     enable = mkEnableOption "Enable Raycast launcher";
   };
 

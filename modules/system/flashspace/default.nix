@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.utilities.flashspace;
+  cfg = config.modules.system.flashspace;
 in
 {
-  options.modules.utilities.flashspace = {
+  options.modules.system.flashspace = {
     enable = mkEnableOption "FlashSpace file management and organization tool";
   };
 

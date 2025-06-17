@@ -2,8 +2,9 @@
 
 {
   imports = [
-    ./darwin.nix
-    ./home.nix
+    ../darwin.nix      # Common Darwin configuration
+    ../home.nix        # Common Home Manager configuration
+    ./overrides.nix    # Mac Mini-specific overrides
   ];
 
   # Enable modules using actual directory structure paths

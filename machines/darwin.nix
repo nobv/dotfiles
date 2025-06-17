@@ -1,6 +1,6 @@
 { config, pkgs, lib, username, ... }:
 {
-  # Work machine-specific Darwin system configuration
+  # Common Darwin system configuration shared across all machines
   environment = {
     systemPackages = with pkgs; [ ];
   };
@@ -18,7 +18,7 @@
     };
 
     overlays =
-      let path = ../../overlays; in
+      let path = ../overlays; in
       with builtins;
       map (n: import (path + ("/" + n)))
         (filter
@@ -29,10 +29,12 @@
 
   system = {
     primaryUser = username;
+    
+    # Default system settings (can be overridden by machine-specific configs)
     defaults = {
       dock = {
         autohide = true;
-        orientation = "bottom";  # Bottom dock for work
+        orientation = "left";
       };
 
       trackpad = { Clicking = true; };
@@ -44,7 +46,6 @@
         KeyRepeat = 2;
         AppleShowAllExtensions = true;
         AppleShowAllFiles = true;
-        # Work productivity settings
         NSAutomaticWindowAnimationsEnabled = true;
       };
     };
