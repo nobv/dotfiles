@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.yt-dlp;
+  cfg = config.modules.development.yt-dlp;
 in
 {
-  options.modules.tools.yt-dlp = {
+  options.modules.development.yt-dlp = {
     enable = mkEnableOption "yt-dlp, a youtube-dl fork with additional features";
   };
 

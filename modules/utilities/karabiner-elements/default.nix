@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.tools.karabiner-elements;
+  cfg = config.modules.utilities.karabiner-elements;
 in
 {
-  options.modules.tools.karabiner-elements = {
+  options.modules.utilities.karabiner-elements = {
     enable = mkEnableOption "Karabiner-Elements keyboard customization tool";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "karabiner-elements" ];
     };
   };

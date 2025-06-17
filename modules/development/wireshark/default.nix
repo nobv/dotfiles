@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.tools.wireshark;
+  cfg = config.modules.development.wireshark;
 in
 {
-  options.modules.tools.wireshark = {
+  options.modules.development.wireshark = {
     enable = mkEnableOption "Wireshark network protocol analyzer";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "wireshark" ];
     };
   };

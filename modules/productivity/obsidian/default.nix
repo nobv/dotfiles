@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.obsidian;
+  cfg = config.modules.productivity.obsidian;
 in
 {
-  options.modules.app.obsidian = {
+  options.modules.productivity.obsidian = {
     enable = mkEnableOption "Obsidian knowledge base and note-taking app";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "obsidian" ];
     };
   };

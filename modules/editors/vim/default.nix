@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.editor.vim;
+  cfg = config.modules.editors.vim;
 in
 {
-  options.modules.editor.vim = {
+  options.modules.editors.vim = {
     enable = mkEnableOption "Vim text editor";
   };
 

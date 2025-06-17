@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.beeper;
+  cfg = config.modules.communication.beeper;
 in
 {
-  options.modules.app.beeper = {
+  options.modules.communication.beeper = {
     enable = mkEnableOption "Beeper unified messaging app";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "beeper" ];
     };
   };

@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.messenger;
+  cfg = config.modules.communication.messenger;
 in
 {
-  options.modules.app.messenger = {
+  options.modules.communication.messenger = {
     enable = mkEnableOption "Messenger by Facebook";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       masApps = {
         "Messenger" = 1480068668;
       };

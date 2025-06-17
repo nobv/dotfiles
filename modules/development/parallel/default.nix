@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.parallel;
+  cfg = config.modules.development.parallel;
 in
 {
-  options.modules.tools.parallel = {
+  options.modules.development.parallel = {
     enable = mkEnableOption "GNU Parallel command-line driven parallelizing utility";
   };
 

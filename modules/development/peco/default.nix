@@ -3,11 +3,11 @@
 with lib;
 
 let
-  cfg = config.modules.tools.peco;
+  cfg = config.modules.development.peco;
   pecoConfig = import ./config.nix;
 in
 {
-  options.modules.tools.peco = {
+  options.modules.development.peco = {
     enable = mkEnableOption "peco interactive filtering tool";
   };
 

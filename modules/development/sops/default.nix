@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.sops;
+  cfg = config.modules.development.sops;
 in
 {
-  options.modules.tools.sops = {
+  options.modules.development.sops = {
     enable = mkEnableOption "SOPS secrets management";
   };
 

@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.tools.fork;
+  cfg = config.modules.development.fork;
 in
 {
-  options.modules.tools.fork = {
+  options.modules.development.fork = {
     enable = mkEnableOption "Fork Git client";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "fork" ];
     };
   };

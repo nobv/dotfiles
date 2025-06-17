@@ -3,16 +3,16 @@
 with lib;
 
 let
-  cfg = config.modules.app.raycast;
+  cfg = config.modules.utilities.raycast;
 in
 {
-  options.modules.app.raycast = {
+  options.modules.utilities.raycast = {
     enable = mkEnableOption "Enable Raycast launcher";
   };
 
   config = mkIf cfg.enable {
     # Homebrew installation
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "raycast" ];
     };
 

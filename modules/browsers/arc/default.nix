@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.arc;
+  cfg = config.modules.browsers.arc;
 in
 {
-  options.modules.app.arc = {
+  options.modules.browsers.arc = {
     enable = mkEnableOption "Arc web browser";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "arc" ];
     };
   };

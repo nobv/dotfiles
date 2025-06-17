@@ -3,11 +3,11 @@
 with lib;
 
 let
-  cfg = config.modules.tools.zotfile;
+  cfg = config.modules.development.zotfile;
   version = "5.1.2";
 in
 {
-  options.modules.tools.zotfile = {
+  options.modules.development.zotfile = {
     enable = mkEnableOption "Enable Zotfile extension";
   };
 

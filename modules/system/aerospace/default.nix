@@ -3,16 +3,16 @@
 with lib;
 
 let
-  cfg = config.modules.tools.aerospace;
+  cfg = config.modules.system.aerospace;
 in
 {
-  options.modules.tools.aerospace = {
+  options.modules.system.aerospace = {
     enable = mkEnableOption "Enable AeroSpace window manager";
   };
 
   config = mkIf cfg.enable {
     # Homebrew installation
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       taps = [ "nikitabobko/tap" ];
       casks = [ "aerospace" ];
     };

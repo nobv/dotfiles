@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.lang.deno;
+  cfg = config.modules.languages.deno;
 in
 {
-  options.modules.lang.deno = {
+  options.modules.languages.deno = {
     enable = mkEnableOption "Deno JavaScript/TypeScript runtime";
   };
 

@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.tools.multipass;
+  cfg = config.modules.development.multipass;
 in
 {
-  options.modules.tools.multipass = {
+  options.modules.development.multipass = {
     enable = mkEnableOption "Multipass Ubuntu virtual machine orchestrator";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "multipass" ];
     };
   };

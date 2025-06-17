@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.go-task;
+  cfg = config.modules.development.go-task;
 in
 {
-  options.modules.tools.go-task = {
+  options.modules.development.go-task = {
     enable = mkEnableOption "Task runner / simpler Make alternative written in Go";
   };
 

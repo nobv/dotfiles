@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.tools.graphviz;
+  cfg = config.modules.development.graphviz;
 in
 {
-  options.modules.tools.graphviz = {
+  options.modules.development.graphviz = {
     enable = mkEnableOption "Graph visualization software";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       brews = [ "graphviz" ];
     };
   };

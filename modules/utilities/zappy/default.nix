@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.zappy;
+  cfg = config.modules.utilities.zappy;
 in
 {
-  options.modules.app.zappy = {
+  options.modules.utilities.zappy = {
     enable = mkEnableOption "Zappy screenshot and screen recording tool";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "zappy" ];
     };
   };

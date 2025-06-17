@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.appcleaner;
+  cfg = config.modules.utilities.appcleaner;
 in
 {
-  options.modules.app.appcleaner = {
+  options.modules.utilities.appcleaner = {
     enable = mkEnableOption "AppCleaner uninstall utility";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "appcleaner" ];
     };
   };

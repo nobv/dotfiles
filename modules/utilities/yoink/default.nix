@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.yoink;
+  cfg = config.modules.utilities.yoink;
 in
 {
-  options.modules.app.yoink = {
+  options.modules.utilities.yoink = {
     enable = mkEnableOption "Yoink improved file drag and drop";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       masApps = {
         "Yoink" = 457622435;
       };

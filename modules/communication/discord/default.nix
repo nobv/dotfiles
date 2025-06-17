@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.discord;
+  cfg = config.modules.communication.discord;
 in
 {
-  options.modules.app.discord = {
+  options.modules.communication.discord = {
     enable = mkEnableOption "Discord voice and text chat app";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "discord" ];
     };
   };

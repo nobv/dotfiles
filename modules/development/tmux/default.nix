@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.tmux;
+  cfg = config.modules.development.tmux;
 in
 {
-  options.modules.tools.tmux = {
+  options.modules.development.tmux = {
     enable = mkEnableOption "Tmux terminal multiplexer with custom configuration and plugins";
   };
 

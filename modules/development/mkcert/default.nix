@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.tools.mkcert;
+  cfg = config.modules.development.mkcert;
 in
 {
-  options.modules.tools.mkcert = {
+  options.modules.development.mkcert = {
     enable = mkEnableOption "Simple tool for making locally-trusted development certificates";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       brews = [ "mkcert" ];
     };
   };

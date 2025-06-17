@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.aws;
+  cfg = config.modules.development.aws;
 in
 {
-  options.modules.tools.aws = {
+  options.modules.development.aws = {
     enable = mkEnableOption "AWS CLI tools";
   };
 

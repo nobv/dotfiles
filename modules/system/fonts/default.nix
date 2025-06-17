@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.font;
+  cfg = config.modules.system.fonts;
 in
 {
-  options.modules.font = {
+  options.modules.system.fonts = {
     enable = mkEnableOption "Enable font module";
   };
 

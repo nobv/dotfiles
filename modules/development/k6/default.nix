@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.k6;
+  cfg = config.modules.development.k6;
 in
 {
-  options.modules.tools.k6 = {
+  options.modules.development.k6 = {
     enable = mkEnableOption "k6 load testing tool";
   };
 

@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.amphetamine;
+  cfg = config.modules.productivity.amphetamine;
 in
 {
-  options.modules.app.amphetamine = {
+  options.modules.productivity.amphetamine = {
     enable = mkEnableOption "Amphetamine keep-awake utility";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       masApps = {
         "Amphetamine" = 937984704;
       };

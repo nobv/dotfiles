@@ -3,11 +3,11 @@
 with lib;
 
 let
-  cfg = config.modules.lang.haskell;
+  cfg = config.modules.languages.haskell;
   stable = import <nixpkgs-stable> { };
 in
 {
-  options.modules.lang.haskell = {
+  options.modules.languages.haskell = {
     enable = mkEnableOption "Haskell programming language";
   };
 

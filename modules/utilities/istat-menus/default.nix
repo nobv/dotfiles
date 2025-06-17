@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.istat-menus;
+  cfg = config.modules.utilities.istat-menus;
 in
 {
-  options.modules.app.istat-menus = {
+  options.modules.utilities.istat-menus = {
     enable = mkEnableOption "iStat Menus system monitoring for menu bar";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "istat-menus" ];
     };
   };

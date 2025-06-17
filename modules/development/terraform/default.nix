@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.terraform;
+  cfg = config.modules.development.terraform;
 in
 {
-  options.modules.tools.terraform = {
+  options.modules.development.terraform = {
     enable = mkEnableOption "Terraform infrastructure as code";
   };
 

@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.perplexity;
+  cfg = config.modules.ai.perplexity;
 in
 {
-  options.modules.app.perplexity = {
+  options.modules.ai.perplexity = {
     enable = mkEnableOption "Perplexity AI search and answer engine";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       masApps = {
         "Perplexity" = 1875466942;
       };

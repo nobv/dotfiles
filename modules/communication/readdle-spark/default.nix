@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.readdle-spark;
+  cfg = config.modules.communication.readdle-spark;
 in
 {
-  options.modules.app.readdle-spark = {
+  options.modules.communication.readdle-spark = {
     enable = mkEnableOption "Spark email client by Readdle";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "readdle-spark" ];
     };
   };

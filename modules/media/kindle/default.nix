@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.kindle;
+  cfg = config.modules.media.kindle;
 in
 {
-  options.modules.app.kindle = {
+  options.modules.media.kindle = {
     enable = mkEnableOption "Kindle e-book reader";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       masApps = {
         "Kindle" = 302584613;
       };

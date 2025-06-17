@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.heptabase;
+  cfg = config.modules.productivity.heptabase;
 in
 {
-  options.modules.app.heptabase = {
+  options.modules.productivity.heptabase = {
     enable = mkEnableOption "Heptabase visual knowledge management";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "heptabase" ];
     };
   };

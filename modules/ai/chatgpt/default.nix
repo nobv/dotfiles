@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.chatgpt;
+  cfg = config.modules.ai.chatgpt;
 in
 {
-  options.modules.app.chatgpt = {
+  options.modules.ai.chatgpt = {
     enable = mkEnableOption "ChatGPT desktop application";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "chatgpt" ];
     };
   };

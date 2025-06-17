@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.lang.dhall;
+  cfg = config.modules.languages.dhall;
 in
 {
-  options.modules.lang.dhall = {
+  options.modules.languages.dhall = {
     enable = mkEnableOption "Dhall configuration language";
   };
 

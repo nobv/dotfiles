@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.ripgrep;
+  cfg = config.modules.development.ripgrep;
 in
 {
-  options.modules.tools.ripgrep = {
+  options.modules.development.ripgrep = {
     enable = mkEnableOption "ripgrep, a line-oriented search tool that recursively searches directories";
   };
 

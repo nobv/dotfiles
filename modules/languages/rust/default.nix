@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.lang.rust;
+  cfg = config.modules.languages.rust;
 in
 {
-  options.modules.lang.rust = {
+  options.modules.languages.rust = {
     enable = mkEnableOption "Rust programming language development environment";
   };
 

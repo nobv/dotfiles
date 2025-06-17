@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.lang.nix;
+  cfg = config.modules.languages.nix;
 in
 {
-  options.modules.lang.nix = {
+  options.modules.languages.nix = {
     enable = mkEnableOption "Nix language support and tools";
   };
 

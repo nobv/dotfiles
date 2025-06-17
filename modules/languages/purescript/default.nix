@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.lang.purescript;
+  cfg = config.modules.languages.purescript;
 in
 {
-  options.modules.lang.purescript = {
+  options.modules.languages.purescript = {
     enable = mkEnableOption "PureScript functional programming language";
   };
 

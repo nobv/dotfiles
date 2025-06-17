@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.flashspace;
+  cfg = config.modules.utilities.flashspace;
 in
 {
-  options.modules.app.flashspace = {
+  options.modules.utilities.flashspace = {
     enable = mkEnableOption "FlashSpace file management and organization tool";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "flashspace" ];
     };
   };

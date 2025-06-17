@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.make;
+  cfg = config.modules.development.make;
 in
 {
-  options.modules.tools.make = {
+  options.modules.development.make = {
     enable = mkEnableOption "CMake build system";
   };
 

@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.tools.wireguard;
+  cfg = config.modules.security.wireguard;
 in
 {
-  options.modules.tools.wireguard = {
+  options.modules.security.wireguard = {
     enable = mkEnableOption "WireGuard VPN client";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       masApps = {
         "WireGuard" = 1451685025;
       };

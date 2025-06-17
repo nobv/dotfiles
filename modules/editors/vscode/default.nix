@@ -3,17 +3,17 @@
 with lib;
 
 let
-  cfg = config.modules.editor.vscode;
+  cfg = config.modules.editors.vscode;
   settings = import ./settings.nix;
 in
 {
-  options.modules.editor.vscode = {
+  options.modules.editors.vscode = {
     enable = mkEnableOption "Enable Visual Studio Code";
   };
 
   config = mkIf cfg.enable {
     # Homebrew installation
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "visual-studio-code" ];
     };
 

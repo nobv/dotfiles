@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.trivy;
+  cfg = config.modules.development.trivy;
 in
 {
-  options.modules.tools.trivy = {
+  options.modules.development.trivy = {
     enable = mkEnableOption "Trivy vulnerability scanner";
   };
 

@@ -3,11 +3,11 @@
 with lib;
 
 let
-  cfg = config.modules.editor.neovim;
+  cfg = config.modules.editors.neovim;
   plugins = (import ./lua/plugins pkgs);
 in
 {
-  options.modules.editor.neovim = {
+  options.modules.editors.neovim = {
     enable = mkEnableOption "Neovim text editor with custom configuration";
   };
 

@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.fzf;
+  cfg = config.modules.development.fzf;
 in
 {
-  options.modules.tools.fzf = {
+  options.modules.development.fzf = {
     enable = mkEnableOption "fzf fuzzy finder";
   };
 

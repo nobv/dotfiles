@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.lang.c;
+  cfg = config.modules.languages.c;
 in
 {
-  options.modules.lang.c = {
+  options.modules.languages.c = {
     enable = mkEnableOption "C/C++ development environment";
   };
 

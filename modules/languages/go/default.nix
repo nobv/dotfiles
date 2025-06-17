@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.lang.go;
+  cfg = config.modules.languages.go;
 in
 {
-  options.modules.lang.go = {
+  options.modules.languages.go = {
     enable = mkEnableOption "Enable Go development environment";
   };
 

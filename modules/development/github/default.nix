@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.github;
+  cfg = config.modules.development.github;
 in
 {
-  options.modules.tools.github = {
+  options.modules.development.github = {
     enable = mkEnableOption "GitHub CLI and development tools";
   };
 

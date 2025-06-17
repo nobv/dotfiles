@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.poe;
+  cfg = config.modules.ai.poe;
 in
 {
-  options.modules.app.poe = {
+  options.modules.ai.poe = {
     enable = mkEnableOption "Poe AI chatbot platform";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "poe" ];
     };
   };

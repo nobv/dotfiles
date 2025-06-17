@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.line;
+  cfg = config.modules.communication.line;
 in
 {
-  options.modules.app.line = {
+  options.modules.communication.line = {
     enable = mkEnableOption "LINE messaging app";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       masApps = {
         "LINE" = 539883307;
       };

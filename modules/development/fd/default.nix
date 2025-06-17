@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.fd;
+  cfg = config.modules.development.fd;
 in
 {
-  options.modules.tools.fd = {
+  options.modules.development.fd = {
     enable = mkEnableOption "fd, a simple, fast and user-friendly alternative to find";
   };
 

@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.lang.protobuf;
+  cfg = config.modules.languages.protobuf;
 in
 {
-  options.modules.lang.protobuf = {
+  options.modules.languages.protobuf = {
     enable = mkEnableOption "Protocol Buffers development tools";
   };
 

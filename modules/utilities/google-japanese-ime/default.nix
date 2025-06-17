@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.google-japanese-ime;
+  cfg = config.modules.utilities.google-japanese-ime;
 in
 {
-  options.modules.app.google-japanese-ime = {
+  options.modules.utilities.google-japanese-ime = {
     enable = mkEnableOption "Google Japanese Input Method Editor";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "google-japanese-ime" ];
     };
   };

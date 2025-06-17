@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.bat;
+  cfg = config.modules.development.bat;
 in
 {
-  options.modules.tools.bat = {
+  options.modules.development.bat = {
     enable = mkEnableOption "Enable bat (cat replacement) tool";
   };
 

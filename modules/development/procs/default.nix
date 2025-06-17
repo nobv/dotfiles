@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.procs;
+  cfg = config.modules.development.procs;
 in
 {
-  options.modules.tools.procs = {
+  options.modules.development.procs = {
     enable = mkEnableOption "procs process viewer";
   };
 

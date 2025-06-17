@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.navi;
+  cfg = config.modules.development.navi;
 in
 {
-  options.modules.tools.navi = {
+  options.modules.development.navi = {
     enable = mkEnableOption "navi interactive cheatsheet";
   };
 

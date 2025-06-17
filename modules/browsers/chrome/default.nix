@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.chrome;
+  cfg = config.modules.browsers.chrome;
 in
 {
-  options.modules.app.chrome = {
+  options.modules.browsers.chrome = {
     enable = mkEnableOption "Google Chrome web browser";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "google-chrome" ];
     };
   };

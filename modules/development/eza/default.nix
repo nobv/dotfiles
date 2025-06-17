@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.eza;
+  cfg = config.modules.development.eza;
 in
 {
-  options.modules.tools.eza = {
+  options.modules.development.eza = {
     enable = mkEnableOption "Enable eza (ls replacement) tool";
   };
 

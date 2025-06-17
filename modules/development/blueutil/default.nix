@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.tools.blueutil;
+  cfg = config.modules.development.blueutil;
 in
 {
-  options.modules.tools.blueutil = {
+  options.modules.development.blueutil = {
     enable = mkEnableOption "Bluetooth command line utility";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       brews = [ "blueutil" ];
     };
   };

@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.kubernetes;
+  cfg = config.modules.development.kubernetes;
 in
 {
-  options.modules.tools.kubernetes = {
+  options.modules.development.kubernetes = {
     enable = mkEnableOption "Kubernetes development and management tools";
   };
 

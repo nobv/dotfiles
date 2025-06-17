@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.lang.nodejs;
+  cfg = config.modules.languages.nodejs;
 in
 {
-  options.modules.lang.nodejs = {
+  options.modules.languages.nodejs = {
     enable = mkEnableOption "Enable Node.js development environment with Volta and Claude Code";
   };
 

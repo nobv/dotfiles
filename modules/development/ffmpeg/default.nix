@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.ffmpeg;
+  cfg = config.modules.development.ffmpeg;
 in
 {
-  options.modules.tools.ffmpeg = {
+  options.modules.development.ffmpeg = {
     enable = mkEnableOption "FFmpeg multimedia framework";
   };
 

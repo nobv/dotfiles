@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.mos;
+  cfg = config.modules.utilities.mos;
 in
 {
-  options.modules.app.mos = {
+  options.modules.utilities.mos = {
     enable = mkEnableOption "Mos smooth scrolling and mouse acceleration control";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "mos" ];
     };
   };

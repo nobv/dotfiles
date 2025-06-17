@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.zotero;
+  cfg = config.modules.development.zotero;
 in
 {
-  options.modules.app.zotero = {
+  options.modules.development.zotero = {
     enable = mkEnableOption "Zotero reference management software";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "zotero" ];
     };
   };

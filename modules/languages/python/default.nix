@@ -4,10 +4,10 @@ with lib;
 
 let
   stable = import <nixpkgs-stable> { };
-  cfg = config.modules.lang.python;
+  cfg = config.modules.languages.python;
 in
 {
-  options.modules.lang.python = {
+  options.modules.languages.python = {
     enable = mkEnableOption "Python programming language development environment";
   };
 

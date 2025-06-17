@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.blender;
+  cfg = config.modules.design.blender;
 in
 {
-  options.modules.app.blender = {
+  options.modules.design.blender = {
     enable = mkEnableOption "Blender 3D creation suite";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "blender" ];
     };
   };

@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.leader-key;
+  cfg = config.modules.utilities.leader-key;
 in
 {
-  options.modules.app.leader-key = {
+  options.modules.utilities.leader-key = {
     enable = mkEnableOption "Leader Key keyboard shortcuts launcher";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "leader-key" ];
     };
   };

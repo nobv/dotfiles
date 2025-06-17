@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.anki;
+  cfg = config.modules.productivity.anki;
 in
 {
-  options.modules.app.anki = {
+  options.modules.productivity.anki = {
     enable = mkEnableOption "Anki flashcard learning system";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "anki" ];
     };
   };

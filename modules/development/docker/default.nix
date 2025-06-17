@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.docker;
+  cfg = config.modules.development.docker;
 in
 {
-  options.modules.tools.docker = {
+  options.modules.development.docker = {
     enable = mkEnableOption "Docker development tools and linters";
     enableDesktop = mkOption {
       type = types.bool;
@@ -20,7 +20,7 @@ in
       hadolint
     ];
     
-    homebrew = mkIf (cfg.enableDesktop && config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (cfg.enableDesktop && config.modules.system.homebrew.enable or false) {
       casks = [ "docker" ];
     };
   };

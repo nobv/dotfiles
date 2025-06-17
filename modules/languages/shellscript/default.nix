@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.lang.shellscript;
+  cfg = config.modules.languages.shellscript;
 in
 {
-  options.modules.lang.shellscript = {
+  options.modules.languages.shellscript = {
     enable = mkEnableOption "Shell script development tools and linters";
   };
 

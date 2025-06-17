@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.jq;
+  cfg = config.modules.development.jq;
 in
 {
-  options.modules.tools.jq = {
+  options.modules.development.jq = {
     enable = mkEnableOption "jq, a lightweight and flexible command-line JSON processor";
   };
 

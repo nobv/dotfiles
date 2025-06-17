@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.tree;
+  cfg = config.modules.development.tree;
 in
 {
-  options.modules.tools.tree = {
+  options.modules.development.tree = {
     enable = mkEnableOption "tree, a recursive directory listing command";
   };
 

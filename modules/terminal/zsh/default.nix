@@ -3,11 +3,11 @@
 with lib;
 
 let
-  cfg = config.modules.term.zsh;
+  cfg = config.modules.terminal.zsh;
   aliases = import ./aliases.nix;
 in
 {
-  options.modules.term.zsh = {
+  options.modules.terminal.zsh = {
     enable = mkEnableOption "Enable Zsh shell with enhanced configuration";
   };
 

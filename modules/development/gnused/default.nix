@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.gnused;
+  cfg = config.modules.development.gnused;
 in
 {
-  options.modules.tools.gnused = {
+  options.modules.development.gnused = {
     enable = mkEnableOption "GNU sed text stream editor";
   };
 

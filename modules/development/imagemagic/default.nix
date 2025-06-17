@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.imagemagic;
+  cfg = config.modules.development.imagemagic;
 in
 {
-  options.modules.tools.imagemagic = {
+  options.modules.development.imagemagic = {
     enable = mkEnableOption "ImageMagick image manipulation tools";
   };
 

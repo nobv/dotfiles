@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.lang.lua;
+  cfg = config.modules.languages.lua;
 in
 {
-  options.modules.lang.lua = {
+  options.modules.languages.lua = {
     enable = mkEnableOption "Lua programming language";
   };
 

@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.lf;
+  cfg = config.modules.development.lf;
 in
 {
-  options.modules.tools.lf = {
+  options.modules.development.lf = {
     enable = mkEnableOption "lf terminal file manager";
   };
 

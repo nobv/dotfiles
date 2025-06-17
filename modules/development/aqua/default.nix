@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.tools.aqua;
+  cfg = config.modules.development.aqua;
 in
 {
-  options.modules.tools.aqua = {
+  options.modules.development.aqua = {
     enable = mkEnableOption "Declarative CLI Version manager";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       brews = [ "aqua" ];
     };
   };

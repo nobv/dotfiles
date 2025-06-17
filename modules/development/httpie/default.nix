@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.httpie;
+  cfg = config.modules.development.httpie;
 in
 {
-  options.modules.tools.httpie = {
+  options.modules.development.httpie = {
     enable = mkEnableOption "HTTPie command-line HTTP client";
   };
 

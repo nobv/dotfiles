@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.direnv;
+  cfg = config.modules.development.direnv;
 in
 {
-  options.modules.tools.direnv = {
+  options.modules.development.direnv = {
     enable = mkEnableOption "direnv shell environment manager";
   };
 

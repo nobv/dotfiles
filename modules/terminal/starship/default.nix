@@ -3,11 +3,11 @@
 with lib;
 
 let
-  cfg = config.modules.term.starship;
+  cfg = config.modules.terminal.starship;
   settings = import ./config.nix { lib = lib; };
 in
 {
-  options.modules.term.starship = {
+  options.modules.terminal.starship = {
     enable = mkEnableOption "Starship cross-shell prompt with custom configuration";
   };
 

@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.streaks;
+  cfg = config.modules.productivity.streaks;
 in
 {
-  options.modules.app.streaks = {
+  options.modules.productivity.streaks = {
     enable = mkEnableOption "Streaks habit tracking app";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       masApps = {
         "Streaks" = 963034692;
       };

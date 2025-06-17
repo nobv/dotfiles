@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.jetbrains;
+  cfg = config.modules.editors.jetbrains;
 in
 {
-  options.modules.app.jetbrains = {
+  options.modules.editors.jetbrains = {
     enable = mkEnableOption "JetBrains Toolbox for IDE management";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [
         "jetbrains-toolbox"
       ];

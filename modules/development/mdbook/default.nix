@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.tools.mdbook;
+  cfg = config.modules.development.mdbook;
 in
 {
-  options.modules.tools.mdbook = {
+  options.modules.development.mdbook = {
     enable = mkEnableOption "Create books from markdown files";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       brews = [ "mdbook" ];
     };
   };

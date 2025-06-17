@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.firefox;
+  cfg = config.modules.browsers.firefox;
 in
 {
-  options.modules.app.firefox = {
+  options.modules.browsers.firefox = {
     enable = mkEnableOption "Firefox web browser";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "firefox" ];
     };
   };

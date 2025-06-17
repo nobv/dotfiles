@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.miro;
+  cfg = config.modules.design.miro;
 in
 {
-  options.modules.app.miro = {
+  options.modules.design.miro = {
     enable = mkEnableOption "Miro collaborative whiteboard platform";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "miro" ];
     };
   };

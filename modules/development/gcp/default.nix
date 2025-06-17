@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.gcp;
+  cfg = config.modules.development.gcp;
 in
 {
-  options.modules.tools.gcp = {
+  options.modules.development.gcp = {
     enable = mkEnableOption "Google Cloud Platform SDK";
   };
 

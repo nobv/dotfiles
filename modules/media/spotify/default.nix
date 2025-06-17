@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.spotify;
+  cfg = config.modules.media.spotify;
 in
 {
-  options.modules.app.spotify = {
+  options.modules.media.spotify = {
     enable = mkEnableOption "Spotify music streaming app";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "spotify" ];
     };
   };

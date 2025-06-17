@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.app.wezterm;
+  cfg = config.modules.terminal.wezterm;
 in
 {
-  options.modules.app.wezterm = {
+  options.modules.terminal.wezterm = {
     enable = mkEnableOption "WezTerm terminal emulator application";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "wezterm" ];
     };
 

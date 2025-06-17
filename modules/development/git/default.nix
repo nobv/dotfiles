@@ -3,12 +3,12 @@
 with lib;
 
 let
-  cfg = config.modules.tools.git;
+  cfg = config.modules.development.git;
   extraConfig = import ./extraConfig.nix;
   aliases = import ./aliases.nix;
 in
 {
-  options.modules.tools.git = {
+  options.modules.development.git = {
     enable = mkEnableOption "Enable Git version control system with enhanced tools";
   };
 

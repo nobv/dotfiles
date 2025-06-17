@@ -3,15 +3,15 @@
 with lib;
 
 let
-  cfg = config.modules.tools.utm;
+  cfg = config.modules.development.utm;
 in
 {
-  options.modules.tools.utm = {
+  options.modules.development.utm = {
     enable = mkEnableOption "UTM virtual machine host for iOS and macOS";
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.tools.homebrew.enable or false) {
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "utm" ];
     };
   };

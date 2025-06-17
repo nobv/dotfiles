@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.tools.homebrew;
+  cfg = config.modules.system.homebrew;
 in
 {
-  options.modules.tools.homebrew = {
+  options.modules.system.homebrew = {
     enable = mkEnableOption "Enable homebrew package manager";
   };
 
