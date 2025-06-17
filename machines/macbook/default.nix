@@ -6,11 +6,16 @@
     ./home.nix
   ];
 
-  # Enable modules using the actual option paths defined in module files
+  # Enable modules using actual directory structure paths
   modules = {
-    # Core system tools
-    tools = {
+    # System tools
+    system = {
       homebrew.enable = true;
+      fonts.enable = true;
+    };
+    
+    # Development tools
+    development = {
       tmux.enable = true;
       docker.enable = true;
       kubernetes.enable = true;
@@ -25,7 +30,7 @@
     };
     
     # Programming languages
-    lang = {
+    languages = {
       go.enable = true;
       nodejs.enable = true;
       nix.enable = true;
@@ -34,26 +39,21 @@
       shellscript.enable = true;
     };
     
-    # Applications
-    app = {
-      jetbrains.enable = true;
-      wezterm.enable = true;
-    };
-    
     # Text editors
-    editor = {
+    editors = {
       neovim.enable = true;
       vim.enable = true;
+      jetbrains.enable = true;
     };
     
     # Terminal configuration
-    term = {
+    terminal = {
       starship.enable = true;
       zsh.enable = true;
+      wezterm.enable = true;
     };
     
-    # Code quality and fonts
+    # Code quality
     checkers.enable = true;
-    font.enable = true;
   };
 }

@@ -6,11 +6,16 @@
     ./home.nix
   ];
 
-  # Enable modules using the actual option paths defined in module files
+  # Enable modules using actual directory structure paths
   modules = {
-    # Core system tools - lighter setup for desktop
-    tools = {
+    # System tools - lighter setup for desktop
+    system = {
       homebrew.enable = true;
+      fonts.enable = true;
+    };
+    
+    # Development tools - lighter setup for desktop
+    development = {
       tmux.enable = false;  # Less needed on desktop
       docker.enable = false;  # Less Docker development
       kubernetes.enable = false;
@@ -25,7 +30,7 @@
     };
     
     # Programming languages - lighter development setup
-    lang = {
+    languages = {
       go.enable = true;
       nodejs.enable = true;
       nix.enable = true;
@@ -34,27 +39,22 @@
       shellscript.enable = true;
     };
     
-    # Applications
-    app = {
-      jetbrains.enable = true;
-      wezterm.enable = true;
-    };
-    
     # Text editors - prefer Emacs on desktop
-    editor = {
+    editors = {
       emacs.enable = true;
       neovim.enable = true;
       vim.enable = true;
+      jetbrains.enable = true;
     };
     
     # Terminal configuration
-    term = {
+    terminal = {
       starship.enable = true;
       zsh.enable = true;
+      wezterm.enable = true;
     };
     
-    # Code quality and fonts
+    # Code quality
     checkers.enable = true;
-    font.enable = true;
   };
 }

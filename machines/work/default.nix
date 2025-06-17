@@ -6,11 +6,16 @@
     ./home.nix
   ];
 
-  # Enable modules using the actual option paths defined in module files
+  # Enable modules using actual directory structure paths
   modules = {
-    # Core system tools - full development stack
-    tools = {
+    # System tools
+    system = {
       homebrew.enable = true;
+      fonts.enable = true;
+    };
+    
+    # Development tools
+    development = {
       tmux.enable = true;
       docker.enable = true;
       bat.enable = true;
@@ -25,14 +30,13 @@
       gcp.enable = true;
       direnv.enable = true;
       aqua.enable = true;
-      karabiner-elements.enable = true;
       peco.enable = true;
       fzf.enable = true;
       fork.enable = true;
     };
     
-    # Programming languages - all programming languages
-    lang = {
+    # Programming languages
+    languages = {
       go.enable = true;
       nodejs.enable = true;
       nix.enable = true;
@@ -41,29 +45,33 @@
       protobuf.enable = true;
     };
     
-    # Applications
-    app = {
+    # Text editors
+    editors = {
+      neovim.enable = true;
+      vscode.enable = true;
       jetbrains.enable = true;
+    };
+    
+    # Terminal configuration
+    terminal = {
+      starship.enable = true;
+      zsh.enable = true;
       wezterm.enable = true;
+    };
+    
+    # Security tools
+    security = {
       "1password".enable = true;
+    };
+    
+    # Utilities
+    utilities = {
+      karabiner-elements.enable = true;
       raycast.enable = true;
       flux.enable = true;
     };
     
-    # Text editors - work-focused
-    editor = {
-      neovim.enable = true;
-      vscode.enable = true;
-    };
-    
-    # Terminal configuration
-    term = {
-      starship.enable = true;
-      zsh.enable = true;
-    };
-    
-    # Code quality and fonts
+    # Code quality
     checkers.enable = true;
-    font.enable = true;
   };
 }
