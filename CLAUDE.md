@@ -64,6 +64,7 @@ Example usage:
 ## Commit Guidelines
 - Use Conventional Commits: `<type>(<optional scope>): <description>`
 - Keep commit messages to a single line only
+- **Do not include** Claude Code attribution (`🤖 Generated with...` or `Co-Authored-By: Claude`) in commit messages
 - Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
 - Examples: `feat(homebrew): add packages`, `fix(wezterm): correct config`, `chore: update .gitignore`
 
