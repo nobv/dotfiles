@@ -14,9 +14,12 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 ## Build Commands
 - Check flake: `nix flake check`
 - Build system configuration: `nix build .#darwinConfigurations.<machine>.system`
+- **Test configuration (REQUIRED)**: `darwin-rebuild switch --flake .#<machine> --dry-run`
 - Apply configuration: `darwin-rebuild switch --flake .#<machine>`
 - Update flake inputs: `nix flake update`
 - Show flake info: `nix flake show`
+
+**IMPORTANT**: Always run `--dry-run` before applying configuration changes to validate the build and prevent system breakage.
 
 ## Installation Commands
 - One-liner install: `bash -c "$(curl -L https://raw.githubusercontent.com/nobv/dotfiles/master/install)"`
@@ -54,7 +57,7 @@ Example usage:
 - **Module pattern**: Follow the established pattern: function signature → `with lib;` → `cfg` binding → `options` → `config = mkIf cfg.enable`
 - **Option naming**: Use `options.modules.<category>.<name>.enable = mkEnableOption "<description>"`
 - **Conditional config**: Wrap all functionality in `config = mkIf cfg.enable { ... }`
-- **Homebrew dependency**: For modules using Homebrew, wrap homebrew config with `mkIf (config.modules.tools.homebrew.enable or false)`
+- **Homebrew dependency**: For modules using Homebrew, wrap homebrew config with `mkIf (config.modules.system.homebrew.enable or false)`
 - **File organization**: Place modules in appropriate functional categories (see Module Categories below)
 - **Adding new modules**: Simply create the module in appropriate category directory - it will be auto-discovered
 
@@ -94,49 +97,60 @@ Modules are organized by function for intuitive discovery and management:
 The Homebrew module serves as the foundational package manager:
 - **Base functionality**: Provides core Homebrew configuration (brewPrefix, onActivation, global settings)
 - **Individual app modules**: Each application has its own module with conditional Homebrew dependencies
-- **Dependency pattern**: Apps use `mkIf (config.modules.tools.homebrew.enable or false)` to conditionally enable Homebrew packages (system homebrew is at modules.tools.homebrew)
+- **Dependency pattern**: Apps use `mkIf (config.modules.system.homebrew.enable or false)` to conditionally enable Homebrew packages
 - **Fine-grained control**: Users can enable/disable individual applications while maintaining Homebrew as the foundation
 
 ## Module Configuration Examples
 ```nix
-# Machine configuration using actual option paths defined in modules
+# Machine configuration using actual directory structure paths
 modules = {
-  # Core system tools (options.modules.tools.*)
-  tools = {
+  # System tools (options.modules.system.*)
+  system = {
     homebrew.enable = true;
+    fonts.enable = true;
+  };
+  
+  # Development tools (options.modules.development.*)
+  development = {
     docker.enable = true;
     git.enable = true;
     tmux.enable = true;
   };
   
-  # Programming languages (options.modules.lang.*)
-  lang = {
+  # Programming languages (options.modules.languages.*)
+  languages = {
     python.enable = true;
     nodejs.enable = true;
     rust.enable = true;
   };
   
-  # Applications (options.modules.app.*)
-  app = {
+  # Text editors (options.modules.editors.*)
+  editors = {
+    neovim.enable = true;
+    vim.enable = true;
     jetbrains.enable = true;
+  };
+  
+  # Terminal configuration (options.modules.terminal.*)
+  terminal = {
+    starship.enable = true;
+    zsh.enable = true;
     wezterm.enable = true;
   };
   
-  # Text editors (options.modules.editor.*)
-  editor = {
-    neovim.enable = true;
-    vim.enable = true;
+  # Utilities (options.modules.utilities.*)
+  utilities = {
+    raycast.enable = true;
+    karabiner-elements.enable = true;
   };
   
-  # Terminal configuration (options.modules.term.*)
-  term = {
-    starship.enable = true;
-    zsh.enable = true;
+  # Security (options.modules.security.*)
+  security = {
+    "1password".enable = true;
   };
   
-  # Code quality and fonts (options.modules.*)
+  # Code quality (options.modules.checkers)
   checkers.enable = true;
-  font.enable = true;
 };
 ```
 
