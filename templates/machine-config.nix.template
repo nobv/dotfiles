@@ -1,0 +1,15 @@
+{
+  # Your username on this machine
+  # This should match your actual username (run `whoami` to check)
+  # Example: username = "john";
+  username = "REPLACE_WITH_YOUR_USERNAME";
+  
+  # Optional: Machine-specific hostname override
+  # If not specified, the machine name (macbook/macmini/work) will be used
+  # Example: hostname = "work-macbook-pro";
+  # hostname = "REPLACE_WITH_HOSTNAME";
+  
+  # Optional: Machine-specific git configuration
+  # Example: gitEmail = "work@company.com";
+  # gitEmail = "REPLACE_WITH_GIT_EMAIL";
+}

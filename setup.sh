@@ -125,7 +125,40 @@ fi
 
 cd "$DOTFILES_DIR"
 
-## Step 5: Fix /run directory issue (common on macOS)
+# Step 5: Generate machine-specific config.nix if needed
+config_file="machines/$MACHINE/config.nix"
+if [[ ! -f "$config_file" ]]; then
+    log_info "Generating machine-specific config.nix for $MACHINE..."
+    
+    # Copy template and prompt for username
+    if [[ -f "templates/machine-config.nix.template" ]]; then
+        cp "templates/machine-config.nix.template" "$config_file"
+        
+        # Get current username as default
+        current_user=$(whoami)
+        
+        # Prompt for username
+        echo ""
+        log_info "Please configure your machine-specific settings:"
+        read -p "Enter your username (default: $current_user): " user_input
+        username="${user_input:-$current_user}"
+        
+        # Replace template placeholder
+        sed -i.bak "s/REPLACE_WITH_YOUR_USERNAME/$username/g" "$config_file"
+        rm "$config_file.bak"
+        
+        log_success "Created $config_file with username: $username"
+        log_info "You can edit $config_file later to add more machine-specific settings"
+    else
+        log_error "Template file not found: templates/machine-config.nix.template"
+        log_info "Please create $config_file manually with: { username = \"$current_user\"; }"
+        exit 1
+    fi
+else
+    log_info "Machine config already exists: $config_file"
+fi
+
+## Step 6: Fix /run directory issue (common on macOS)
 #if [[ ! -d /run ]]; then
 #    log_info "Creating /run directory symlink..."
 #    printf 'run\tprivate/var/run\n' | sudo tee -a /etc/synthetic.conf
@@ -135,7 +168,7 @@ cd "$DOTFILES_DIR"
 #    log_success "/run directory configured"
 #fi
 
-# Step 6: Build and apply Nix Darwin configuration
+# Step 7: Build and apply Nix Darwin configuration
 log_info "Building Nix Darwin configuration for machine: $MACHINE"
 nix build ".#darwinConfigurations.$MACHINE.system" --extra-experimental-features "nix-command flakes"
 
@@ -144,7 +177,7 @@ sudo ./result/sw/bin/darwin-rebuild switch --flake ".#$MACHINE"
 
 log_success "Nix Darwin configuration applied successfully!"
 
-# Step 7: Final instructions
+# Step 8: Final instructions
 echo ""
 log_success "Installation completed successfully!"
 echo ""

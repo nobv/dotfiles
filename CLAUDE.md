@@ -37,12 +37,31 @@ Example usage:
 - `darwin-rebuild switch --flake .#work`
 - `darwin-rebuild switch --flake .#macmini`
 
-## Username Configuration
-- Each machine has a `config.nix` file containing username configuration
+## Machine-Specific Configuration
+- Each machine requires a `config.nix` file containing machine-specific settings
 - Files located at `machines/<machine>/config.nix` with format `{ username = "your-username"; }`
-- Usernames are read during flake evaluation and passed via specialArgs
-- Error thrown if config.nix file is missing for a machine
-- Username setting is now centralized and no longer duplicated across files
+- **These files are NOT tracked in git** (machine-specific settings should remain local)
+- Configuration is generated from `templates/machine-config.nix.template` during setup
+
+### Configuration Setup
+**Automatic (Recommended):**
+- Run `./setup.sh -m <machine>` - it will automatically generate `config.nix` from template
+- Prompts for username and creates the file with proper format
+
+**Manual Setup:**
+1. Copy template: `cp templates/machine-config.nix.template machines/<machine>/config.nix`
+2. Edit the file and replace placeholders:
+   - `REPLACE_WITH_YOUR_USERNAME` → your actual username
+   - Add any machine-specific settings as needed
+
+### Configuration Format
+```nix
+{
+  username = "your-username";  # Required: your system username
+  # hostname = "custom-hostname";  # Optional: override default hostname
+  # gitEmail = "work@company.com";  # Optional: machine-specific git email
+}
+```
 
 ## Module System Architecture
 - **Self-contained machine configs**: Each `machines/<machine>/default.nix` contains complete Darwin + Home Manager config
