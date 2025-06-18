@@ -70,7 +70,10 @@
             if builtins.pathExists machineConfigPath
             then import machineConfigPath
             else throw "Missing required config file: machines/${machine}/config.nix";
-          username = machineConfig.username;
+          username = 
+            if machineConfig.username == "REPLACE_WITH_YOUR_USERNAME"
+            then throw "Please update machines/${machine}/config.nix with your actual username (currently set to placeholder 'REPLACE_WITH_YOUR_USERNAME')"
+            else machineConfig.username;
         in
         darwin.lib.darwinSystem {
           inherit system;
