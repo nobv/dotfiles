@@ -59,6 +59,10 @@
       zsh.enable = true;
       wezterm.enable = true;
     };
+
+    productivity = {
+      raycast.enable = true;
+    };
     
     # Security tools
     security = {
@@ -68,7 +72,6 @@
     # Utilities
     utilities = {
       karabiner-elements.enable = true;
-      raycast.enable = true;
       flux.enable = true;
     };
     
