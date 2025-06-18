@@ -125,37 +125,60 @@ fi
 
 cd "$DOTFILES_DIR"
 
-# Step 5: Generate machine-specific config.nix if needed
+# Step 5: Configure machine-specific config.nix
 config_file="machines/$MACHINE/config.nix"
+
+# Check if config file exists
 if [[ ! -f "$config_file" ]]; then
-    log_info "Generating machine-specific config.nix for $MACHINE..."
+    log_error "Config file not found: $config_file"
+    log_info "Please ensure you have cloned the complete dotfiles repository"
+    exit 1
+fi
+
+# Check if config.nix has placeholder username
+if grep -q "REPLACE_WITH_YOUR_USERNAME" "$config_file"; then
+    log_info "Configuring machine-specific settings for $MACHINE..."
     
-    # Copy template and prompt for username
-    if [[ -f "templates/machine-config.nix.template" ]]; then
-        cp "templates/machine-config.nix.template" "$config_file"
-        
-        # Get current username as default
-        current_user=$(whoami)
-        
-        # Prompt for username
-        echo ""
-        log_info "Please configure your machine-specific settings:"
-        read -p "Enter your username (default: $current_user): " user_input
-        username="${user_input:-$current_user}"
-        
-        # Replace template placeholder
-        sed -i.bak "s/REPLACE_WITH_YOUR_USERNAME/$username/g" "$config_file"
-        rm "$config_file.bak"
-        
-        log_success "Created $config_file with username: $username"
-        log_info "You can edit $config_file later to add more machine-specific settings"
-    else
-        log_error "Template file not found: templates/machine-config.nix.template"
-        log_info "Please create $config_file manually with: { username = \"$current_user\"; }"
+    # Get current username as default
+    current_user=$(whoami)
+    
+    # Prompt for username
+    echo ""
+    log_info "The config file contains placeholder username that needs to be updated:"
+    echo "  File: $config_file"
+    echo "  Current: REPLACE_WITH_YOUR_USERNAME"
+    echo ""
+    read -p "Enter your username (default: $current_user): " user_input
+    username="${user_input:-$current_user}"
+    
+    # Validate username is not empty
+    if [[ -z "$username" ]]; then
+        log_error "Username cannot be empty"
         exit 1
     fi
+    
+    # Replace placeholder with actual username
+    sed -i.bak "s/REPLACE_WITH_YOUR_USERNAME/$username/g" "$config_file"
+    rm "$config_file.bak"
+    
+    log_success "Updated $config_file with username: $username"
+    log_info "You can edit $config_file later to add more machine-specific settings"
 else
-    log_info "Machine config already exists: $config_file"
+    # Check if config has valid username
+    username=$(grep 'username.*=' "$config_file" | sed 's/.*"\(.*\)".*/\1/')
+    if [[ -n "$username" && "$username" != "REPLACE_WITH_YOUR_USERNAME" ]]; then
+        log_info "Machine config already configured: $config_file (username: $username)"
+    else
+        log_warning "Config file exists but username may not be properly set: $config_file"
+        log_info "Please verify the username in $config_file is correct"
+    fi
+fi
+
+# Final validation before proceeding
+if grep -q "REPLACE_WITH_YOUR_USERNAME" "$config_file"; then
+    log_error "Config file still contains placeholder username"
+    log_info "Please manually edit $config_file and replace REPLACE_WITH_YOUR_USERNAME with your actual username"
+    exit 1
 fi
 
 ## Step 6: Fix /run directory issue (common on macOS)
