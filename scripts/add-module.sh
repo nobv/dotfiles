@@ -235,6 +235,48 @@ get_brew_description() {
     return 1
 }
 
+# Get description from nixpkgs
+get_nix_description() {
+    local app_name="$1"
+    
+    if command -v nix >/dev/null 2>&1; then
+        # Try nix search first (for flakes-enabled systems)
+        # Search for exact match first, then broader search
+        local search_result
+        
+        # Try exact match first
+        search_result=$(nix search nixpkgs "^$app_name$" 2>/dev/null | grep -A 1 "$app_name" | tail -n 1 | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+        
+        # If no exact match, try broader search
+        if [[ -z "$search_result" ]]; then
+            search_result=$(nix search nixpkgs "$app_name" 2>/dev/null | grep -A 1 "\.$app_name" | tail -n 1 | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')
+        fi
+        
+        if [[ -n "$search_result" && ! "$search_result" =~ ^\* && ${#search_result} -gt 5 ]]; then
+            echo "$search_result"
+            return 0
+        fi
+        
+        # Fallback to nix-env -qa with description
+        local nix_info
+        nix_info=$(nix-env -qa --description "$app_name" 2>/dev/null | head -n 1)
+        
+        if [[ -n "$nix_info" ]]; then
+            # Extract description part (after the package name)
+            local description
+            description=$(echo "$nix_info" | sed 's/^[^[:space:]]*[[:space:]]\+//' | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
+            
+            if [[ -n "$description" && ${#description} -gt 5 ]]; then
+                echo "$description"
+                return 0
+            fi
+        fi
+    fi
+    
+    # Fallback to generic description
+    return 1
+}
+
 # Generate module template based on installation method
 generate_module_template() {
     local category="$1"
@@ -258,8 +300,29 @@ generate_module_template() {
                 description="$app_name tool"
             fi
             ;;
+        "nix")
+            if ! description=$(get_nix_description "$app_name"); then
+                # Fallback to category-based description
+                case "$category" in
+                    "productivity") description="$app_name productivity tool" ;;
+                    "utilities") description="$app_name utility tool" ;;
+                    "development") description="$app_name development tool" ;;
+                    "browsers") description="$app_name web browser" ;;
+                    "editors") description="$app_name text editor" ;;
+                    "ai") description="$app_name AI application" ;;
+                    "communication") description="$app_name communication app" ;;
+                    "design") description="$app_name design tool" ;;
+                    "languages") description="$app_name programming language support" ;;
+                    "media") description="$app_name media application" ;;
+                    "security") description="$app_name security tool" ;;
+                    "system") description="$app_name system configuration" ;;
+                    "terminal") description="$app_name terminal tool" ;;
+                    *) description="$app_name application" ;;
+                esac
+            fi
+            ;;
         *)
-            # Fallback to category-based description for non-Homebrew methods
+            # Fallback to category-based description for other methods
             case "$category" in
                 "productivity") description="$app_name productivity tool" ;;
                 "utilities") description="$app_name utility tool" ;;
@@ -571,12 +634,21 @@ main() {
         log_warning "Syntax validation failed, but module was created"
     fi
     
-    # Add module to git
+    # Add module to git and commit
     local module_dir="modules/$category/$app_name"
     if command -v git >/dev/null 2>&1 && [[ -d "$DOTFILES_DIR/.git" ]]; then
         log_info "Adding module to git..."
         if git add "$module_dir" 2>/dev/null; then
             log_success "Module added to git staging area"
+            
+            # Create commit with conventional commit format
+            local commit_message="feat($category): add $app_name module"
+            log_info "Committing module..."
+            if git commit -m "$commit_message" 2>/dev/null; then
+                log_success "Module committed successfully"
+            else
+                log_warning "Failed to commit module (module is still staged)"
+            fi
         else
             log_warning "Failed to add module to git"
         fi
@@ -588,13 +660,13 @@ main() {
     log_success "Module created successfully!"
     echo
     echo "Next steps:"
-    echo "1. Edit the module file: $module_file"
-    echo "2. Add to your machine configuration:"
+    echo "1. Add to your machine configuration:"
     echo "   modules.$category.$app_name.enable = true;"
-    echo "3. Test the configuration:"
+    echo "2. Test the configuration:"
     echo "   darwin-rebuild switch --flake .#<machine> --dry-run"
-    echo "4. Commit the changes:"
-    echo "   git commit -m \"feat($category): add $app_name module\""
+    echo "3. If needed, edit the module file: $module_file"
+    echo "4. Apply the configuration:"
+    echo "   darwin-rebuild switch --flake .#<machine>"
     echo
 }
 
