@@ -33,26 +33,28 @@
     # Default system settings (can be overridden by machine-specific configs)
     defaults = {
       dock = {
-        autohide = true;
-        orientation = "left";
+        autohide = lib.mkDefault true;
+        orientation = lib.mkDefault "left";
       };
 
-      trackpad = { Clicking = true; };
+      trackpad = { 
+        Clicking = lib.mkDefault true; 
+      };
 
       NSGlobalDomain = {
-        "com.apple.trackpad.scaling" = 3.0;
-        "com.apple.mouse.tapBehavior" = 1;
-        InitialKeyRepeat = 15;
-        KeyRepeat = 2;
-        AppleShowAllExtensions = true;
-        AppleShowAllFiles = true;
-        NSAutomaticWindowAnimationsEnabled = true;
+        "com.apple.trackpad.scaling" = lib.mkDefault 3.0;
+        "com.apple.mouse.tapBehavior" = lib.mkDefault 1;
+        InitialKeyRepeat = lib.mkDefault 15;
+        KeyRepeat = lib.mkDefault 2;
+        AppleShowAllExtensions = lib.mkDefault true;
+        AppleShowAllFiles = lib.mkDefault true;
+        NSAutomaticWindowAnimationsEnabled = lib.mkDefault true;
       };
     };
 
     keyboard = {
-      enableKeyMapping = true;
-      remapCapsLockToControl = true;
+      enableKeyMapping = lib.mkDefault true;
+      remapCapsLockToControl = lib.mkDefault true;
     };
 
     stateVersion = 6;
