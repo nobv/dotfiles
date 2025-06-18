@@ -34,5 +34,3 @@ conda.yaml
 ## flakes
 result
 
-## machine-specific configs (generated from template)
-machines/*/config.nix
