@@ -329,10 +329,10 @@ toggle_module() {
     
     case "$current_status" in
         "enabled")
-            new_status="disabled"
+            new_status="false"
             ;;
         "disabled"|"available")
-            new_status="enabled"
+            new_status="true"
             ;;
     esac
     
@@ -360,6 +360,8 @@ apply_module_change() {
     local module="${module_key#*.}"
     local enable_line="      $module.enable = $new_status;"
     
+    log_info "Enable line: $enable_line"
+    
     log_info "Updating $module_key to $new_status in $category category"
     
     # Check if module already exists in config
@@ -382,12 +384,16 @@ apply_module_change() {
             ' "$config_file")
             
             if [ -n "$category_start_line" ] && [ -n "$category_end_line" ]; then
+                log_info "Found category boundaries: start=$category_start_line, end=$category_end_line"
                 # Insert the new line before the closing brace
                 sed -i.tmp "${category_end_line}i\\
 $enable_line" "$config_file"
-                rm -f "$config_file.tmp"
+                if [ -f "$config_file.tmp" ]; then
+                    rm -f "$config_file.tmp"
+                fi
+                log_info "Configuration file modified"
             else
-                log_error "Could not find category boundaries"
+                log_error "Could not find category boundaries (start=$category_start_line, end=$category_end_line)"
                 return 1
             fi
         else
@@ -409,8 +415,11 @@ $enable_line\\
         log_success "Configuration file updated successfully"
         return 0
     else
-        # Restore backup on failure
-        log_error "Configuration validation failed, restoring backup"
+        # Show the problematic content before restoring backup
+        log_error "Configuration validation failed"
+        log_info "Showing problematic content:"
+        cat "$config_file" >&2
+        log_error "Restoring backup"
         mv "$config_file.backup" "$config_file"
         return 1
     fi
@@ -421,10 +430,13 @@ validate_nix_file() {
     local file="$1"
     
     if command -v nix-instantiate >/dev/null 2>&1; then
-        if nix-instantiate --parse "$file" >/dev/null 2>&1; then
+        local nix_error
+        nix_error=$(nix-instantiate --parse "$file" 2>&1)
+        if [ $? -eq 0 ]; then
             return 0
         else
-            log_error "Nix syntax validation failed"
+            log_error "Nix syntax validation failed:"
+            echo "$nix_error" >&2
             return 1
         fi
     else
@@ -436,11 +448,11 @@ validate_nix_file() {
             if [ "$open_braces" -eq "$close_braces" ]; then
                 return 0
             else
-                log_error "Unbalanced braces detected"
+                log_error "Unbalanced braces detected (open: $open_braces, close: $close_braces)"
                 return 1
             fi
         else
-            log_error "File validation failed"
+            log_error "File validation failed - file not found or invalid structure"
             return 1
         fi
     fi
