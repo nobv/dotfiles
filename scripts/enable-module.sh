@@ -360,38 +360,57 @@ apply_module_change() {
     local module="${module_key#*.}"
     local enable_line="      $module.enable = $new_status;"
     
+    log_info "Updating $module_key to $new_status in $category category"
+    
     # Check if module already exists in config
     if grep -q "^[[:space:]]*$module\.enable[[:space:]]*=" "$config_file"; then
         # Update existing line
+        log_info "Updating existing module line"
         sed -i.tmp "s/^[[:space:]]*$module\.enable[[:space:]]*=.*$/      $module.enable = $new_status;/" "$config_file"
         rm -f "$config_file.tmp"
     else
         # Add new module to the appropriate category
         if grep -q "^[[:space:]]*$category[[:space:]]*=" "$config_file"; then
             # Category section exists, add module to it
-            sed -i.tmp "/^[[:space:]]*$category[[:space:]]*=[[:space:]]*{/,/^[[:space:]]*};/ {
-                /^[[:space:]]*};/i\\
-$enable_line
-            }" "$config_file"
-            rm -f "$config_file.tmp"
+            log_info "Adding module to existing $category category"
+            
+            # Find the last line in the category section and add the module before the closing brace
+            # Look for the pattern: category = { ... };
+            local category_start_line=$(grep -n "^[[:space:]]*$category[[:space:]]*=" "$config_file" | cut -d: -f1)
+            local category_end_line=$(awk -v start="$category_start_line" '
+                NR >= start && /^[[:space:]]*};/ { print NR; exit }
+            ' "$config_file")
+            
+            if [ -n "$category_start_line" ] && [ -n "$category_end_line" ]; then
+                # Insert the new line before the closing brace
+                sed -i.tmp "${category_end_line}i\\
+$enable_line" "$config_file"
+                rm -f "$config_file.tmp"
+            else
+                log_error "Could not find category boundaries"
+                return 1
+            fi
         else
             # Category doesn't exist, create it
+            log_info "Creating new $category category"
+            # Find the modules = { line and add the new category after it
             sed -i.tmp "/^[[:space:]]*modules[[:space:]]*=[[:space:]]*{/a\\
 \\
     $category = {\\
 $enable_line\\
-    };
-            " "$config_file"
+    };" "$config_file"
             rm -f "$config_file.tmp"
         fi
     fi
     
     # Validate the file
-    if [[ -f "$config_file" ]] && validate_nix_file "$config_file"; then
+    if [ -f "$config_file" ] && validate_nix_file "$config_file"; then
         rm -f "$config_file.backup"
+        log_success "Configuration file updated successfully"
         return 0
     else
         # Restore backup on failure
+        log_error "Configuration validation failed, restoring backup"
         mv "$config_file.backup" "$config_file"
         return 1
     fi
@@ -402,10 +421,28 @@ validate_nix_file() {
     local file="$1"
     
     if command -v nix-instantiate >/dev/null 2>&1; then
-        nix-instantiate --parse "$file" >/dev/null 2>&1
+        if nix-instantiate --parse "$file" >/dev/null 2>&1; then
+            return 0
+        else
+            log_error "Nix syntax validation failed"
+            return 1
+        fi
     else
-        # Basic syntax check
-        [[ -f "$file" ]] && grep -q "modules.*=" "$file"
+        # Basic syntax check - check for balanced braces and basic structure
+        if [ -f "$file" ] && grep -q "modules.*=" "$file"; then
+            # Count braces to ensure they're balanced
+            local open_braces=$(grep -o '{' "$file" | wc -l)
+            local close_braces=$(grep -o '}' "$file" | wc -l)
+            if [ "$open_braces" -eq "$close_braces" ]; then
+                return 0
+            else
+                log_error "Unbalanced braces detected"
+                return 1
+            fi
+        else
+            log_error "File validation failed"
+            return 1
+        fi
     fi
 }
 
