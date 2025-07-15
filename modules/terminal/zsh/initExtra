@@ -16,11 +16,13 @@ export ZSH=$DOTFILES/modules/term/zsh/bin
 export VOLTA_HOME=$HOME/.volta
 export VOLTA_FEATURE_PNPM=1
 
+export AQUA="$(aqua root-dir)/bin"
+
 export NPM_PACKAGES=$HOME/.npm-packages/bin
 ## https://github.com/LnL7/nix-darwin/issues/122#issuecomment-1030877541
 export NIX=$HOME/.nix-profile/bin:/run/current-system/sw/bin:/etc/profiles/per-user/$USER/bin
 export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels
-export PATH=$VOLTA_HOME/bin:$HOME/.cargo/bin:/usr/local/bin:$DOTFILES/bin:$DOOM:$ZSH:$NIX:$NPM_PACKAGES:$PATH
+export PATH=$VOLTA_HOME/bin:$HOME/.cargo/bin:/usr/local/bin:$DOTFILES/bin:$DOOM:$ZSH:$NIX:$NPM_PACKAGES:$AQUA:$PATH
 
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True

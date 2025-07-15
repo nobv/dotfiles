@@ -7,12 +7,12 @@ let
 in
 {
   options.modules.utilities.flux = {
-    enable = mkEnableOption "f.lux blue light reduction tool";
+    enable = mkEnableOption "Screen colour temperature controller";
   };
 
   config = mkIf cfg.enable {
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
-      casks = [ "flux" ];
+      casks = [ "flux-app" ];
     };
   };
 }

@@ -21,7 +21,7 @@ in
     ];
     
     homebrew = mkIf (cfg.enableDesktop && config.modules.system.homebrew.enable or false) {
-      casks = [ "docker" ];
+      casks = [ "docker-desktop" ];
     };
   };
 }
