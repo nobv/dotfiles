@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.media.kindle;
+  cfg = config.modules.productivity.kindle;
 in
 {
-  options.modules.media.kindle = {
+  options.modules.productivity.kindle = {
     enable = mkEnableOption "Kindle e-book reader";
   };
 

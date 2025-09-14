@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.design.miro;
+  cfg = config.modules.productivity.miro;
 in
 {
-  options.modules.design.miro = {
+  options.modules.productivity.miro = {
     enable = mkEnableOption "Miro collaborative whiteboard platform";
   };
 

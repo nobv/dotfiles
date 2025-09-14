@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.mdbook;
+  cfg = config.modules.productivity.mdbook;
 in
 {
-  options.modules.development.mdbook = {
+  options.modules.productivity.mdbook = {
     enable = mkEnableOption "Create books from markdown files";
   };
 
