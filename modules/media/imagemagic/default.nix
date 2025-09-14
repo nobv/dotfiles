@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.imagemagic;
+  cfg = config.modules.media.imagemagic;
 in
 {
-  options.modules.development.imagemagic = {
+  options.modules.media.imagemagic = {
     enable = mkEnableOption "ImageMagick image manipulation tools";
   };
 

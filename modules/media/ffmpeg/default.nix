@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.ffmpeg;
+  cfg = config.modules.media.ffmpeg;
 in
 {
-  options.modules.development.ffmpeg = {
+  options.modules.media.ffmpeg = {
     enable = mkEnableOption "FFmpeg multimedia framework";
   };
 

@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.yt-dlp;
+  cfg = config.modules.media.yt-dlp;
 in
 {
-  options.modules.development.yt-dlp = {
+  options.modules.media.yt-dlp = {
     enable = mkEnableOption "yt-dlp, a youtube-dl fork with additional features";
   };
 

@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.graphviz;
+  cfg = config.modules.media.graphviz;
 in
 {
-  options.modules.development.graphviz = {
+  options.modules.media.graphviz = {
     enable = mkEnableOption "Graph visualization software";
   };
 
