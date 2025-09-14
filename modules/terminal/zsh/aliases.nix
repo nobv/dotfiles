@@ -58,7 +58,6 @@
   kn = "kubens";
   ## }}}
 
-
   ##  docker compose {{{
   dc = "docker compose";
   dcps = "dc ps";

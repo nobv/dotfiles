@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.lf;
+  cfg = config.modules.terminal.lf;
 in
 {
-  options.modules.development.lf = {
+  options.modules.terminal.lf = {
     enable = mkEnableOption "lf terminal file manager";
   };
 

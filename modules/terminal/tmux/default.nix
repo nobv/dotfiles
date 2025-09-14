@@ -1,12 +1,18 @@
-{ config, pkgs, lib, username, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.tmux;
+  cfg = config.modules.terminal.tmux;
 in
 {
-  options.modules.development.tmux = {
+  options.modules.terminal.tmux = {
     enable = mkEnableOption "Tmux terminal multiplexer with custom configuration and plugins";
   };
 
@@ -67,5 +73,3 @@ in
     };
   };
 }
-
-
