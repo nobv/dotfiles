@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.xcode;
+  cfg = config.modules.editors.xcode;
 in
 {
-  options.modules.development.xcode = {
+  options.modules.editors.xcode = {
     enable = mkEnableOption "Xcode IDE for macOS and iOS development";
   };
 

@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -12,9 +17,9 @@ in
 
   config = mkIf cfg.enable {
     programs = {
-      vim = { enable = true; };
+      vim = {
+        enable = true;
+      };
     };
   };
 }
-
-
