@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -13,7 +18,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       nix
-      nixpkgs-fmt
+      nixfmt-rfc-style
       #rnix-lsp # https://github.com/nix-community/rnix-lsp
     ];
   };
