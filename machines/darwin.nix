@@ -1,4 +1,9 @@
-{ config, pkgs, lib, username, ... }:
+{ config
+, pkgs
+, lib
+, username
+, ...
+}:
 {
   # Common Darwin system configuration shared across all machines
   environment = {
@@ -6,30 +11,29 @@
   };
 
   nix = {
+    enable = false;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
   };
 
   nixpkgs = {
-    config = {
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ ];
-      allowUnsupportedSystem = true;
-    };
 
     overlays =
-      let path = ../overlays; in
+      let
+        path = ../overlays;
+      in
       with builtins;
-      map (n: import (path + ("/" + n)))
-        (filter
-          (n: match ".*\\.nix" n != null ||
-            pathExists (path + ("/" + n + "/default.nix")))
-          (attrNames (readDir path)));
+      map (n: import (path + ("/" + n))) (
+        filter (n: match ".*\\.nix" n != null || pathExists (path + ("/" + n + "/default.nix"))) (
+          attrNames (readDir path)
+        )
+      );
   };
 
   system = {
     primaryUser = username;
-    
+
     # Default system settings (can be overridden by machine-specific configs)
     defaults = {
       dock = {
@@ -37,8 +41,8 @@
         orientation = lib.mkDefault "left";
       };
 
-      trackpad = { 
-        Clicking = lib.mkDefault true; 
+      trackpad = {
+        Clicking = lib.mkDefault true;
       };
 
       NSGlobalDomain = {
