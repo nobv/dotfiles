@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -14,5 +19,15 @@ in
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "claude" ];
     };
+
+    nixpkgs.config.allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "claude-code"
+      ];
+
+    environment.systemPackages = with pkgs; [
+      claude-code
+    ];
   };
 }
