@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.media.spotify;
+  cfg = config.modules.utilities.spotify;
 in
 {
-  options.modules.media.spotify = {
+  options.modules.utilities.spotify = {
     enable = mkEnableOption "Spotify music streaming app";
   };
 

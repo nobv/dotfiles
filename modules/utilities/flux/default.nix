@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -12,7 +17,7 @@ in
 
   config = mkIf cfg.enable {
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
-      casks = [ "flux" ];
+      casks = [ "flux-app" ];
     };
   };
 }
