@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.utm;
+  cfg = config.modules.system.utm;
 in
 {
-  options.modules.development.utm = {
+  options.modules.system.utm = {
     enable = mkEnableOption "UTM virtual machine host for iOS and macOS";
   };
 

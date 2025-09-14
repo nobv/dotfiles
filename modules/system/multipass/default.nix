@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.multipass;
+  cfg = config.modules.system.multipass;
 in
 {
-  options.modules.development.multipass = {
+  options.modules.system.multipass = {
     enable = mkEnableOption "Multipass Ubuntu virtual machine orchestrator";
   };
 

@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.blueutil;
+  cfg = config.modules.system.blueutil;
 in
 {
-  options.modules.development.blueutil = {
+  options.modules.system.blueutil = {
     enable = mkEnableOption "Bluetooth command line utility";
   };
 
