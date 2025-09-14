@@ -1,9 +1,15 @@
-{ config, pkgs, lib, username, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
+}:
 {
   # Mac Mini-specific overrides
   system.defaults = {
     dock = {
-      autohide = false;  # Show dock on desktop setup
+      autohide = false; # Show dock on desktop setup
       orientation = "left";
     };
 

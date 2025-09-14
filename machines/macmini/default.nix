@@ -1,10 +1,15 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
-    ../darwin.nix      # Common Darwin configuration
-    ../home.nix        # Common Home Manager configuration
-    ./overrides.nix    # Mac Mini-specific overrides
+    ../darwin.nix # Common Darwin configuration
+    ../home.nix # Common Home Manager configuration
+    ./overrides.nix # Mac Mini-specific overrides
   ];
 
   # Enable modules using actual directory structure paths
@@ -14,11 +19,11 @@
       homebrew.enable = true;
       fonts.enable = true;
     };
-    
+
     # Development tools - lighter setup for desktop
     development = {
-      tmux.enable = false;  # Less needed on desktop
-      docker.enable = false;  # Less Docker development
+      tmux.enable = false; # Less needed on desktop
+      docker.enable = false; # Less Docker development
       kubernetes.enable = false;
       bat.enable = true;
       eza.enable = true;
@@ -29,17 +34,17 @@
       ripgrep.enable = true;
       tree.enable = true;
     };
-    
+
     # Programming languages - lighter development setup
     languages = {
       go.enable = true;
       nodejs.enable = true;
       nix.enable = true;
-      python.enable = false;  # Less Python development
-      rust.enable = false;   # Less Rust development
+      python.enable = false; # Less Python development
+      rust.enable = false; # Less Rust development
       shellscript.enable = true;
     };
-    
+
     # Text editors - prefer Emacs on desktop
     editors = {
       emacs.enable = true;
@@ -47,14 +52,14 @@
       vim.enable = true;
       jetbrains.enable = true;
     };
-    
+
     # Terminal configuration
     terminal = {
       starship.enable = true;
       zsh.enable = true;
       wezterm.enable = true;
     };
-    
+
     # Code quality
     checkers.enable = true;
   };
