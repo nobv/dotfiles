@@ -1,12 +1,17 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
 let
-  cfg = config.modules.development.trivy;
+  cfg = config.modules.security.trivy;
 in
 {
-  options.modules.development.trivy = {
+  options.modules.security.trivy = {
     enable = mkEnableOption "Trivy vulnerability scanner";
   };
 
