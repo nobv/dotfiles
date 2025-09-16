@@ -32,11 +32,11 @@ in
       keyMode = "vi";
       prefix = "C-a";
       extraConfig =
-        ''
+        builtins.readFile ./.tmux.conf
+        + ''
           set-option -g default-shell ${pkgs.zsh}/bin/zsh
           set-option -g default-command ${pkgs.zsh}/bin/zsh
-        ''
-        + builtins.readFile ./.tmux.conf;
+        '';
       historyLimit = 10000;
       clock24 = true;
       mouse = true;
@@ -61,16 +61,18 @@ in
           '';
         }
         {
-          plugin = continuum;
+          plugin = continuum; # https://github.com/tmux-plugins/tmux-continuum
           extraConfig = ''
             set -g @continuum-boot 'on'
-            set -g @continuum-boot-options 'iterm'
             set -g @continuum-restore 'on'
             set -g @continuum-save-interval '1'
           '';
         }
         {
           plugin = vim-tmux-navigator; # https://github.com/tmux-plugins/tmux-continuum
+        }
+        {
+          plugin = tmux-fzf; # https://github.com/sainnhe/tmux-fzf
         }
       ];
       terminal = "screen-256color";
