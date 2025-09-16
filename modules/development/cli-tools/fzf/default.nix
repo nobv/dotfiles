@@ -1,9 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  username,
-  ...
+{ config
+, lib
+, pkgs
+, username
+, ...
 }:
 
 with lib;
@@ -20,6 +19,9 @@ in
     home-manager.users.${username}.programs.fzf = {
       enable = true;
       enableZshIntegration = true;
+      tmux = {
+        enableShellIntegration = true;
+      };
     };
   };
 }
