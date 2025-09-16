@@ -1,9 +1,15 @@
-{ config, pkgs, lib, username, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
+}:
 {
   # Work machine-specific overrides
   system.defaults = {
     dock = {
-      orientation = "bottom";  # Bottom dock for work productivity
+      orientation = "bottom"; # Bottom dock for work productivity
     };
 
     NSGlobalDomain = {

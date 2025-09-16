@@ -1,4 +1,9 @@
-{ config, pkgs, lib, username, ... }:
+{ config
+, pkgs
+, lib
+, username
+, ...
+}:
 
 with lib;
 
@@ -14,11 +19,11 @@ in
   config = mkIf cfg.enable {
     home-manager.users.${username}.programs.zsh = {
       enable = true;
+      enableCompletion = true;
       autocd = true;
       autosuggestion = {
         enable = true;
       };
-      enableCompletion = true;
       syntaxHighlighting = {
         enable = true;
       };
@@ -30,16 +35,17 @@ in
         ignoreSpace = true;
         ignorePatterns = [ "ll" ];
       };
-      initExtra = builtins.readFile ./initExtra;
+      initContent = builtins.readFile ./.zshrc;
       shellAliases = aliases;
-      profileExtra = builtins.readFile ./profileExtra;
-      # plugins = {
-      #   "doom" = {
-      #       name = 
-      #   };
-      # };
+      profileExtra = builtins.readFile ./.zprofile;
     };
   };
 }
 
-
+/*
+      enableAutosuggestions = true;
+      enableFastSyntaxHighlighting = true;
+      enableFzfCompletion = true;
+      enableFzfGit = true;
+      enableFzfHistory = true;
+*/

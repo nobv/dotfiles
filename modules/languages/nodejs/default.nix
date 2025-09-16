@@ -1,4 +1,10 @@
-{ config, pkgs, lib, username, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
+}:
 
 with lib;
 
@@ -16,31 +22,35 @@ in
       # Runtime
       # nodejs_22
       # nodejs_23
+      nodejs_24
       # nodePackages.prettier
       # nodePackages.node-gyp
       # Package managers
       # yarn
-      node-gyp
-      volta
+      #      node-gyp
+      #      volta
       # corepack
-      # pnpm
+      pnpm
+      pnpm-shell-completion
       nest-cli
     ];
 
     # Home Manager configuration for Node.js
-/*    home-manager.users.${username} = {
-      home.sessionVariables = {
-        NPM_CONFIG_PREFIX = "~/.npm-packages";
-      };
+    /*
+      home-manager.users.${username} = {
+         home.sessionVariables = {
+           NPM_CONFIG_PREFIX = "~/.npm-packages";
+         };
 
-      home.sessionPath = [
-        "~/.npm-packages/bin"
-      ];
+         home.sessionPath = [
+           "~/.npm-packages/bin"
+         ];
 
-      home.file.".npmrc".text = ''
-        prefix=~/.npm-packages
-      '';
+         home.file.".npmrc".text = ''
+           prefix=~/.npm-packages
+         '';
 
-    };*/
+       };
+    */
   };
 }

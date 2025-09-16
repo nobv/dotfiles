@@ -1,46 +1,43 @@
 {
   # https://code.visualstudio.com/docs/getstarted/settings
 
-
   # TextEditor
   "editor.renderWhitespace" = "all";
 
-  /* Font */
+  # Font
   "editor.fontSize" = 14;
   "editor.fontFamily" = "Hasklig, Menlo, Monaco, 'Courier New', monospace";
   "editor.fontLigatures" = true;
 
-  /* Formatting */
+  # Formatting
   "editor.formatOnSave" = true;
 
-  /* Minimap */
+  # Minimap
   "editor.minimap.enabled" = false;
 
-  /* Suggestions (https://code.visualstudio.com/docs/editor/intellisense) */
+  # Suggestions (https://code.visualstudio.com/docs/editor/intellisense)
   "editor.suggestSelection" = "recentlyUsedByPrefix";
   "editor.acceptSuggestionOnEnter" = "off";
   "editor.suggest.localityBonus" = true;
 
-  /* Files */
+  # Files
   "files.autoSave" = "afterDelay";
   "files.insertFinalNewline" = true;
 
-
   # Workbench
-  /* Appearance */
+  # Appearance
   "workbench.colorTheme" = "Spacemacs - dark";
 
   # Features
-  /* Explorer */
+  # Explorer
   "explorer.confirmDragAndDrop" = false;
   "explorer.confirmDelete" = false;
 
-  /* Remote Containers */
+  # Remote Containers
   "remote.localPortHost" = "allInterfaces";
 
-
   # Extensions
-  /* Vim */
+  # Vim
   "vim.easymotion" = true;
   "vim.useSystemClipboard" = true;
   "vim.normalModeKeyBindingsNonRecursive" = [
@@ -67,11 +64,10 @@
     }
   ];
 
-  /* NixIDE */
+  # NixIDE
   "nix.enableLanguageServer" = true;
 
-  /* Remote Containers */
+  # Remote Containers
   "remote.containers.dockerComposePath" = "docker compose";
 
 }
-

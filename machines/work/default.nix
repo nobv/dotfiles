@@ -1,10 +1,15 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
-    ../darwin.nix      # Common Darwin configuration
-    ../home.nix        # Common Home Manager configuration
-    ./overrides.nix    # Work machine-specific overrides
+    ../darwin.nix # Common Darwin configuration
+    ../home.nix # Common Home Manager configuration
+    ./overrides.nix # Work machine-specific overrides
   ];
 
   # Enable modules using actual directory structure paths
@@ -14,7 +19,7 @@
       homebrew.enable = true;
       fonts.enable = true;
     };
-    
+
     # Development tools
     development = {
       tmux.enable = true;
@@ -35,24 +40,24 @@
       fzf.enable = true;
       fork.enable = true;
     };
-    
+
     # Programming languages
     languages = {
       go.enable = true;
       nodejs.enable = true;
       nix.enable = true;
       rust.enable = true;
-      shellscript.enable = true; 
+      shellscript.enable = true;
       protobuf.enable = true;
     };
-    
+
     # Text editors
     editors = {
       neovim.enable = true;
       vscode.enable = true;
       jetbrains.enable = true;
     };
-    
+
     # Terminal configuration
     terminal = {
       starship.enable = true;
@@ -63,18 +68,18 @@
     productivity = {
       raycast.enable = true;
     };
-    
+
     # Security tools
     security = {
       "1password".enable = true;
     };
-    
+
     # Utilities
     utilities = {
       karabiner-elements.enable = true;
       flux.enable = true;
     };
-    
+
     # Code quality
     checkers.enable = true;
   };

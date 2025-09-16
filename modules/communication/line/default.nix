@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -13,7 +18,7 @@ in
   config = mkIf cfg.enable {
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       masApps = {
-        "LINE" = 539883307;
+        LINE = 539883307;
       };
     };
   };
