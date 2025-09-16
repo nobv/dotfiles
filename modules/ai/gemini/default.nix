@@ -7,13 +7,12 @@ let
 in
 {
   options.modules.ai.gemini = {
-    enable = mkEnableOption "gemini AI application";
+    enable = mkEnableOption "AI agent that brings the power of Gemini directly into your terminal";
   };
 
   config = mkIf cfg.enable {
-    home-manager.users.${username}.programs.gemini = {
-      enable = true;
-      # Add configuration options here
-    };
+    environment.systemPackages = with pkgs; [
+      gemini-cli
+    ];
   };
 }

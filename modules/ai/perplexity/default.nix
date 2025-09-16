@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 
 with lib;
@@ -18,7 +17,7 @@ in
   config = mkIf cfg.enable {
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       masApps = {
-        "Perplexity" = 1875466942;
+        "Perplexity" = 6714467650;
       };
     };
   };

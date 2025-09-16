@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 
 {
@@ -17,7 +16,8 @@
     ai = {
       chatgpt.enable = true;
       claude.enable = true;
-      #      perplexity.enable = true;
+      gemini.enable = true;
+      perplexity.enable = true;
       poe.enable = false;
     };
 
