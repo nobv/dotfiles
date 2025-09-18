@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 
 {
@@ -14,73 +13,140 @@
 
   # Enable modules using actual directory structure paths
   modules = {
-    # System tools
-    system = {
-      homebrew.enable = true;
-      fonts.enable = true;
+    ai = {
+      chatgpt.enable = false;
+      claude.enable = true;
+      gemini.enable = true;
+      perplexity.enable = false;
+    };
+
+    browsers = {
+      arc.enable = false;
+      chrome.enable = true;
+      firefox.enable = true;
+      microsoft-edge.enable = false;
+    };
+
+    checkers.enable = true;
+
+    design = {
+      figma.enable = true;
     };
 
     # Development tools
     development = {
-      tmux.enable = true;
-      docker.enable = true;
-      bat.enable = true;
-      eza.enable = true;
-      fd.enable = true;
-      git.enable = true;
-      github.enable = true;
-      jq.enable = true;
-      ripgrep.enable = true;
-      tree.enable = true;
-      go-task.enable = true;
-      gcp.enable = true;
-      direnv.enable = true;
-      aqua.enable = true;
-      peco.enable = true;
-      fzf.enable = true;
-      fork.enable = true;
+      build = {
+        aqua.enable = true;
+        direnv.enable = true;
+        go-task.enable = true;
+        make.enable = false;
+      };
+      cli-tools = {
+        bat.enable = true;
+        eza.enable = true;
+        fd.enable = true;
+        fzf.enable = true;
+        gnused.enable = true;
+        jq.enable = true;
+        navi.enable = true;
+        parallel.enable = true;
+        peco.enable = true;
+        procs.enable = true;
+        ripgrep.enable = true;
+        tree.enable = true;
+      };
+      data-and-protocol = {
+        dbeaver-community.enable = true;
+        httpie.enable = false;
+        k6.enable = true;
+        mkcert.enable = true;
+        pgformatter.enable = true;
+        postman.enable = false;
+      };
+
+      infrastructure = {
+        aws.enable = false;
+        docker.enable = true;
+        gcp.enable = true;
+        kubernetes.enable = true;
+        sops.enable = true;
+        terraform.enable = true;
+      };
+
+      vcs = {
+        fork.enable = true;
+        git.enable = true;
+        github.enable = true;
+        pre-commit.enable = true;
+      };
+    };
+
+    editors = {
+      jetbrains.enable = true;
+      neovim.enable = true;
+      typora.enable = true;
+      vscode.enable = true;
     };
 
     # Programming languages
     languages = {
+      c.enable = false;
+      deno.enable = false;
+      dhall.enable = false;
       go.enable = true;
+      haskell.enable = false;
+      lua.enable = true;
       nodejs.enable = true;
       nix.enable = true;
+      protobuf.enable = true;
+      purescript.enable = false;
+      python.enable = false;
       rust.enable = true;
       shellscript.enable = true;
-      protobuf.enable = true;
     };
 
-    # Text editors
-    editors = {
-      neovim.enable = true;
-      vscode.enable = true;
-      jetbrains.enable = true;
+    productivity = {
+      capacities.enable = true;
+      heptabase.enable = true;
+      mdbook.enable = false;
+      obsidian.enable = true;
+      raycast.enable = true;
+      zotero.enable = true;
+    };
+
+    security = {
+      "1password".enable = true;
+      trivy.enable = true;
+    };
+
+    # System tools
+    system = {
+      aerospace.enable = true;
+      flashspace.enable = true;
+      fonts.enable = true;
+      homebrew.enable = true;
+      multipass.enable = true;
     };
 
     # Terminal configuration
     terminal = {
+      lf.enable = true;
       starship.enable = true;
-      zsh.enable = true;
+      tmux.enable = true;
       wezterm.enable = true;
-    };
-
-    productivity = {
-      raycast.enable = true;
-    };
-
-    # Security tools
-    security = {
-      "1password".enable = true;
+      zsh.enable = true;
     };
 
     # Utilities
     utilities = {
-      karabiner-elements.enable = true;
+      battery.enable = true;
+      deskpad.enable = true;
       flux.enable = true;
+      google-japanese-ime.enable = true;
+      jordanbaird-ice.enable = true;
+      karabiner-elements.enable = true;
+      logi-options-plus.enable = true;
+      meetingbar.enable = true;
     };
-
-    # Code quality
-    checkers.enable = true;
   };
 }
