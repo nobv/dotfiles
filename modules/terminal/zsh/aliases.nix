@@ -95,6 +95,8 @@
   ## home-manager
   reloadvim = "home-manager switch && vim";
 
+  claude="env CLAUDE_CONFIG_DIR=$HOME/.claude claude";
+
   ##  nix {{{
   nix-repl = "nix repl '<nixpkgs>'";
   ## }}}
