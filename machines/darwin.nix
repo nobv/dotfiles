@@ -64,5 +64,16 @@
     stateVersion = 6;
   };
 
+  security = {
+    pam = {
+      services = {
+        sudo_local = {
+          touchIdAuth = lib.mkDefault true;
+          watchIdAuth = lib.mkDefault true;
+        };
+      };
+    };
+  };
+
   users.users.${username}.home = "/Users/${username}";
 }
