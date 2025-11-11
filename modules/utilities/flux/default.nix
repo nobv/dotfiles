@@ -12,7 +12,7 @@ let
 in
 {
   options.modules.utilities.flux = {
-    enable = mkEnableOption "f.lux blue light reduction tool";
+    enable = mkEnableOption "Screen colour temperature controller";
   };
 
   config = mkIf cfg.enable {

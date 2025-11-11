@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 
 with lib;
@@ -17,8 +16,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      terraform
-      terragrunt
+      tenv # https://github.com/tofuutils/tenv
       terraform-ls
     ];
   };
