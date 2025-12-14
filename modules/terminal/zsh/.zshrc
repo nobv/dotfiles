@@ -30,3 +30,13 @@ export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # for kubernetes
 source <(kubectl completion zsh)
+
+g() {
+  local REPO
+  REPO=$(ghq list | sort -u | fzf --height 40% --reverse --border)
+  [ -z "$REPO" ] && return
+  for GHQ_ROOT in $(ghq root -all); do
+    [ -d "$GHQ_ROOT/$REPO" ] && cd "$GHQ_ROOT/$REPO" && return
+  done
+}
+

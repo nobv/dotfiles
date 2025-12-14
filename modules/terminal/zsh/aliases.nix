@@ -84,7 +84,6 @@
   # }}}
 
   # peco {{{
-  g = "REPO=$(ghq list | sort -u | peco);for GHQ_ROOT in $(ghq root -all);do [ -d $GHQ_ROOT/$REPO ] && cd $GHQ_ROOT/$REPO;done";
   app = ''
     open "$(ls ~/Applications | peco | awk '{print $3}')"
   '';

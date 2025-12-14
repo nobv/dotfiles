@@ -43,9 +43,9 @@ in
 }
 
 /*
-      enableAutosuggestions = true;
-      enableFastSyntaxHighlighting = true;
-      enableFzfCompletion = true;
-      enableFzfGit = true;
-      enableFzfHistory = true;
+  enableAutosuggestions = true;
+  enableFastSyntaxHighlighting = true;
+  enableFzfCompletion = true;
+  enableFzfGit = true;
+  enableFzfHistory = true;
 */
