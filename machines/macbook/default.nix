@@ -103,7 +103,7 @@
       typora.enable = true;
       vim.enable = false;
       vscode.enable = true;
-      xcode.enable = false;
+      xcode.enable = true;
     };
 
     # Programming languages
@@ -118,7 +118,7 @@
       nix.enable = true;
       protobuf.enable = true;
       purescript.enable = false;
-      python.enable = false;
+      python.enable = true;
       rust.enable = true;
       shellscript.enable = true;
     };
@@ -132,6 +132,7 @@
 
     productivity = {
       #      amphetamine.enable = false;
+      affine.enable = true;
       anki.enable = true;
       capacities.enable = true;
       clickup.enable = true;
