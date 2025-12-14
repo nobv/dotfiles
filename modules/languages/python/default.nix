@@ -1,8 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 
 with lib;
@@ -19,13 +18,16 @@ in
   config = mkIf cfg.enable {
     # https://github.com/NixOS/nixpkgs/blob/a0dbe47318/doc/languages-frameworks/python.section.md
     environment.systemPackages = with pkgs; [
+      python314
+      uv
+      ruff
       /*
-            python310
-            python310Packages.pytest
-            python310Packages.isort
-            python310Packages.pyflakes
-            python310Packages.mypy
-            python310Packages.black
+        python310
+        python310Packages.pytest
+        python310Packages.isort
+        python310Packages.pyflakes
+        python310Packages.mypy
+        python310Packages.black
       */
 
       # stable.python310Packages.jupyterlab
