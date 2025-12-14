@@ -1,8 +1,9 @@
-{ config
-, pkgs
-, lib
-, username
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
 }:
 
 with lib;
@@ -31,12 +32,10 @@ in
       customPaneNavigationAndResize = true;
       keyMode = "vi";
       prefix = "C-a";
-      extraConfig =
-        builtins.readFile ./.tmux.conf
-        + ''
-          set-option -g default-shell ${pkgs.zsh}/bin/zsh
-          set-option -g default-command ${pkgs.zsh}/bin/zsh
-        '';
+      extraConfig = builtins.readFile ./.tmux.conf + ''
+        set-option -g default-shell ${pkgs.zsh}/bin/zsh
+        set-option -g default-command ${pkgs.zsh}/bin/zsh
+      '';
       historyLimit = 10000;
       clock24 = true;
       mouse = true;

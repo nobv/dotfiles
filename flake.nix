@@ -38,19 +38,23 @@
       modulesPath = ./modules;
 
       # Get all modules that have default.nix (both directories and single files)
-      getModules = dir:
+      getModules =
+        dir:
         let
           contents = builtins.readDir (modulesPath + "/${dir}");
         in
-        lib.mapAttrsToList (name: type:
-          if type == "directory" then
-            modulesPath + "/${dir}/${name}"
-          else
-            modulesPath + "/${dir}/${name}"
-        ) (lib.filterAttrs (name: type: 
-          (type == "directory" && builtins.pathExists (modulesPath + "/${dir}/${name}/default.nix")) ||
-          (type == "regular" && name == "default.nix")
-        ) contents);
+        lib.mapAttrsToList
+          (
+            name: type:
+            if type == "directory" then modulesPath + "/${dir}/${name}" else modulesPath + "/${dir}/${name}"
+          )
+          (
+            lib.filterAttrs (
+              name: type:
+              (type == "directory" && builtins.pathExists (modulesPath + "/${dir}/${name}/default.nix"))
+              || (type == "regular" && name == "default.nix")
+            ) contents
+          );
 
       # Auto-discover all modules
       allModules = lib.flatten [
@@ -92,7 +96,8 @@
             determinate.darwinModules.default
             home-manager.darwinModules.home-manager
             ./machines/${machine}
-          ] ++ allModules;
+          ]
+          ++ allModules;
 
           specialArgs = {
             inherit
