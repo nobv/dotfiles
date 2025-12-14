@@ -1,16 +1,15 @@
-{
-  config,
-  pkgs,
-  lib,
-  username,
-  ...
+{ config
+, pkgs
+, lib
+, username
+, ...
 }:
 
 with lib;
 
 let
   cfg = config.modules.development.vcs.git;
-  extraConfig = import ./extraConfig.nix;
+  settings = import ./settings.nix;
   aliases = import ./aliases.nix;
 in
 {
@@ -28,11 +27,8 @@ in
     # Git configuration should be in Home Manager context
     home-manager.users.${username}.programs.git = {
       enable = true;
-      aliases = aliases;
-      extraConfig = extraConfig;
+      settings = settings;
       ignores = lib.splitString "\n" (builtins.readFile ./.gitignore_global);
-      userEmail = "36393714+nobv@users.noreply.github.com";
-      userName = "nobv";
       # package = unstable.git;
     };
   };

@@ -1,4 +1,9 @@
 {
+  user = {
+    email = "36393714+nobv@users.noreply.github.com";
+    name = "nobv";
+  };
+
   color = {
     "ui" = "auto";
   };
