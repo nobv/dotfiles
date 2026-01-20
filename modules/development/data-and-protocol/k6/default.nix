@@ -19,5 +19,10 @@ in
     environment.systemPackages = with pkgs; [
       k6
     ];
+    
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
+      casks = [ "k6-studio" ];
+    };
+
   };
 }
