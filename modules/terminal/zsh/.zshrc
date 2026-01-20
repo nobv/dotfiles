@@ -16,6 +16,9 @@ export DOTFILES=$HOME/.dotfiles
 # export NIX=$HOME/.nix-profile/bin:/run/current-system/sw/bin:/etc/profiles/per-user/$USER/bin
 # export NIX_PATH=darwin-config=$HOME/.nixpkgs/darwin-configuration.nix:$HOME/.nix-defexpr/channels
 # export PATH=$VOLTA_HOME/bin:$HOME/.cargo/bin:/usr/local/bin:$DOTFILES/bin:$DOOM:$ZSH:$NIX:$NPM_PACKAGES:$PATH
+# export VOLTA_HOME="$HOME/.volta"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
