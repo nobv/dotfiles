@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }:
 
 {
@@ -125,7 +124,7 @@
     };
 
     media = {
-      ffmpeg.enable = false;
+      ffmpeg.enable = true;
       graphviz.enable = false;
       imagemagic.enable = false;
       yt-dlp.enable = true;
@@ -188,8 +187,10 @@
 
     # Utilities
     utilities = {
+      aqua-voice.enable = true;
       appcleaner.enable = true;
       battery.enable = true;
+      cleanshot.enable = true;
       deskpad.enable = true;
       flux.enable = true;
       google-drive.enable = true;
