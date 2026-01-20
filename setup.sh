@@ -128,11 +128,14 @@ cd "$DOTFILES_DIR"
 # Step 5: Configure machine-specific config.nix
 config_file="machines/$MACHINE/config.nix"
 
-# Check if config file exists
+# Ensure config file exists (it is intentionally git-ignored)
 if [[ ! -f "$config_file" ]]; then
-    log_error "Config file not found: $config_file"
-    log_info "Please ensure you have cloned the complete dotfiles repository"
-    exit 1
+    log_info "Config file not found, creating: $config_file"
+    cat > "$config_file" << 'EOF'
+{
+  username = "REPLACE_WITH_YOUR_USERNAME";
+}
+EOF
 fi
 
 # Check if config.nix has placeholder username
