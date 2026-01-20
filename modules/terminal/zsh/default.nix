@@ -1,8 +1,9 @@
-{ config
-, pkgs
-, lib
-, username
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
 }:
 
 with lib;
@@ -43,9 +44,9 @@ in
 }
 
 /*
-      enableAutosuggestions = true;
-      enableFastSyntaxHighlighting = true;
-      enableFzfCompletion = true;
-      enableFzfGit = true;
-      enableFzfHistory = true;
+  enableAutosuggestions = true;
+  enableFastSyntaxHighlighting = true;
+  enableFzfCompletion = true;
+  enableFzfGit = true;
+  enableFzfHistory = true;
 */

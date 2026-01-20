@@ -1,8 +1,9 @@
-{ config
-, pkgs
-, lib
-, username
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
 }:
 {
   # Common Darwin system configuration shared across all machines

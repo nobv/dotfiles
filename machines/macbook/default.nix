@@ -103,7 +103,7 @@
       typora.enable = true;
       vim.enable = false;
       vscode.enable = true;
-      xcode.enable = false;
+      xcode.enable = true;
     };
 
     # Programming languages
@@ -118,13 +118,13 @@
       nix.enable = true;
       protobuf.enable = true;
       purescript.enable = false;
-      python.enable = false;
+      python.enable = true;
       rust.enable = true;
       shellscript.enable = true;
     };
 
     media = {
-      ffmpeg.enable = false;
+      ffmpeg.enable = true;
       graphviz.enable = false;
       imagemagic.enable = false;
       yt-dlp.enable = true;
@@ -132,6 +132,7 @@
 
     productivity = {
       #      amphetamine.enable = false;
+      affine.enable = true;
       anki.enable = true;
       capacities.enable = true;
       clickup.enable = true;
@@ -186,8 +187,10 @@
 
     # Utilities
     utilities = {
+      aqua-voice.enable = true;
       appcleaner.enable = true;
       battery.enable = true;
+      cleanshot.enable = true;
       deskpad.enable = true;
       flux.enable = true;
       google-drive.enable = true;

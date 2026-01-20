@@ -84,7 +84,6 @@
   # }}}
 
   # peco {{{
-  g = "REPO=$(ghq list | sort -u | peco);for GHQ_ROOT in $(ghq root -all);do [ -d $GHQ_ROOT/$REPO ] && cd $GHQ_ROOT/$REPO;done";
   app = ''
     open "$(ls ~/Applications | peco | awk '{print $3}')"
   '';
@@ -95,7 +94,7 @@
   ## home-manager
   reloadvim = "home-manager switch && vim";
 
-  claude="env CLAUDE_CONFIG_DIR=$HOME/.claude claude";
+  #  claude = "env CLAUDE_CONFIG_DIR=$HOME/.claude claude";
 
   ##  nix {{{
   nix-repl = "nix repl '<nixpkgs>'";

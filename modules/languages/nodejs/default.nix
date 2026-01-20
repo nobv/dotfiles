@@ -32,25 +32,25 @@ in
       # corepack
       pnpm
       pnpm-shell-completion
-      nest-cli
+      # nest-cli
     ];
 
     # Home Manager configuration for Node.js
     /*
       home-manager.users.${username} = {
-         home.sessionVariables = {
-           NPM_CONFIG_PREFIX = "~/.npm-packages";
-         };
+      home.sessionVariables = {
+      NPM_CONFIG_PREFIX = "~/.npm-packages";
+      };
 
-         home.sessionPath = [
-           "~/.npm-packages/bin"
-         ];
+      home.sessionPath = [
+      "~/.npm-packages/bin"
+      ];
 
-         home.file.".npmrc".text = ''
-           prefix=~/.npm-packages
-         '';
+      home.file.".npmrc".text = ''
+      prefix=~/.npm-packages
+      '';
 
-       };
+      };
     */
   };
 }

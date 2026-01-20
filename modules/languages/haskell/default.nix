@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  nixpkgs-stable,
   ...
 }:
 
@@ -9,7 +10,6 @@ with lib;
 
 let
   cfg = config.modules.languages.haskell;
-  stable = import <nixpkgs-stable> { };
 in
 {
   options.modules.languages.haskell = {
@@ -21,7 +21,7 @@ in
     environment.systemPackages = with pkgs; [
       haskell.compiler.ghc94
       haskell-language-server
-      stack
+      nixpkgs-stable.stack
     ];
   };
 }

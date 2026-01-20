@@ -1,7 +1,8 @@
-{ config
-, pkgs
-, lib
-, username
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
 }:
 { }
