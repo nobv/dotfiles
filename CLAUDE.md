@@ -11,13 +11,24 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 - **Auto-discovery system**: Modules are automatically imported from the modules directory
 - **Conditional module loading** via options system for clean, maintainable configurations
 
-## Build Commands
-- Check flake: `nix flake check`
-- Build system configuration: `nix build .#darwinConfigurations.<machine>.system`
+## Quick Start Commands
+
+### Daily Development Commands
 - **Test configuration (REQUIRED)**: `darwin-rebuild switch --flake .#<machine> --dry-run`
 - Apply configuration: `darwin-rebuild switch --flake .#<machine>`
-- Update flake inputs: `nix flake update`
+- Interactive module management: `./scripts/enable-module.sh [machine]`
+- List all modules and status: `./scripts/enable-module.sh --list`
+
+### Build and Validation Commands
+- Check flake: `nix flake check`
+- Build system configuration: `nix build .#darwinConfigurations.<machine>.system`
+- Enter development shell: `nix develop`
 - Show flake info: `nix flake show`
+
+### Flake Management
+- Update all inputs: `nix flake update`
+- Update specific input: `nix flake lock --update-input <input-name>` (e.g., `nixpkgs`, `home-manager`)
+- Show flake metadata: `nix flake metadata`
 
 **IMPORTANT**: Always run `--dry-run` before applying configuration changes to validate the build and prevent system breakage.
 
@@ -33,7 +44,8 @@ Available machine configurations:
 - `work` - Full development stack for work environment
 
 Example usage:
-- `darwin-rebuild switch --flake .#macbook`
+- `darwin-rebuild switch --flake .#macbook --dry-run` (test first)
+- `darwin-rebuild switch --flake .#macbook` (then apply)
 - `darwin-rebuild switch --flake .#work`
 - `darwin-rebuild switch --flake .#macmini`
 
@@ -63,12 +75,38 @@ Example usage:
 }
 ```
 
+## Interactive Module Management
+
+The `scripts/enable-module.sh` script provides an interactive interface for managing modules:
+
+**Usage:**
+- Interactive mode: `./scripts/enable-module.sh` (auto-detects machine)
+- Specific machine: `./scripts/enable-module.sh macbook`
+- List all modules: `./scripts/enable-module.sh --list`
+- Help: `./scripts/enable-module.sh --help`
+
+**Features:**
+- Browse modules by category (ai, browsers, development, etc.)
+- View current status: enabled ✅, disabled ❌, or available 🆕
+- Select multiple modules for bulk enable/disable
+- Paginated display for categories with many modules
+- Automatic validation of Nix configuration syntax
+- Backup and rollback on validation failure
+
+**Navigation:**
+- Numbers: Select module to toggle
+- Space: Toggle all visible modules on current page
+- Enter: Apply selected changes
+- c: Clear selections
+- n/p: Next/previous page
+- q: Back to categories
+
 ## Module System Architecture
 - **Self-contained machine configs**: Each `machines/<machine>/default.nix` contains complete Darwin + Home Manager config
 - **Centralized module discovery**: Module auto-discovery logic is shared in `flake.nix` and applied to all machines
 - **Module structure**: Each module in `modules/` defines `options.modules.<category>.<name>` and conditional `config`
 - **Individual app modules**: All applications are split into individual modules for fine-grained control
-- **Homebrew dependency**: Apps using Homebrew wrap their config with `mkIf (config.modules.tools.homebrew.enable or false)`
+- **Homebrew dependency**: Apps using Homebrew wrap their config with `mkIf (config.modules.system.homebrew.enable or false)`
 - **Machine config structure**: Each machine has `default.nix` (module selections), `darwin.nix` (system config), `home.nix` (user config), and `config.nix` (username)
 - **DRY principle**: No code duplication between machine configs
 
@@ -174,7 +212,94 @@ modules = {
 };
 ```
 
+## Development Workflow
+
+### Making Changes to Modules
+1. Edit module files in `modules/<category>/<module>/default.nix`
+2. Validate flake: `nix flake check`
+3. Test changes: `darwin-rebuild switch --flake .#<machine> --dry-run`
+4. Apply changes: `darwin-rebuild switch --flake .#<machine>`
+
+### Adding New Modules
+1. Create directory: `modules/<category>/<module-name>/`
+2. Create `default.nix` following the module pattern (see Module Development Guidelines)
+3. Module is auto-discovered - no flake.nix changes needed
+4. Enable in machine config using `./scripts/enable-module.sh` or manually edit `machines/<machine>/default.nix`
+
+### Testing Configuration Changes
+Always use this sequence to prevent system breakage:
+```bash
+# 1. Validate flake syntax
+nix flake check
+
+# 2. Test the build without applying
+darwin-rebuild switch --flake .#macbook --dry-run
+
+# 3. If dry-run succeeds, apply the changes
+darwin-rebuild switch --flake .#macbook
+```
+
+### Working with Development Shell
+The repository includes a development shell with useful tools:
+```bash
+nix develop  # Enter shell with nixpkgs-fmt and nix-tree
+```
+
+Tools available in dev shell:
+- `nixpkgs-fmt` - Format Nix files
+- `nix-tree` - Interactively browse dependency tree
+
+### Managing Dependencies
+Update specific flake inputs when needed:
+```bash
+# Update nixpkgs only
+nix flake lock --update-input nixpkgs
+
+# Update home-manager only
+nix flake lock --update-input home-manager
+
+# Update all inputs
+nix flake update
+```
+
+After updating, always test with `--dry-run` before applying.
+
+## Troubleshooting
+
+### Configuration Validation Failures
+If `darwin-rebuild` fails with validation errors:
+1. Check syntax: `nix flake check`
+2. Review recent changes to module files
+3. Verify balanced braces in edited `.nix` files
+4. Check that module options follow correct naming: `options.modules.<category>.<name>.enable`
+
+### Username Placeholder Error
+Error: `Please update machines/<machine>/config.nix with your actual username`
+- Edit `machines/<machine>/config.nix`
+- Replace `REPLACE_WITH_YOUR_USERNAME` with your actual username
+- Or run `./setup.sh -m <machine>` to regenerate config
+
+### Module Not Found After Adding
+If a new module isn't recognized:
+1. Ensure `default.nix` exists in `modules/<category>/<module-name>/`
+2. Run `nix flake check` to verify syntax
+3. Check that category exists in the auto-discovery list in `flake.nix` (line 60-74)
+
+### Homebrew Dependencies Not Installing
+If apps requiring Homebrew don't install:
+1. Verify `modules.system.homebrew.enable = true` in machine config
+2. Check module wraps homebrew config with: `mkIf (config.modules.system.homebrew.enable or false)`
+3. Run `darwin-rebuild` to apply Homebrew configuration
+
+### Build Fails After Flake Update
+If builds fail after updating inputs:
+1. Check `flake.lock` for the changes: `git diff flake.lock`
+2. Try updating inputs individually to isolate the issue
+3. Rollback lock file: `git checkout flake.lock`
+4. Report compatibility issues to the respective input repository
+
 ## Installation Script Architecture
 - `install`: Bootstrap script that handles system preparation (Xcode CLT, system updates) before repo cloning
 - `setup.sh`: Main installer that handles Nix installation, Homebrew, and Darwin configuration
-- Both scripts use shared utilities from `scripts/lib.sh` for consistent logging and error handling
+- `scripts/enable-module.sh`: Interactive module management with validation
+- `scripts/lib.sh`: Shared utilities for logging, macOS checks, and constants

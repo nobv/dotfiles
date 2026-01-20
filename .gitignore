@@ -34,3 +34,6 @@ conda.yaml
 ## flakes
 result
 
+
+# Claude Code
+.claude/settings.local.json
