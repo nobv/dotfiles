@@ -37,3 +37,7 @@ result
 
 # Claude Code
 .claude/settings.local.json
+
+
+# machines
+machines/work/config.nix
