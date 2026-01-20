@@ -8,7 +8,6 @@
 with lib;
 
 let
-  stable = import <nixpkgs-stable> { };
   cfg = config.modules.languages.python;
 in
 {
@@ -19,7 +18,7 @@ in
   config = mkIf cfg.enable {
     # https://github.com/NixOS/nixpkgs/blob/a0dbe47318/doc/languages-frameworks/python.section.md
     environment.systemPackages = with pkgs; [
-      python314
+      # python314
       uv
       ruff
       /*
