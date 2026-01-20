@@ -16,7 +16,7 @@
   modules = {
     ai = {
       chatgpt.enable = false;
-      claude.enable = true;
+      claude.enable = false;
       gemini.enable = true;
       perplexity.enable = false;
     };
@@ -101,7 +101,7 @@
       nix.enable = true;
       protobuf.enable = true;
       purescript.enable = false;
-      python.enable = false;
+      python.enable = true;
       rust.enable = true;
       shellscript.enable = true;
     };
@@ -136,6 +136,8 @@
       tmux.enable = true;
       wezterm.enable = true;
       zsh.enable = true;
+      iTerm2.enable = false;
+      ghostty.enable = true;
     };
 
     # Utilities
