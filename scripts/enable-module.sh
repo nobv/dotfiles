@@ -10,6 +10,8 @@ source "$SCRIPT_DIR/lib.sh"
 # Global variables (using different approach for associative arrays)
 AVAILABLE_MODULES=()
 CATEGORIES=()
+SELECTED_MODULES=()
+MODULES_PER_PAGE=15
 
 # Colors for status display
 ENABLED_COLOR='\033[0;32m'   # Green
@@ -150,6 +152,43 @@ get_module_description() {
     extract_module_description "$module_file" "$module_name"
 }
 
+# Check if module is selected for toggle
+is_module_selected() {
+    local module_key="$1"
+    for selected in "${SELECTED_MODULES[@]}"; do
+        if [ "$selected" = "$module_key" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+# Toggle module selection
+toggle_module_selection() {
+    local module_key="$1"
+    local new_selected=()
+    local found=false
+    
+    for selected in "${SELECTED_MODULES[@]}"; do
+        if [ "$selected" = "$module_key" ]; then
+            found=true
+        else
+            new_selected+=("$selected")
+        fi
+    done
+    
+    if [ "$found" = "false" ]; then
+        new_selected+=("$module_key")
+    fi
+    
+    SELECTED_MODULES=("${new_selected[@]}")
+}
+
+# Clear all selections
+clear_selections() {
+    SELECTED_MODULES=()
+}
+
 # Parse machine configuration to get current module status
 parse_machine_config() {
     local machine="$1"
@@ -256,14 +295,11 @@ interactive_selection() {
     fi
 }
 
-# Manage modules in a specific category
-manage_category_modules() {
+# Interactive module selector with multiple selection
+interactive_module_selector() {
     local machine="$1"
     local category="$2"
-    
-    echo
-    echo "=== Managing $category modules ==="
-    echo
+    local page="${3:-1}"
     
     local category_modules=()
     for module_key in "${AVAILABLE_MODULES[@]}"; do
@@ -277,47 +313,204 @@ manage_category_modules() {
         return
     fi
     
-    # Display current status
+    local total_pages=$(( (${#category_modules[@]} + MODULES_PER_PAGE - 1) / MODULES_PER_PAGE ))
+    local start_idx=$(( (page - 1) * MODULES_PER_PAGE ))
+    local end_idx=$(( start_idx + MODULES_PER_PAGE ))
+    
+    # Clear screen for better UX
+    clear
+    
+    echo "========================================="
+    echo "Managing $category modules (Page $page/$total_pages)"
+    echo "========================================="
+    echo
+    
+    # Display modules for current page
+    local current_idx=0
     for module_key in "${category_modules[@]}"; do
-        local module_name="${module_key#$category.}"
-        local status=$(get_module_status "$machine" "$module_key")
-        local description=$(get_module_description "$module_key")
-        
-        case "$status" in
-            "enabled")
-                echo -e "$ENABLED_SYMBOL ${ENABLED_COLOR}[ENABLED]${NC}   $module_name - $description"
-                ;;
-            "disabled")
-                echo -e "$DISABLED_SYMBOL ${DISABLED_COLOR}[DISABLED]${NC}  $module_name - $description"
-                ;;
-            "available")
-                echo -e "$AVAILABLE_SYMBOL ${AVAILABLE_COLOR}[AVAILABLE]${NC} $module_name - $description"
-                ;;
-        esac
+        if [ $current_idx -ge $start_idx ] && [ $current_idx -lt $end_idx ]; then
+            local module_name="${module_key#$category.}"
+            local status=$(get_module_status "$machine" "$module_key")
+            local description=$(get_module_description "$module_key")
+            local item_num=$((current_idx + 1))
+            
+            # Selection checkbox
+            local checkbox="[ ]"
+            if is_module_selected "$module_key"; then
+                checkbox="[x]"
+            fi
+            
+            # Status display
+            case "$status" in
+                "enabled")
+                    echo -e "$checkbox $item_num) $ENABLED_SYMBOL ${ENABLED_COLOR}[ENABLED]${NC}   $module_name"
+                    ;;
+                "disabled")  
+                    echo -e "$checkbox $item_num) $DISABLED_SYMBOL ${DISABLED_COLOR}[DISABLED]${NC}  $module_name"
+                    ;;
+                "available")
+                    echo -e "$checkbox $item_num) $AVAILABLE_SYMBOL ${AVAILABLE_COLOR}[AVAILABLE]${NC} $module_name"
+                    ;;
+            esac
+            echo "    $description"
+            echo
+        fi
+        current_idx=$((current_idx + 1))
     done
     
-    echo
-    echo "Enter module name to toggle (or 'back' to return, 'list' to see status again):"
-    read -r input
+    # Show selection summary
+    local to_enable=0
+    local to_disable=0
+    for selected in "${SELECTED_MODULES[@]}"; do
+        if [ "${selected#$category.}" != "$selected" ]; then
+            local current_status=$(get_module_status "$machine" "$selected")
+            if [ "$current_status" = "enabled" ]; then
+                to_disable=$((to_disable + 1))
+            else
+                to_enable=$((to_enable + 1))
+            fi
+        fi
+    done
     
-    case "$input" in
-        "back")
+    echo "========================================="
+    echo "Selected: $to_enable to enable, $to_disable to disable"
+    echo
+    echo "Navigation:"
+    echo "  [1-$((end_idx > ${#category_modules[@]} ? ${#category_modules[@]} - start_idx : MODULES_PER_PAGE))] Select item  [Space] Apply to current page"
+    echo "  [Enter] Apply changes    [c] Clear selections"
+    if [ $page -gt 1 ]; then
+        echo "  [p] Previous page"
+    fi
+    if [ $page -lt $total_pages ]; then
+        echo "  [n] Next page"
+    fi
+    echo "  [q] Back to categories"
+    echo
+    echo -n "Choice: "
+    
+    read -r choice
+    
+    case "$choice" in
+        "q")
+            clear_selections
             interactive_selection "$machine"
             ;;
-        "list")
-            manage_category_modules "$machine" "$category"
+        "c")
+            clear_selections
+            interactive_module_selector "$machine" "$category" "$page"
+            ;;
+        "n")
+            if [ $page -lt $total_pages ]; then
+                interactive_module_selector "$machine" "$category" $((page + 1))
+            else
+                interactive_module_selector "$machine" "$category" "$page"
+            fi
+            ;;
+        "p")
+            if [ $page -gt 1 ]; then
+                interactive_module_selector "$machine" "$category" $((page - 1))
+            else
+                interactive_module_selector "$machine" "$category" "$page"
+            fi
+            ;;
+        "")
+            # Enter pressed - apply changes
+            if [ ${#SELECTED_MODULES[@]} -gt 0 ]; then
+                apply_bulk_changes "$machine" "$category"
+            else
+                log_warning "No modules selected"
+                sleep 1
+                interactive_module_selector "$machine" "$category" "$page"
+            fi
+            ;;
+        " ")
+            # Space key - toggle all visible modules on current page
+            for module_key in "${category_modules[@]}"; do
+                local idx=0
+                for mod in "${category_modules[@]}"; do
+                    if [ "$mod" = "$module_key" ]; then
+                        break
+                    fi
+                    idx=$((idx + 1))
+                done
+                if [ $idx -ge $start_idx ] && [ $idx -lt $end_idx ]; then
+                    toggle_module_selection "$module_key"
+                fi
+            done
+            interactive_module_selector "$machine" "$category" "$page"
             ;;
         *)
-            local target_module="$category.$input"
-            if [[ " ${category_modules[*]} " =~ " $target_module " ]]; then
-                toggle_module "$machine" "$target_module"
-                manage_category_modules "$machine" "$category"
+            # Check if it's a number for item selection
+            if [ "$choice" -ge 1 ] && [ "$choice" -le $((end_idx - start_idx)) ] 2>/dev/null; then
+                local target_idx=$((start_idx + choice - 1))
+                if [ $target_idx -lt ${#category_modules[@]} ]; then
+                    local target_module="${category_modules[$target_idx]}"
+                    toggle_module_selection "$target_module"
+                fi
+                interactive_module_selector "$machine" "$category" "$page"
             else
-                log_error "Module not found: $input"
-                manage_category_modules "$machine" "$category"
+                log_error "Invalid choice: $choice"
+                sleep 1
+                interactive_module_selector "$machine" "$category" "$page"
             fi
             ;;
     esac
+}
+
+# Apply bulk changes to selected modules
+apply_bulk_changes() {
+    local machine="$1"
+    local category="$2"
+    
+    if [ ${#SELECTED_MODULES[@]} -eq 0 ]; then
+        log_warning "No modules selected"
+        return
+    fi
+    
+    clear
+    echo "========================================="
+    echo "Applying Changes"
+    echo "========================================="
+    echo
+    
+    local success_count=0
+    local total_count=0
+    
+    for module_key in "${SELECTED_MODULES[@]}"; do
+        if [ "${module_key#$category.}" != "$module_key" ]; then
+            total_count=$((total_count + 1))
+            local current_status=$(get_module_status "$machine" "$module_key")
+            local module_name="${module_key#$category.}"
+            
+            echo -n "Processing $module_name... "
+            
+            if toggle_module "$machine" "$module_key"; then
+                echo -e "\033[0;32m✓\033[0m"
+                success_count=$((success_count + 1))
+            else
+                echo -e "\033[0;31m✗\033[0m"
+            fi
+        fi
+    done
+    
+    echo
+    echo "========================================="
+    echo "Results: $success_count/$total_count successful"
+    echo "========================================="
+    echo
+    
+    clear_selections
+    
+    echo "Press Enter to continue..."
+    read -r
+    interactive_selection "$machine"
+}
+
+# Legacy function - redirect to new interface
+manage_category_modules() {
+    local machine="$1"
+    local category="$2"
+    interactive_module_selector "$machine" "$category" 1
 }
 
 # Toggle module enable status
@@ -336,14 +529,8 @@ toggle_module() {
             ;;
     esac
     
-    log_info "Toggling $module_key: $current_status -> $new_status"
-    
-    # Apply changes to configuration file
-    if apply_module_change "$machine" "$module_key" "$new_status"; then
-        log_success "Successfully updated $module_key"
-    else
-        log_error "Failed to update $module_key"
-    fi
+    # Apply changes to configuration file (return success/failure)
+    apply_module_change "$machine" "$module_key" "$new_status"
 }
 
 # Apply module change to configuration file
@@ -360,45 +547,36 @@ apply_module_change() {
     local module="${module_key#*.}"
     local enable_line="      $module.enable = $new_status;"
     
-    log_info "Enable line: $enable_line"
-    
-    log_info "Updating $module_key to $new_status in $category category"
+    # Silent mode for bulk operations - only log errors
     
     # Check if module already exists in config
     if grep -q "^[[:space:]]*$module\.enable[[:space:]]*=" "$config_file"; then
         # Update existing line
-        log_info "Updating existing module line"
         sed -i.tmp "s/^[[:space:]]*$module\.enable[[:space:]]*=.*$/      $module.enable = $new_status;/" "$config_file"
         rm -f "$config_file.tmp"
     else
         # Add new module to the appropriate category
         if grep -q "^[[:space:]]*$category[[:space:]]*=" "$config_file"; then
             # Category section exists, add module to it
-            log_info "Adding module to existing $category category"
-            
             # Find the last line in the category section and add the module before the closing brace
-            # Look for the pattern: category = { ... };
             local category_start_line=$(grep -n "^[[:space:]]*$category[[:space:]]*=" "$config_file" | cut -d: -f1)
             local category_end_line=$(awk -v start="$category_start_line" '
                 NR >= start && /^[[:space:]]*};/ { print NR; exit }
             ' "$config_file")
             
             if [ -n "$category_start_line" ] && [ -n "$category_end_line" ]; then
-                log_info "Found category boundaries: start=$category_start_line, end=$category_end_line"
                 # Insert the new line before the closing brace
                 sed -i.tmp "${category_end_line}i\\
 $enable_line" "$config_file"
                 if [ -f "$config_file.tmp" ]; then
                     rm -f "$config_file.tmp"
                 fi
-                log_info "Configuration file modified"
             else
-                log_error "Could not find category boundaries (start=$category_start_line, end=$category_end_line)"
+                log_error "Could not find category boundaries for $category"
                 return 1
             fi
         else
             # Category doesn't exist, create it
-            log_info "Creating new $category category"
             # Find the modules = { line and add the new category after it
             sed -i.tmp "/^[[:space:]]*modules[[:space:]]*=[[:space:]]*{/a\\
 \\
