@@ -1,7 +1,8 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }:
 
 {
@@ -79,7 +80,7 @@
       };
 
       infrastructure = {
-        aws.enable = false;
+        aws.enable = true;
         docker.enable = true;
         gcp.enable = true;
         kubernetes.enable = true;
@@ -136,6 +137,7 @@
       anki.enable = true;
       capacities.enable = true;
       clickup.enable = true;
+      d2.enable = true;
       daisydisk.enable = true;
       day-one.enable = false;
       drafts.enable = true;

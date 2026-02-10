@@ -19,5 +19,10 @@ in
     environment.systemPackages = with pkgs; [
       awscli2
     ];
+
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
+      brews = [ "awsdac" ];
+    };
+
   };
 }
