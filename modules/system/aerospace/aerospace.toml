@@ -41,6 +41,7 @@ key-mapping.preset = 'qwerty'
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+on-focus-changed = ['exec-and-forget ~/.config/aerospace/follow-aqua-voice.sh']
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
@@ -111,8 +112,9 @@ alt-shift-equal = 'resize smart +50'
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-3 = 'workspace 3' # for Float apps
+alt-a = 'workspace A' # for AI-tools
 alt-b = 'workspace B' # for Browser
-alt-c = 'workspace C' # for Chat
+alt-c = 'workspace C' # for Communications
 alt-o = 'workspace O' # for Obsidian
 alt-r = 'workspace R' # for Reader
 alt-t = 'workspace T' # for Terminal
@@ -122,6 +124,7 @@ alt-w = 'workspace W' # for Work
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-a = 'move-node-to-workspace A'
 alt-shift-b = 'move-node-to-workspace B'
 alt-shift-c = 'move-node-to-workspace C'
 alt-shift-o = 'move-node-to-workspace O'
@@ -144,6 +147,7 @@ alt-shift-semicolon = 'mode service'
 1 = 'main'
 2 = 'main'
 3 = 'main'
+A = 'main'
 B = 'main'
 C = 'main'
 F = 'main'
@@ -185,6 +189,18 @@ if.app-id = 'com.davetech.habit'
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
+if.app-id = 'ai.perplexity.mac'
+run = 'move-node-to-workspace A'
+
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+run = 'move-node-to-workspace A'
+
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'move-node-to-workspace A'
+
+[[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
 run = 'move-node-to-workspace B'
 
@@ -205,6 +221,10 @@ if.app-id = 'md.obsidian'
 run = 'move-node-to-workspace O'
 
 [[on-window-detected]]
+if.app-id = 'com.linear'
+run = 'move-node-to-workspace O'
+
+[[on-window-detected]]
 if.app-id = 'org.zotero.zotero'
 run = 'move-node-to-workspace R'
 
@@ -217,12 +237,12 @@ if.app-id = 'com.github.wez.wezterm'
 run = 'move-node-to-workspace T'
 
 [[on-window-detected]]
-if.app-id = 'com.google.Chrome'
-run = 'move-node-to-workspace W'
+if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace T'
 
 [[on-window-detected]]
-if.app-id = 'ai.perplexity.mac'
-run = ['layout floating', 'move-node-to-workspace 3']
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace W'
 
 [[on-window-detected]]
 if.app-id = 'com.1password.1password'
@@ -242,5 +262,4 @@ run = ['layout floating', 'move-node-to-workspace 3']
 
 [[on-window-detected]]
 if.app-id = 'com.electron.aqua-voice'
-run = ['layout floating', 'move-node-to-workspace 3']
-
+run = 'move-node-to-workspace 3'

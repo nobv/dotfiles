@@ -24,8 +24,15 @@ in
     };
 
     # Configuration files
-    home-manager.users.${username}.home.file.".config/aerospace/aerospace.toml" = {
-      source = ./aerospace.toml;
+    home-manager.users.${username}.home.file = {
+      ".config/aerospace/aerospace.toml" = {
+        source = ./aerospace.toml;
+      };
+
+      ".config/aerospace/follow-aqua-voice.sh" = {
+        source = ./follow-aqua-voice.sh;
+        executable = true;
+      };
     };
   };
 }
