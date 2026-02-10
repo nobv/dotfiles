@@ -21,7 +21,6 @@ neotest.setup({
       dap = { justMyCode = false },
       args = { "--log-level", "DEBUG" },
     }),
-    require("neotest-vim-test")({ ignore_filetypes = { "python", "lua" } }),
     require("neotest-plenary"),
     require("neotest-rust"),
     require("neotest-go")({
