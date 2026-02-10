@@ -20,7 +20,7 @@ in
     environment.systemPackages = with pkgs; [
       #cargo
       rustup
-      #rust-analyzer
+      rust-analyzer
       #rustc
       #rustfmt
       # cargo-tauri

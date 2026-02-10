@@ -18,8 +18,10 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       nix
-      nixfmt-rfc-style
+      nixfmt
+      nixd
       #rnix-lsp # https://github.com/nix-community/rnix-lsp
+
     ];
   };
 }

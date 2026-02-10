@@ -23,6 +23,11 @@ in
       # nodejs_22
       # nodejs_23
       nodejs_24
+      biome
+
+      # LSP servers
+      nodePackages.typescript-language-server
+
       # nodePackages.prettier
       # nodePackages.node-gyp
       # Package managers

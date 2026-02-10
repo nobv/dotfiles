@@ -21,6 +21,11 @@ in
       # python314
       uv
       ruff
+      pyright
+      python3Packages.black
+      python3Packages.isort
+      python3Packages.mypy
+      python3Packages.debugpy
       /*
         python310
         python310Packages.pytest

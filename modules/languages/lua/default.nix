@@ -18,6 +18,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       lua
+      lua-language-server
       #luajitPackages.lua-lsp # https://github.com/Alloyed/lua-lsp
       # lua-language-server # https://github.com/LuaLS/lua-language-server
     ];
