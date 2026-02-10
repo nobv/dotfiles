@@ -4,131 +4,62 @@ if (not status) then
   return
 end
 
-which_key.register({
-  g = {
-    d = { "<cmd>Lspsaga goto_definition<CR>", "Go to definition" },
-    h = { "<cmd>Lspsaga lsp_finder<CR>", "LSP finder" },
-    r = {
-      name = "Rename",
-      e = { "<cmd>Lspsaga rename<CR>", "Rename all occurrene of the entire file" },
-      s = { "<cmd>Lspsaga rename ++project<CR>", "Rename all occurrene of the selected files" },
-    },
-    p = { "<cmd>Lspsaga peek_definition<CR>", "Peak definition" },
-    t = { "<cmd>Lspsaga peek_type_definition<CR>", "Peek type definition" }
-    -- t = { "<cmd>Lspsaga goto_type_definition<CR>", "Go to type definition" }
+which_key.setup({})
+
+which_key.add({
+  { "<leader>f", group = "find" },
+  { "<leader>g", group = "git" },
+  { "<leader>c", group = "code" },
+  { "<leader>t", group = "test" },
+  { "<leader>w", group = "window" },
+  { "<leader>b", group = "buffer" },
+  { "<leader>q", group = "quit" },
+
+  -- Find / File
+  { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find files" },
+  { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Live grep" },
+  { "<leader>fb", "<cmd>Telescope buffers<CR>", desc = "Buffers" },
+  { "<leader>fr", "<cmd>Telescope oldfiles<CR>", desc = "Recent files" },
+  { "<leader>fe", "<cmd>NvimTreeFindFileToggle<CR>", desc = "Explorer" },
+
+  -- Git
+  { "<leader>gg", "<cmd>Neogit<CR>", desc = "Neogit" },
+  { "<leader>gb", "<cmd>Telescope git_branches<CR>", desc = "Git branches" },
+  { "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "Git commits" },
+  { "<leader>gh", "<cmd>Gitsigns preview_hunk<CR>", desc = "Preview hunk" },
+
+  -- Code / LSP
+  { "<leader>ca", "<cmd>Lspsaga code_action<CR>", desc = "Code action" },
+  { "<leader>cr", "<cmd>Lspsaga rename<CR>", desc = "Rename" },
+  { "<leader>cd", "<cmd>Lspsaga peek_definition<CR>", desc = "Definition" },
+  {
+    "<leader>cf",
+    function()
+      require("conform").format({ async = false, lsp_fallback = true })
+    end,
+    desc = "Format buffer",
   },
-  K = { "<cmd>Lspsaga hover_doc ++keep<CR>", "Hover Doc" },
-  t = {
-    name = "Neotest",
-    a = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach" },
-    f = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "Run File" },
-    F = { "<cmd>lua require('neotest').run.run({vim.fn.expand('%'), strategy = 'dap'})<cr>", "Debug File" },
-    l = { "<cmd>lua require('neotest').run.run_last()<cr>", "Run Last" },
-    L = { "<cmd>lua require('neotest').run.run_last({ strategy = 'dap' })<cr>", "Debug Last" },
-    n = { "<cmd>lua require('neotest').run.run()<cr>", "Run Nearest" },
-    N = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Debug Nearest" },
-    o = { "<cmd>lua require('neotest').output.open({ enter = true })<cr>", "Output" },
-    S = { "<cmd>lua require('neotest').run.stop()<cr>", "Stop" },
-    s = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Summary" },
-  },
-  ["<leader>"] = {
-    [":"] = { ":Telescope commands<CR>", "List available commands and run" },
-    ["<TAB>"] = { ":b#<CR>", "Last buffer" },
-    -- ["<TAB>"] = {
-    --   name = "+workspace",
-    --   n = {":tabn<CR>", "Next tab"},
-    --   o = {":tabnew<CR>", "Oepn new tab"},
-    --   p = {":tabp<CR>", "Previous tab"},
-    --   x = {":tabclose<CR>", "Close current tab"},
-    -- },
+  { "K", "<cmd>Lspsaga hover_doc ++keep<CR>", desc = "Hover doc" },
 
-    b = {
-      name = "+buffer",
-      b = { ":Telescope buffers<CR>", "Search buffer" },
-      d = { ":bd<CR>", "Delete buffer" },
-    },
+  -- Test / Neotest
+  { "<leader>tt", function() require("neotest").run.run() end, desc = "Nearest test" },
+  { "<leader>tf", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "File tests" },
+  { "<leader>tl", function() require("neotest").run.run_last() end, desc = "Last test" },
+  { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Test summary" },
+  { "<leader>to", function() require("neotest").output.open({ enter = true }) end, desc = "Test output" },
 
-    f = {
-      name = "+file",
-      f = { ":Telescope file_browser path=%:p:h select_buffer=true<CR>", "Find file" },
-      t = {
-        name = "NvimTree",
-        -- t = { ":NvimTreeToggle<CR>", "toggle" },
-        t = { ":NvimTreeFindFileToggle<CR>", "Find file" }
-      }
-    },
+  -- Window / Buffer
+  { "<leader>wh", "<C-w><C-h>", desc = "Focus left" },
+  { "<leader>wj", "<C-w><C-j>", desc = "Focus down" },
+  { "<leader>wk", "<C-w><C-k>", desc = "Focus up" },
+  { "<leader>wl", "<C-w><C-l>", desc = "Focus right" },
+  { "<leader>ws", "<C-w>s", desc = "Split below" },
+  { "<leader>wv", "<C-w>v", desc = "Split right" },
+  { "<leader>bd", "<cmd>bd<CR>", desc = "Delete buffer" },
+  { "<leader>bn", "<cmd>bnext<CR>", desc = "Next buffer" },
+  { "<leader>bp", "<cmd>bprevious<CR>", desc = "Previous buffer" },
 
-    g = {
-      name = "+git",
-      g = { ":Neogit<CR>", "Neogit status" },
-      u = { vim.cmd.UndotreeToggle, "undo-tree" }
-    },
-
-    h = {
-      name = "+help",
-      t = { ":Telescope help_tags<CR>", "help tags" },
-    },
-
-    l = {
-      name = "+lsp",
-      a = { "<cmd>Lspsaga code_action<CR>", "Code action" },
-      c = {
-        name = "+code_lens",
-        s = { "<cmd> lua vim.lsp.codelens.refresh()<CR>", "Show code lens" },
-        r = { "<cmd>lua vim.lsp.codelens.run()<CR>", "Run code lens" }
-      },
-      d = {
-        name = "+diagnostics",
-        b = { "<cmd>Lspsaga show_buf_diagnostics<CR>", "Show buffer diabnostics" },
-        c = { "<cmd>Lspsaga show_cursor_diagnostics<CR>", "Show cursor diagnostics" },
-        l = { "<cmd>Lspsaga show_line_diagnostics<CR>", "Show line diagnostics" },
-        w = { "<cmd>Lspsaga show_workspace_diagnostics<CR>", "Show workspace diagnostics" },
-        p = { "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Diagnostics jump previous" },
-        n = { "<cmd>Lspsaga diagnostic_jump_next<CR>", "Diagnostics jump next" },
-      },
-      h = {
-        name = "hierarchy",
-        i = { "<cmd>Lspsaga incoming_calls<CR>", "Incoming calls" },
-        o = { "<cmd>Lspsaga outgoing_calls<CR>", "Outgoing calls" },
-      },
-      o = { "<cmd>Lspsaga outline<CR>", "Toggle outline" },
-    },
-
-    o = {
-      name = "+open",
-      t = { "<cmd>Lspsaga term_toggle<CR>", "Open floating terminal" },
-    },
-    p = {
-      name = "+project",
-      -- f = { ":Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>", "Find file in project" },
-      f = { ":Telescope find_files<CR>", "Find file in project" },
-    },
-
-    s = {
-      name = "+search",
-      p = { ":Telescope live_grep<CR>", "Search project" },
-      s = { ":Telescope current_buffer_fuzzy_find<CR>", "Swipe" }
-    },
-
-    tg = {
-      name = "+toggle",
-      h = { ":noh<CR>", "Clear search highlight" },
-      t = { ":Twilight<CR>", "Twilight" },
-    },
-
-    w = {
-      name = "+window",
-      d = { ":close<CR>", "Close current window" },
-      h = { "<C-w><C-h>", "Move left" },
-      j = { "<C-w><C-j>", "Move bottom" },
-      k = { "<C-w><C-k>", "Move top" },
-      l = { "<C-w><C-l>", "Move right" },
-      s = { "<C-w>s", "Split window below" },
-      v = { "<C-w>v", "Split window right" },
-      m = { "<C-w>o", "maximize" },
-      ["="] = { "<C-w>=", "balance-window" },
-    },
-  }
+  -- Quit
+  { "<leader>qq", "<cmd>qa<CR>", desc = "Quit all" },
+  { "<leader>qw", "<cmd>wqa<CR>", desc = "Save and quit all" },
 })
-
-which_key.setup {}
