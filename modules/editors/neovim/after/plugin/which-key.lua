@@ -11,6 +11,7 @@ which_key.add({
   { "<leader>g", group = "git" },
   { "<leader>c", group = "code" },
   { "<leader>t", group = "test" },
+  { "<leader>o", group = "open" },
   { "<leader>w", group = "window" },
   { "<leader>b", group = "buffer" },
   { "<leader>q", group = "quit" },
@@ -47,6 +48,10 @@ which_key.add({
   { "<leader>tl", function() require("neotest").run.run_last() end, desc = "Last test" },
   { "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Test summary" },
   { "<leader>to", function() require("neotest").output.open({ enter = true }) end, desc = "Test output" },
+
+  -- Open / Terminal
+  { "<leader>ot", "<cmd>ToggleTerm<CR>", desc = "Terminal toggle" },
+  { "<leader>of", "<cmd>ToggleTerm direction=float<CR>", desc = "Float terminal" },
 
   -- Window / Buffer
   { "<leader>wh", "<C-w><C-h>", desc = "Focus left" },
