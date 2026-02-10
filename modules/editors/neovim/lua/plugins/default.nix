@@ -37,8 +37,6 @@ in
 
       ## LSP
       nvim-lspconfig # https://github.com/neovim/nvim-lspconfig/
-      mason-nvim # https://github.com/williamboman/mason.nvim/
-      mason-lspconfig-nvim # https://github.com/williamboman/mason-lspconfig.nvim
       lspsaga-nvim # https://github.com/nvimdev/lspsaga.nvim/
 
       nvim-cmp # https://github.com/hrsh7th/nvim-cmp/
@@ -47,7 +45,8 @@ in
       cmp-path # https://github.com/hrsh7th/cmp-path/
       luasnip # https://github.com/l3mon4d3/luasnip/
       cmp_luasnip # https://github.com/saadparwaiz1/cmp_luasnip/
-      null-ls-nvim # https://github.com/jose-elias-alvarez/null-ls.nvim/
+      conform-nvim # https://github.com/stevearc/conform.nvim/
+      nvim-lint # https://github.com/mfussenegger/nvim-lint
       lspkind-nvim # https://github.com/onsails/lspkind.nvim/
       {
         plugin = pkgs.vimUtils.buildVimPlugin {

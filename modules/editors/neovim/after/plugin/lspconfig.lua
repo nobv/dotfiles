@@ -1,6 +1,6 @@
-local status, lspconfig = pcall(require, "lspconfig")
+local status, _ = pcall(require, "lspconfig")
 if (not status) then
-  print("lspconfig not found.")
+  print("nvim-lspconfig not found.")
   return
 end
 
@@ -25,22 +25,50 @@ fidget.setup {}
 
 local lsp_capabilities = cmp_nvim_lsp.default_capabilities()
 
-local get_servers = require('mason-lspconfig').get_installed_servers
+local servers = {
+  "bashls",
+  "dhall_lsp_server",
+  "gopls",
+  "html",
+  "jsonls",
+  "lua_ls",
+  "nixd",
+  "purescriptls",
+  "pyright",
+  "terraformls",
+  "rust_analyzer",
+  "vimls",
+  "yamlls",
+}
 
-for _, servername in ipairs(get_servers()) do
-  lspconfig[servername].setup {
-    capabilities = lsp_capabilities,
-  }
+if vim.lsp.config["ts_ls"] ~= nil then
+  table.insert(servers, "ts_ls")
+elseif vim.lsp.config["tsserver"] ~= nil then
+  table.insert(servers, "tsserver")
 end
 
--- format on save
--- https://github.com/neovim/nvim-lspconfig/issues/1792#issuecomment-1352782205
-vim.api.nvim_create_autocmd("BufWritePre", {
-  buffer = buffer,
-  callback = function()
-    vim.lsp.buf.format { async = false }
-  end
+vim.lsp.config("*", {
+  capabilities = lsp_capabilities,
 })
+
+for _, servername in ipairs(servers) do
+  if servername == "nixd" then
+    vim.lsp.config("nixd", {
+      settings = {
+        nixd = {
+          formatting = {
+            command = { "nixfmt" },
+          },
+        },
+      },
+    })
+  end
+
+  local ok, err = pcall(vim.lsp.enable, servername)
+  if not ok then
+    vim.notify(string.format("LSP enable failed for %s: %s", servername, err), vim.log.levels.WARN)
+  end
+end
 
 
 local to_camel_case = require("util").to_camel_case

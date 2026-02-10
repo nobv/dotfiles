@@ -91,10 +91,6 @@ which_key.register({
         i = { "<cmd>Lspsaga incoming_calls<CR>", "Incoming calls" },
         o = { "<cmd>Lspsaga outgoing_calls<CR>", "Outgoing calls" },
       },
-      m = {
-        name = "mason",
-        o = { ":Mason<CR>", "opens agraphical status window" },
-      },
       o = { "<cmd>Lspsaga outline<CR>", "Toggle outline" },
     },
 
