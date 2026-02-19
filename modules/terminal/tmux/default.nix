@@ -18,28 +18,50 @@ in
 
   config = mkIf cfg.enable {
     home-manager.users.${username}.programs.tmux = {
-      #package = pkgs.tmux.overrideAttrs (_: rec {
-      #  version = "3.3";
-      #  src = pkgs.fetchFromGitHub {
-      #    owner = "tmux";
-      #    repo = "tmux";
-      #    rev = version;
-      #    sha256 = "sha256-Sxj2vXkbbPNRrqJKeIYwI7xdBtwRbl6a6a3yZr7UWW0=";
-      #  };
-      #});
       enable = true;
       baseIndex = 1;
-      customPaneNavigationAndResize = true;
-      keyMode = "vi";
-      prefix = "C-a";
-      extraConfig = builtins.readFile ./.tmux.conf + ''
-        set-option -g default-shell ${pkgs.zsh}/bin/zsh
-        set-option -g default-command ${pkgs.zsh}/bin/zsh
-      '';
-      historyLimit = 10000;
       clock24 = true;
+      customPaneNavigationAndResize = true;
+      escapeTime = 1;
+      focusEvents = true;
+      historyLimit = 10000;
+      keyMode = "vi";
       mouse = true;
+      prefix = "C-a";
       sensibleOnTop = true;
+      shell = "${pkgs.zsh}/bin/zsh";
+      terminal = "tmux-256color";
+      extraConfig = ''
+        # 設定ファイルをリロードする
+        bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
+
+        # | でペインを縦に分割する
+        bind | split-window -h
+
+        # - でペインを横に分割する
+        bind - split-window -v
+
+        # ステータスバー
+        set -g status-style bg=black
+        set -g status-position top
+        set-option -g status-interval 1
+
+        # アクティビティモニタリング
+        setw -g monitor-activity on
+        set -g visual-activity on
+
+        # コピーモード (vi風)
+        bind-key -T copy-mode-vi v send-keys -X begin-selection
+        bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+        unbind -T copy-mode-vi Enter
+        bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "pbcopy"
+
+        # 拡張キー対応 (Shift+Enter 等)
+        # https://github.com/anthropics/claude-code/issues/6072#issuecomment-3864208228
+        set -s extended-keys on
+        set -as terminal-features 'xterm*:extkeys'
+        bind-key -T root S-Enter send-keys Escape "[13;2u"
+      '';
       plugins = with pkgs.tmuxPlugins; [
         {
           plugin = dracula; # https://draculatheme.com/tmux
@@ -64,17 +86,16 @@ in
           extraConfig = ''
             set -g @continuum-boot 'on'
             set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '1'
+            set -g @continuum-save-interval '30'
           '';
         }
         {
-          plugin = vim-tmux-navigator; # https://github.com/tmux-plugins/tmux-continuum
+          plugin = vim-tmux-navigator; # https://github.com/christoomey/vim-tmux-navigator
         }
         {
           plugin = tmux-fzf; # https://github.com/sainnhe/tmux-fzf
         }
       ];
-      terminal = "screen-256color";
     };
   };
 }
