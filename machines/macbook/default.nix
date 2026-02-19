@@ -84,8 +84,9 @@
         docker.enable = true;
         gcp.enable = true;
         kubernetes.enable = true;
+        oci.enable = true;
         sops.enable = true;
-        terraform.enable = false;
+        terraform.enable = true;
       };
 
       vcs = {
@@ -163,6 +164,7 @@
       trivy.enable = true;
       wireguard.enable = true;
       wireshark.enable = true;
+      tailscale-app.enable = true;
     };
 
     # System tools
@@ -179,13 +181,14 @@
 
     # Terminal configuration
     terminal = {
+      ghostty.enable = true;
       iTerm2.enable = false;
       lf.enable = true;
       starship.enable = true;
       tmux.enable = true;
       wezterm.enable = true;
+      zellij.enable = true;
       zsh.enable = true;
-      ghostty.enable = true;
     };
 
     # Utilities
