@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  username,
   ...
 }:
 
@@ -18,6 +19,10 @@ in
   config = mkIf cfg.enable {
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "ghostty" ];
+    };
+
+    home-manager.users.${username}.home.file.".config/ghostty/config" = {
+      source = ./config;
     };
   };
 }
