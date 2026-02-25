@@ -16,7 +16,7 @@
   modules = {
     ai = {
       chatgpt.enable = false;
-      claude.enable = false;
+      claude.enable = true;
       gemini.enable = true;
       perplexity.enable = false;
     };
@@ -109,6 +109,7 @@
     productivity = {
       capacities.enable = true;
       heptabase.enable = true;
+      linear-linear.enable = true;
       mdbook.enable = false;
       obsidian.enable = true;
       raycast.enable = true;
@@ -143,6 +144,7 @@
     # Utilities
     utilities = {
       battery.enable = true;
+      cleanshot.enable = true;
       deskpad.enable = true;
       flux.enable = true;
       google-japanese-ime.enable = true;
