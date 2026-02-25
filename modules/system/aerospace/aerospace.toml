@@ -52,11 +52,11 @@ on-focus-changed = ['exec-and-forget ~/.config/aerospace/follow-aqua-voice.sh']
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
 inner.horizontal = 10
-inner.vertical =   10
-outer.left =       10
-outer.bottom =     10
-outer.top =        10
-outer.right =      10
+inner.vertical = 10
+outer.left = 10
+outer.bottom = 10
+outer.top = 10
+outer.right = 10
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -149,7 +149,7 @@ alt-shift-semicolon = 'mode service'
 3 = 'main'
 A = 'main'
 B = 'main'
-C = 'main'
+C = ['Display', 'main']
 F = 'main'
 O = ['built-in.*', 'main']
 R = 'main'
