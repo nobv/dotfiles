@@ -32,5 +32,6 @@ in
       ignores = lib.splitString "\n" (builtins.readFile ./.gitignore_global);
       # package = unstable.git;
     };
-  };
+
+};
 }
