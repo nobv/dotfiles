@@ -8,6 +8,7 @@
 {
   # Common Home Manager configuration shared across all machines
   home-manager = {
+    backupFileExtension = "backup";
     useGlobalPkgs = true;
     useUserPackages = true;
     users.${username} = {
