@@ -3,3 +3,6 @@
 
 # for homebrew
 eval $(/opt/homebrew/bin/brew shellenv)
+
+## for workmux
+eval "$(workmux completions zsh)"

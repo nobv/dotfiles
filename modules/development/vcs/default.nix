@@ -12,5 +12,6 @@
     ./git
     ./github
     ./pre-commit
+    ./workmux
   ];
 }
