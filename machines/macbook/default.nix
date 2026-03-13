@@ -94,6 +94,8 @@
         git.enable = true;
         github.enable = true;
         pre-commit.enable = true;
+        difit.enable = true;
+        workmux.enable = true;
       };
     };
 
@@ -181,20 +183,22 @@
 
     # Terminal configuration
     terminal = {
+      cmux.enable = false;
       ghostty.enable = true;
       iTerm2.enable = false;
       lf.enable = true;
       starship.enable = true;
       tmux.enable = true;
-      wezterm.enable = true;
-      zellij.enable = true;
+      wezterm.enable = false;
+      zellij.enable = false;
       zsh.enable = true;
     };
 
     # Utilities
     utilities = {
-      aqua-voice.enable = true;
       appcleaner.enable = true;
+      aqua-voice.enable = true;
+      bartender.enable = false;
       battery.enable = true;
       cleanshot.enable = true;
       deskpad.enable = true;
@@ -208,6 +212,7 @@
       logi-options-plus.enable = true;
       meetingbar.enable = true;
       mos.enable = true;
+      sanebar.enable = true;
       spotify.enable = true;
       textsniper.enable = true;
       the-unarchiver.enable = true;
