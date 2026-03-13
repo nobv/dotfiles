@@ -7,6 +7,7 @@
 
 {
   imports = [
+    ./difit
     ./fork
     ./git
     ./github
