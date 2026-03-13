@@ -24,6 +24,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
+export KUBECONFIG=~/.kube/config-oci-k3s
+
 # typeset -U PATH
 
 # typeset -U fpath
