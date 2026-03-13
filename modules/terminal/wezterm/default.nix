@@ -10,6 +10,7 @@ with lib;
 
 let
   cfg = config.modules.terminal.wezterm;
+  dotfilesPath = "/Users/${username}/.dotfiles";
 in
 {
   options.modules.terminal.wezterm = {
@@ -21,8 +22,10 @@ in
       casks = [ "wezterm" ];
     };
 
-    home-manager.users.${username}.home.file.".wezterm.lua" = {
-      source = ./wezterm.lua;
+    home-manager.users.${username} = { config, ... }: {
+      home.file.".wezterm.lua".source =
+        config.lib.file.mkOutOfStoreSymlink
+          "${dotfilesPath}/modules/terminal/wezterm/wezterm.lua";
     };
   };
 }

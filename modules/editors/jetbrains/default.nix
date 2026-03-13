@@ -10,6 +10,7 @@ with lib;
 
 let
   cfg = config.modules.editors.jetbrains;
+  dotfilesPath = "/Users/${username}/.dotfiles";
 in
 {
   options.modules.editors.jetbrains = {
@@ -24,10 +25,10 @@ in
     };
 
     # ideavimrc configuration
-    home-manager.users.${username}.home.file = {
-      ".ideavimrc" = {
-        text = builtins.readFile ./.ideavimrc;
-      };
+    home-manager.users.${username} = { config, ... }: {
+      home.file.".ideavimrc".source =
+        config.lib.file.mkOutOfStoreSymlink
+          "${dotfilesPath}/modules/editors/jetbrains/.ideavimrc";
     };
   };
 }

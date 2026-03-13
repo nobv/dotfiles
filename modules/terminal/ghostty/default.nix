@@ -10,6 +10,7 @@ with lib;
 
 let
   cfg = config.modules.terminal.ghostty;
+  dotfilesPath = "/Users/${username}/.dotfiles";
 in
 {
   options.modules.terminal.ghostty = {
@@ -21,8 +22,10 @@ in
       casks = [ "ghostty" ];
     };
 
-    home-manager.users.${username}.home.file.".config/ghostty/config" = {
-      source = ./config;
+    home-manager.users.${username} = { config, ... }: {
+      home.file.".config/ghostty/config".source =
+        config.lib.file.mkOutOfStoreSymlink
+          "${dotfilesPath}/modules/terminal/ghostty/config";
     };
   };
 }
