@@ -12,7 +12,7 @@ after-login-command = []
 after-startup-command = []
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -115,6 +115,7 @@ alt-3 = 'workspace 3' # for Float apps
 alt-a = 'workspace A' # for AI-tools
 alt-b = 'workspace B' # for Browser
 alt-c = 'workspace C' # for Communications
+alt-d = 'workspace D' # for Development
 alt-o = 'workspace O' # for Obsidian
 alt-r = 'workspace R' # for Reader
 alt-t = 'workspace T' # for Terminal
@@ -127,6 +128,7 @@ alt-shift-3 = 'move-node-to-workspace 3'
 alt-shift-a = 'move-node-to-workspace A'
 alt-shift-b = 'move-node-to-workspace B'
 alt-shift-c = 'move-node-to-workspace C'
+alt-shift-d = 'move-node-to-workspace D'
 alt-shift-o = 'move-node-to-workspace O'
 alt-shift-r = 'move-node-to-workspace R'
 alt-shift-t = 'move-node-to-workspace T'
@@ -150,6 +152,7 @@ alt-shift-semicolon = 'mode service'
 A = 'main'
 B = 'main'
 C = 'main'
+D = 'main'
 F = 'main'
 O = ['built-in.*', 'main']
 R = 'main'
@@ -173,6 +176,10 @@ alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
+if.app-name-regex-substring = 'Finder'
+run = 'layout floating'
+
+[[on-window-detected]]
 if.app-id = 'com.apple.iCal'
 run = 'move-node-to-workspace 1'
 
@@ -189,6 +196,26 @@ if.app-id = 'com.davetech.habit'
 run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
+if.app-id = 'com.1password.1password'
+run = ['layout floating', 'move-node-to-workspace 3']
+
+[[on-window-detected]]
+if.app-id = 'com.agiletortoise.Drafts-OSX'
+run = ['layout floating', 'move-node-to-workspace 3']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Music'
+run = ['layout floating', 'move-node-to-workspace 3']
+
+[[on-window-detected]]
+if.app-id = 'com.withopal.opalmacos'
+run = ['layout floating', 'move-node-to-workspace 3']
+
+[[on-window-detected]]
+if.app-id = 'com.electron.aqua-voice'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
 if.app-id = 'ai.perplexity.mac'
 run = 'move-node-to-workspace A'
 
@@ -202,6 +229,10 @@ run = 'move-node-to-workspace A'
 
 [[on-window-detected]]
 if.app-id = 'company.thebrowser.Browser'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
 run = 'move-node-to-workspace B'
 
 [[on-window-detected]]
@@ -242,24 +273,10 @@ run = 'move-node-to-workspace T'
 
 [[on-window-detected]]
 if.app-id = 'com.google.Chrome'
+if.window-title-regex-substring = 'client work'
 run = 'move-node-to-workspace W'
 
 [[on-window-detected]]
-if.app-id = 'com.1password.1password'
-run = ['layout floating', 'move-node-to-workspace 3']
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
 
-[[on-window-detected]]
-if.app-id = 'com.agiletortoise.Drafts-OSX'
-run = ['layout floating', 'move-node-to-workspace 3']
-
-[[on-window-detected]]
-if.app-id = 'com.apple.Music'
-run = ['layout floating', 'move-node-to-workspace 3']
-
-[[on-window-detected]]
-if.app-id = 'com.withopal.opalmacos'
-run = ['layout floating', 'move-node-to-workspace 3']
-
-[[on-window-detected]]
-if.app-id = 'com.electron.aqua-voice'
-run = 'move-node-to-workspace 3'
