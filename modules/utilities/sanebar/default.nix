@@ -1,4 +1,8 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
 with lib;
 
@@ -12,7 +16,7 @@ in
 
   config = mkIf cfg.enable {
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
-      casks = [ "sanebar" ];
+      casks = [ "sane-apps/tap/sanebar" ];
     };
   };
 }
