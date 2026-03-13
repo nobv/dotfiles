@@ -17,8 +17,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      gemini-cli
-    ];
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
+      brews = [ "gemini-cli" ];
+    };
   };
 }
