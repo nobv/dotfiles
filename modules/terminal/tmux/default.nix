@@ -52,9 +52,9 @@ in
 
         # コピーモード (vi風)
         bind-key -T copy-mode-vi v send-keys -X begin-selection
-        bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+        bind-key -T copy-mode-vi y send-keys -X copy-pipe-no-clear "pbcopy"
         unbind -T copy-mode-vi Enter
-        bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "pbcopy"
+        bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-no-clear "pbcopy"
 
         # 拡張キー対応 (Shift+Enter 等)
         # https://github.com/anthropics/claude-code/issues/6072#issuecomment-3864208228
