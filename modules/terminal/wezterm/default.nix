@@ -22,10 +22,11 @@ in
       casks = [ "wezterm" ];
     };
 
-    home-manager.users.${username} = { config, ... }: {
-      home.file.".wezterm.lua".source =
-        config.lib.file.mkOutOfStoreSymlink
-          "${dotfilesPath}/modules/terminal/wezterm/wezterm.lua";
-    };
+    home-manager.users.${username} =
+      { config, ... }:
+      {
+        home.file.".wezterm.lua".source =
+          config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/terminal/wezterm/wezterm.lua";
+      };
   };
 }

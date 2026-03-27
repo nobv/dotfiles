@@ -22,10 +22,11 @@ in
       casks = [ "ghostty" ];
     };
 
-    home-manager.users.${username} = { config, ... }: {
-      home.file.".config/ghostty/config".source =
-        config.lib.file.mkOutOfStoreSymlink
-          "${dotfilesPath}/modules/terminal/ghostty/config";
-    };
+    home-manager.users.${username} =
+      { config, ... }:
+      {
+        home.file.".config/ghostty/config".source =
+          config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/terminal/ghostty/config";
+      };
   };
 }

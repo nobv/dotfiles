@@ -29,7 +29,8 @@ let
 
     pre_add:
       - git fetch origin
-  '' + sandboxConfig;
+  ''
+  + sandboxConfig;
 in
 {
   options.modules.development.vcs.workmux = {
@@ -47,13 +48,19 @@ in
         description = "Memory per sandbox VM";
       };
       isolation = mkOption {
-        type = types.enum [ "project" "shared" ];
+        type = types.enum [
+          "project"
+          "shared"
+        ];
         default = "project";
         description = "VM isolation mode: project (per-repo) or shared (single VM)";
       };
       hostCommands = mkOption {
         type = types.listOf types.str;
-        default = [ "just" "make" ];
+        default = [
+          "just"
+          "make"
+        ];
         description = "Commands that can be proxied from sandbox to host";
       };
     };
@@ -64,8 +71,10 @@ in
       brews = [ "raine/workmux/workmux" ];
     };
 
-    home-manager.users.${username} = { config, ... }: {
-      home.file.".config/workmux/config.yaml".text = configYaml;
-    };
+    home-manager.users.${username} =
+      { config, ... }:
+      {
+        home.file.".config/workmux/config.yaml".text = configYaml;
+      };
   };
 }

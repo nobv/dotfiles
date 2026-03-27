@@ -17,7 +17,7 @@
   ls = "eza";
 
   # workmux (instead of git worktree)
-  wm="workmux";
+  wm = "workmux";
 
   ## }}}
 

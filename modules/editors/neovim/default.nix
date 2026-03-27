@@ -19,25 +19,25 @@ in
   };
 
   config = mkIf cfg.enable {
-    home-manager.users.${username} = { config, ... }: {
-      xdg.configFile = {
-        "nvim/after".source =
-          config.lib.file.mkOutOfStoreSymlink
-            "${dotfilesPath}/modules/editors/neovim/after";
+    home-manager.users.${username} =
+      { config, ... }:
+      {
+        xdg.configFile = {
+          "nvim/after".source =
+            config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/editors/neovim/after";
 
-        "nvim/lua".source =
-          config.lib.file.mkOutOfStoreSymlink
-            "${dotfilesPath}/modules/editors/neovim/lua";
-      };
+          "nvim/lua".source =
+            config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/editors/neovim/lua";
+        };
 
-      programs.neovim = {
-        enable = true;
-        viAlias = true;
-        vimAlias = true;
-        vimdiffAlias = true;
-        extraConfig = "source ~/.config/nvim/lua/init.lua";
-        plugins = plugins.vimPlugins;
+        programs.neovim = {
+          enable = true;
+          viAlias = true;
+          vimAlias = true;
+          vimdiffAlias = true;
+          extraConfig = "source ~/.config/nvim/lua/init.lua";
+          plugins = plugins.vimPlugins;
+        };
       };
-    };
   };
 }

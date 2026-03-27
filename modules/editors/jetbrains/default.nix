@@ -25,10 +25,11 @@ in
     };
 
     # ideavimrc configuration
-    home-manager.users.${username} = { config, ... }: {
-      home.file.".ideavimrc".source =
-        config.lib.file.mkOutOfStoreSymlink
-          "${dotfilesPath}/modules/editors/jetbrains/.ideavimrc";
-    };
+    home-manager.users.${username} =
+      { config, ... }:
+      {
+        home.file.".ideavimrc".source =
+          config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/editors/jetbrains/.ideavimrc";
+      };
   };
 }

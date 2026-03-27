@@ -12,7 +12,6 @@
     };
   };
 
-
   security = {
     pam = {
       services = {
