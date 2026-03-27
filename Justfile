@@ -13,7 +13,7 @@ check:
     nix flake check
 
 fmt:
-    nix develop -c nixpkgs-fmt .
+    nix fmt
 
 update:
     nix flake update

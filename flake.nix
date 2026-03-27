@@ -118,11 +118,13 @@
         work = mkDarwinSystem { machine = "work"; };
       };
 
+      formatter.${system} = pkgs.nixfmt-tree;
+
       # Development shell for working with the configuration
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
           just
-          nixpkgs-fmt
+          nixfmt
           nix-tree
         ];
       };
