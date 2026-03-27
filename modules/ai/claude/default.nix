@@ -40,6 +40,9 @@ in
         ".claude/CLAUDE.md".source =
           config.lib.file.mkOutOfStoreSymlink
             "${dotfilesPath}/modules/ai/claude/CLAUDE.md";
+        ".config/ccstatusline/settings.json".source =
+          config.lib.file.mkOutOfStoreSymlink
+            "${dotfilesPath}/modules/ai/claude/ccstatusline-settings.json";
       };
     };
   };

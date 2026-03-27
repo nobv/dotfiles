@@ -1,0 +1,109 @@
+{
+  "version": 3,
+  "lines": [
+    [
+      {
+        "id": "66eea10b-616f-4692-a636-59af49ab1333",
+        "type": "context-bar",
+        "metadata": {
+          "display": "progress-short"
+        }
+      },
+      {
+        "id": "f2d1e086-f364-41ca-89e8-9ad030bde137",
+        "type": "session-cost",
+        "rawValue": false
+      },
+      {
+        "id": "53e0be38-78af-4586-9b7c-9cec38bd44f0",
+        "type": "reset-timer",
+        "metadata": {
+          "display": "progress-short"
+        }
+      },
+      {
+        "id": "3694a887-531b-4c89-9526-ae8843df0d23",
+        "type": "session-usage",
+        "rawValue": false,
+        "metadata": {
+          "display": "progress-short"
+        }
+      }
+    ],
+    [
+      {
+        "id": "3cad9dcc-f99a-472a-a7bd-9d5020adaa32",
+        "type": "model"
+      },
+      {
+        "id": "644bc378-6027-400f-8c17-c46d33357e95",
+        "type": "thinking-effort"
+      },
+      {
+        "id": "efb0b86a-7893-4810-8711-a344e23b21df",
+        "type": "total-speed"
+      },
+      {
+        "id": "b470dc15-d118-4b3f-8e19-17887bd12448",
+        "type": "session-clock"
+      },
+      {
+        "id": "f339471d-b16f-4f58-adb6-c572fcc45100",
+        "type": "output-style"
+      }
+    ],
+    [
+      {
+        "id": "1b065763-6a8c-4706-bcd8-dea015eb4fb7",
+        "type": "git-branch",
+        "metadata": {
+          "hideNoGit": "true",
+          "linkToGitHub": "true"
+        }
+      },
+      {
+        "id": "c884a4cd-0cd2-44d0-9e7e-7e1126a423bc",
+        "type": "git-changes",
+        "metadata": {
+          "hideNoGit": "true"
+        }
+      },
+      {
+        "id": "f281f3ca-15a0-48b1-bcf5-5ac9e16deb03",
+        "type": "current-working-dir",
+        "metadata": {
+          "abbreviateHome": "true",
+          "segments": "2"
+        }
+      },
+      {
+        "id": "1d232f71-0f46-4f63-9d8a-83f7b05361e1",
+        "type": "skills",
+        "metadata": {
+          "mode": "list",
+          "hideWhenEmpty": "true",
+          "listLimit": "3"
+        }
+      }
+    ]
+  ],
+  "flexMode": "full-minus-40",
+  "compactThreshold": 60,
+  "colorLevel": 2,
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "powerline": {
+    "enabled": true,
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [],
+    "endCaps": [],
+    "autoAlign": true,
+    "theme": "dracula"
+  },
+  "defaultPadding": " "
+}
