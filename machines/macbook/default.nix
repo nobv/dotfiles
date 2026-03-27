@@ -96,7 +96,14 @@
         github.enable = true;
         pre-commit.enable = true;
         difit.enable = true;
-        workmux.enable = true;
+        workmux = {
+          enable = true;
+          sandbox = {
+            enable = true;
+            cpus = 2;
+            memory = "4GiB";
+          };
+        };
       };
     };
 
@@ -177,6 +184,7 @@
       flashspace.enable = true;
       fonts.enable = true;
       homebrew.enable = true;
+      lima.enable = true;
       multipass.enable = true;
       sketchybar.enable = true;
       utm.enable = true;

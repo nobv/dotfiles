@@ -80,6 +80,14 @@
         git.enable = true;
         github.enable = true;
         pre-commit.enable = true;
+        workmux = {
+          enable = true;
+          sandbox = {
+            enable = true;
+            cpus = 4;
+            memory = "8GiB";
+          };
+        };
       };
     };
 
@@ -128,6 +136,7 @@
       flashspace.enable = true;
       fonts.enable = true;
       homebrew.enable = true;
+      lima.enable = true;
       multipass.enable = true;
     };
 
