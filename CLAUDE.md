@@ -13,6 +13,20 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 
 ## Quick Start Commands
 
+### just コマンド（推奨）
+リポジトリルートの `Justfile` で頻出コマンドを簡略化:
+- **Test configuration (REQUIRED)**: `just dry-run`
+- Apply configuration: `just switch`
+- Check flake: `just check`
+- Format Nix files: `just fmt`
+- Update all inputs: `just update`
+- Update specific input: `just update-input <input-name>`
+- Show flake info: `just show`
+- Interactive module management: `just modules`
+- Enter development shell: `just dev`
+
+別マシンを指定する場合: `just MACHINE=work switch`
+
 ### Daily Development Commands
 - **Test configuration (REQUIRED)**: `darwin-rebuild switch --flake .#<machine> --dry-run`
 - Apply configuration: `darwin-rebuild switch --flake .#<machine>`
