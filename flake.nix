@@ -15,6 +15,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -25,6 +30,7 @@
       nixpkgs-stable,
       darwin,
       home-manager,
+      git-hooks,
     }:
     let
       system = "aarch64-darwin";
@@ -120,13 +126,27 @@
 
       formatter.${system} = pkgs.nixfmt-tree;
 
-      # Development shell for working with the configuration
-      devShells.${system}.default = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          just
-          nixfmt
-          nix-tree
-        ];
+      checks.${system}.pre-commit = git-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          nixfmt.enable = true;
+        };
       };
+
+      # Development shell for working with the configuration
+      devShells.${system}.default =
+        let
+          inherit (self.checks.${system}.pre-commit) shellHook enabledPackages;
+        in
+        pkgs.mkShell {
+          inherit shellHook;
+          buildInputs =
+            enabledPackages
+            ++ (with pkgs; [
+              just
+              nixfmt
+              nix-tree
+            ]);
+        };
     };
 }

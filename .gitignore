@@ -34,6 +34,9 @@ conda.yaml
 ## flakes
 result
 
+# git-hooks.nix (auto-generated)
+.pre-commit-config.yaml
+
 
 # Claude Code
 .claude/settings.local.json
