@@ -25,7 +25,8 @@
     [
       {
         "id": "3cad9dcc-f99a-472a-a7bd-9d5020adaa32",
-        "type": "model"
+        "type": "model",
+        "rawValue": true
       },
       {
         "id": "644bc378-6027-400f-8c17-c46d33357e95",
@@ -43,7 +44,8 @@
         "metadata": {
           "hideNoGit": "true",
           "linkToGitHub": "true"
-        }
+        },
+        "merge": true
       },
       {
         "id": "c884a4cd-0cd2-44d0-9e7e-7e1126a423bc",
@@ -59,12 +61,18 @@
           "abbreviateHome": "true",
           "segments": "2"
         }
+      },
+      {
+        "id": "a57a4406-a90f-43b8-914e-cdd101f8069a",
+        "type": "skills",
+        "backgroundColor": "bgBrightMagenta"
       }
     ]
   ],
   "flexMode": "full",
   "compactThreshold": 60,
   "colorLevel": 2,
+  "defaultPadding": " ",
   "inheritSeparatorColors": false,
   "globalBold": false,
   "powerline": {
@@ -77,8 +85,7 @@
     ],
     "startCaps": [],
     "endCaps": [],
-    "autoAlign": true,
-    "theme": "dracula"
-  },
-  "defaultPadding": " "
+    "theme": "dracula",
+    "autoAlign": true
+  }
 }
