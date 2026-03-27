@@ -3,12 +3,14 @@
   pkgs,
   lib,
   username,
+  machine,
   ...
 }:
 {
   # Common Darwin system configuration shared across all machines
   environment = {
     systemPackages = with pkgs; [ ];
+    variables.DOTFILES_MACHINE = machine;
   };
 
   nix = {

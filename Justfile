@@ -1,4 +1,4 @@
-MACHINE := "macbook"
+MACHINE := env("DOTFILES_MACHINE", "macbook")
 
 default:
     @just --list
@@ -7,7 +7,7 @@ dry-run:
     darwin-rebuild switch --flake .#{{MACHINE}} --dry-run
 
 switch:
-    darwin-rebuild switch --flake .#{{MACHINE}}
+    sudo darwin-rebuild switch --flake .#{{MACHINE}}
 
 check:
     nix flake check
