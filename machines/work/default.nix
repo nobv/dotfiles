@@ -40,6 +40,7 @@
         aqua.enable = true;
         direnv.enable = true;
         go-task.enable = true;
+        just.enable = true;
         make.enable = false;
       };
       cli-tools = {
