@@ -121,6 +121,7 @@
       # Development shell for working with the configuration
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
+          just
           nixpkgs-fmt
           nix-tree
         ];

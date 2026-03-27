@@ -10,6 +10,7 @@
     ./aqua
     ./direnv
     ./go-task
+    ./just
     ./make
   ];
 }
