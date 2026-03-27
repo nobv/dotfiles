@@ -122,6 +122,7 @@
       mdbook.enable = false;
       obsidian.enable = true;
       raycast.enable = true;
+      todoist.enable = true;
       zotero.enable = true;
     };
 

@@ -166,6 +166,7 @@
       raycast.enable = true;
       streaks.enable = false;
       things3.enable = true;
+      todoist.enable = true;
       zotero.enable = true;
     };
 
