@@ -99,7 +99,7 @@
         workmux = {
           enable = true;
           sandbox = {
-            enable = true;
+            enable = false;
             cpus = 2;
             memory = "4GiB";
           };
@@ -222,7 +222,7 @@
       logi-options-plus.enable = true;
       meetingbar.enable = true;
       mos.enable = true;
-      sanebar.enable = true;
+      sanebar.enable = false;
       spotify.enable = true;
       textsniper.enable = true;
       the-unarchiver.enable = true;
