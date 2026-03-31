@@ -26,7 +26,6 @@ in
       };
       global = {
         brewfile = true;
-        lockfiles = true;
       };
     };
   };
