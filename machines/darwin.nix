@@ -71,8 +71,9 @@
     pam = {
       services = {
         sudo_local = {
+          # watchIdAuth = lib.mkDefault true;
           touchIdAuth = lib.mkDefault true;
-          watchIdAuth = lib.mkDefault true;
+          reattach = true;
         };
       };
     };
