@@ -159,7 +159,7 @@
       deskpad.enable = true;
       flux.enable = true;
       google-japanese-ime.enable = true;
-      jordanbaird-ice.enable = true;
+      thaw.enable = true;
       karabiner-elements.enable = true;
       logi-options-plus.enable = true;
       meetingbar.enable = true;

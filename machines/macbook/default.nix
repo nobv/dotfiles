@@ -216,7 +216,7 @@
       google-drive.enable = true;
       google-japanese-ime.enable = true;
       istat-menus.enable = true;
-      jordanbaird-ice.enable = true;
+      thaw.enable = true;
       karabiner-elements.enable = true;
       leader-key.enable = false;
       logi-options-plus.enable = true;
