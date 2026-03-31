@@ -10,6 +10,25 @@ with lib;
 
 let
   cfg = config.modules.terminal.tmux;
+  # macOS Sequoia 以降の SSID <redacted> 問題の修正 (dracula/tmux#358)
+  dracula-patched = pkgs.tmuxPlugins.dracula.overrideAttrs (old: {
+    version = "unstable-2025-12-18";
+    src = pkgs.fetchFromGitHub {
+      owner = "dracula";
+      repo = "tmux";
+      rev = "f3855313678d4b5c334604223fe37e6c4a60856a";
+      hash = "sha256-a+rTH9rU7Dsgh4zSlpTdqYfeVUzD48+lyTPyAYvuPNc=";
+    };
+    # Fix: upstream uses `sw_vers -productVersion > 25.0` via bc, but bc
+    # cannot parse versions with multiple dots (e.g. "26.3.1").
+    # Replace with integer comparison on the major version (>= 15 = Sequoia).
+    postPatch = ''
+      substituteInPlace scripts/network.sh \
+        --replace-fail \
+          'if (( $(echo "$(sw_vers -productVersion) > 25.0" | bc -l) )); then' \
+          'if (( $(sw_vers -productVersion | cut -d. -f1) >= 15 )); then'
+    '';
+  });
 in
 {
   options.modules.terminal.tmux = {
@@ -41,14 +60,8 @@ in
         # - でペインを横に分割する
         bind - split-window -v
 
-        # ステータスバー
-        set -g status-style bg=black
-        set -g status-position top
-        set-option -g status-interval 1
-
         # アクティビティモニタリング
         setw -g monitor-activity on
-        set -g visual-activity on
 
         # コピーモード (vi風)
         bind-key -T copy-mode-vi v send-keys -X begin-selection
@@ -64,15 +77,21 @@ in
       '';
       plugins = with pkgs.tmuxPlugins; [
         {
-          plugin = dracula; # https://draculatheme.com/tmux
+          plugin = dracula-patched; # https://draculatheme.com/tmux
           extraConfig = ''
-            set -g @dracula-plugins 'battery cpu-usage ram-usage network time'
+            set -g @dracula-plugins 'git battery cpu-usage ram-usage network time'
             set -g @dracula-show-powerline true
-            set -g @dracula-show-flags false
+            set -g @dracula-show-flags true
             set -g @dracula-border-contrast true
+            set -g @dracula-show-empty-plugins false
+            set -g @dracula-show-left-icon session
             set -g @dracula-military-time true
-            set -g @dracula-show-fahrenheit false
-            set -g @dracula-show-location false
+            set -g @dracula-show-timezone false
+            set -g @dracula-cpu-display-load true
+            set -g @dracula-show-battery-status true
+            set -g @dracula-git-show-remote-status true
+            set -g @dracula-git-no-repo-message ""
+            set -g status-position top
           '';
         }
         {
