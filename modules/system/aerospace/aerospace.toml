@@ -197,7 +197,7 @@ run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.1password.1password'
-run = ['layout floating', 'move-node-to-workspace 3']
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.agiletortoise.Drafts-OSX'
