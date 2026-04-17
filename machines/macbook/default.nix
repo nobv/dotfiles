@@ -216,7 +216,6 @@
       google-drive.enable = true;
       google-japanese-ime.enable = true;
       istat-menus.enable = true;
-      thaw.enable = true;
       karabiner-elements.enable = true;
       leader-key.enable = false;
       logi-options-plus.enable = true;
@@ -225,7 +224,9 @@
       sanebar.enable = false;
       spotify.enable = true;
       textsniper.enable = true;
+      thaw.enable = true;
       the-unarchiver.enable = true;
+      typeless.enable = true;
       yoink.enable = true;
       zappy.enable = true;
     };
