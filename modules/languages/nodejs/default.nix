@@ -26,7 +26,7 @@ in
       biome
 
       # LSP servers
-      nodePackages.typescript-language-server
+      typescript-language-server
 
       # nodePackages.prettier
       # nodePackages.node-gyp
