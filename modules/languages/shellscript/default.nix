@@ -19,7 +19,7 @@ in
     environment.systemPackages = with pkgs; [
       bats
       shellcheck
-      nodePackages.bash-language-server
+      bash-language-server
     ];
   };
 }
