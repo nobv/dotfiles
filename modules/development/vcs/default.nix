@@ -13,5 +13,6 @@
     ./github
     ./pre-commit
     ./workmux
+    ./worktrunk
   ];
 }
