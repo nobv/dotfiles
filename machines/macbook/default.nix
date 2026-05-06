@@ -17,6 +17,7 @@
     ai = {
       chatgpt.enable = true;
       claude.enable = true;
+      claude-code.enable = true;
       gemini.enable = true;
       perplexity.enable = true;
       poe.enable = false;
