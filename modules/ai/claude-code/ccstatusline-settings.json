@@ -57,6 +57,7 @@
       {
         "id": "f281f3ca-15a0-48b1-bcf5-5ac9e16deb03",
         "type": "current-working-dir",
+        "maxWidth": 30,
         "metadata": {
           "abbreviateHome": "true",
           "segments": "2"
