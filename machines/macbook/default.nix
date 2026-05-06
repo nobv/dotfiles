@@ -104,6 +104,7 @@
             memory = "4GiB";
           };
         };
+        worktrunk.enable = true;
       };
     };
 
