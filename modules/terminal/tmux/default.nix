@@ -41,18 +41,21 @@ in
       baseIndex = 1;
       clock24 = true;
       customPaneNavigationAndResize = true;
-      escapeTime = 1;
+      escapeTime = 0;
       focusEvents = true;
       historyLimit = 10000;
       keyMode = "vi";
       mouse = true;
-      prefix = "C-a";
+      prefix = "C-Space";
       sensibleOnTop = true;
       shell = "${pkgs.zsh}/bin/zsh";
       terminal = "tmux-256color";
       extraConfig = ''
         # 設定ファイルをリロードする
         bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
+
+        # 連打系（resize-pane など）の repeat 受付時間を短く
+        set -g repeat-time 300
 
         # | でペインを縦に分割する
         bind | split-window -h
