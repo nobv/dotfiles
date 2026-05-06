@@ -23,10 +23,10 @@
     };
 
     browsers = {
-      arc.enable = true;
+      arc.enable = false;
       chrome.enable = true;
       firefox.enable = true;
-      microsoft-edge.enable = true;
+      microsoft-edge.enable = false;
     };
 
     checkers.enable = true;
@@ -144,10 +144,10 @@
 
     productivity = {
       #      amphetamine.enable = false;
-      affine.enable = true;
+      affine.enable = false;
       anki.enable = true;
-      capacities.enable = true;
-      clickup.enable = true;
+      capacities.enable = false;
+      clickup.enable = false;
       d2.enable = true;
       daisydisk.enable = true;
       day-one.enable = false;
