@@ -44,3 +44,4 @@ result
 
 # machines
 # machines/work/config.nix
+machines/*/env.local
