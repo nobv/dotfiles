@@ -15,6 +15,7 @@
   # Enable modules using actual directory structure paths
   modules = {
     ai = {
+      apm.enable = true;
       chatgpt.enable = true;
       claude.enable = true;
       claude-code.enable = true;

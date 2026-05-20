@@ -45,3 +45,7 @@ result
 # machines
 # machines/work/config.nix
 machines/*/env.local
+
+
+# APM dependencies
+apm_modules/
