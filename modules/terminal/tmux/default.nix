@@ -46,7 +46,7 @@ in
       historyLimit = 10000;
       keyMode = "vi";
       mouse = true;
-      prefix = "C-Space";
+      prefix = "C-a";
       sensibleOnTop = true;
       shell = "${pkgs.zsh}/bin/zsh";
       terminal = "tmux-256color";
