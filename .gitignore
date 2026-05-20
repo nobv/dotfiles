@@ -46,3 +46,6 @@ result
 # machines/work/config.nix
 machines/*/env.local
 machines/*/claude-code/settings.json
+
+# APM dependencies
+apm_modules/

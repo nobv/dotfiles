@@ -1,0 +1,17 @@
+name: dotfiles-apm
+version: 1.0.0
+description: APM project for dotfiles-apm
+author: nobv
+# Which agent platforms to deploy to:
+targets:
+  - claude
+
+dependencies:
+  apm:
+    - anthropics/skills
+    - anthropics/claude-plugins-official/plugins/ralph-loop
+  mcp:
+    - name: io.github.github/github-mcp-server
+      transport: http
+includes: auto
+scripts: {}

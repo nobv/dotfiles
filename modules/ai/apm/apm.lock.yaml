@@ -1,0 +1,83 @@
+lockfile_version: '1'
+generated_at: '2026-05-15T08:45:52.167762+00:00'
+apm_version: 0.13.0
+dependencies:
+- repo_url: anthropics/claude-plugins-official
+  host: github.com
+  resolved_commit: 1a2f18b05cf5652fd25403e8d229fc884fb84103
+  virtual_path: plugins/ralph-loop
+  is_virtual: true
+  package_type: marketplace_plugin
+  deployed_files:
+  - .claude/commands/cancel-ralph.md
+  - .claude/commands/help.md
+  - .claude/commands/ralph-loop.md
+  - .config/opencode/commands/cancel-ralph.md
+  - .config/opencode/commands/help.md
+  - .config/opencode/commands/ralph-loop.md
+  - .cursor/commands/cancel-ralph.md
+  - .cursor/commands/help.md
+  - .cursor/commands/ralph-loop.md
+  - .gemini/commands/cancel-ralph.toml
+  - .gemini/commands/help.toml
+  - .gemini/commands/ralph-loop.toml
+  deployed_file_hashes:
+    .claude/commands/cancel-ralph.md: sha256:942236042e91987d23f140703d9e81a097cc6c3d73fb09c32cbce3d358745ad8
+    .claude/commands/help.md: sha256:414a3189d727186194aab7c8a60af93daa35c3d6995406a1697e4c66b0efdcd9
+    .claude/commands/ralph-loop.md: sha256:e560af6864dd5554ab26464cb526507e2b836117d468ca9c403fb6d5c674a900
+    .config/opencode/commands/cancel-ralph.md: sha256:942236042e91987d23f140703d9e81a097cc6c3d73fb09c32cbce3d358745ad8
+    .config/opencode/commands/help.md: sha256:414a3189d727186194aab7c8a60af93daa35c3d6995406a1697e4c66b0efdcd9
+    .config/opencode/commands/ralph-loop.md: sha256:e560af6864dd5554ab26464cb526507e2b836117d468ca9c403fb6d5c674a900
+    .cursor/commands/cancel-ralph.md: sha256:942236042e91987d23f140703d9e81a097cc6c3d73fb09c32cbce3d358745ad8
+    .cursor/commands/help.md: sha256:414a3189d727186194aab7c8a60af93daa35c3d6995406a1697e4c66b0efdcd9
+    .cursor/commands/ralph-loop.md: sha256:e560af6864dd5554ab26464cb526507e2b836117d468ca9c403fb6d5c674a900
+    .gemini/commands/cancel-ralph.toml: sha256:1bdb0a132597482657d88e6dca6f783eb85d58a92b491c312d620f7807f6435d
+    .gemini/commands/help.toml: sha256:c6c04acfb35a2b2f99b6e6972ed99f20be084a697bbedaeaff8b71f6647230a3
+    .gemini/commands/ralph-loop.toml: sha256:6f24c1c80458301677dd017941fe0b8071e2fbb9119ff8f6dc1deb3319e8f6fc
+  content_hash: sha256:505ef90f057b672ca418a7ba10da05be195d28b7089063beed4c614a08fb3c07
+- repo_url: anthropics/skills
+  host: github.com
+  resolved_commit: f458cee31a7577a47ba0c9a101976fa599385174
+  package_type: marketplace_plugin
+  deployed_files:
+  - .agents/skills/algorithmic-art
+  - .agents/skills/brand-guidelines
+  - .agents/skills/canvas-design
+  - .agents/skills/claude-api
+  - .agents/skills/doc-coauthoring
+  - .agents/skills/docx
+  - .agents/skills/frontend-design
+  - .agents/skills/internal-comms
+  - .agents/skills/mcp-builder
+  - .agents/skills/pdf
+  - .agents/skills/pptx
+  - .agents/skills/skill-creator
+  - .agents/skills/slack-gif-creator
+  - .agents/skills/theme-factory
+  - .agents/skills/web-artifacts-builder
+  - .agents/skills/webapp-testing
+  - .agents/skills/xlsx
+  - .claude/skills/algorithmic-art
+  - .claude/skills/brand-guidelines
+  - .claude/skills/canvas-design
+  - .claude/skills/claude-api
+  - .claude/skills/doc-coauthoring
+  - .claude/skills/docx
+  - .claude/skills/frontend-design
+  - .claude/skills/internal-comms
+  - .claude/skills/mcp-builder
+  - .claude/skills/pdf
+  - .claude/skills/pptx
+  - .claude/skills/skill-creator
+  - .claude/skills/slack-gif-creator
+  - .claude/skills/theme-factory
+  - .claude/skills/web-artifacts-builder
+  - .claude/skills/webapp-testing
+  - .claude/skills/xlsx
+  content_hash: sha256:91959dd47c219df6af45ed9d3f4be4302b00041e447254fdda0c51767b24e57b
+mcp_servers:
+- io.github.github/github-mcp-server
+mcp_configs:
+  io.github.github/github-mcp-server:
+    name: io.github.github/github-mcp-server
+    transport: http
