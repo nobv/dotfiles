@@ -17,6 +17,12 @@
     ai = {
       chatgpt.enable = false;
       claude.enable = true;
+      claude-code = {
+        enable = true;
+        # Machine-local settings.json (git-ignored, edited live by Claude Code).
+        # Seeded from machines/work/claude-code/settings.json.example.
+        settingsSource = "machines/work/claude-code/settings.json";
+      };
       gemini.enable = true;
       perplexity.enable = false;
     };

@@ -45,3 +45,4 @@ result
 # machines
 # machines/work/config.nix
 machines/*/env.local
+machines/*/claude-code/settings.json
