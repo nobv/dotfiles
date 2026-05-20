@@ -8,6 +8,7 @@ dry-run:
 
 switch:
     sudo darwin-rebuild switch --flake .#{{MACHINE}}
+    just apm-sync
 
 check:
     nix flake check

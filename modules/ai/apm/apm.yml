@@ -1,6 +1,6 @@
-name: dotfiles-apm
-version: 1.0.0
-description: APM project for dotfiles-apm
+name: agent-config
+version: 0.0.1
+description: Declarative APM configuration for Claude Code skills, plugins, and MCP servers
 author: nobv
 # Which agent platforms to deploy to:
 targets:
@@ -10,6 +10,10 @@ dependencies:
   apm:
     - anthropics/skills
     - anthropics/claude-plugins-official/plugins/ralph-loop
+    - currents-dev/playwright-best-practices-skill
+    - shadcn-ui/ui/skills/shadcn
+    - vercel-labs/agent-skills/skills/react-best-practices
+    - vercel-labs/next-skills/skills/next-best-practices
   mcp:
     - name: io.github.github/github-mcp-server
       transport: http
