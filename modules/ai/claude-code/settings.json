@@ -47,8 +47,7 @@
             "type": "command",
             "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/stop-hook.sh\""
           }
-        ],
-        "_apm_source": "ralph-loop"
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -87,17 +86,9 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "claude-mem@thedotmack": true,
-    "document-skills@anthropic-agent-skills": true,
-    "example-skills@anthropic-agent-skills": true
+    "claude-mem@thedotmack": true
   },
   "extraKnownMarketplaces": {
-    "anthropic-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/skills"
-      }
-    },
     "thedotmack": {
       "source": {
         "source": "github",
@@ -106,7 +97,8 @@
     }
   },
   "language": "japanese",
-  "skipAutoPermissionPrompt": true,
   "theme": "dark-ansi",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "skipAutoPermissionPrompt": true,
+  "agentPushNotifEnabled": true
 }
