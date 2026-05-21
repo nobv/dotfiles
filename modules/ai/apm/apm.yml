@@ -9,7 +9,6 @@ targets:
 dependencies:
   apm:
     - anthropics/skills
-    - anthropics/claude-plugins-official/plugins/ralph-loop
     - currents-dev/playwright-best-practices-skill
     - shadcn-ui/ui/skills/shadcn
     - vercel-labs/agent-skills/skills/react-best-practices

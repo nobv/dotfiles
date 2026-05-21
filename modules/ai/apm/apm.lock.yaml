@@ -1,40 +1,7 @@
 lockfile_version: '1'
-generated_at: '2026-05-15T08:45:52.167762+00:00'
-apm_version: 0.13.0
+generated_at: '2026-05-21T13:15:55.981022+00:00'
+apm_version: 0.14.0
 dependencies:
-- repo_url: anthropics/claude-plugins-official
-  host: github.com
-  resolved_commit: 1a2f18b05cf5652fd25403e8d229fc884fb84103
-  virtual_path: plugins/ralph-loop
-  is_virtual: true
-  package_type: marketplace_plugin
-  deployed_files:
-  - .claude/commands/cancel-ralph.md
-  - .claude/commands/help.md
-  - .claude/commands/ralph-loop.md
-  - .config/opencode/commands/cancel-ralph.md
-  - .config/opencode/commands/help.md
-  - .config/opencode/commands/ralph-loop.md
-  - .cursor/commands/cancel-ralph.md
-  - .cursor/commands/help.md
-  - .cursor/commands/ralph-loop.md
-  - .gemini/commands/cancel-ralph.toml
-  - .gemini/commands/help.toml
-  - .gemini/commands/ralph-loop.toml
-  deployed_file_hashes:
-    .claude/commands/cancel-ralph.md: sha256:942236042e91987d23f140703d9e81a097cc6c3d73fb09c32cbce3d358745ad8
-    .claude/commands/help.md: sha256:414a3189d727186194aab7c8a60af93daa35c3d6995406a1697e4c66b0efdcd9
-    .claude/commands/ralph-loop.md: sha256:e560af6864dd5554ab26464cb526507e2b836117d468ca9c403fb6d5c674a900
-    .config/opencode/commands/cancel-ralph.md: sha256:942236042e91987d23f140703d9e81a097cc6c3d73fb09c32cbce3d358745ad8
-    .config/opencode/commands/help.md: sha256:414a3189d727186194aab7c8a60af93daa35c3d6995406a1697e4c66b0efdcd9
-    .config/opencode/commands/ralph-loop.md: sha256:e560af6864dd5554ab26464cb526507e2b836117d468ca9c403fb6d5c674a900
-    .cursor/commands/cancel-ralph.md: sha256:942236042e91987d23f140703d9e81a097cc6c3d73fb09c32cbce3d358745ad8
-    .cursor/commands/help.md: sha256:414a3189d727186194aab7c8a60af93daa35c3d6995406a1697e4c66b0efdcd9
-    .cursor/commands/ralph-loop.md: sha256:e560af6864dd5554ab26464cb526507e2b836117d468ca9c403fb6d5c674a900
-    .gemini/commands/cancel-ralph.toml: sha256:1bdb0a132597482657d88e6dca6f783eb85d58a92b491c312d620f7807f6435d
-    .gemini/commands/help.toml: sha256:c6c04acfb35a2b2f99b6e6972ed99f20be084a697bbedaeaff8b71f6647230a3
-    .gemini/commands/ralph-loop.toml: sha256:6f24c1c80458301677dd017941fe0b8071e2fbb9119ff8f6dc1deb3319e8f6fc
-  content_hash: sha256:505ef90f057b672ca418a7ba10da05be195d28b7089063beed4c614a08fb3c07
 - repo_url: anthropics/skills
   host: github.com
   resolved_commit: f458cee31a7577a47ba0c9a101976fa599385174
@@ -75,6 +42,44 @@ dependencies:
   - .claude/skills/webapp-testing
   - .claude/skills/xlsx
   content_hash: sha256:91959dd47c219df6af45ed9d3f4be4302b00041e447254fdda0c51767b24e57b
+- repo_url: currents-dev/playwright-best-practices-skill
+  host: github.com
+  resolved_commit: ef329e7e65149918e1ff0eed2cf7d2e6e6f9eb5b
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/playwright-best-practices-skill
+  - .claude/skills/playwright-best-practices-skill
+  content_hash: sha256:4a2c8b6165b46914f587131006256040286185918e6ee5903ad070087cdb53bc
+- repo_url: shadcn-ui/ui
+  host: github.com
+  resolved_commit: 731e6dd8a2c9981b5d419f7dcf5b6476a69d288c
+  virtual_path: skills/shadcn
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/shadcn
+  - .claude/skills/shadcn
+  content_hash: sha256:e9d76d55c14a21546595524cdc44466d191c0da4e183298949ae881b8b6d5e24
+- repo_url: vercel-labs/agent-skills
+  host: github.com
+  resolved_commit: 7defe2d03c5fa8e39b63b12648c1fa10131b422a
+  virtual_path: skills/react-best-practices
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/react-best-practices
+  - .claude/skills/react-best-practices
+  content_hash: sha256:74f142d28d360d78e8bac4f239a84c87f0ced9015729bc72b5458d82ff45b015
+- repo_url: vercel-labs/next-skills
+  host: github.com
+  resolved_commit: dc1de9caf7612d73f56a8dec3cb1bd6c9ec096b9
+  virtual_path: skills/next-best-practices
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/next-best-practices
+  - .claude/skills/next-best-practices
+  content_hash: sha256:4bf1b21f7a66848642c150cab284f24c004ad6da0f717eed4fe9db74eaa6b6a8
 mcp_servers:
 - io.github.github/github-mcp-server
 mcp_configs:
