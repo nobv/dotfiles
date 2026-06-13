@@ -35,6 +35,8 @@ in
           viAlias = true;
           vimAlias = true;
           vimdiffAlias = true;
+          withRuby = false;
+          withPython3 = false;
           extraConfig = "source ~/.config/nvim/lua/init.lua";
           plugins = plugins.vimPlugins;
         };

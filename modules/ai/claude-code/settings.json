@@ -101,8 +101,9 @@
     }
   },
   "language": "japanese",
+  "effortLevel": "xhigh",
   "theme": "dark-ansi",
   "editorMode": "vim",
-  "skipAutoPermissionPrompt": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true
 }

@@ -41,7 +41,7 @@
     defaults = {
       dock = {
         autohide = lib.mkDefault true;
-        orientation = lib.mkDefault "left";
+        orientation = lib.mkDefault "bottom";
       };
 
       trackpad = {
