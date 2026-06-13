@@ -17,7 +17,7 @@ in
 
   config = mkIf cfg.enable {
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
-      casks = [ "todoist" ];
+      casks = [ "todoist-app" ];
     };
   };
 }
