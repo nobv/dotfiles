@@ -40,6 +40,14 @@
             "command": "workmux set-window-status done"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/stop-hook.sh\""
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -79,16 +87,12 @@
   },
   "enabledPlugins": {
     "claude-mem@thedotmack": true,
-    "document-skills@anthropic-agent-skills": true,
-    "example-skills@anthropic-agent-skills": true
+    "ralph-loop@claude-plugins-official": true,
+    "linear@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "github@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
-    "anthropic-agent-skills": {
-      "source": {
-        "source": "github",
-        "repo": "anthropics/skills"
-      }
-    },
     "thedotmack": {
       "source": {
         "source": "github",
@@ -97,7 +101,8 @@
     }
   },
   "language": "japanese",
-  "skipAutoPermissionPrompt": true,
   "theme": "dark-ansi",
-  "editorMode": "vim"
+  "editorMode": "vim",
+  "skipAutoPermissionPrompt": true,
+  "agentPushNotifEnabled": true
 }
