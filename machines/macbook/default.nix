@@ -86,6 +86,7 @@
         aws.enable = true;
         docker.enable = true;
         gcp.enable = true;
+        google-workspace-cli.enable = true;
         kubernetes.enable = true;
         oci.enable = true;
         sops.enable = true;
@@ -196,7 +197,7 @@
 
     # Terminal configuration
     terminal = {
-      cmux.enable = false;
+      cmux.enable = true;
       ghostty.enable = true;
       iTerm2.enable = false;
       lf.enable = true;
