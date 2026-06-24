@@ -17,7 +17,7 @@ in
 
   config = mkIf cfg.enable {
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
-      taps = [ "microsoft/apm" ];
+      taps = [ { name = "microsoft/apm"; trusted = true; } ];
       brews = [ "microsoft/apm/apm" ];
     };
 
