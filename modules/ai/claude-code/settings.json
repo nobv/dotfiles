@@ -7,58 +7,17 @@
     "allow": [
       "Bash(codex exec:*)"
     ],
+    "deny": [
+      "Bash(sudo:*)",
+      "Bash(just switch)",
+      "Bash(just switch:*)"
+    ],
     "defaultMode": "auto"
   },
+  "model": "opusplan[1m]",
   "enableAllProjectMcpServers": true,
   "hooks": {
-    "Notification": [
-      {
-        "matcher": "permission_prompt|elicitation_dialog",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "workmux set-window-status waiting"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "workmux set-window-status working"
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "workmux set-window-status done"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/stop-hook.sh\""
-          }
-        ]
-      }
-    ],
     "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "workmux set-window-status working"
-          }
-        ]
-      },
       {
         "hooks": [
           {
@@ -69,6 +28,15 @@
       }
     ],
     "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd=$(jq -r \".tool_input.command // empty\"); if printf \"%s\" \"$cmd\" | grep -Eq \"codex\" && printf \"%s\" \"$cmd\" | grep -Eiq -- \"--dangerously-bypass|danger-full-access\"; then echo \"blocked: codex sandbox/approval bypass flags are not permitted\" >&2; exit 2; fi"
+          }
+        ]
+      },
       {
         "matcher": "Skill",
         "hooks": [
@@ -102,8 +70,10 @@
   },
   "language": "japanese",
   "effortLevel": "xhigh",
-  "theme": "dark-ansi",
+  "theme": "dark",
   "editorMode": "vim",
+  "autoCompactEnabled": false,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "tui": "fullscreen"
 }
