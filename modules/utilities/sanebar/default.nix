@@ -16,7 +16,7 @@ in
 
   config = mkIf cfg.enable {
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
-      taps = [ "sane-apps/tap" ];
+      taps = [ { name = "sane-apps/tap"; trusted = true; } ];
       casks = [ "sane-apps/tap/sanebar" ];
     };
   };

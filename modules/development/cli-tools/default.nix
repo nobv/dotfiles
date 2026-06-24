@@ -13,6 +13,7 @@
     ./fzf
     ./gnused
     ./jq
+    ./mo
     ./navi
     ./parallel
     ./peco

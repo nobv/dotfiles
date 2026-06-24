@@ -20,7 +20,7 @@ in
   config = mkIf cfg.enable {
     # Homebrew installation
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
-      taps = [ "nikitabobko/tap" ];
+      taps = [ { name = "nikitabobko/tap"; trusted = true; } ];
       casks = [ "aerospace" ];
     };
 
