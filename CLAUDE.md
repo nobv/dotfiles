@@ -13,9 +13,9 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 
 ## Quick Start Commands
 
-### just コマンド（推奨）
-リポジトリルートの `Justfile` で頻出コマンドを簡略化:
-- **Test configuration (REQUIRED)**: `just dry-run`
+### just commands (recommended)
+The `Justfile` at the repository root provides shortcuts for common commands:
+- Dry-run activation (needs root; pre-`switch` check on `main`): `just dry-run`
 - Apply configuration: `just switch`
 - Check flake: `just check`
 - Format Nix files: `just fmt`
@@ -25,17 +25,17 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 - Interactive module management: `just modules`
 - Enter development shell: `just dev`
 
-別マシンを指定する場合: `just MACHINE=work switch`
+To target a different machine: `just MACHINE=work switch`
 
 ### Daily Development Commands
-- **Test configuration (REQUIRED)**: `darwin-rebuild switch --flake .#<machine> --dry-run`
+- Dry-run activation (needs root; pre-`switch` check on `main`): `darwin-rebuild switch --flake .#<machine> --dry-run`
 - Apply configuration: `darwin-rebuild switch --flake .#<machine>`
 - Interactive module management: `./scripts/enable-module.sh [machine]`
 - List all modules and status: `./scripts/enable-module.sh --list`
 
 ### Build and Validation Commands
 - Check flake: `nix flake check`
-- Build system configuration: `nix build .#darwinConfigurations.<machine>.system`
+- Build system configuration (rootless validation — use this inside a worktree): `nix build .#darwinConfigurations.<machine>.system`
 - Enter development shell: `nix develop`
 - Show flake info: `nix flake show`
 
@@ -44,10 +44,10 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 - Update specific input: `nix flake lock --update-input <input-name>` (e.g., `nixpkgs`, `home-manager`)
 - Show flake metadata: `nix flake metadata`
 
-**IMPORTANT**: Always run `--dry-run` before applying configuration changes to validate the build and prevent system breakage.
+**IMPORTANT**: Validate every change before it touches the live system (see Development Workflow). Inside a worktree use the rootless `nix build .#darwinConfigurations.<machine>.system`; `just dry-run` / `darwin-rebuild … --dry-run` need root and are for the pre-`switch` check on `main`.
 
 ## Installation Commands
-- One-liner install: `bash -c "$(curl -L https://raw.githubusercontent.com/nobv/dotfiles/master/install)"`
+- One-liner install: `bash -c "$(curl -L https://raw.githubusercontent.com/nobv/dotfiles/main/install)"`
 - Manual install: `./setup.sh -m <machine>` (after cloning repo)
 - Skip Homebrew: `./setup.sh -m <machine> --skip-homebrew`
 
@@ -139,36 +139,43 @@ The `scripts/enable-module.sh` script provides an interactive interface for mana
 - Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
 - Examples: `feat(homebrew): add packages`, `fix(wezterm): correct config`, `chore: update .gitignore`
 
-## Worktree Workflow (feature additions & fixes)
+## Development Workflow
 
-Do code-changing work (feature additions, bug fixes) inside a git worktree.
+All code-changing work happens inside a git worktree, is validated rootless, and is applied only after merging to `main`.
 
-### When to enter a worktree
+### When to use a worktree
 - **Enter**: feature additions, bug fixes, multi-file changes, refactors
 - **Skip**: questions/investigation only, a single trivial edit, a config value tweak, a typo fix
 
-### Steps
-1. At the start of the work, call `EnterWorktree` (built-in tool). Name the branch following Conventional Commits: `<type>/<short-kebab-description>` (e.g. `feat/todoist-mcp`, `fix/wezterm-config`, `refactor/module-discovery`). Same types as commits: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
-2. Implement inside the worktree
-3. Validate with `nix build .#darwinConfigurations.<machine>.system` (no root) entirely within the worktree
-4. Commit to the worktree's branch (Conventional Commits, single line)
-5. Run `just switch` only after merging into `main`, never from the worktree
-   (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent)
+### Change flow
+1. Call `EnterWorktree` (built-in tool) at the start. Name the branch `<type>/<short-kebab-description>` following Conventional Commits (e.g. `feat/todoist-mcp`, `fix/wezterm-config`, `refactor/module-discovery`); same types as commits.
+2. Implement inside the worktree — edit modules in `modules/<category>/<module>/default.nix`.
+3. Validate **without root**, entirely within the worktree:
+   - `nix flake check` — syntax
+   - `nix build .#darwinConfigurations.<machine>.system` — full build, no root
 
-### When an unrelated task comes up while in a worktree (park it in Todoist)
-If, while working in a worktree, the user starts an unrelated task:
-- Do NOT exit the worktree, do NOT create another worktree, do NOT spawn a sub-agent (keeps the work visible)
-- Instead, use the Todoist MCP task-creation tool to file the unrelated task as a ticket
-  (concise title; put context in the body — which conversation, which files)
+   Do **not** use `just dry-run` / `darwin-rebuild … --dry-run` here — they require root and activate against the live system.
+4. Commit to the worktree's branch (Conventional Commits, single line).
+5. After merging into `main`, apply with `just switch` — **never `switch` from a worktree** (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent).
+
+### Adding a new module
+1. Create `modules/<category>/<module-name>/`
+2. Add `default.nix` following the module pattern (see Module Development Guidelines)
+3. It is auto-discovered — no `flake.nix` changes needed
+4. Enable it in the machine config via `./scripts/enable-module.sh` or by editing `machines/<machine>/default.nix`
+
+### Parking an unrelated task (Todoist)
+If, while working in a worktree, the user starts an **unrelated** task:
+- Do NOT exit the worktree, create another worktree, or spawn a sub-agent (keeps the current work visible)
+- File the unrelated task as a Todoist ticket via the Todoist MCP task-creation tool (concise title; context in the body — which conversation, which files)
 - Report briefly ("Filed '<task>' in Todoist; continuing current work") and keep working in the current worktree
-- When that parked task is later picked up, spin up a new worktree for it as usual
-- Continuations/spin-offs of the current task are NOT parked — keep them in the current worktree
+- Pick it up later in its own worktree; continuations/spin-offs of the *current* task are NOT parked — keep them here
 
 ### Notes
 - `EnterWorktree` defaults to base `origin/main` (fresh); uncommitted changes on `main` are not carried into the worktree
 - `ExitWorktree` (remove/keep) and merges happen only on explicit user request
+- The dev shell (`just dev` / `nix develop`) provides `nixpkgs-fmt` and `nix-tree`
 - Todoist MCP is configured at user scope (`claude mcp add -s user --transport http todoist https://ai.todoist.net/mcp`), so it is available across all projects; `/mcp` authentication may be needed once
-- Independent of terminal-side tools like cmux/workmux (`EnterWorktree` is built into Claude Code)
 
 ## Repository Structure
 - `flake.nix`: Main entry point with auto-discovery logic
@@ -256,58 +263,6 @@ modules = {
   checkers.enable = true;
 };
 ```
-
-## Development Workflow
-
-### Making Changes to Modules
-1. Edit module files in `modules/<category>/<module>/default.nix`
-2. Validate flake: `nix flake check`
-3. Test changes: `darwin-rebuild switch --flake .#<machine> --dry-run`
-4. Apply changes: `darwin-rebuild switch --flake .#<machine>`
-
-### Adding New Modules
-1. Create directory: `modules/<category>/<module-name>/`
-2. Create `default.nix` following the module pattern (see Module Development Guidelines)
-3. Module is auto-discovered - no flake.nix changes needed
-4. Enable in machine config using `./scripts/enable-module.sh` or manually edit `machines/<machine>/default.nix`
-
-### Testing Configuration Changes
-Always use this sequence to prevent system breakage:
-```bash
-# 1. Validate flake syntax
-nix flake check
-
-# 2. Test the build without applying
-darwin-rebuild switch --flake .#macbook --dry-run
-
-# 3. If dry-run succeeds, apply the changes
-darwin-rebuild switch --flake .#macbook
-```
-
-### Working with Development Shell
-The repository includes a development shell with useful tools:
-```bash
-nix develop  # Enter shell with nixpkgs-fmt and nix-tree
-```
-
-Tools available in dev shell:
-- `nixpkgs-fmt` - Format Nix files
-- `nix-tree` - Interactively browse dependency tree
-
-### Managing Dependencies
-Update specific flake inputs when needed:
-```bash
-# Update nixpkgs only
-nix flake lock --update-input nixpkgs
-
-# Update home-manager only
-nix flake lock --update-input home-manager
-
-# Update all inputs
-nix flake update
-```
-
-After updating, always test with `--dry-run` before applying.
 
 ## Troubleshooting
 

@@ -13,7 +13,7 @@ This configuration features a **fully modular architecture** with 74+ individual
 One-liner installation:
 
 ```bash
-bash -c "$(curl -L https://raw.githubusercontent.com/nobv/dotfiles/master/install)"
+bash -c "$(curl -L https://raw.githubusercontent.com/nobv/dotfiles/main/install)"
 ```
 
 Or manual installation:

@@ -120,7 +120,7 @@ if [[ ! -d "$DOTFILES_DIR" ]]; then
 else
     log_info "Dotfiles repository already exists"
     cd "$DOTFILES_DIR"
-    git pull origin master || log_warning "Failed to update dotfiles repository"
+    git pull origin main || log_warning "Failed to update dotfiles repository"
 fi
 
 cd "$DOTFILES_DIR"
