@@ -35,6 +35,10 @@ modules:
 apm-sync:
     apm install --frozen -g
 
+# Sync Claude Code native plugins from settings.json (marketplace add + install; idempotent)
+plugin-sync:
+    ./scripts/claude-plugin-sync.sh
+
 # Refresh apm dependencies and regenerate lockfile (commit the diff)
 apm-update:
     apm update
