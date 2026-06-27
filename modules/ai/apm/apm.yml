@@ -16,5 +16,7 @@ dependencies:
   mcp:
     - name: io.github.github/github-mcp-server
       transport: http
+    - name: doist/todoist-ai
+      transport: http
 includes: auto
 scripts: {}

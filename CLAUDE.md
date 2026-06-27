@@ -175,7 +175,7 @@ If, while working in a worktree, the user starts an **unrelated** task:
 - `EnterWorktree` defaults to base `origin/main` (fresh); uncommitted changes on `main` are not carried into the worktree
 - `ExitWorktree` (remove/keep) and merges happen only on explicit user request
 - The dev shell (`just dev` / `nix develop`) provides `nixpkgs-fmt` and `nix-tree`
-- Todoist MCP is configured at user scope (`claude mcp add -s user --transport http todoist https://ai.todoist.net/mcp`), so it is available across all projects; `/mcp` authentication may be needed once
+- Todoist MCP is managed declaratively via apm (`modules/ai/apm/apm.yml` → `mcp: doist/todoist-ai`); `just apm-sync` deploys it to user scope (`~/.claude.json`), available across all projects. `/mcp` authentication may be needed once
 
 ## Repository Structure
 - `flake.nix`: Main entry point with auto-discovery logic
