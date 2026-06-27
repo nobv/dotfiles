@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # One-liner installer for nobv's dotfiles
-# Usage: bash -c "$(curl -L https://raw.githubusercontent.com/nobv/dotfiles/master/install)"
+# Usage: bash -c "$(curl -L https://raw.githubusercontent.com/nobv/dotfiles/main/install)"
 
 set -e
 
@@ -64,7 +64,7 @@ DOTFILES_DIR="$HOME/.dotfiles"
 if [[ -d "$DOTFILES_DIR" ]]; then
     log_info "Dotfiles directory already exists at $DOTFILES_DIR"
     cd "$DOTFILES_DIR"
-    git pull origin master || log_error "Failed to update existing dotfiles"
+    git pull origin main || log_error "Failed to update existing dotfiles"
 else
     log_info "Cloning dotfiles repository..."
     git clone https://github.com/nobv/dotfiles.git "$DOTFILES_DIR"
