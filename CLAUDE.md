@@ -139,6 +139,37 @@ The `scripts/enable-module.sh` script provides an interactive interface for mana
 - Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
 - Examples: `feat(homebrew): add packages`, `fix(wezterm): correct config`, `chore: update .gitignore`
 
+## Worktree Workflow (feature additions & fixes)
+
+Do code-changing work (feature additions, bug fixes) inside a git worktree.
+
+### When to enter a worktree
+- **Enter**: feature additions, bug fixes, multi-file changes, refactors
+- **Skip**: questions/investigation only, a single trivial edit, a config value tweak, a typo fix
+
+### Steps
+1. At the start of the work, call `EnterWorktree` (built-in tool). Name the branch following Conventional Commits: `<type>/<short-kebab-description>` (e.g. `feat/todoist-mcp`, `fix/wezterm-config`, `refactor/module-discovery`). Same types as commits: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
+2. Implement inside the worktree
+3. Validate with `nix build .#darwinConfigurations.<machine>.system` (no root) entirely within the worktree
+4. Commit to the worktree's branch (Conventional Commits, single line)
+5. Run `just switch` only after merging into `main`, never from the worktree
+   (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent)
+
+### When an unrelated task comes up while in a worktree (park it in Todoist)
+If, while working in a worktree, the user starts an unrelated task:
+- Do NOT exit the worktree, do NOT create another worktree, do NOT spawn a sub-agent (keeps the work visible)
+- Instead, use the Todoist MCP task-creation tool to file the unrelated task as a ticket
+  (concise title; put context in the body — which conversation, which files)
+- Report briefly ("Filed '<task>' in Todoist; continuing current work") and keep working in the current worktree
+- When that parked task is later picked up, spin up a new worktree for it as usual
+- Continuations/spin-offs of the current task are NOT parked — keep them in the current worktree
+
+### Notes
+- `EnterWorktree` defaults to base `origin/main` (fresh); uncommitted changes on `main` are not carried into the worktree
+- `ExitWorktree` (remove/keep) and merges happen only on explicit user request
+- Todoist MCP is configured at user scope (`claude mcp add -s user --transport http todoist https://ai.todoist.net/mcp`), so it is available across all projects; `/mcp` authentication may be needed once
+- Independent of terminal-side tools like cmux/workmux (`EnterWorktree` is built into Claude Code)
+
 ## Repository Structure
 - `flake.nix`: Main entry point with auto-discovery logic
 - `install`: One-liner bootstrap script (curl-compatible)
