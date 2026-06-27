@@ -1,5 +1,5 @@
 lockfile_version: '1'
-generated_at: '2026-05-21T13:15:55.981022+00:00'
+generated_at: '2026-06-27T03:00:43.542618+00:00'
 apm_version: 0.14.0
 dependencies:
 - repo_url: anthropics/skills
@@ -81,8 +81,12 @@ dependencies:
   - .claude/skills/next-best-practices
   content_hash: sha256:4bf1b21f7a66848642c150cab284f24c004ad6da0f717eed4fe9db74eaa6b6a8
 mcp_servers:
+- doist/todoist-ai
 - io.github.github/github-mcp-server
 mcp_configs:
+  doist/todoist-ai:
+    name: doist/todoist-ai
+    transport: http
   io.github.github/github-mcp-server:
     name: io.github.github/github-mcp-server
     transport: http
