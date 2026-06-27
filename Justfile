@@ -9,6 +9,11 @@ dry-run:
 switch:
     sudo darwin-rebuild switch --flake .#{{MACHINE}}
     # just apm-sync
+    just gc
+
+# Collect Nix garbage, keeping generations from the last 3 days (rollback stays available)
+gc:
+    sudo nix-collect-garbage --delete-older-than 3d
 
 check:
     nix flake check
