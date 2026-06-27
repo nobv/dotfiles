@@ -16,10 +16,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
-      masApps = {
-        "Messenger" = 1480068668;
-      };
-    };
+    # Messenger's standalone Mac app is discontinued upstream: the Mac App Store
+    # build was pulled (ADAM ID 1480068668 returns "No apps found") and the
+    # Homebrew cask was disabled on 2025-12-25 (downloads 404). Nothing is
+    # installed here; use messenger.com in a browser instead.
   };
 }

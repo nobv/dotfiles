@@ -16,10 +16,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
-      masApps = {
-        "Perplexity" = 6714467650;
-      };
-    };
+    # Perplexity is not on the Mac App Store (ADAM ID 6714467650 returns "No
+    # apps found") and has no Homebrew cask, so it is installed manually from
+    # https://www.perplexity.ai/personal-computer and not managed here.
   };
 }
