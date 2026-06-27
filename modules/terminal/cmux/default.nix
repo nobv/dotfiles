@@ -25,8 +25,10 @@ in
     home-manager.users.${username} =
       { config, ... }:
       {
+        # cmux reads ~/.config/cmux/cmux.json; the repo source is .jsonc so
+        # editors treat the comments as valid (JSON with comments).
         home.file.".config/cmux/cmux.json".source =
-          config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/terminal/cmux/cmux.json";
+          config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/terminal/cmux/cmux.jsonc";
       };
   };
 }
