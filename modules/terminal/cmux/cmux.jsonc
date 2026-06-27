@@ -1,0 +1,44 @@
+{
+  "$schema": "https://raw.githubusercontent.com/manaflow-ai/cmux/main/web/data/cmux.schema.json",
+  "schemaVersion": 1,
+
+  // ── tmux-style keybindings (prefix = Ctrl-a) ──
+  // Same prefix as tmux (C-a), on the assumption tmux is not used inside cmux.
+  // cmux is "1 action = 1 binding", so any action set here overrides (disables)
+  // its default cmd-based key. Actions not listed keep their defaults.
+  //
+  // This file is a home-manager out-of-store symlink: edits apply live, and
+  // pressing the prefix r (reloadConfiguration) in cmux reloads it.
+  //
+  // Default keys being overridden (for reference): newSurface=cmd+t /
+  //   closeTab=cmd+w / renameTab=cmd+r / reloadConfiguration=cmd+shift+, /
+  //   toggleTerminalCopyMode=cmd+shift+m
+  "shortcuts": {
+    "bindings": {
+      // Pane splits (tmux: bind | split-window -h / bind - split-window -v)
+      "splitRight": ["ctrl+a", "shift+\\"], // | split into left/right panes
+      "splitDown": ["ctrl+a", "-"],         // - split into top/bottom panes
+
+      // Pane navigation (tmux: customPaneNavigationAndResize → prefix h/j/k/l)
+      "focusLeft": ["ctrl+a", "h"],
+      "focusDown": ["ctrl+a", "j"],
+      "focusUp": ["ctrl+a", "k"],
+      "focusRight": ["ctrl+a", "l"],
+
+      // Pane zoom / equalize split sizes (tmux: prefix z)
+      "toggleSplitZoom": ["ctrl+a", "z"],
+      "equalizeSplits": ["ctrl+a", "="],
+
+      // Tab (surface) ops (tmux window equivalents: prefix c/n/p/,/x)
+      "newSurface": ["ctrl+a", "c"],
+      "nextSurface": ["ctrl+a", "n"],
+      "prevSurface": ["ctrl+a", "p"],
+      "renameTab": ["ctrl+a", ","],
+      "closeTab": ["ctrl+a", "x"],
+
+      // Copy mode / reload config (tmux: prefix [ / prefix r)
+      "toggleTerminalCopyMode": ["ctrl+a", "["],
+      "reloadConfiguration": ["ctrl+a", "r"]
+    }
+  }
+}
