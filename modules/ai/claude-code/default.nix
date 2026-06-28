@@ -96,6 +96,10 @@ in
             {
               ".claude/settings.json".source = mkSymlink cfg.settingsSource;
               ".claude/CLAUDE.md".source = mkSymlink sharedClaudeMd;
+              ".claude/commands/difit.md".source = mkSymlink "modules/ai/claude-code/commands/difit.md";
+              ".claude/skills/difit/SKILL.md".source = mkSymlink "modules/ai/claude-code/skills/difit/SKILL.md";
+              ".claude/skills/difit-review/SKILL.md".source =
+                mkSymlink "modules/ai/claude-code/skills/difit-review/SKILL.md";
               ".config/ccstatusline/settings.json".source =
                 mkSymlink "modules/ai/claude-code/ccstatusline-settings.json";
             }
