@@ -148,7 +148,10 @@ All code-changing work happens inside a git worktree, is validated rootless, and
 - **Skip**: questions/investigation only, a single trivial edit, a config value tweak, a typo fix
 
 ### Change flow
-1. Call `EnterWorktree` (built-in tool) at the start. Name the branch `<type>/<short-kebab-description>` following Conventional Commits (e.g. `feat/todoist-mcp`, `fix/wezterm-config`, `refactor/module-discovery`); same types as commits.
+1. Call `EnterWorktree` (built-in tool) at the start, passing a name `<type>/<short-kebab-description>` following Conventional Commits (e.g. `feat/todoist-mcp`, `fix/wezterm-config`, `refactor/module-discovery`); same types as commits. `EnterWorktree` does **not** create the branch under that exact name — it prefixes `worktree-` and replaces `/` with `+` (passing `feat/todoist-mcp` yields branch `worktree-feat+todoist-mcp`). Immediately rename the branch to the conventional name before pushing, so the remote branch and PR are Conventional Commits–compliant:
+   ```sh
+   git branch -m <type>/<short-kebab-description>   # e.g. git branch -m feat/todoist-mcp
+   ```
 2. Implement inside the worktree — edit modules in `modules/<category>/<module>/default.nix`.
 3. Validate **without root**, entirely within the worktree:
    - `nix flake check` — syntax
@@ -174,6 +177,7 @@ If, while working in a worktree, the user starts an **unrelated** task:
 
 ### Notes
 - `EnterWorktree` defaults to base `origin/main` (fresh); uncommitted changes on `main` are not carried into the worktree
+- `EnterWorktree` auto-prefixes the branch with `worktree-` and turns `/` into `+`; rename it with `git branch -m <type>/<short-kebab-description>` (step 1) so the pushed branch/PR follow Conventional Commits. The worktree directory name (`.claude/worktrees/<type>+<desc>`) keeps the `+` form — that's expected and only the branch needs renaming
 - Merges happen only on explicit user request; once the work is merged, remove the worktree with `ExitWorktree` (`action: "remove"`) rather than leaving it on disk
 - The dev shell (`just dev` / `nix develop`) provides `nixpkgs-fmt` and `nix-tree`
 - Todoist MCP is managed declaratively via apm (`modules/ai/apm/apm.yml` → `mcp: doist/todoist-ai`); `just apm-sync` deploys it to user scope (`~/.claude.json`), available across all projects. `/mcp` authentication may be needed once
