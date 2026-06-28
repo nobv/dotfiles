@@ -157,6 +157,7 @@ All code-changing work happens inside a git worktree, is validated rootless, and
    Do **not** use `just dry-run` / `darwin-rebuild … --dry-run` here — they require root and activate against the live system.
 4. Commit to the worktree's branch (Conventional Commits, single line).
 5. After merging into `main`, apply with `just switch` — **never `switch` from a worktree** (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent).
+6. Once the work is done and the PR is merged, remove the worktree with `ExitWorktree` (`action: "remove"`) so `.claude/worktrees/` stays clean — don't leave stale worktrees around.
 
 ### Adding a new module
 1. Create `modules/<category>/<module-name>/`
@@ -173,7 +174,7 @@ If, while working in a worktree, the user starts an **unrelated** task:
 
 ### Notes
 - `EnterWorktree` defaults to base `origin/main` (fresh); uncommitted changes on `main` are not carried into the worktree
-- `ExitWorktree` (remove/keep) and merges happen only on explicit user request
+- Merges happen only on explicit user request; once the work is merged, remove the worktree with `ExitWorktree` (`action: "remove"`) rather than leaving it on disk
 - The dev shell (`just dev` / `nix develop`) provides `nixpkgs-fmt` and `nix-tree`
 - Todoist MCP is managed declaratively via apm (`modules/ai/apm/apm.yml` → `mcp: doist/todoist-ai`); `just apm-sync` deploys it to user scope (`~/.claude.json`), available across all projects. `/mcp` authentication may be needed once
 
