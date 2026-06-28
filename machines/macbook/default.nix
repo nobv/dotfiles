@@ -211,6 +211,7 @@
 
     # Utilities
     utilities = {
+      alt-tab.enable = true;
       appcleaner.enable = true;
       aqua-voice.enable = true;
       bartender.enable = false;
