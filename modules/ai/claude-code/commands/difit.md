@@ -6,9 +6,9 @@ allowed-tools: Bash(difit:*)
 
 Launch `difit` to view a Git diff in cmux's built-in browser.
 
-`difit` starts a foreground web server and the wrapper hands its URL to
-`cmux browser open`, so it **must** be started in the background — otherwise it
-blocks this session until the server is stopped.
+`difit` starts a foreground web server; inside cmux its URL opens in cmux's
+built-in browser automatically (cmux intercepts `open`). It **must** be started
+in the background — otherwise it blocks this session until the server is stopped.
 
 Steps:
 
