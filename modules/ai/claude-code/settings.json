@@ -14,7 +14,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opusplan[1m]",
+  "model": "default",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "UserPromptSubmit": [
@@ -70,10 +70,10 @@
   },
   "language": "japanese",
   "effortLevel": "xhigh",
+  "tui": "fullscreen",
   "theme": "dark",
   "editorMode": "vim",
   "autoCompactEnabled": false,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true,
-  "tui": "fullscreen"
+  "skipAutoPermissionPrompt": true
 }
