@@ -17,7 +17,12 @@ in
 
   config = mkIf cfg.enable {
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
-      taps = [ { name = "FelixKratz/formulae"; trusted = true; } ];
+      taps = [
+        {
+          name = "FelixKratz/formulae";
+          trusted = true;
+        }
+      ];
       brews = [
         { name = "sketchybar"; }
       ];

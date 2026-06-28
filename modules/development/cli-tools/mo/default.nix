@@ -20,7 +20,12 @@ in
     # so it must be marked trusted or HOMEBREW_REQUIRE_TAP_TRUST (default since
     # Homebrew 6.0.0) aborts activation. Requires nix-darwin >= 2026-06-17 (PR #1789).
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
-      taps = [ { name = "k1LoW/tap"; trusted = true; } ];
+      taps = [
+        {
+          name = "k1LoW/tap";
+          trusted = true;
+        }
+      ];
       brews = [ "k1LoW/tap/mo" ];
     };
   };
