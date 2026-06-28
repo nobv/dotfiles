@@ -96,6 +96,7 @@ in
             {
               ".claude/settings.json".source = mkSymlink cfg.settingsSource;
               ".claude/CLAUDE.md".source = mkSymlink sharedClaudeMd;
+              ".claude/commands/difit.md".source = mkSymlink "modules/ai/claude-code/commands/difit.md";
               ".config/ccstatusline/settings.json".source =
                 mkSymlink "modules/ai/claude-code/ccstatusline-settings.json";
             }
