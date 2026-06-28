@@ -15,6 +15,15 @@ switch:
 gc:
     sudo nix-collect-garbage --delete-older-than 3d
 
+# Fast-forward the local main branch to origin/main. Safe to run from any worktree.
+sync-main:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    root="$(git worktree list --porcelain | sed -n 's/^worktree //p' | head -1)"
+    git -C "$root" fetch origin
+    git -C "$root" merge --ff-only origin/main
+    echo "main -> $(git -C "$root" rev-parse --short main)"
+
 check:
     nix flake check
 
