@@ -14,7 +14,6 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "default",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "SessionStart": [
