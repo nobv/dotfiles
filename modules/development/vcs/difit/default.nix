@@ -18,7 +18,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = [
       (pkgs.writeShellScriptBin "difit" ''
-        exec ${pkgs.nodejs_24}/bin/npx --yes difit "$@"
+        exec ${pkgs.nodejs_24}/bin/npx --yes difit@5.0.2 "$@"
       '')
     ];
   };

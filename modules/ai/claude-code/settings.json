@@ -17,6 +17,17 @@
   "model": "default",
   "enableAllProjectMcpServers": true,
   "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v difit >/dev/null 2>&1 || exit 0; git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0; lsof -ti tcp:4966 >/dev/null 2>&1 || (difit --watch --port 4966 >/dev/null 2>&1 &); exit 0"
+          }
+        ]
+      }
+    ],
     "UserPromptSubmit": [
       {
         "hooks": [
