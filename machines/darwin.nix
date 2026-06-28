@@ -13,12 +13,10 @@
     variables.DOTFILES_MACHINE = machine;
   };
 
-  nix = {
-    enable = false;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
+  # Determinate Nix manages the daemon. Enabling this disables nix-darwin's
+  # built-in Nix module (no need for nix.enable = false), pre-enables
+  # nix-command/flakes, and runs automatic garbage collection by default.
+  determinateNix.enable = true;
 
   nixpkgs = {
 
