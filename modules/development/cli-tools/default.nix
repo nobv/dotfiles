@@ -8,6 +8,7 @@
 {
   imports = [
     ./bat
+    ./dyff
     ./eza
     ./fd
     ./fzf

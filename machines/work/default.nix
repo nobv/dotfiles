@@ -51,6 +51,7 @@
       };
       cli-tools = {
         bat.enable = true;
+        dyff.enable = true;
         eza.enable = true;
         fd.enable = true;
         fzf.enable = true;

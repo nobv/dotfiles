@@ -26,6 +26,7 @@
       docker.enable = false; # Less Docker development
       kubernetes.enable = false;
       bat.enable = true;
+      dyff.enable = true;
       eza.enable = true;
       fd.enable = true;
       git.enable = true;
