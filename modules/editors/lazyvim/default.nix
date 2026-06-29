@@ -40,7 +40,8 @@ in
           tree-sitter # nvim-treesitter `main` needs the CLI to build parsers
           nixfmt-rfc-style # nix extra: formatter (conform -> nixfmt)
           statix # nix extra: linter (nvim-lint)
-          # nil (nix LSP) is built by Mason via cargo; marksman/gopls/etc. via Mason
+          nil # nix extra: LSP (nil_ls); paired with mason=false so Mason won't cargo-build it
+          # marksman / gopls / pyright / etc. are installed by Mason at runtime
         ];
 
         # `lvim` -> the LazyVim profile. Merges with the zsh module's aliases.
