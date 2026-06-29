@@ -44,8 +44,14 @@ in
           # marksman / gopls / pyright / etc. are installed by Mason at runtime
         ];
 
-        # `lvim` -> the LazyVim profile. Merges with the zsh module's aliases.
-        programs.zsh.shellAliases.lvim = "NVIM_APPNAME=lazyvim nvim";
+        # Launch the LazyVim profile. `vim`/`vi` shadow the neovim module's
+        # binaries in interactive shells; `nvim` stays the hand-rolled config.
+        # Merges with the zsh module's aliases.
+        programs.zsh.shellAliases = {
+          lvim = "NVIM_APPNAME=lazyvim nvim";
+          vim = "NVIM_APPNAME=lazyvim nvim";
+          vi = "NVIM_APPNAME=lazyvim nvim";
+        };
       };
   };
 }
