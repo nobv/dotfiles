@@ -31,6 +31,16 @@ in
       settings = settings;
       ignores = lib.splitString "\n" (builtins.readFile ./.gitignore_global);
       # package = unstable.git;
+
+      # Use delta as the pager for diffs (sets core.pager and
+      # interactive.diffFilter, and installs the delta package).
+      delta = {
+        enable = true;
+        options = {
+          navigate = true;
+          line-numbers = true;
+        };
+      };
     };
 
   };
