@@ -13,6 +13,16 @@ dependencies:
     - shadcn-ui/ui/skills/shadcn
     - vercel-labs/agent-skills/skills/react-best-practices
     - vercel-labs/next-skills/skills/next-best-practices
+    # cmux CLI control skills (drive workspaces, browser surface, socket API)
+    - manaflow-ai/cmux/skills/cmux
+    - manaflow-ai/cmux/skills/cmux-workspace
+    - manaflow-ai/cmux/skills/cmux-browser
+    - manaflow-ai/cmux/skills/cmux-socket-policy
+    - manaflow-ai/cmux/skills/cmux-keyboard-shortcuts
+    - manaflow-ai/cmux/skills/cmux-settings
+    - manaflow-ai/cmux/skills/cmux-customization
+    - manaflow-ai/cmux/skills/cmux-markdown
+    - manaflow-ai/cmux/skills/cmux-diagnostics
   mcp:
     - name: io.github.github/github-mcp-server
       transport: http
