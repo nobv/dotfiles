@@ -85,6 +85,7 @@
         fork.enable = true;
         git.enable = true;
         github.enable = true;
+        gh-dash.enable = true;
         pre-commit.enable = true;
         workmux = {
           enable = true;

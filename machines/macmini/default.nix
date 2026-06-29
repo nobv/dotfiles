@@ -30,6 +30,7 @@
       fd.enable = true;
       git.enable = true;
       github.enable = true;
+      gh-dash.enable = true;
       jq.enable = true;
       ripgrep.enable = true;
       tree.enable = true;
