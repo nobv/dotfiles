@@ -1,10 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-06-27T03:00:43.542618+00:00'
-apm_version: 0.14.0
+generated_at: '2026-06-29T16:19:45.019546+00:00'
+apm_version: 0.23.0
 dependencies:
 - repo_url: anthropics/skills
+  name: skills
   host: github.com
   resolved_commit: f458cee31a7577a47ba0c9a101976fa599385174
+  version: f458cee
   package_type: marketplace_plugin
   deployed_files:
   - .agents/skills/algorithmic-art
@@ -43,16 +45,101 @@ dependencies:
   - .claude/skills/xlsx
   content_hash: sha256:91959dd47c219df6af45ed9d3f4be4302b00041e447254fdda0c51767b24e57b
 - repo_url: currents-dev/playwright-best-practices-skill
+  name: playwright-best-practices-skill
   host: github.com
   resolved_commit: ef329e7e65149918e1ff0eed2cf7d2e6e6f9eb5b
+  version: unknown
   package_type: claude_skill
   deployed_files:
   - .agents/skills/playwright-best-practices-skill
   - .claude/skills/playwright-best-practices-skill
   content_hash: sha256:4a2c8b6165b46914f587131006256040286185918e6ee5903ad070087cdb53bc
+- repo_url: manaflow-ai/cmux
+  name: cmux
+  host: github.com
+  resolved_commit: 39df334577a8f77291fe40f20b8403a3cde345b7
+  version: unknown
+  virtual_path: skills/cmux
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:aaef6c329ccf3a246474621c114e90e35a182f25a4ead925135587e5f7f01a22
+- repo_url: manaflow-ai/cmux
+  name: cmux
+  host: github.com
+  resolved_commit: 39df334577a8f77291fe40f20b8403a3cde345b7
+  version: unknown
+  virtual_path: skills/cmux-browser
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:aa16020e62743b6c5b3c71e523e7b9faed231b2e3c3e21b04d03bbead93c0d9e
+- repo_url: manaflow-ai/cmux
+  name: cmux
+  host: github.com
+  resolved_commit: 39df334577a8f77291fe40f20b8403a3cde345b7
+  version: unknown
+  virtual_path: skills/cmux-customization
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:ff2ca2e7fce755264c4dfd40cd14ec0a192145f179fdc741ed528e089bd18c17
+- repo_url: manaflow-ai/cmux
+  name: cmux
+  host: github.com
+  resolved_commit: 39df334577a8f77291fe40f20b8403a3cde345b7
+  version: unknown
+  virtual_path: skills/cmux-diagnostics
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:81215b4612f788f26e2e05b32954e1b021d415735553561a3c13b0edafd7e7fb
+- repo_url: manaflow-ai/cmux
+  name: cmux
+  host: github.com
+  resolved_commit: 39df334577a8f77291fe40f20b8403a3cde345b7
+  version: unknown
+  virtual_path: skills/cmux-keyboard-shortcuts
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:eb39e8be80571101ff2a9820d44ac4e57415ac7ee7e27f46c81bf18d97b70554
+- repo_url: manaflow-ai/cmux
+  name: cmux
+  host: github.com
+  resolved_commit: 39df334577a8f77291fe40f20b8403a3cde345b7
+  version: unknown
+  virtual_path: skills/cmux-markdown
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:e50204ae328a00a8a62d6a43c403bc2ee2f7e913f529e6dbcc682c3d48921818
+- repo_url: manaflow-ai/cmux
+  name: cmux
+  host: github.com
+  resolved_commit: 39df334577a8f77291fe40f20b8403a3cde345b7
+  version: unknown
+  virtual_path: skills/cmux-settings
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:88be6e4b5e376a9faca5ea3a2fb377bd4827bb85c1e087058dbac6fa5f940116
+- repo_url: manaflow-ai/cmux
+  name: cmux
+  host: github.com
+  resolved_commit: 39df334577a8f77291fe40f20b8403a3cde345b7
+  version: unknown
+  virtual_path: skills/cmux-socket-policy
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:bebf2e11fdb5c5dbbf84272257b05d2ad0df3207018989ddd26a3235ee4fcb62
+- repo_url: manaflow-ai/cmux
+  name: cmux
+  host: github.com
+  resolved_commit: 39df334577a8f77291fe40f20b8403a3cde345b7
+  version: unknown
+  virtual_path: skills/cmux-workspace
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:ee69bbbf783ac02f156527dd207a8ad021586a9b4ba6152e309103fd35453398
 - repo_url: shadcn-ui/ui
+  name: ui
   host: github.com
   resolved_commit: 731e6dd8a2c9981b5d419f7dcf5b6476a69d288c
+  version: unknown
   virtual_path: skills/shadcn
   is_virtual: true
   package_type: claude_skill
@@ -61,8 +148,10 @@ dependencies:
   - .claude/skills/shadcn
   content_hash: sha256:e9d76d55c14a21546595524cdc44466d191c0da4e183298949ae881b8b6d5e24
 - repo_url: vercel-labs/agent-skills
+  name: agent-skills
   host: github.com
   resolved_commit: 7defe2d03c5fa8e39b63b12648c1fa10131b422a
+  version: unknown
   virtual_path: skills/react-best-practices
   is_virtual: true
   package_type: claude_skill
@@ -71,8 +160,10 @@ dependencies:
   - .claude/skills/react-best-practices
   content_hash: sha256:74f142d28d360d78e8bac4f239a84c87f0ced9015729bc72b5458d82ff45b015
 - repo_url: vercel-labs/next-skills
+  name: next-skills
   host: github.com
   resolved_commit: dc1de9caf7612d73f56a8dec3cb1bd6c9ec096b9
+  version: unknown
   virtual_path: skills/next-best-practices
   is_virtual: true
   package_type: claude_skill
