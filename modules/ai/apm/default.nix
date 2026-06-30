@@ -32,9 +32,9 @@ in
         # apm.yml is immutable (nix-store). apm.lock.yaml uses
         # mkOutOfStoreSymlink so that `apm install -g` updates can flow
         # back to the dotfiles repo for version control.
-        # Frozen install is wired into `just switch` (see Justfile), not
-        # home.activation, so rebuild and apm-sync stay separately
-        # observable.
+        # apm sync stays separate from the nix rebuild (run `just apm sync`,
+        # or `just apply` to chain switch + apm sync) so the two stay
+        # independently observable.
         home.file = {
           ".apm/apm.yml".source = ./apm.yml;
           ".apm/apm.lock.yaml".source =
