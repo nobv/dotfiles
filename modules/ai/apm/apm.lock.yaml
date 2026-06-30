@@ -1,5 +1,5 @@
 lockfile_version: '1'
-generated_at: '2026-06-29T16:19:45.019546+00:00'
+generated_at: '2026-06-30T02:50:30.341547+00:00'
 apm_version: 0.23.0
 dependencies:
 - repo_url: anthropics/skills
@@ -171,6 +171,24 @@ dependencies:
   - .agents/skills/next-best-practices
   - .claude/skills/next-best-practices
   content_hash: sha256:4bf1b21f7a66848642c150cab284f24c004ad6da0f717eed4fe9db74eaa6b6a8
+- repo_url: yoshiko-pg/difit
+  name: difit
+  host: github.com
+  resolved_commit: 59df3692ff4aa8f96df84b98e17171fa452a0b04
+  version: unknown
+  virtual_path: skills/difit
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:d7183ec34bc1b776e8e54cf34efd1bf8be8b04bdb424e5efcfbb3faa5f095db7
+- repo_url: yoshiko-pg/difit
+  name: difit
+  host: github.com
+  resolved_commit: 59df3692ff4aa8f96df84b98e17171fa452a0b04
+  version: unknown
+  virtual_path: skills/difit-review
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:4f95a432d8a359a2c3a8d320b98c871dda13d03b8583fe202528890e767e8c30
 mcp_servers:
 - doist/todoist-ai
 - io.github.github/github-mcp-server
