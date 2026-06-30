@@ -13,6 +13,9 @@ dependencies:
     - shadcn-ui/ui/skills/shadcn
     - vercel-labs/agent-skills/skills/react-best-practices
     - vercel-labs/next-skills/skills/next-best-practices
+    # difit diff-viewer review skills (upstream source; replaces local vendoring)
+    - yoshiko-pg/difit/skills/difit
+    - yoshiko-pg/difit/skills/difit-review
     # cmux CLI control skills (drive workspaces, browser surface, socket API)
     - manaflow-ai/cmux/skills/cmux
     - manaflow-ai/cmux/skills/cmux-workspace
