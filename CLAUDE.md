@@ -14,18 +14,22 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 ## Quick Start Commands
 
 ### just commands (recommended)
-The `Justfile` at the repository root provides shortcuts for common commands:
-- Dry-run activation (needs root; pre-`switch` check on `main`): `just dry-run`
-- Apply configuration: `just switch`
-- Check flake: `just check`
-- Format Nix files: `just fmt`
-- Update all inputs: `just update`
-- Update specific input: `just update-input <input-name>`
-- Show flake info: `just show`
-- Interactive module management: `just modules`
-- Enter development shell: `just dev`
+The `Justfile` uses modules under `just/`. Recipes are invoked as `just <module> <recipe>` (e.g. `just apm lock`); the `::` form (`just apm::lock`) is equivalent. Run `just` to list everything, `just --list <module>` for one group.
+- Apply everything (ff `main` → switch → apm sync): `just apply`
+- Apply configuration: `just nix switch`
+- Build without root (worktree-safe validation): `just nix build`
+- Dry-run activation (needs root; pre-`switch` check on `main`): `just nix dry-run`
+- Check flake: `just nix check`
+- Format Nix files: `just nix fmt`
+- Update all inputs: `just nix update` (one input: `just nix update-input <input-name>`)
+- Show flake info: `just nix show`
+- Interactive module management: `just nix modules`
+- Enter development shell: `just nix dev`
+- Fast-forward `main`: `just git sync`
+- apm: `just apm sync` (install locked) · `just apm lock` (relock) · `just apm update` · `just apm outdated` · `just apm audit`
+- Claude native plugins: `just claude plugins`
 
-To target a different machine: `just MACHINE=work switch`
+To target a different machine, set the env var (CLI `MACHINE=…` does not work across modules): `DOTFILES_MACHINE=work just nix switch`
 
 ### Daily Development Commands
 - Dry-run activation (needs root; pre-`switch` check on `main`): `darwin-rebuild switch --flake .#<machine> --dry-run`
@@ -44,7 +48,7 @@ To target a different machine: `just MACHINE=work switch`
 - Update specific input: `nix flake lock --update-input <input-name>` (e.g., `nixpkgs`, `home-manager`)
 - Show flake metadata: `nix flake metadata`
 
-**IMPORTANT**: Validate every change before it touches the live system (see Development Workflow). Inside a worktree use the rootless `nix build .#darwinConfigurations.<machine>.system`; `just dry-run` / `darwin-rebuild … --dry-run` need root and are for the pre-`switch` check on `main`.
+**IMPORTANT**: Validate every change before it touches the live system (see Development Workflow). Inside a worktree use the rootless `just nix build` (`nix build .#darwinConfigurations.<machine>.system`); `just nix dry-run` / `darwin-rebuild … --dry-run` need root and are for the pre-`switch` check on `main`.
 
 ## Installation Commands
 - One-liner install: `bash -c "$(curl -L https://raw.githubusercontent.com/nobv/dotfiles/main/install)"`
@@ -154,12 +158,12 @@ All code-changing work happens inside a git worktree, is validated rootless, and
    ```
 2. Implement inside the worktree — edit modules in `modules/<category>/<module>/default.nix`.
 3. Validate **without root**, entirely within the worktree:
-   - `nix flake check` — syntax
-   - `nix build .#darwinConfigurations.<machine>.system` — full build, no root
+   - `just nix check` (`nix flake check`) — syntax
+   - `just nix build` (`nix build .#darwinConfigurations.<machine>.system`) — full build, no root
 
-   Do **not** use `just dry-run` / `darwin-rebuild … --dry-run` here — they require root and activate against the live system.
+   Do **not** use `just nix dry-run` / `darwin-rebuild … --dry-run` here — they require root and activate against the live system.
 4. Commit to the worktree's branch (Conventional Commits, single line).
-5. After merging into `main`, apply with `just switch` — **never `switch` from a worktree** (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent).
+5. After merging into `main`, apply with `just nix switch` (or `just apply` to also ff `main` + apm sync) — **never `switch` from a worktree** (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent).
 6. Once the work is done and the PR is merged, remove the worktree with `ExitWorktree` (`action: "remove"`) so `.claude/worktrees/` stays clean — don't leave stale worktrees around.
 
 ### Adding a new module
@@ -179,8 +183,8 @@ If, while working in a worktree, the user starts an **unrelated** task:
 - `EnterWorktree` defaults to base `origin/main` (fresh); uncommitted changes on `main` are not carried into the worktree
 - `EnterWorktree` auto-prefixes the branch with `worktree-` and turns `/` into `+`; rename it with `git branch -m <type>/<short-kebab-description>` (step 1) so the pushed branch/PR follow Conventional Commits. The worktree directory name (`.claude/worktrees/<type>+<desc>`) keeps the `+` form — that's expected and only the branch needs renaming
 - Merges happen only on explicit user request; once the work is merged, remove the worktree with `ExitWorktree` (`action: "remove"`) rather than leaving it on disk
-- The dev shell (`just dev` / `nix develop`) provides `nixpkgs-fmt` and `nix-tree`
-- Todoist MCP is managed declaratively via apm (`modules/ai/apm/apm.yml` → `mcp: doist/todoist-ai`); `just apm-sync` deploys it to user scope (`~/.claude.json`), available across all projects. `/mcp` authentication may be needed once
+- The dev shell (`just nix dev` / `nix develop`) provides `nixpkgs-fmt` and `nix-tree`
+- Todoist MCP is managed declaratively via apm (`modules/ai/apm/apm.yml` → `mcp: doist/todoist-ai`); `just apm sync` deploys it to user scope (`~/.claude.json`), available across all projects. `/mcp` authentication may be needed once
 
 ## Repository Structure
 - `flake.nix`: Main entry point with auto-discovery logic
