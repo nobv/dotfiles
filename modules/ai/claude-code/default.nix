@@ -106,6 +106,13 @@ in
           ++ (mapAttrsToList (_: profile: {
             "${homeRel profile}/settings.json".source = mkSymlink profile.settingsSource;
             "${homeRel profile}/CLAUDE.md".source = mkSymlink sharedClaudeMd;
+            # Share user-scope skills + commands (~/.claude/{skills,commands}) so
+            # profiles also see them; otherwise personal/apm skills and custom
+            # slash commands are invisible under a profile.
+            "${homeRel profile}/skills".source =
+              config.lib.file.mkOutOfStoreSymlink "/Users/${username}/.claude/skills";
+            "${homeRel profile}/commands".source =
+              config.lib.file.mkOutOfStoreSymlink "/Users/${username}/.claude/commands";
           }) cfg.profiles)
         );
 
@@ -123,6 +130,8 @@ in
             mkdir -p "$dir"
             ln -sfn "$HOME/.claude/settings.json" "$dir/settings.json"
             ln -sfn "$HOME/.claude/CLAUDE.md" "$dir/CLAUDE.md"
+            ln -sfn "$HOME/.claude/skills" "$dir/skills"
+            ln -sfn "$HOME/.claude/commands" "$dir/commands"
             export CLAUDE_CONFIG_DIR="$dir"
           }
         '';
