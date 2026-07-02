@@ -26,6 +26,8 @@ dependencies:
     - manaflow-ai/cmux/skills/cmux-customization
     - manaflow-ai/cmux/skills/cmux-markdown
     - manaflow-ai/cmux/skills/cmux-diagnostics
+    # grilling: relentlessly stress-test a plan/design before building
+    - mattpocock/skills/skills/productivity/grilling
   mcp:
     - name: io.github.github/github-mcp-server
       transport: http
