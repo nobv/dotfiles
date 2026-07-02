@@ -1,5 +1,5 @@
 lockfile_version: '1'
-generated_at: '2026-06-30T02:50:30.341547+00:00'
+generated_at: '2026-07-02T14:24:22.039596+00:00'
 apm_version: 0.23.0
 dependencies:
 - repo_url: anthropics/skills
@@ -135,6 +135,15 @@ dependencies:
   is_virtual: true
   package_type: claude_skill
   content_hash: sha256:ee69bbbf783ac02f156527dd207a8ad021586a9b4ba6152e309103fd35453398
+- repo_url: mattpocock/skills
+  name: skills
+  host: github.com
+  resolved_commit: 1445797da5ee4e4054233878c0029e9276f9986a
+  version: unknown
+  virtual_path: skills/productivity/grilling
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:ef685a6fa0bbe73b05bbd8dc1ec97258191587f07c6aa7dbc9006675ceb8f90f
 - repo_url: shadcn-ui/ui
   name: ui
   host: github.com
