@@ -68,6 +68,7 @@
         jq.enable = true;
         mo.enable = true;
         navi.enable = true;
+        openspec.enable = true;
         parallel.enable = true;
         peco.enable = true;
         procs.enable = true;

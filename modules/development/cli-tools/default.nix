@@ -15,6 +15,7 @@
     ./jq
     ./mo
     ./navi
+    ./openspec
     ./parallel
     ./peco
     ./procs
