@@ -12,6 +12,7 @@
     ./fd
     ./fzf
     ./gnused
+    ./herdr
     ./jq
     ./mo
     ./navi
