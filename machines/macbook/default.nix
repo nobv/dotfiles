@@ -124,6 +124,7 @@
       vim.enable = false;
       vscode.enable = true;
       xcode.enable = true;
+      zed.enable = true;
     };
 
     # Programming languages
