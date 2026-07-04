@@ -65,6 +65,7 @@
         fd.enable = true;
         fzf.enable = true;
         gnused.enable = true;
+        herdr.enable = true;
         jq.enable = true;
         mo.enable = true;
         navi.enable = true;
