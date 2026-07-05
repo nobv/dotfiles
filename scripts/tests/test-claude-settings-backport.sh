@@ -40,4 +40,17 @@ got="$(diff_keys "$d/live.json" "$d/repo.json" | sort | tr '\n' ',')"
 # model: 値違い→候補 / enabledPlugins: 内容違い→候補 / same: 一致→除外 / repoOnly: repo固有→除外
 assert_eq "$got" "enabledPlugins,model,onlyLive," "diff_keys: added/changed keys only, repo-only excluded"
 
+# --- apply_keys ---
+d="$(fixture_dir)"
+cat > "$d/live.json" <<'JSON'
+{ "enabledPlugins": {"a": true, "b": true}, "hooks": {"h": 1} }
+JSON
+cat > "$d/repo.json" <<'JSON'
+{ "enabledPlugins": {"a": true}, "model": "keep" }
+JSON
+apply_keys "$d/repo.json" "$d/live.json" enabledPlugins
+assert_eq "$(jq -c '.enabledPlugins' "$d/repo.json")" '{"a":true,"b":true}' "apply_keys: key replaced with live value"
+assert_eq "$(jq -r '.model' "$d/repo.json")" "keep" "apply_keys: repo-only key preserved"
+assert_eq "$(jq 'has("hooks")' "$d/repo.json")" "false" "apply_keys: non-approved key not added"
+
 echo "PASS=$PASS FAIL=$FAIL"; [ "$FAIL" -eq 0 ]

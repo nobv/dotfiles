@@ -44,6 +44,20 @@ diff_keys() {
   done < <(jq -r 'keys[]' "$live")
 }
 
+# 指定トップレベルキーを live 値で repo に丸ごと反映する(atomic)。
+apply_keys() {
+  local repo="$1" live="$2"; shift 2
+  local tmp v k
+  tmp="$(mktemp)"
+  cp "$repo" "$tmp"
+  for k in "$@"; do
+    v="$(jq -c --arg k "$k" '.[$k]' "$live")"
+    jq --arg k "$k" --argjson v "$v" '.[$k] = $v' "$tmp" > "$tmp.next"
+    mv "$tmp.next" "$tmp"
+  done
+  mv "$tmp" "$repo"
+}
+
 main() {
   parse_args "$@"
   : # 後続タスクで肉付け
