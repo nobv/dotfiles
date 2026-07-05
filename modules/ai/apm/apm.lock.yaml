@@ -1,6 +1,6 @@
 lockfile_version: '1'
-generated_at: '2026-07-02T14:24:22.039596+00:00'
-apm_version: 0.23.0
+generated_at: '2026-07-05T07:35:45.060433+00:00'
+apm_version: 0.23.1
 dependencies:
 - repo_url: anthropics/skills
   name: skills
@@ -54,6 +54,15 @@ dependencies:
   - .agents/skills/playwright-best-practices-skill
   - .claude/skills/playwright-best-practices-skill
   content_hash: sha256:4a2c8b6165b46914f587131006256040286185918e6ee5903ad070087cdb53bc
+- repo_url: feature-sliced/skills
+  name: skills
+  host: github.com
+  resolved_commit: 653e7f3187eac51311652bf787a72bcf56325eea
+  version: unknown
+  virtual_path: feature-sliced-design
+  is_virtual: true
+  package_type: claude_skill
+  content_hash: sha256:352d32fc64864842ae400f7bbaed21c3e6b962a8ab8f09c1a7b90813cf9c6003
 - repo_url: manaflow-ai/cmux
   name: cmux
   host: github.com
