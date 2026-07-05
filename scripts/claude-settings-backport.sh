@@ -58,9 +58,61 @@ apply_keys() {
   mv "$tmp" "$repo"
 }
 
+# 差分候補から取り込むキーを APPROVED に決める。$ALL なら全採用、他は対話。
+select_keys() {
+  local live="$1"; shift
+  APPROVED=()
+  local k ans
+  for k in "$@"; do
+    if $ALL; then APPROVED+=("$k"); continue; fi
+    printf '\n=== %s (live value) ===\n' "$k"
+    jq --arg k "$k" '.[$k]' "$live"
+    read -r -p "取り込む? [y/N] " ans </dev/tty || ans=""
+    [[ "$ans" =~ ^[Yy]$ ]] && APPROVED+=("$k")
+  done
+}
+
+# APPROVED を ", " 連結した commit メッセージ。
+# 注: `local IFS=', '; "${APPROVED[*]}"` は bash では IFS の先頭 1 文字(',')
+# しか区切りに使われず ", " にならないため、printf '%s, ' + 末尾トリムで連結する。
+commit_message() {
+  local joined
+  joined="$(printf '%s, ' "${APPROVED[@]}")"
+  joined="${joined%, }"
+  printf 'chore(claude): backport settings.json (%s)' "$joined"
+}
+
 main() {
   parse_args "$@"
-  : # 後続タスクで肉付け
+  command -v jq >/dev/null 2>&1 || { log_error "jq not found"; exit 1; }
+  [ -f "$LIVE" ] || { log_error "live settings.json not found: $LIVE"; exit 1; }
+  [ -f "$REPO_REL" ] || { log_error "repo settings.json not found: $REPO_REL"; exit 1; }
+
+  if ! is_drifted; then
+    log_info "settings.json は symlink(drift なし)。取り込むものはありません。"; exit 0
+  fi
+
+  local keys=() line; while IFS= read -r line; do keys+=("$line"); done < <(diff_keys "$LIVE" "$REPO_REL")
+  if [ "${#keys[@]}" -eq 0 ]; then
+    log_success "差分なし。取り込むものはありません。"; exit 0
+  fi
+
+  if $DRY_RUN; then
+    log_info "差分候補(--dry-run):"; printf '  - %s\n' "${keys[@]}"; exit 0
+  fi
+
+  select_keys "$LIVE" "${keys[@]}"
+  if [ "${#APPROVED[@]}" -eq 0 ]; then
+    log_info "取り込むキーが選択されませんでした。"; exit 0
+  fi
+
+  apply_keys "$REPO_REL" "$LIVE" "${APPROVED[@]}"
+  log_success "repo に反映しました: ${APPROVED[*]}"
+  git --no-pager diff -- "$REPO_REL" || true
+
+  if $EDIT; then "${EDITOR:-vi}" "$REPO_REL"; fi
+
+  # git/gh 連携は Task 5,6 で追加
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then main "$@"; fi

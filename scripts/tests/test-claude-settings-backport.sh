@@ -53,4 +53,15 @@ assert_eq "$(jq -c '.enabledPlugins' "$d/repo.json")" '{"a":true,"b":true}' "app
 assert_eq "$(jq -r '.model' "$d/repo.json")" "keep" "apply_keys: repo-only key preserved"
 assert_eq "$(jq 'has("hooks")' "$d/repo.json")" "false" "apply_keys: non-approved key not added"
 
+# --- select_keys (--all) & commit_message ---
+d="$(fixture_dir)"
+cat > "$d/live.json" <<'JSON'
+{ "enabledPlugins": {"a": true}, "hooks": {"h": 1} }
+JSON
+ALL=true
+select_keys "$d/live.json" enabledPlugins hooks
+assert_eq "${APPROVED[*]}" "enabledPlugins hooks" "select_keys: --all approves all"
+APPROVED=(enabledPlugins hooks)
+assert_eq "$(commit_message)" "chore(claude): backport settings.json (enabledPlugins, hooks)" "commit_message: joins keys"
+
 echo "PASS=$PASS FAIL=$FAIL"; [ "$FAIL" -eq 0 ]
