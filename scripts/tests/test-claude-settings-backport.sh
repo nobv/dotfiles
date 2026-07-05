@@ -28,4 +28,16 @@ parse_args custom/path.json --no-merge
 assert_eq "$REPO_REL"  "custom/path.json" "parse_args: positional repo path"
 assert_eq "$NO_MERGE"  true "parse_args: --no-merge"
 
+# --- diff_keys ---
+d="$(fixture_dir)"
+cat > "$d/live.json" <<'JSON'
+{ "model": "x", "enabledPlugins": {"a": true, "b": true}, "same": {"k": 1}, "onlyLive": 1 }
+JSON
+cat > "$d/repo.json" <<'JSON'
+{ "model": "y", "enabledPlugins": {"a": true}, "same": {"k": 1}, "repoOnly": 1 }
+JSON
+got="$(diff_keys "$d/live.json" "$d/repo.json" | sort | tr '\n' ',')"
+# model: 値違い→候補 / enabledPlugins: 内容違い→候補 / same: 一致→除外 / repoOnly: repo固有→除外
+assert_eq "$got" "enabledPlugins,model,onlyLive," "diff_keys: added/changed keys only, repo-only excluded"
+
 echo "PASS=$PASS FAIL=$FAIL"; [ "$FAIL" -eq 0 ]

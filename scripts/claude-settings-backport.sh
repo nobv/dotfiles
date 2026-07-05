@@ -32,6 +32,18 @@ parse_args() {
 # $LIVE が存在し、かつ symlink でない(=実ファイルに drift)なら true。
 is_drifted() { [ -e "$LIVE" ] && [ ! -L "$LIVE" ]; }
 
+# ライブにあり、repo に無い or 正規化値が異なるトップレベルキーを列挙する。
+diff_keys() {
+  local live="$1" repo="$2" k
+  while IFS= read -r k; do
+    if ! jq -e --arg k "$k" 'has($k)' "$repo" >/dev/null 2>&1; then
+      printf '%s\n' "$k"
+    elif [ "$(jq -S --arg k "$k" '.[$k]' "$live")" != "$(jq -S --arg k "$k" '.[$k]' "$repo")" ]; then
+      printf '%s\n' "$k"
+    fi
+  done < <(jq -r 'keys[]' "$live")
+}
+
 main() {
   parse_args "$@"
   : # 後続タスクで肉付け
