@@ -28,6 +28,8 @@ dependencies:
     - manaflow-ai/cmux/skills/cmux-diagnostics
     # grilling: relentlessly stress-test a plan/design before building
     - mattpocock/skills/skills/productivity/grilling
+    # Feature-Sliced Design v2.1 methodology skill (fsd.how)
+    - feature-sliced/skills/feature-sliced-design
   mcp:
     - name: io.github.github/github-mcp-server
       transport: http
