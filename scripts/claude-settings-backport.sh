@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# claude-settings-backport.sh — ライブ settings.json の変更を repo に取り込み、
+# 既定で PR 作成 → マージまで行う(差分承認式・一方向 live->repo)。
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=lib.sh
+source "${SCRIPT_DIR}/lib.sh"
+
+CONFIG_DIR="${CLAUDE_CONFIG_DIR:-${HOME}/.claude}"
+LIVE="${CONFIG_DIR}/settings.json"
+REPO_REL="modules/ai/claude-code/settings.json"
+BRANCH="chore/claude-settings-backport"
+DRY_RUN=false NO_PR=false NO_MERGE=false ALL=false EDIT=false
+
+parse_args() {
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --dry-run) DRY_RUN=true ;;
+      --no-pr)   NO_PR=true ;;
+      --no-merge) NO_MERGE=true ;;
+      --all)     ALL=true ;;
+      --edit)    EDIT=true ;;
+      -h|--help) echo "usage: claude-settings-backport.sh [repo-settings-path] [--dry-run|--no-pr|--no-merge|--all|--edit]"; exit 0 ;;
+      -*) log_error "unknown flag: $1"; exit 1 ;;
+      *) REPO_REL="$1" ;;
+    esac
+    shift
+  done
+}
+
+# $LIVE が存在し、かつ symlink でない(=実ファイルに drift)なら true。
+is_drifted() { [ -e "$LIVE" ] && [ ! -L "$LIVE" ]; }
+
+main() {
+  parse_args "$@"
+  : # 後続タスクで肉付け
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then main "$@"; fi
