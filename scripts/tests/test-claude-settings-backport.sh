@@ -64,4 +64,18 @@ assert_eq "${APPROVED[*]}" "enabledPlugins hooks" "select_keys: --all approves a
 APPROVED=(enabledPlugins hooks)
 assert_eq "$(commit_message)" "chore(claude): backport settings.json (enabledPlugins, hooks)" "commit_message: joins keys"
 
+# --- open_pr uses gh pr create when no PR exists (gh stubbed) ---
+d="$(fixture_dir)"; stub="$d/bin"; mkdir -p "$stub"
+cat > "$stub/gh" <<'SH'
+#!/usr/bin/env bash
+# stub: `gh pr view` -> fail(=PR なし), `gh pr create` -> ログ記録
+if [ "$1" = "pr" ] && [ "$2" = "view" ]; then exit 1; fi
+if [ "$1" = "pr" ] && [ "$2" = "create" ]; then echo "create $*" >> "$GH_LOG"; echo "https://x/pr/1"; exit 0; fi
+exit 0
+SH
+chmod +x "$stub/gh"
+export GH_LOG="$d/gh.log"; : > "$GH_LOG"
+PATH="$stub:$PATH" BRANCH="chore/claude-settings-backport" open_pr
+assert_eq "$(grep -c '^create ' "$GH_LOG")" "1" "open_pr: calls gh pr create when no PR"
+
 echo "PASS=$PASS FAIL=$FAIL"; [ "$FAIL" -eq 0 ]

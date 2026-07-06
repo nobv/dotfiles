@@ -82,6 +82,35 @@ commit_message() {
   printf 'chore(claude): backport settings.json (%s)' "$joined"
 }
 
+prepare_branch() {
+  git fetch origin main --quiet
+  if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
+    git fetch origin "$BRANCH" --quiet
+    git checkout -B "$BRANCH" "origin/$BRANCH" --quiet
+  else
+    git checkout -B "$BRANCH" origin/main --quiet
+  fi
+}
+
+commit_and_push() {
+  git add "$REPO_REL"
+  git commit -m "$(commit_message)" --quiet
+  $NO_PR && { log_success "commit まで完了(--no-pr)。"; return 0; }
+  git push -u origin "$BRANCH" --quiet
+}
+
+open_pr() {
+  if gh pr view "$BRANCH" >/dev/null 2>&1; then
+    log_info "既存 PR を更新: $(gh pr view "$BRANCH" --json url -q .url 2>/dev/null)"
+  else
+    local url
+    url="$(gh pr create --base main --head "$BRANCH" \
+      --title "chore(claude): backport settings.json" \
+      --body "Automated backport of live settings.json changes into the repo." 2>/dev/null | tail -1)"
+    log_info "PR を作成: $url"
+  fi
+}
+
 main() {
   parse_args "$@"
   command -v jq >/dev/null 2>&1 || { log_error "jq not found"; exit 1; }
@@ -106,13 +135,19 @@ main() {
     log_info "取り込むキーが選択されませんでした。"; exit 0
   fi
 
+  if ! $NO_PR; then command -v gh >/dev/null 2>&1 || { log_error "gh not found (needed for PR)"; exit 1; }; fi
+  prepare_branch
+
   apply_keys "$REPO_REL" "$LIVE" "${APPROVED[@]}"
   log_success "repo に反映しました: ${APPROVED[*]}"
   git --no-pager diff -- "$REPO_REL" || true
 
   if $EDIT; then "${EDITOR:-vi}" "$REPO_REL"; fi
 
-  # git/gh 連携は Task 5,6 で追加
+  commit_and_push
+  $NO_PR && exit 0
+  open_pr
+  # PR マージは Task 6 で追加
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then main "$@"; fi
