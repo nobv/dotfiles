@@ -1,0 +1,16 @@
+# cship (https://cship.dev) statusline for Claude Code
+# usage_limits formats use {curly} placeholders; subfield formats use $value
+
+[cship]
+lines = [
+  "$cship.context_window.remaining_percentage $cship.usage_limits $cship.cost",
+  "$cship.model $cship.effort",
+  "$directory $git_branch $git_status",
+]
+
+[cship.context_window.remaining_percentage]
+format = "Ctx $value%"
+
+[cship.usage_limits]
+five_hour_format = "5h {pct}% ({reset})"
+seven_day_format = "7d {pct}%"

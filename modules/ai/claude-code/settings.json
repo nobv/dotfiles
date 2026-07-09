@@ -27,16 +27,6 @@
         ]
       }
     ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "npx -y ccstatusline@latest --hook"
-          }
-        ]
-      }
-    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -46,21 +36,12 @@
             "command": "cmd=$(jq -r \".tool_input.command // empty\"); if printf \"%s\" \"$cmd\" | grep -Eq \"codex\" && printf \"%s\" \"$cmd\" | grep -Eiq -- \"--dangerously-bypass|danger-full-access\"; then echo \"blocked: codex sandbox/approval bypass flags are not permitted\" >&2; exit 2; fi"
           }
         ]
-      },
-      {
-        "matcher": "Skill",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "npx -y ccstatusline@latest --hook"
-          }
-        ]
       }
     ]
   },
   "statusLine": {
     "type": "command",
-    "command": "npx -y ccstatusline@latest",
+    "command": "cship",
     "padding": 0
   },
   "enabledPlugins": {
