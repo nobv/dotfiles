@@ -89,6 +89,7 @@
       infrastructure = {
         aws.enable = true;
         docker.enable = true;
+        firebase-cli.enable = true;
         gcp.enable = true;
         google-workspace-cli.enable = true;
         kubernetes.enable = true;
