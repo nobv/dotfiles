@@ -1,6 +1,16 @@
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
+# Desk model: each desk (domain) owns one AeroSpace workspace, switched exclusively
+# via the desk CLI — never bind desk switching to an AeroSpace key here. A window's
+# default home is its own desk's tiled surface (no on-window-detected rule needed).
+# Two exceptions:
+#   - floating windows are the "wagon": they follow you across desk switches instead
+#     of staying tiled on one desk.
+#   - 'break' is the one shared, domain-independent workspace (bound to alt-b) for
+#     life/comms apps that don't belong to a single desk; its residents stay tiled,
+#     not floating, so they don't get swept along as wagon passengers.
+
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
 # Available commands: https://nikitabobko.github.io/AeroSpace/commands
@@ -108,31 +118,10 @@ alt-shift-l = 'move right'
 alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3' # for Float apps
-alt-a = 'workspace A' # for AI-tools
-alt-b = 'workspace B' # for Browser
-alt-c = 'workspace C' # for Communications
-alt-d = 'workspace D' # for Development
-alt-o = 'workspace O' # for Obsidian
-alt-r = 'workspace R' # for Reader
-alt-t = 'workspace T' # for Terminal
-alt-w = 'workspace W' # for Work
-
-# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-shift-1 = 'move-node-to-workspace 1'
-alt-shift-2 = 'move-node-to-workspace 2'
-alt-shift-3 = 'move-node-to-workspace 3'
-alt-shift-a = 'move-node-to-workspace A'
-alt-shift-b = 'move-node-to-workspace B'
-alt-shift-c = 'move-node-to-workspace C'
-alt-shift-d = 'move-node-to-workspace D'
-alt-shift-o = 'move-node-to-workspace O'
-alt-shift-r = 'move-node-to-workspace R'
-alt-shift-t = 'move-node-to-workspace T'
-alt-shift-w = 'move-node-to-workspace W'
+# Desk switching itself happens via the desk CLI, not AeroSpace workspace keys.
+# 'break' is the one shared, domain-independent workspace — see the desk-model
+# note near the top of this file. See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+alt-b = 'workspace break'
 
 alt-shift-f = 'fullscreen'
 
@@ -181,100 +170,67 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
-run = 'move-node-to-workspace 1'
+run = 'move-node-to-workspace break'
 
 [[on-window-detected]]
 if.app-id = 'com.culturedcode.ThingsMac'
-run = 'move-node-to-workspace 1'
+run = 'move-node-to-workspace break'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.reminders'
-run = 'move-node-to-workspace 1'
+run = 'move-node-to-workspace break'
 
 [[on-window-detected]]
 if.app-id = 'com.davetech.habit'
-run = 'move-node-to-workspace 1'
+run = 'move-node-to-workspace break'
 
 [[on-window-detected]]
 if.app-id = 'com.1password.1password'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.agiletortoise.Drafts-OSX'
-run = ['layout floating', 'move-node-to-workspace 3']
-
-[[on-window-detected]]
 if.app-id = 'com.apple.Music'
-run = ['layout floating', 'move-node-to-workspace 3']
-
-[[on-window-detected]]
-if.app-id = 'com.withopal.opalmacos'
-run = ['layout floating', 'move-node-to-workspace 3']
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.electron.aqua-voice'
-run = 'move-node-to-workspace 3'
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'ai.perplexity.mac'
-run = 'move-node-to-workspace A'
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.openai.chat'
-run = 'move-node-to-workspace A'
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.anthropic.claudefordesktop'
-run = 'move-node-to-workspace A'
-
-[[on-window-detected]]
-if.app-id = 'company.thebrowser.Browser'
-run = 'move-node-to-workspace B'
-
-[[on-window-detected]]
-if.app-id = 'com.google.Chrome'
-run = 'move-node-to-workspace B'
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = 'move-node-to-workspace C'
+run = 'move-node-to-workspace break'
 
 [[on-window-detected]]
 if.app-id = 'jp.naver.line.mac'
-run = 'move-node-to-workspace C'
+run = 'move-node-to-workspace break'
 
 [[on-window-detected]]
 if.app-id = 'com.readdle.SparkDesktop'
-run = 'move-node-to-workspace C'
-
-[[on-window-detected]]
-if.app-id = 'md.obsidian'
-run = 'move-node-to-workspace O'
+run = 'move-node-to-workspace break'
 
 [[on-window-detected]]
 if.app-id = 'com.linear'
-run = 'move-node-to-workspace O'
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'org.zotero.zotero'
-run = 'move-node-to-workspace R'
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.amazon.Lassen'
-run = 'move-node-to-workspace R'
-
-[[on-window-detected]]
-if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace T'
-
-[[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-run = 'move-node-to-workspace T'
-
-[[on-window-detected]]
-if.app-id = 'com.google.Chrome'
-if.window-title-regex-substring = 'client work'
-run = 'move-node-to-workspace W'
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
