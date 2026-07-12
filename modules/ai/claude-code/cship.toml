@@ -1,0 +1,24 @@
+# cship (https://cship.dev) statusline for Claude Code
+# usage_limits formats use {curly} placeholders; subfield formats use $value
+
+[cship]
+lines = [
+  "$cship.context_bar $cship.usage_limits $cship.cost",
+  "$cship.model $cship.effort $cship.vim",
+  "$directory $git_branch $git_status",
+]
+
+[cship.usage_limits]
+five_hour_format = "5h {pct}% ({reset}, {pace})"
+seven_day_format = "7d {pct}%"
+warn_threshold = 60
+warn_style = "yellow"
+critical_threshold = 85
+critical_style = "bold red"
+
+[cship.cost]
+# cost coloring stays off unless warn_style/critical_style are set explicitly
+warn_threshold = 5
+warn_style = "yellow"
+critical_threshold = 20
+critical_style = "bold red"
