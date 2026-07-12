@@ -52,7 +52,11 @@ apply_keys() {
   cp "$repo" "$tmp"
   for k in "$@"; do
     v="$(jq -c --arg k "$k" '.[$k]' "$live")"
-    jq --arg k "$k" --argjson v "$v" '.[$k] = $v' "$tmp" > "$tmp.next"
+    if ! jq --arg k "$k" --argjson v "$v" '.[$k] = $v' "$tmp" > "$tmp.next"; then
+      rm -f "$tmp" "$tmp.next"
+      log_error "failed to apply key: $k"
+      return 1
+    fi
     mv "$tmp.next" "$tmp"
   done
   mv "$tmp" "$repo"
@@ -106,7 +110,7 @@ open_pr() {
     local url
     url="$(gh pr create --base main --head "$BRANCH" \
       --title "chore(claude): backport settings.json" \
-      --body "Automated backport of live settings.json changes into the repo." 2>/dev/null | tail -1)"
+      --body "Automated backport of live settings.json changes into the repo." | tail -1)"
     log_info "PR を作成: $url"
   fi
 }
@@ -126,6 +130,8 @@ main() {
   command -v jq >/dev/null 2>&1 || { log_error "jq not found"; exit 1; }
   [ -f "$LIVE" ] || { log_error "live settings.json not found: $LIVE"; exit 1; }
   [ -f "$REPO_REL" ] || { log_error "repo settings.json not found: $REPO_REL"; exit 1; }
+  jq empty "$LIVE" 2>/dev/null || { log_error "invalid JSON: $LIVE"; exit 1; }
+  jq empty "$REPO_REL" 2>/dev/null || { log_error "invalid JSON: $REPO_REL"; exit 1; }
 
   if ! is_drifted; then
     log_info "settings.json は symlink(drift なし)。取り込むものはありません。"; exit 0
@@ -156,7 +162,11 @@ main() {
   log_success "repo に反映しました: ${APPROVED[*]}"
   git --no-pager diff -- "$REPO_REL" || true
 
-  if $EDIT; then "${EDITOR:-vi}" "$REPO_REL"; fi
+  if $EDIT; then
+    local -a editor
+    read -r -a editor <<< "${EDITOR:-vi}"
+    "${editor[@]}" "$REPO_REL"
+  fi
 
   commit_and_push
   $NO_PR && exit 0
