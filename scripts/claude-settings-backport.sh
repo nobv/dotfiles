@@ -149,6 +149,10 @@ main() {
   prepare_branch
 
   apply_keys "$REPO_REL" "$LIVE" "${APPROVED[@]}"
+  if git diff --quiet -- "$REPO_REL"; then
+    log_success "適用後の差分なし(既に反映済み)。取り込むものはありません。"
+    exit 0
+  fi
   log_success "repo に反映しました: ${APPROVED[*]}"
   git --no-pager diff -- "$REPO_REL" || true
 
