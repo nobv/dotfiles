@@ -4,6 +4,10 @@ set -uo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=/dev/null
 source "${HERE}/../claude-settings-backport.sh"   # main ガードにより実行はされない
+# 注意: 上の source で script の `set -euo pipefail` が走り、この harness シェルでも
+# `-e` が有効化される(source によるシェルオプション変更はスコープされない)。以降、
+# 非ゼロを返し得る関数を呼ぶアサーションは必ず `if` / `$(...)` / `&&`・`||` で包むこと。
+# 素の呼び出しが失敗すると PASS=/FAIL= 行も出ずにテスト全体が沈黙終了する。
 
 PASS=0 FAIL=0
 assert_eq() { # actual expected msg
@@ -77,18 +81,19 @@ chmod +x "$stub/gh"
 export GH_LOG="$d/gh.log"; : > "$GH_LOG"
 PATH="$stub:$PATH" BRANCH="chore/claude-settings-backport" open_pr
 assert_eq "$(grep -c '^create ' "$GH_LOG")" "1" "open_pr: calls gh pr create when no PR"
+assert_eq "$(grep -c -- '--base main --head chore/claude-settings-backport' "$GH_LOG")" "1" "open_pr: passes --base main --head BRANCH"
 
 # --- merge_pr: success path ---
 d="$(fixture_dir)"; stub="$d/bin"; mkdir -p "$stub"
 cat > "$stub/gh" <<'SH'
 #!/usr/bin/env bash
-if [ "$1" = "pr" ] && [ "$2" = "merge" ]; then echo "merged" >> "$GH_LOG"; exit 0; fi
+if [ "$1" = "pr" ] && [ "$2" = "merge" ]; then echo "merge $*" >> "$GH_LOG"; exit 0; fi
 exit 0
 SH
 chmod +x "$stub/gh"; export GH_LOG="$d/gh.log"; : > "$GH_LOG"
-PATH="$stub:$PATH" merge_pr && rc=0 || rc=1
+PATH="$stub:$PATH" BRANCH="chore/claude-settings-backport" merge_pr && rc=0 || rc=1
 assert_eq "$rc" "0" "merge_pr: returns 0 on success"
-assert_eq "$(grep -c merged "$GH_LOG")" "1" "merge_pr: calls gh pr merge"
+assert_eq "$(grep -c -- '^merge pr merge chore/claude-settings-backport --merge --delete-branch' "$GH_LOG")" "1" "merge_pr: calls gh pr merge with --merge --delete-branch and BRANCH"
 
 # --- merge_pr: failure falls back to return 0 ---
 cat > "$stub/gh" <<'SH'
@@ -98,7 +103,7 @@ if [ "$1" = "pr" ] && [ "$2" = "view" ]; then echo "https://x/pr/1"; exit 0; fi
 exit 0
 SH
 chmod +x "$stub/gh"
-PATH="$stub:$PATH" merge_pr && rc=0 || rc=1
+PATH="$stub:$PATH" BRANCH="chore/claude-settings-backport" merge_pr && rc=0 || rc=1
 assert_eq "$rc" "0" "merge_pr: returns 0 (fallback) on merge failure"
 
 echo "PASS=$PASS FAIL=$FAIL"; [ "$FAIL" -eq 0 ]
