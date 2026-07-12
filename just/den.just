@@ -5,9 +5,9 @@ set working-directory := '..'
 
 MACHINE := env("DOTFILES_MACHINE", "macbook")
 
-# Local den checkout: DEN_PATH env wins; default derives from the ghq layout
-# (follows GHQ_ROOT wherever it points, no machine-specific path baked in)
-DEN_PATH := env("DEN_PATH", `ghq root` / "github.com/nobv/den")
+# Local den checkout: DEN_PATH env wins; default asks ghq for the repo by
+# name, so host/owner moves and GHQ_ROOT changes need no edit here
+DEN_PATH := env("DEN_PATH", `ghq list --full-path --exact den | head -n1`)
 
 # Push den main, re-pin the den input to the pushed rev, and build to validate
 update:
