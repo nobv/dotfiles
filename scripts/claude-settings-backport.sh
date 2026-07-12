@@ -87,7 +87,6 @@ commit_message() {
 }
 
 prepare_branch() {
-  git fetch origin main --quiet
   if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
     git fetch origin "$BRANCH" --quiet
     git checkout -B "$BRANCH" "origin/$BRANCH" --quiet
@@ -146,12 +145,15 @@ main() {
     log_info "差分候補(--dry-run):"; printf '  - %s\n' "${keys[@]}"; exit 0
   fi
 
+  # 対話プロンプト前に前提を確認して早期失敗させる(gh 不在・オフライン)。
+  if ! $NO_PR; then command -v gh >/dev/null 2>&1 || { log_error "gh not found (needed for PR)"; exit 1; }; fi
+  git fetch origin main --quiet
+
   select_keys "$LIVE" "${keys[@]}"
   if [ "${#APPROVED[@]}" -eq 0 ]; then
     log_info "取り込むキーが選択されませんでした。"; exit 0
   fi
 
-  if ! $NO_PR; then command -v gh >/dev/null 2>&1 || { log_error "gh not found (needed for PR)"; exit 1; }; fi
   prepare_branch
 
   apply_keys "$REPO_REL" "$LIVE" "${APPROVED[@]}"
