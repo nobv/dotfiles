@@ -1,6 +1,14 @@
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
+# See: https://nikitabobko.github.io/AeroSpace/guide#config-version
+config-version = 2
+
+# 'break' is the only workspace AeroSpace itself knows about (see desk-model note
+# below); keep it alive even when it's empty and invisible, matching what
+# config-version = 1 inferred automatically from this file's keybindings.
+persistent-workspaces = ['break']
+
 # Desk model: each desk (domain) owns one AeroSpace workspace, switched exclusively
 # via the desk CLI — never bind desk switching to an AeroSpace key here. A window's
 # default home is its own desk's tiled surface (no on-window-detected rule needed).
