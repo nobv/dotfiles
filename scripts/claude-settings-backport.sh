@@ -111,6 +111,16 @@ open_pr() {
   fi
 }
 
+# PR をマージ。失敗しても PR は残し fatal にしない(--no-merge 相当に退避)。
+merge_pr() {
+  if gh pr merge "$BRANCH" --merge --delete-branch; then
+    log_success "PR をマージしました。"
+  else
+    log_warning "PR マージに失敗。PR を残します: $(gh pr view "$BRANCH" --json url -q .url 2>/dev/null)"
+  fi
+  return 0
+}
+
 main() {
   parse_args "$@"
   command -v jq >/dev/null 2>&1 || { log_error "jq not found"; exit 1; }
@@ -147,7 +157,8 @@ main() {
   commit_and_push
   $NO_PR && exit 0
   open_pr
-  # PR マージは Task 6 で追加
+  $NO_MERGE && { log_success "PR 作成まで完了(--no-merge)。"; exit 0; }
+  merge_pr
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then main "$@"; fi
