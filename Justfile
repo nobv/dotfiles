@@ -2,6 +2,7 @@ mod nix 'just/nix.just'
 mod git 'just/git.just'
 mod apm 'just/apm.just'
 mod claude 'just/claude.just'
+mod den 'just/den.just'
 
 # List all recipes
 default:
