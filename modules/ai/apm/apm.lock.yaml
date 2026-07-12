@@ -1,6 +1,6 @@
 lockfile_version: '1'
-generated_at: '2026-07-05T07:35:45.060433+00:00'
-apm_version: 0.23.1
+generated_at: '2026-07-12T03:23:03.920409+00:00'
+apm_version: 0.24.1
 dependencies:
 - repo_url: anthropics/skills
   name: skills
@@ -27,22 +27,797 @@ dependencies:
   - .agents/skills/webapp-testing
   - .agents/skills/xlsx
   - .claude/skills/algorithmic-art
+  - .claude/skills/algorithmic-art/LICENSE.txt
+  - .claude/skills/algorithmic-art/SKILL.md
+  - .claude/skills/algorithmic-art/templates/generator_template.js
+  - .claude/skills/algorithmic-art/templates/viewer.html
   - .claude/skills/brand-guidelines
+  - .claude/skills/brand-guidelines/LICENSE.txt
+  - .claude/skills/brand-guidelines/SKILL.md
   - .claude/skills/canvas-design
+  - .claude/skills/canvas-design/LICENSE.txt
+  - .claude/skills/canvas-design/SKILL.md
+  - .claude/skills/canvas-design/canvas-fonts/ArsenalSC-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/ArsenalSC-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/BigShoulders-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/BigShoulders-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/BigShoulders-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Boldonse-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/Boldonse-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/BricolageGrotesque-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/BricolageGrotesque-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/BricolageGrotesque-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/CrimsonPro-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/CrimsonPro-Italic.ttf
+  - .claude/skills/canvas-design/canvas-fonts/CrimsonPro-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/CrimsonPro-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/DMMono-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/DMMono-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/EricaOne-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/EricaOne-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/GeistMono-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/GeistMono-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/GeistMono-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Gloock-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/Gloock-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/IBMPlexMono-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/IBMPlexMono-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/IBMPlexMono-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/IBMPlexSerif-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/IBMPlexSerif-BoldItalic.ttf
+  - .claude/skills/canvas-design/canvas-fonts/IBMPlexSerif-Italic.ttf
+  - .claude/skills/canvas-design/canvas-fonts/IBMPlexSerif-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/InstrumentSans-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/InstrumentSans-BoldItalic.ttf
+  - .claude/skills/canvas-design/canvas-fonts/InstrumentSans-Italic.ttf
+  - .claude/skills/canvas-design/canvas-fonts/InstrumentSans-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/InstrumentSans-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/InstrumentSerif-Italic.ttf
+  - .claude/skills/canvas-design/canvas-fonts/InstrumentSerif-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Italiana-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/Italiana-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/JetBrainsMono-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/JetBrainsMono-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/JetBrainsMono-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Jura-Light.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Jura-Medium.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Jura-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/LibreBaskerville-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/LibreBaskerville-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Lora-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Lora-BoldItalic.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Lora-Italic.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Lora-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/Lora-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/NationalPark-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/NationalPark-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/NationalPark-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/NothingYouCouldDo-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/NothingYouCouldDo-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Outfit-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Outfit-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/Outfit-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/PixelifySans-Medium.ttf
+  - .claude/skills/canvas-design/canvas-fonts/PixelifySans-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/PoiretOne-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/PoiretOne-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/RedHatMono-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/RedHatMono-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/RedHatMono-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Silkscreen-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/Silkscreen-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/SmoochSans-Medium.ttf
+  - .claude/skills/canvas-design/canvas-fonts/SmoochSans-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/Tektur-Medium.ttf
+  - .claude/skills/canvas-design/canvas-fonts/Tektur-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/Tektur-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/WorkSans-Bold.ttf
+  - .claude/skills/canvas-design/canvas-fonts/WorkSans-BoldItalic.ttf
+  - .claude/skills/canvas-design/canvas-fonts/WorkSans-Italic.ttf
+  - .claude/skills/canvas-design/canvas-fonts/WorkSans-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/WorkSans-Regular.ttf
+  - .claude/skills/canvas-design/canvas-fonts/YoungSerif-OFL.txt
+  - .claude/skills/canvas-design/canvas-fonts/YoungSerif-Regular.ttf
   - .claude/skills/claude-api
+  - .claude/skills/claude-api/LICENSE.txt
+  - .claude/skills/claude-api/SKILL.md
+  - .claude/skills/claude-api/csharp/claude-api.md
+  - .claude/skills/claude-api/curl/examples.md
+  - .claude/skills/claude-api/curl/managed-agents.md
+  - .claude/skills/claude-api/go/claude-api.md
+  - .claude/skills/claude-api/go/managed-agents/README.md
+  - .claude/skills/claude-api/java/claude-api.md
+  - .claude/skills/claude-api/java/managed-agents/README.md
+  - .claude/skills/claude-api/php/claude-api.md
+  - .claude/skills/claude-api/php/managed-agents/README.md
+  - .claude/skills/claude-api/python/claude-api/README.md
+  - .claude/skills/claude-api/python/claude-api/batches.md
+  - .claude/skills/claude-api/python/claude-api/files-api.md
+  - .claude/skills/claude-api/python/claude-api/streaming.md
+  - .claude/skills/claude-api/python/claude-api/tool-use.md
+  - .claude/skills/claude-api/python/managed-agents/README.md
+  - .claude/skills/claude-api/ruby/claude-api.md
+  - .claude/skills/claude-api/ruby/managed-agents/README.md
+  - .claude/skills/claude-api/shared/agent-design.md
+  - .claude/skills/claude-api/shared/error-codes.md
+  - .claude/skills/claude-api/shared/live-sources.md
+  - .claude/skills/claude-api/shared/managed-agents-api-reference.md
+  - .claude/skills/claude-api/shared/managed-agents-client-patterns.md
+  - .claude/skills/claude-api/shared/managed-agents-core.md
+  - .claude/skills/claude-api/shared/managed-agents-environments.md
+  - .claude/skills/claude-api/shared/managed-agents-events.md
+  - .claude/skills/claude-api/shared/managed-agents-memory.md
+  - .claude/skills/claude-api/shared/managed-agents-multiagent.md
+  - .claude/skills/claude-api/shared/managed-agents-onboarding.md
+  - .claude/skills/claude-api/shared/managed-agents-outcomes.md
+  - .claude/skills/claude-api/shared/managed-agents-overview.md
+  - .claude/skills/claude-api/shared/managed-agents-tools.md
+  - .claude/skills/claude-api/shared/managed-agents-webhooks.md
+  - .claude/skills/claude-api/shared/model-migration.md
+  - .claude/skills/claude-api/shared/models.md
+  - .claude/skills/claude-api/shared/prompt-caching.md
+  - .claude/skills/claude-api/shared/tool-use-concepts.md
+  - .claude/skills/claude-api/typescript/claude-api/README.md
+  - .claude/skills/claude-api/typescript/claude-api/batches.md
+  - .claude/skills/claude-api/typescript/claude-api/files-api.md
+  - .claude/skills/claude-api/typescript/claude-api/streaming.md
+  - .claude/skills/claude-api/typescript/claude-api/tool-use.md
+  - .claude/skills/claude-api/typescript/managed-agents/README.md
   - .claude/skills/doc-coauthoring
+  - .claude/skills/doc-coauthoring/SKILL.md
   - .claude/skills/docx
+  - .claude/skills/docx/LICENSE.txt
+  - .claude/skills/docx/SKILL.md
+  - .claude/skills/docx/scripts/__init__.py
+  - .claude/skills/docx/scripts/accept_changes.py
+  - .claude/skills/docx/scripts/comment.py
+  - .claude/skills/docx/scripts/office/helpers/__init__.py
+  - .claude/skills/docx/scripts/office/helpers/merge_runs.py
+  - .claude/skills/docx/scripts/office/helpers/simplify_redlines.py
+  - .claude/skills/docx/scripts/office/pack.py
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chart.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-main.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-picture.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/pml.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-math.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/sml.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-main.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/wml.xsd
+  - .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/xml.xsd
+  - .claude/skills/docx/scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd
+  - .claude/skills/docx/scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd
+  - .claude/skills/docx/scripts/office/schemas/ecma/fouth-edition/opc-digSig.xsd
+  - .claude/skills/docx/scripts/office/schemas/ecma/fouth-edition/opc-relationships.xsd
+  - .claude/skills/docx/scripts/office/schemas/mce/mc.xsd
+  - .claude/skills/docx/scripts/office/schemas/microsoft/wml-2010.xsd
+  - .claude/skills/docx/scripts/office/schemas/microsoft/wml-2012.xsd
+  - .claude/skills/docx/scripts/office/schemas/microsoft/wml-2018.xsd
+  - .claude/skills/docx/scripts/office/schemas/microsoft/wml-cex-2018.xsd
+  - .claude/skills/docx/scripts/office/schemas/microsoft/wml-cid-2016.xsd
+  - .claude/skills/docx/scripts/office/schemas/microsoft/wml-sdtdatahash-2020.xsd
+  - .claude/skills/docx/scripts/office/schemas/microsoft/wml-symex-2015.xsd
+  - .claude/skills/docx/scripts/office/soffice.py
+  - .claude/skills/docx/scripts/office/unpack.py
+  - .claude/skills/docx/scripts/office/validate.py
+  - .claude/skills/docx/scripts/office/validators/__init__.py
+  - .claude/skills/docx/scripts/office/validators/base.py
+  - .claude/skills/docx/scripts/office/validators/docx.py
+  - .claude/skills/docx/scripts/office/validators/pptx.py
+  - .claude/skills/docx/scripts/office/validators/redlining.py
+  - .claude/skills/docx/scripts/templates/comments.xml
+  - .claude/skills/docx/scripts/templates/commentsExtended.xml
+  - .claude/skills/docx/scripts/templates/commentsExtensible.xml
+  - .claude/skills/docx/scripts/templates/commentsIds.xml
+  - .claude/skills/docx/scripts/templates/people.xml
   - .claude/skills/frontend-design
+  - .claude/skills/frontend-design/LICENSE.txt
+  - .claude/skills/frontend-design/SKILL.md
   - .claude/skills/internal-comms
+  - .claude/skills/internal-comms/LICENSE.txt
+  - .claude/skills/internal-comms/SKILL.md
+  - .claude/skills/internal-comms/examples/3p-updates.md
+  - .claude/skills/internal-comms/examples/company-newsletter.md
+  - .claude/skills/internal-comms/examples/faq-answers.md
+  - .claude/skills/internal-comms/examples/general-comms.md
   - .claude/skills/mcp-builder
+  - .claude/skills/mcp-builder/LICENSE.txt
+  - .claude/skills/mcp-builder/SKILL.md
+  - .claude/skills/mcp-builder/reference/evaluation.md
+  - .claude/skills/mcp-builder/reference/mcp_best_practices.md
+  - .claude/skills/mcp-builder/reference/node_mcp_server.md
+  - .claude/skills/mcp-builder/reference/python_mcp_server.md
+  - .claude/skills/mcp-builder/scripts/connections.py
+  - .claude/skills/mcp-builder/scripts/evaluation.py
+  - .claude/skills/mcp-builder/scripts/example_evaluation.xml
+  - .claude/skills/mcp-builder/scripts/requirements.txt
   - .claude/skills/pdf
+  - .claude/skills/pdf/LICENSE.txt
+  - .claude/skills/pdf/SKILL.md
+  - .claude/skills/pdf/forms.md
+  - .claude/skills/pdf/reference.md
+  - .claude/skills/pdf/scripts/check_bounding_boxes.py
+  - .claude/skills/pdf/scripts/check_fillable_fields.py
+  - .claude/skills/pdf/scripts/convert_pdf_to_images.py
+  - .claude/skills/pdf/scripts/create_validation_image.py
+  - .claude/skills/pdf/scripts/extract_form_field_info.py
+  - .claude/skills/pdf/scripts/extract_form_structure.py
+  - .claude/skills/pdf/scripts/fill_fillable_fields.py
+  - .claude/skills/pdf/scripts/fill_pdf_form_with_annotations.py
   - .claude/skills/pptx
+  - .claude/skills/pptx/LICENSE.txt
+  - .claude/skills/pptx/SKILL.md
+  - .claude/skills/pptx/editing.md
+  - .claude/skills/pptx/pptxgenjs.md
+  - .claude/skills/pptx/scripts/__init__.py
+  - .claude/skills/pptx/scripts/add_slide.py
+  - .claude/skills/pptx/scripts/clean.py
+  - .claude/skills/pptx/scripts/office/helpers/__init__.py
+  - .claude/skills/pptx/scripts/office/helpers/merge_runs.py
+  - .claude/skills/pptx/scripts/office/helpers/simplify_redlines.py
+  - .claude/skills/pptx/scripts/office/pack.py
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chart.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-main.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-picture.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/pml.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-math.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/sml.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-main.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/wml.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/xml.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-digSig.xsd
+  - .claude/skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-relationships.xsd
+  - .claude/skills/pptx/scripts/office/schemas/mce/mc.xsd
+  - .claude/skills/pptx/scripts/office/schemas/microsoft/wml-2010.xsd
+  - .claude/skills/pptx/scripts/office/schemas/microsoft/wml-2012.xsd
+  - .claude/skills/pptx/scripts/office/schemas/microsoft/wml-2018.xsd
+  - .claude/skills/pptx/scripts/office/schemas/microsoft/wml-cex-2018.xsd
+  - .claude/skills/pptx/scripts/office/schemas/microsoft/wml-cid-2016.xsd
+  - .claude/skills/pptx/scripts/office/schemas/microsoft/wml-sdtdatahash-2020.xsd
+  - .claude/skills/pptx/scripts/office/schemas/microsoft/wml-symex-2015.xsd
+  - .claude/skills/pptx/scripts/office/soffice.py
+  - .claude/skills/pptx/scripts/office/unpack.py
+  - .claude/skills/pptx/scripts/office/validate.py
+  - .claude/skills/pptx/scripts/office/validators/__init__.py
+  - .claude/skills/pptx/scripts/office/validators/base.py
+  - .claude/skills/pptx/scripts/office/validators/docx.py
+  - .claude/skills/pptx/scripts/office/validators/pptx.py
+  - .claude/skills/pptx/scripts/office/validators/redlining.py
+  - .claude/skills/pptx/scripts/thumbnail.py
   - .claude/skills/skill-creator
+  - .claude/skills/skill-creator/LICENSE.txt
+  - .claude/skills/skill-creator/SKILL.md
+  - .claude/skills/skill-creator/agents/analyzer.md
+  - .claude/skills/skill-creator/agents/comparator.md
+  - .claude/skills/skill-creator/agents/grader.md
+  - .claude/skills/skill-creator/assets/eval_review.html
+  - .claude/skills/skill-creator/eval-viewer/generate_review.py
+  - .claude/skills/skill-creator/eval-viewer/viewer.html
+  - .claude/skills/skill-creator/references/schemas.md
+  - .claude/skills/skill-creator/scripts/__init__.py
+  - .claude/skills/skill-creator/scripts/aggregate_benchmark.py
+  - .claude/skills/skill-creator/scripts/generate_report.py
+  - .claude/skills/skill-creator/scripts/improve_description.py
+  - .claude/skills/skill-creator/scripts/package_skill.py
+  - .claude/skills/skill-creator/scripts/quick_validate.py
+  - .claude/skills/skill-creator/scripts/run_eval.py
+  - .claude/skills/skill-creator/scripts/run_loop.py
+  - .claude/skills/skill-creator/scripts/utils.py
   - .claude/skills/slack-gif-creator
+  - .claude/skills/slack-gif-creator/LICENSE.txt
+  - .claude/skills/slack-gif-creator/SKILL.md
+  - .claude/skills/slack-gif-creator/core/easing.py
+  - .claude/skills/slack-gif-creator/core/frame_composer.py
+  - .claude/skills/slack-gif-creator/core/gif_builder.py
+  - .claude/skills/slack-gif-creator/core/validators.py
+  - .claude/skills/slack-gif-creator/requirements.txt
   - .claude/skills/theme-factory
+  - .claude/skills/theme-factory/LICENSE.txt
+  - .claude/skills/theme-factory/SKILL.md
+  - .claude/skills/theme-factory/theme-showcase.pdf
+  - .claude/skills/theme-factory/themes/arctic-frost.md
+  - .claude/skills/theme-factory/themes/botanical-garden.md
+  - .claude/skills/theme-factory/themes/desert-rose.md
+  - .claude/skills/theme-factory/themes/forest-canopy.md
+  - .claude/skills/theme-factory/themes/golden-hour.md
+  - .claude/skills/theme-factory/themes/midnight-galaxy.md
+  - .claude/skills/theme-factory/themes/modern-minimalist.md
+  - .claude/skills/theme-factory/themes/ocean-depths.md
+  - .claude/skills/theme-factory/themes/sunset-boulevard.md
+  - .claude/skills/theme-factory/themes/tech-innovation.md
   - .claude/skills/web-artifacts-builder
+  - .claude/skills/web-artifacts-builder/LICENSE.txt
+  - .claude/skills/web-artifacts-builder/SKILL.md
+  - .claude/skills/web-artifacts-builder/scripts/bundle-artifact.sh
+  - .claude/skills/web-artifacts-builder/scripts/init-artifact.sh
+  - .claude/skills/web-artifacts-builder/scripts/shadcn-components.tar.gz
   - .claude/skills/webapp-testing
+  - .claude/skills/webapp-testing/LICENSE.txt
+  - .claude/skills/webapp-testing/SKILL.md
+  - .claude/skills/webapp-testing/examples/console_logging.py
+  - .claude/skills/webapp-testing/examples/element_discovery.py
+  - .claude/skills/webapp-testing/examples/static_html_automation.py
+  - .claude/skills/webapp-testing/scripts/with_server.py
   - .claude/skills/xlsx
+  - .claude/skills/xlsx/LICENSE.txt
+  - .claude/skills/xlsx/SKILL.md
+  - .claude/skills/xlsx/scripts/office/helpers/__init__.py
+  - .claude/skills/xlsx/scripts/office/helpers/merge_runs.py
+  - .claude/skills/xlsx/scripts/office/helpers/simplify_redlines.py
+  - .claude/skills/xlsx/scripts/office/pack.py
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chart.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-main.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-picture.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/pml.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-math.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/sml.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-main.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/wml.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/xml.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ecma/fouth-edition/opc-digSig.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/ecma/fouth-edition/opc-relationships.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/mce/mc.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-2010.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-2012.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-2018.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-cex-2018.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-cid-2016.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-sdtdatahash-2020.xsd
+  - .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-symex-2015.xsd
+  - .claude/skills/xlsx/scripts/office/soffice.py
+  - .claude/skills/xlsx/scripts/office/unpack.py
+  - .claude/skills/xlsx/scripts/office/validate.py
+  - .claude/skills/xlsx/scripts/office/validators/__init__.py
+  - .claude/skills/xlsx/scripts/office/validators/base.py
+  - .claude/skills/xlsx/scripts/office/validators/docx.py
+  - .claude/skills/xlsx/scripts/office/validators/pptx.py
+  - .claude/skills/xlsx/scripts/office/validators/redlining.py
+  - .claude/skills/xlsx/scripts/recalc.py
+  deployed_file_hashes:
+    .claude/skills/algorithmic-art/LICENSE.txt: sha256:bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362
+    .claude/skills/algorithmic-art/SKILL.md: sha256:3bc4092c09804853186524c826bc0621b940bb6122c05b84496dff95388e6eef
+    .claude/skills/algorithmic-art/templates/generator_template.js: sha256:9ee0f1da52ef8f7bbfde1917123654880890d43f2d388642d71eab6dd78f94c4
+    .claude/skills/algorithmic-art/templates/viewer.html: sha256:86c79d7ce97d2599ebe4bd9b97fdeb7295c9d3ed61ceeb513cbe1b2bb5d1ce29
+    .claude/skills/brand-guidelines/LICENSE.txt: sha256:bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362
+    .claude/skills/brand-guidelines/SKILL.md: sha256:1120b3769e2985cefb3d25be981b1f914abeba57ae079b83c20c666c164fa9fe
+    .claude/skills/canvas-design/LICENSE.txt: sha256:bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362
+    .claude/skills/canvas-design/SKILL.md: sha256:a1f288079624402f30682753c1d43920b6664785698d21d3e7aa197450a6448b
+    .claude/skills/canvas-design/canvas-fonts/ArsenalSC-OFL.txt: sha256:8ddd61b18ba2c0d0dbe4a691cf5f1a0673f473d02fa0546e67ee88c006aeff6e
+    .claude/skills/canvas-design/canvas-fonts/ArsenalSC-Regular.ttf: sha256:65e6f89df58f68fd905b3add34a79dd6106aa3b3044df0dad9676fff53d504b9
+    .claude/skills/canvas-design/canvas-fonts/BigShoulders-Bold.ttf: sha256:b43bcd198b9fdf717dd42aa61a34dba32e01aceaeae659d689afd0ca52c37ea2
+    .claude/skills/canvas-design/canvas-fonts/BigShoulders-OFL.txt: sha256:fbc746aabf0eb1847dfd92e2efc4596d79fa897d60b8e64062a22f585508fb3f
+    .claude/skills/canvas-design/canvas-fonts/BigShoulders-Regular.ttf: sha256:18a879fc71978a4447150705caf880a9da3860083c259fd29e6dc03057b6842a
+    .claude/skills/canvas-design/canvas-fonts/Boldonse-OFL.txt: sha256:45cc82ab4032273c0924025ffcf8f0665a68e1a5955e3f7247e5daf1deeb1326
+    .claude/skills/canvas-design/canvas-fonts/Boldonse-Regular.ttf: sha256:cc2e540604565c0f90a7d8d46194a2f42fc9c45512cd2e39bf03b50eb68c35a4
+    .claude/skills/canvas-design/canvas-fonts/BricolageGrotesque-Bold.ttf: sha256:a737b146fe0d77ffe8a86e3cd16700dd431d3b1e420d4fd80e142cd68a1cb50d
+    .claude/skills/canvas-design/canvas-fonts/BricolageGrotesque-OFL.txt: sha256:0e4f4eb8534bc66a76aca13dd19c1f9731b2008866b29ccff182b764649df9b4
+    .claude/skills/canvas-design/canvas-fonts/BricolageGrotesque-Regular.ttf: sha256:972a6d098c9867ae131d0ea99e221e63976b11a19d4b931c2c7ace525674e4f6
+    .claude/skills/canvas-design/canvas-fonts/CrimsonPro-Bold.ttf: sha256:48f191e38355c8db100eb3ce157c20f9302a3b9a37b44a660f77ecfce3986609
+    .claude/skills/canvas-design/canvas-fonts/CrimsonPro-Italic.ttf: sha256:52318db3526b644e6efa60be0b3ca5a50e40fbe8bd026c261e0aa206f0772267
+    .claude/skills/canvas-design/canvas-fonts/CrimsonPro-OFL.txt: sha256:35680d14547b6748b6f362a052a46d22764ce5eccf96e18b74f567bb2ee58114
+    .claude/skills/canvas-design/canvas-fonts/CrimsonPro-Regular.ttf: sha256:48fad08cb1917a7b2f2c6fe5135d6c07743a6663cf7631ec4481108aaf081422
+    .claude/skills/canvas-design/canvas-fonts/DMMono-OFL.txt: sha256:bfe7842fcb88323e2981e24710c25202677385a8c75fb6a87217b275a0247ae3
+    .claude/skills/canvas-design/canvas-fonts/DMMono-Regular.ttf: sha256:f98ada968dc3b6b2c08d3f5caaf266977df0bfe0929372b93df5a06cf2ace450
+    .claude/skills/canvas-design/canvas-fonts/EricaOne-OFL.txt: sha256:e0de629968b52255548d5fafcf30b24ff9edae0eda362380755a75816404d0fa
+    .claude/skills/canvas-design/canvas-fonts/EricaOne-Regular.ttf: sha256:db1d89e80e33a8a01beaaac7a85df582857d24a43f1e181461aa7ff5d701476a
+    .claude/skills/canvas-design/canvas-fonts/GeistMono-Bold.ttf: sha256:75c0828d5c1ee44b9ef9f4df577bf41595ec362e2ea3f1e558590c9e92c7949d
+    .claude/skills/canvas-design/canvas-fonts/GeistMono-OFL.txt: sha256:6a873c900f584109b13ae0aaf81d6e3cf0a68751a216b03f7b6c68d547057bb4
+    .claude/skills/canvas-design/canvas-fonts/GeistMono-Regular.ttf: sha256:a55c1b51cda4afeab9e471e7947b85a20f7c8831d7e6b1470c1b7fbdc0f0f15e
+    .claude/skills/canvas-design/canvas-fonts/Gloock-OFL.txt: sha256:c0a3f3125ac491ef3d1f09f401be4834c646562f647e44f2bcbc49f0466c656d
+    .claude/skills/canvas-design/canvas-fonts/Gloock-Regular.ttf: sha256:e86b4ce66dbd3f1f83eee8db99ec96e0da1128c3f53df0e9b3b7472025dfe960
+    .claude/skills/canvas-design/canvas-fonts/IBMPlexMono-Bold.ttf: sha256:dbd2a2fb024579438d6400a84e57579bfd2dbe67c306c8fd9fde92a61e4f2eea
+    .claude/skills/canvas-design/canvas-fonts/IBMPlexMono-OFL.txt: sha256:5294ce778857e1eb02e830b6ab06435537d38f43055327e73d03a2d4d57d5123
+    .claude/skills/canvas-design/canvas-fonts/IBMPlexMono-Regular.ttf: sha256:ab08018ccd276b79fb2c636bb95b9c543598f9d50505fe92506fcb4dae7810cd
+    .claude/skills/canvas-design/canvas-fonts/IBMPlexSerif-Bold.ttf: sha256:b8d294e9b5c5a0940f167c3ced0f7ef2e3f57082ca3ff096ef30e86e26c1c159
+    .claude/skills/canvas-design/canvas-fonts/IBMPlexSerif-BoldItalic.ttf: sha256:da64b75f4284f53e7b5c71fa190a35b8bf3494fe19f1804c81c3a53340bca570
+    .claude/skills/canvas-design/canvas-fonts/IBMPlexSerif-Italic.ttf: sha256:b11f1048745e715a55c9d837b3f10226ca3d78867b7db7251ddad8f98dcf0f38
+    .claude/skills/canvas-design/canvas-fonts/IBMPlexSerif-Regular.ttf: sha256:77cd233a2af8dc6b1022faea3bb3b01f3c75af68bcf530cb6aeb15982ff3dbb7
+    .claude/skills/canvas-design/canvas-fonts/InstrumentSans-Bold.ttf: sha256:444f85bf1c4b0e1ce1ca624f6be54bcd832207714ccaf4ea99ee531341683bdf
+    .claude/skills/canvas-design/canvas-fonts/InstrumentSans-BoldItalic.ttf: sha256:3762f6cef95d6039489ad5ba5787d4c30f17a1ad01e9ac3c816ed69692722a68
+    .claude/skills/canvas-design/canvas-fonts/InstrumentSans-Italic.ttf: sha256:78e85858e371b2cb4e18f617c10f0f937c0e12a0887ffee98555b24ed305b3a7
+    .claude/skills/canvas-design/canvas-fonts/InstrumentSans-OFL.txt: sha256:bf4dc6d13a8cccd4807133c77a1ee9619a16b92cb23322258725ab6731c2f6e5
+    .claude/skills/canvas-design/canvas-fonts/InstrumentSans-Regular.ttf: sha256:a22cb26e48fd79bcb01bf2fc92d36785474dce36d9c544ab0a8868c2657c4a87
+    .claude/skills/canvas-design/canvas-fonts/InstrumentSerif-Italic.ttf: sha256:9c86e4d5a47b50224a2463a9eca8535835257c8e85c470c2c6b454b1af6f046e
+    .claude/skills/canvas-design/canvas-fonts/InstrumentSerif-Regular.ttf: sha256:56ac3be03ac3ba283196b3e77850ab2ffcf56cfb6fd3212c5620109a972f8c99
+    .claude/skills/canvas-design/canvas-fonts/Italiana-OFL.txt: sha256:8373b11312ace78c4cec2e8f9f6aa9f2330601107dac7bcf899c6f2dbd40c5a5
+    .claude/skills/canvas-design/canvas-fonts/Italiana-Regular.ttf: sha256:15c4dd6ab8cf4a29ba8826f65edcbe2f6c266c557d34d081f25072dfd5605fd2
+    .claude/skills/canvas-design/canvas-fonts/JetBrainsMono-Bold.ttf: sha256:a2349098b9e45419e7bf0e2958d6c4937a049dded37387b08be725be4c7615f3
+    .claude/skills/canvas-design/canvas-fonts/JetBrainsMono-OFL.txt: sha256:a76abf002c49097d146e86740a3105a5d00450b1592e820a1109a8c5680cd697
+    .claude/skills/canvas-design/canvas-fonts/JetBrainsMono-Regular.ttf: sha256:b6b1ff4ddefe36d7f2a6174e1d001cab374e594519ee9049af028d577b64c5f5
+    .claude/skills/canvas-design/canvas-fonts/Jura-Light.ttf: sha256:c891a381df056b2c4dfe85841e911bf45da0890fa21a7b2692cbe5ea1f505e1e
+    .claude/skills/canvas-design/canvas-fonts/Jura-Medium.ttf: sha256:c72965cb732a92872643819fd1734128238583cc36b116313859137a51d3368a
+    .claude/skills/canvas-design/canvas-fonts/Jura-OFL.txt: sha256:eaf9bdb675f6d87e5feb88199ab3ea581d3bd2082f426e384fa9c394576d7260
+    .claude/skills/canvas-design/canvas-fonts/LibreBaskerville-OFL.txt: sha256:55959eef5b0c3b2e3c1c7631b8ff0f9447d75de20f29cfa7db5bcfb026763343
+    .claude/skills/canvas-design/canvas-fonts/LibreBaskerville-Regular.ttf: sha256:2101302538d9e88adb679031c04623e4578b5745e89566284fd2c508d79acae0
+    .claude/skills/canvas-design/canvas-fonts/Lora-Bold.ttf: sha256:7d74015e950c2fb66519c7295b8155621d22200ae2ca2a4c6b43ce3c490cac87
+    .claude/skills/canvas-design/canvas-fonts/Lora-BoldItalic.ttf: sha256:152f87e71f5ddb60d5c57ecd9132807c947e65c42977193c9164e7c5a6690081
+    .claude/skills/canvas-design/canvas-fonts/Lora-Italic.ttf: sha256:be627e595184e8afe521f08da0607eee613f1997d423bc8dadc5798995581377
+    .claude/skills/canvas-design/canvas-fonts/Lora-OFL.txt: sha256:62e37a82d3f1ef2a70712885fa8b3144b65fd144d8e748d6196b690a354d792c
+    .claude/skills/canvas-design/canvas-fonts/Lora-Regular.ttf: sha256:7ed00e7c9cdf16ab7e2fd2361fe45d4f0b61263cd60aae398b27b7ee08108827
+    .claude/skills/canvas-design/canvas-fonts/NationalPark-Bold.ttf: sha256:69ac4c301c4a7233c6e602d12a92c54d7967b575f4449951c45ce773f7acff53
+    .claude/skills/canvas-design/canvas-fonts/NationalPark-OFL.txt: sha256:81c6c71d83b5b45d7344f96df12bb4a2477a5b092a9144757ee1d0f50f855175
+    .claude/skills/canvas-design/canvas-fonts/NationalPark-Regular.ttf: sha256:a477338b7e18308d476650dfe31235ef86a883572665e56ffb5fb80f82009b58
+    .claude/skills/canvas-design/canvas-fonts/NothingYouCouldDo-OFL.txt: sha256:7c2a6970584ddad04919816163746f83b378078015899b18468b40f05e9ce128
+    .claude/skills/canvas-design/canvas-fonts/NothingYouCouldDo-Regular.ttf: sha256:d866f985896d3280f4fce72db7e17302c24a0c1fdb0699b6b5ed3af14f944d57
+    .claude/skills/canvas-design/canvas-fonts/Outfit-Bold.ttf: sha256:6654b93d21301ec61887d3cedd6c11d9df1b1dfb63f9cf45ac7995f6e2235ab1
+    .claude/skills/canvas-design/canvas-fonts/Outfit-OFL.txt: sha256:1945b62cd76da9a3051a1660dde72afaa64ffc2666d30e7a78356d651653ba2f
+    .claude/skills/canvas-design/canvas-fonts/Outfit-Regular.ttf: sha256:f24945365147c9e783e91d8649959b59be6b00c9ee4ecd2f6b33afbb2dd871fe
+    .claude/skills/canvas-design/canvas-fonts/PixelifySans-Medium.ttf: sha256:38397504f71c122b03d234ea6f55118e3d5bdbddffd82bedddbd7755d3b3be82
+    .claude/skills/canvas-design/canvas-fonts/PixelifySans-OFL.txt: sha256:7f54d1d9f1ae1ba9f2722f978145f90324fea34ca3c2304b3a29cfa96ac6037e
+    .claude/skills/canvas-design/canvas-fonts/PoiretOne-OFL.txt: sha256:2eaf541f7eb8b512e4c757a5212060abf5b6edfef230e9d7640bf736b315c33a
+    .claude/skills/canvas-design/canvas-fonts/PoiretOne-Regular.ttf: sha256:9cf265b139648b36b6c0afdfeb0bf27f7e66db9a16094bc40f644d8da05bc318
+    .claude/skills/canvas-design/canvas-fonts/RedHatMono-Bold.ttf: sha256:7ef48353f4be5ddb90f000f6fad48f2b62b3e8c27d9818d8d45ff46c201065e0
+    .claude/skills/canvas-design/canvas-fonts/RedHatMono-OFL.txt: sha256:435fbfb7e66988b2a06686a4cb966faec733f35d8fe100a1601573c27f3e0bb8
+    .claude/skills/canvas-design/canvas-fonts/RedHatMono-Regular.ttf: sha256:452fe826871b37539f5212b20c87cf30f82f58dd2741f1c96edd1dcbdc0db6b4
+    .claude/skills/canvas-design/canvas-fonts/Silkscreen-OFL.txt: sha256:6b849745119bbe85ec01fd080c9cd50234da9f52ac6e48b55d1a424a0c4d7ca9
+    .claude/skills/canvas-design/canvas-fonts/Silkscreen-Regular.ttf: sha256:49567408600809e25147e9225ac4f37f410e2df45a750696c45027531fb65f1b
+    .claude/skills/canvas-design/canvas-fonts/SmoochSans-Medium.ttf: sha256:dd76e6e77cce82f827a8654cd906e9ce58f3aaf78adda63c4a7f655b8ecb41f0
+    .claude/skills/canvas-design/canvas-fonts/SmoochSans-OFL.txt: sha256:74c9c4eb88e891483e1b7bc54780b452cbf4f4df66d4e71881d7569aa2130749
+    .claude/skills/canvas-design/canvas-fonts/Tektur-Medium.ttf: sha256:52bbe8c9b057b3d2da4eeace31a524b1ea26a1375ae34319cf6900ccc57a4c82
+    .claude/skills/canvas-design/canvas-fonts/Tektur-OFL.txt: sha256:3f1466cb5438f31782eeb6e895f3a655bc4d090e24263e331f555357d1cb734e
+    .claude/skills/canvas-design/canvas-fonts/Tektur-Regular.ttf: sha256:162e1b36c4718c5b051b36c971ad7e50d341944f35618f480422ebbe72988f98
+    .claude/skills/canvas-design/canvas-fonts/WorkSans-Bold.ttf: sha256:240d125fc9f8561363dc1ea3f513501253bd70942f41468f48f0b0cafb0c82e2
+    .claude/skills/canvas-design/canvas-fonts/WorkSans-BoldItalic.ttf: sha256:a5b2cad813df0aaa7d16621f2e93b5117c25e9bc788bc9a3ad218e9d6348ce34
+    .claude/skills/canvas-design/canvas-fonts/WorkSans-Italic.ttf: sha256:6b7f7002e0b0c8b261fe878658ef5551e3e59d9f6b609b04efb90dde1e2c1ada
+    .claude/skills/canvas-design/canvas-fonts/WorkSans-OFL.txt: sha256:ace8c22a3326318b54e67c3691857929634205533f454a70ef5a3473ddb2e2ba
+    .claude/skills/canvas-design/canvas-fonts/WorkSans-Regular.ttf: sha256:e67985a843df0d3cdee51a3d0f329eb1774a344ad9ff0c9ab923751f1577e2a4
+    .claude/skills/canvas-design/canvas-fonts/YoungSerif-OFL.txt: sha256:cdcb8039606b40a027a6d24586ec62d5fe29c701343d82a048c829cb28a3dd28
+    .claude/skills/canvas-design/canvas-fonts/YoungSerif-Regular.ttf: sha256:f8dc08f77abad753a00670af70756a8ace938e5c3f0b770f4f4c2071c4bd8fc6
+    .claude/skills/claude-api/LICENSE.txt: sha256:bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362
+    .claude/skills/claude-api/SKILL.md: sha256:617512252b92969fbbe71cb0bc5f18641e1b8ee00a799cd3276a0f28f7a2e017
+    .claude/skills/claude-api/csharp/claude-api.md: sha256:c17ddeb20330f54d8fbf9af3e1225ab0370396b86d211cf71b1f8a5008c39e5f
+    .claude/skills/claude-api/curl/examples.md: sha256:fa77288bc86b055868d8934d2b81a8fb4da783241bc7dd0c15a5b55e3d0570cb
+    .claude/skills/claude-api/curl/managed-agents.md: sha256:e383f71c696d7ee55437cc743e657fe31483bca5e71a5d404ac7c65b045d5dba
+    .claude/skills/claude-api/go/claude-api.md: sha256:79730feb26fde385d351e269ff5dec022e9d2f88f1b94230c48b18db1b3e1a9b
+    .claude/skills/claude-api/go/managed-agents/README.md: sha256:127a472f2d97a34edd096cbaa864ce49912f6cef0477b892b819ea5467457a9d
+    .claude/skills/claude-api/java/claude-api.md: sha256:631e1014b2e5994c74994b6e5f9694c4e059375d1692eca233af49134fb613cc
+    .claude/skills/claude-api/java/managed-agents/README.md: sha256:a58bf7306937bd17cc1d344043235d5004ef4524bf14a063027c7c395784efc5
+    .claude/skills/claude-api/php/claude-api.md: sha256:bfe37758d6ad0edaf0e3328347742e88990646cb11d8cf22e74dcbd9b82db020
+    .claude/skills/claude-api/php/managed-agents/README.md: sha256:e9cf486cd1ecb738b34c3c720392e9d8448c7f520932875314a3395a4c781c87
+    .claude/skills/claude-api/python/claude-api/README.md: sha256:0791f8bcdd080d1aea992620a477006d5e722ebb5649f31841a8e6a9e6b51dd4
+    .claude/skills/claude-api/python/claude-api/batches.md: sha256:b7c22eade4ffbbb92cf1dca1760904d6bd35c1b26e3c2e512c8d5f0ab895c728
+    .claude/skills/claude-api/python/claude-api/files-api.md: sha256:76d5f216111559a386bb1257cef82d147a9182a3559e143d7b00004dbdc60469
+    .claude/skills/claude-api/python/claude-api/streaming.md: sha256:0293136bfee6cf09d9eca79c15f48aad3a3075bc0cab5c9d72f81582ec3d7232
+    .claude/skills/claude-api/python/claude-api/tool-use.md: sha256:ea3ce9e218176fa78790cd37b8a6ff01d7f6b2bd3cb282bd5d2d0b91a44822c6
+    .claude/skills/claude-api/python/managed-agents/README.md: sha256:008a5c11226dc071c110b84b75177540d9bb9a58ef15994b3a784d3db1722200
+    .claude/skills/claude-api/ruby/claude-api.md: sha256:91819394c0c6929a2612ea9ba28d3843d31b9938be6f6eba08ffe5169740d0c1
+    .claude/skills/claude-api/ruby/managed-agents/README.md: sha256:0ecda024060a4d229a98843566144a7b8bca3ad665423f9b17989fc669f17946
+    .claude/skills/claude-api/shared/agent-design.md: sha256:4801b81580e1251c0df809da9647b05b6e30513014f439f814caccfb7750e8a4
+    .claude/skills/claude-api/shared/error-codes.md: sha256:fbfefc37fe4a89bc4af3ffc6bf204c4163297f115827a937e8ce2ad093ff0988
+    .claude/skills/claude-api/shared/live-sources.md: sha256:377a6774ca00191e114aeff763bfc5c36871122452a5d9ba40e44a128e861096
+    .claude/skills/claude-api/shared/managed-agents-api-reference.md: sha256:c8ea216815a9e616189ac81a892f006094f32335211ec781e5985799f32e9df3
+    .claude/skills/claude-api/shared/managed-agents-client-patterns.md: sha256:8fff1efb9c21f214a5597586b24e42c74ba680a4e90a98d6c291df1eaa880a64
+    .claude/skills/claude-api/shared/managed-agents-core.md: sha256:c4c9bca6bb8f0ca4e9dfeb7802a63d394bf292a01dc72b3ba4dea141e9bf86bb
+    .claude/skills/claude-api/shared/managed-agents-environments.md: sha256:7524862b02fc0c49c98ee46e800029491c5af2cac9abcd4369bbff322e512a1c
+    .claude/skills/claude-api/shared/managed-agents-events.md: sha256:925de73f0b239811fa220462ecd621a579f8fef3b24fa90bc0e1b354e537f154
+    .claude/skills/claude-api/shared/managed-agents-memory.md: sha256:1c2825364115ccf9d0a779447336764ebbaaf875f79c2a064075ca9235d16c16
+    .claude/skills/claude-api/shared/managed-agents-multiagent.md: sha256:febbd902aeae3e7763cdb84df04d35d2b954c0c935f840dec36f9db5e1d36fae
+    .claude/skills/claude-api/shared/managed-agents-onboarding.md: sha256:3936f4af7922a160042e221c6c1caf079acf4d7b21b44c2be0cae693310afb39
+    .claude/skills/claude-api/shared/managed-agents-outcomes.md: sha256:bf195965dca27a07a996c66df16ccb62c745dd000039f1f364b8a4e75dd73b96
+    .claude/skills/claude-api/shared/managed-agents-overview.md: sha256:b2a92a7a156082592ec00ba5c9f6c8b2d753301744c8a4d7486bb1313b54e75e
+    .claude/skills/claude-api/shared/managed-agents-tools.md: sha256:ac586e9b199c2df2d30daba86980d1c21ebb0f61dd99b7cc2727596ca214af6a
+    .claude/skills/claude-api/shared/managed-agents-webhooks.md: sha256:6fa05e6f8ae950e164d06990de1b3f69ddc7cbc744e404a32ffd7f556ac8f64e
+    .claude/skills/claude-api/shared/model-migration.md: sha256:769f3c4bf7debc03ca349e858d1e0652c28d51dbb956bd2d56c14eaa6a69acaa
+    .claude/skills/claude-api/shared/models.md: sha256:0d08f60e064e104d537d66181e50c692343fbd3a4a19cd9946ff0bb557709dcc
+    .claude/skills/claude-api/shared/prompt-caching.md: sha256:1ed4b531b10dfb65b85e967045c7ed704dd36b2113a8c5b4f94d2ed0631891e3
+    .claude/skills/claude-api/shared/tool-use-concepts.md: sha256:1f4f1c4e0a87d911139ebf01b4d5f97839df327e22abd0e8d0854acadeff77fd
+    .claude/skills/claude-api/typescript/claude-api/README.md: sha256:b6a7db2c213419a4bba7217642b51ecd4655a1b59d2aa29a36dd861ac1611bb9
+    .claude/skills/claude-api/typescript/claude-api/batches.md: sha256:706af0ee8c62f45cc9696bbe7cc81a35f6df636c3a877215864b32c418a3e136
+    .claude/skills/claude-api/typescript/claude-api/files-api.md: sha256:8b43d5583490d5bf340e48acee0c4fb5fb43b7da00fe3c41c93e2048eab595fb
+    .claude/skills/claude-api/typescript/claude-api/streaming.md: sha256:92813bdc545b87599c04853cbd4a2f5204693f8cc07996be9b6570e2a662cad5
+    .claude/skills/claude-api/typescript/claude-api/tool-use.md: sha256:636e5ad9826aef67fea9e2aea86ae48cfa54532eedaa37171dc1f9d401469f11
+    .claude/skills/claude-api/typescript/managed-agents/README.md: sha256:45f7466eaf2c110969bd584a51f580245c088739d7b02c986db19a2874a000dc
+    .claude/skills/doc-coauthoring/SKILL.md: sha256:2e47d78846faeea4a56e9809c52700087a15a2155a3f293a3efbaded81398ef4
+    .claude/skills/docx/LICENSE.txt: sha256:79f6d8f5b427252fa3b1c11ecdbdb6bf610b944f7530b4de78f770f38741cfaa
+    .claude/skills/docx/SKILL.md: sha256:cfbabd72b1aec7dfaad988fb6e5e16b27dc744b9a00cae15db9045e95f53903e
+    .claude/skills/docx/scripts/__init__.py: sha256:01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b
+    .claude/skills/docx/scripts/accept_changes.py: sha256:0c991d2bc7304a1248e9f3bf9b1498f0b6e76641fc457e7cbd73c99b4eef3a74
+    .claude/skills/docx/scripts/comment.py: sha256:e86e4e17ec5805780325206d20d3ed5a8f7024f1e4641ac8f46ef5df0b564f63
+    .claude/skills/docx/scripts/office/helpers/__init__.py: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    .claude/skills/docx/scripts/office/helpers/merge_runs.py: sha256:7c40ed838b88639c51f9ffdcfd564b568f26832b78fe44008c0e01b742669ca7
+    .claude/skills/docx/scripts/office/helpers/simplify_redlines.py: sha256:560cb55978a834c505406eb18e2c61f62f998fc7a2d8e9721b9c563b42597896
+    .claude/skills/docx/scripts/office/pack.py: sha256:b1800987e568261a31f462df8e1303d386e9e6ccc11a75ef46e60cc528c20683
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chart.xsd: sha256:41b93bd8857cc68b1e43be2806a872d736a9bdd6566900062d8fdb57d7bbb354
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd: sha256:3fd0586f2637b98bb9886f0e0b67d89e1cc987c2d158cc7deb5f5b9890ced412
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd: sha256:29b254ee0d10414a8504b5a08149c7baec35a60d5ff607d6b3f492aa36815f40
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd: sha256:5cb76dabd8b97d1e9308a1700b90c20139be4d50792d21a7f09789f5cccd6026
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-main.xsd: sha256:5375417f0f5394b8dd1a7035b9679151f19a6b65df309dec10cfb4a420cb00e9
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-picture.xsd: sha256:5d389d42befbebd91945d620242347caecd3367f9a3a7cf8d97949507ae1f53c
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd: sha256:b4532b6d258832953fbb3ee4c711f4fe25d3faf46a10644b2505f17010d01e88
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd: sha256:bdad416b096b61d37b71603b2c949484f9070c830bdaeba93bf35e15c8900614
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/pml.xsd: sha256:d173c3e5d61e42e2e3a97226c632fd2ab7cc481fc4e492365b87024ab546daff
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd: sha256:3c6709101c6aaa82888df5d8795c33f9e857196790eb320d9194e64be2b6bdd8
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd: sha256:0b364451dc36a48dd6dae0f3b6ada05fd9b71e5208211f8ee5537d7e51a587e2
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd: sha256:e2abacbb9a55ce1365f8961bc1b1395bbc811e512b111000d8c333f98458dece
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd: sha256:0ef4bb354ff44b923564c4ddbdda5987919d220225129ec94614a618ceafc281
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd: sha256:0d103b99a4a8652f8871552a69d42d2a3760ac6a5e3ef02d979c4273257ff6a4
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd: sha256:9c085407751b9061c1f996f6c39ce58451be22a8d334f09175f0e89e42736285
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd: sha256:bc92e36ccd233722d4c5869bec71ddc7b12e2df56059942cce5a39065cc9c368
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd: sha256:7b5b7413e2c895b1e148e82e292a117d53c7ec65b0696c992edca57b61b4a74b
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-math.xsd: sha256:3213ef1631606250f5010b42cad7ef716f7c59426367798e33c374c0ec391d3a
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd: sha256:12264f3c03d738311cd9237d212f1c07479e70f0cbe1ae725d29b36539aef637
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/sml.xsd: sha256:beffeed56945c22a77440122c8bdc426f3fcbe7f3b12ea0976c770d1f8d54578
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-main.xsd: sha256:f5ee623b08b6a66935e5aced2f5d8ad0fc71bf9e8e833cd490150c0fa94b8763
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd: sha256:585bedc1313b40888dcc544cb74cd939a105ee674f3b1d3aa1cc6d34f70ff155
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd: sha256:133c9f64a5c5d573b78d0a474122b22506d8eadb5e063f67cdbbb8fa2f161d0e
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd: sha256:6bdeb169c3717eb01108853bd9fc5a3750fb1fa5b82abbdd854d49855a40f519
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd: sha256:475dcae1e7d1ea46232db6f8481040c15e53a52a3c256831d3df204212b0e831
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/wml.xsd: sha256:c2dd9f61f892deae6acd8d20771ea79b12018af25f3bf8d06639c8542d218cfd
+    .claude/skills/docx/scripts/office/schemas/ISO-IEC29500-4_2016/xml.xsd: sha256:a539aa2fb154fa50e0f5cc97e6ad7cbc66f8ec3e3746f61ec6a8b0d5d15ecdf2
+    .claude/skills/docx/scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd: sha256:9e0b7209fc69ab11987900404540969976000c5ebe4d4f58c43dc3842886bf3a
+    .claude/skills/docx/scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd: sha256:451958454e8588dfc7cd945981ada142ca06ff3307937f5700df059c2b307fa8
+    .claude/skills/docx/scripts/office/schemas/ecma/fouth-edition/opc-digSig.xsd: sha256:6de111e11403f7cd49027400755bae0ea1cabef2815f09bd40a24f0017613b24
+    .claude/skills/docx/scripts/office/schemas/ecma/fouth-edition/opc-relationships.xsd: sha256:f565adfef5a502044abc3a9153e157edc25af78304d335994afb958874b15e26
+    .claude/skills/docx/scripts/office/schemas/mce/mc.xsd: sha256:3a37e461ecf5a8670fdec34029703401f8728ab9c96ec1739a6ae58d55212413
+    .claude/skills/docx/scripts/office/schemas/microsoft/wml-2010.xsd: sha256:568b26ee156cb9549aa439ca2158965f77b7c1602b7e0316f40ac6cf586e35f2
+    .claude/skills/docx/scripts/office/schemas/microsoft/wml-2012.xsd: sha256:0fa75578a000439a7988ba0c59fdc69f774bbd416cbacc14d07125b3f686cb74
+    .claude/skills/docx/scripts/office/schemas/microsoft/wml-2018.xsd: sha256:be0ff793a22dd31384650c3a4da14c2fa8062751c2e97b0e5ee852bda13c60ad
+    .claude/skills/docx/scripts/office/schemas/microsoft/wml-cex-2018.xsd: sha256:fddc2b880cabb9005aebbc7e783e53c19fec1c03df7d0e2f2076a33a0fdfd081
+    .claude/skills/docx/scripts/office/schemas/microsoft/wml-cid-2016.xsd: sha256:127ca209fa73d7cb708449cb355c871867948a96e4a74f7bf5811ef62d17991d
+    .claude/skills/docx/scripts/office/schemas/microsoft/wml-sdtdatahash-2020.xsd: sha256:842e7163409c8d74f4d7088a8bc99500d80bc75332681a0980055b08f374a604
+    .claude/skills/docx/scripts/office/schemas/microsoft/wml-symex-2015.xsd: sha256:16f6f8072249f431370723c2cd8974672e0d9c897e00e97dd918079df934871b
+    .claude/skills/docx/scripts/office/soffice.py: sha256:a3e21840e29e32f947d5286028931b96eaf2dee63f75d883b8eb19c943c80aa0
+    .claude/skills/docx/scripts/office/unpack.py: sha256:83f69cecc87910183654c06345837244402e8a99edbf3bdddc1cf72f11304b62
+    .claude/skills/docx/scripts/office/validate.py: sha256:1aef24f8e316965a0584c30859776bd2c82a9fb69f72d79cfed041119cf95514
+    .claude/skills/docx/scripts/office/validators/__init__.py: sha256:83e0f035c5abea238d3f2c3968afbd511ed022b527b7c9cb60a9434cc34ff987
+    .claude/skills/docx/scripts/office/validators/base.py: sha256:d6358b67252df4dbfe4fa6647423a765960c949346ef6a8c4eb8722bb1108d25
+    .claude/skills/docx/scripts/office/validators/docx.py: sha256:0ef04ce86b2e6b6a1cb088c0276fd0bd5b770d96fdfe7a6cc73d005feb3f0345
+    .claude/skills/docx/scripts/office/validators/pptx.py: sha256:f937961e62a5fa0d002b8dc51a4c4e2cd8fcd59fe65853fa54edaca3fe99eccc
+    .claude/skills/docx/scripts/office/validators/redlining.py: sha256:f4c33fdb9da0651d1d9aa76f0d5294cc9955869339ae131b2f75f3b2e366cb40
+    .claude/skills/docx/scripts/templates/comments.xml: sha256:a08ba83ee8790ac9e3dc61921f4988f19edd7e06ac09d6f1897a877c1581818d
+    .claude/skills/docx/scripts/templates/commentsExtended.xml: sha256:544eeecfeceed4b468fff163cd9c366d33641c8b8ab691ce002576197846afe8
+    .claude/skills/docx/scripts/templates/commentsExtensible.xml: sha256:bad10b3283e6ad6e7ef6d1ca5169683721ed690ee331282c65df04017e080631
+    .claude/skills/docx/scripts/templates/commentsIds.xml: sha256:db20f9616e004ec42ef736e80c2384e45db0f8d1194d31dc8b37c7d6ecdd6420
+    .claude/skills/docx/scripts/templates/people.xml: sha256:056f63aa1197fd8c9dda980c9f1b9ff016fd5fa4a462df8aec5f384f39d23e37
+    .claude/skills/frontend-design/LICENSE.txt: sha256:0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594
+    .claude/skills/frontend-design/SKILL.md: sha256:b81e2ff87ed8fa4d6c377ccb127a7254c9e6a77e3ae94f21e6b514f7bb2945a0
+    .claude/skills/internal-comms/LICENSE.txt: sha256:bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362
+    .claude/skills/internal-comms/SKILL.md: sha256:067b7587a344a928fc6534ef66b1bcd591fc7c26d207ea7ca3334aeb678d6475
+    .claude/skills/internal-comms/examples/3p-updates.md: sha256:087e4363c0f3513728a7e695eeb9ead5c3ecd12a4681b59340691180e65b68fc
+    .claude/skills/internal-comms/examples/company-newsletter.md: sha256:30f81cfbdb03858a006169c72169024089c7c5d3d32611d337782da4f38c86b5
+    .claude/skills/internal-comms/examples/faq-answers.md: sha256:5ecd3356cd6666937f2ebefa753253edfdbdca15e368d07baf398bfcced72484
+    .claude/skills/internal-comms/examples/general-comms.md: sha256:4d3a4bb198a77626bcf018e96b2b45a2dbabed172d4ade0fcd70d23ae8a47a47
+    .claude/skills/mcp-builder/LICENSE.txt: sha256:bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362
+    .claude/skills/mcp-builder/SKILL.md: sha256:0f4592dcb53cf2b5d6b7febee6b4152018b565551a1c29e3c612f57b218ab295
+    .claude/skills/mcp-builder/reference/evaluation.md: sha256:8c99479f8a2d22a636c38e274537aac3610879e26f34e0709825077c4576f427
+    .claude/skills/mcp-builder/reference/mcp_best_practices.md: sha256:80fb4369a349447cf18ecdd7494fe7938b6065377e9f08c077cec411093a3007
+    .claude/skills/mcp-builder/reference/node_mcp_server.md: sha256:c3ba35a4f599dd53be9c6555ae72c19a7bf412cd5426576c2c08d42755482c66
+    .claude/skills/mcp-builder/reference/python_mcp_server.md: sha256:2da52f77e675191014ca2e146a4b95aa04d0ca7dd7e2b100322df15ade685e80
+    .claude/skills/mcp-builder/scripts/connections.py: sha256:9403668a2041568772082a8b334122c1f88daf0541fb393af4522d0094a47a6e
+    .claude/skills/mcp-builder/scripts/evaluation.py: sha256:49ed1d17cdce5da101b210197740713f49b935c29d4f339542a14b132658e6f7
+    .claude/skills/mcp-builder/scripts/example_evaluation.xml: sha256:9272b348ddcc4b06ba562367ccd0770e018158c0068ac5116d5e34aaeff8777a
+    .claude/skills/mcp-builder/scripts/requirements.txt: sha256:d5d7558b2368ecea9dfeed7d1fbc71ee9e0750bebd1282faa527d528a344c3c7
+    .claude/skills/pdf/LICENSE.txt: sha256:79f6d8f5b427252fa3b1c11ecdbdb6bf610b944f7530b4de78f770f38741cfaa
+    .claude/skills/pdf/SKILL.md: sha256:9f78b8359fbd4943ad260a7a1e436e5a96503406d6c34e99f69223d647d85b9c
+    .claude/skills/pdf/forms.md: sha256:9530b3f57034792e0242a3abfe8b3c296466329551916f2ff6c5a70db78f7e44
+    .claude/skills/pdf/reference.md: sha256:03a5f964f8abecbbe156f363356e927e864d7ee964f1012c84ee1bfc8acbeb95
+    .claude/skills/pdf/scripts/check_bounding_boxes.py: sha256:0ced522402dd7b3c82a0be9518cf4e485fa9cc0467d7beab6ddb04cb36fcc3e1
+    .claude/skills/pdf/scripts/check_fillable_fields.py: sha256:1fe10b9980a5493c9bbec8c20630c603eaa475b45403751c08f26738736647b8
+    .claude/skills/pdf/scripts/convert_pdf_to_images.py: sha256:7f58e292a67e18a8ff000d30bad2469389546731f7e8a698cc1d0aed001ea15d
+    .claude/skills/pdf/scripts/create_validation_image.py: sha256:8fa9fd7962c9f940045b81cf6b991e7c1057c1838e3f9cc6d305007a222ffebf
+    .claude/skills/pdf/scripts/extract_form_field_info.py: sha256:bb235b36f497bbb1c7c6821cecf527bbba7213520de11219da99f7b13a38c109
+    .claude/skills/pdf/scripts/extract_form_structure.py: sha256:6814e3fe8f78c2b16d766c132b5a727ff7a31b71d76a7d46bd6e40fe50bc97c5
+    .claude/skills/pdf/scripts/fill_fillable_fields.py: sha256:d140872c2e92e41b1e05370ae8d270c5b7f5ebdf55d9905f03bc974a9c708ff5
+    .claude/skills/pdf/scripts/fill_pdf_form_with_annotations.py: sha256:8a56e063a49ed53c0b0e1d312ecf8023af76816ed139486ec3b539873de202fd
+    .claude/skills/pptx/LICENSE.txt: sha256:79f6d8f5b427252fa3b1c11ecdbdb6bf610b944f7530b4de78f770f38741cfaa
+    .claude/skills/pptx/SKILL.md: sha256:e5b0df918cbe9d62508b3cf808d73899633f82fc19f6258a25ef9f0de7e62125
+    .claude/skills/pptx/editing.md: sha256:6cb47c3ab17e60b7de37e83131c409ef5a90a01bfb54e999905a9c9f7dd88e68
+    .claude/skills/pptx/pptxgenjs.md: sha256:9539534d92b7170813b735a448750df3580390da2da6c52a02b687ed53ecba86
+    .claude/skills/pptx/scripts/__init__.py: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    .claude/skills/pptx/scripts/add_slide.py: sha256:04233ba3932c6b8611677347891616456e243cc09b7f9769408b8c83d9acfe64
+    .claude/skills/pptx/scripts/clean.py: sha256:3e3966a17f488a1ddc7145f0b7ec9f25595afa1f3a427ab05e610f1a328feea9
+    .claude/skills/pptx/scripts/office/helpers/__init__.py: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    .claude/skills/pptx/scripts/office/helpers/merge_runs.py: sha256:7c40ed838b88639c51f9ffdcfd564b568f26832b78fe44008c0e01b742669ca7
+    .claude/skills/pptx/scripts/office/helpers/simplify_redlines.py: sha256:560cb55978a834c505406eb18e2c61f62f998fc7a2d8e9721b9c563b42597896
+    .claude/skills/pptx/scripts/office/pack.py: sha256:b1800987e568261a31f462df8e1303d386e9e6ccc11a75ef46e60cc528c20683
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chart.xsd: sha256:41b93bd8857cc68b1e43be2806a872d736a9bdd6566900062d8fdb57d7bbb354
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd: sha256:3fd0586f2637b98bb9886f0e0b67d89e1cc987c2d158cc7deb5f5b9890ced412
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd: sha256:29b254ee0d10414a8504b5a08149c7baec35a60d5ff607d6b3f492aa36815f40
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd: sha256:5cb76dabd8b97d1e9308a1700b90c20139be4d50792d21a7f09789f5cccd6026
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-main.xsd: sha256:5375417f0f5394b8dd1a7035b9679151f19a6b65df309dec10cfb4a420cb00e9
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-picture.xsd: sha256:5d389d42befbebd91945d620242347caecd3367f9a3a7cf8d97949507ae1f53c
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd: sha256:b4532b6d258832953fbb3ee4c711f4fe25d3faf46a10644b2505f17010d01e88
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd: sha256:bdad416b096b61d37b71603b2c949484f9070c830bdaeba93bf35e15c8900614
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/pml.xsd: sha256:d173c3e5d61e42e2e3a97226c632fd2ab7cc481fc4e492365b87024ab546daff
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd: sha256:3c6709101c6aaa82888df5d8795c33f9e857196790eb320d9194e64be2b6bdd8
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd: sha256:0b364451dc36a48dd6dae0f3b6ada05fd9b71e5208211f8ee5537d7e51a587e2
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd: sha256:e2abacbb9a55ce1365f8961bc1b1395bbc811e512b111000d8c333f98458dece
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd: sha256:0ef4bb354ff44b923564c4ddbdda5987919d220225129ec94614a618ceafc281
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd: sha256:0d103b99a4a8652f8871552a69d42d2a3760ac6a5e3ef02d979c4273257ff6a4
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd: sha256:9c085407751b9061c1f996f6c39ce58451be22a8d334f09175f0e89e42736285
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd: sha256:bc92e36ccd233722d4c5869bec71ddc7b12e2df56059942cce5a39065cc9c368
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd: sha256:7b5b7413e2c895b1e148e82e292a117d53c7ec65b0696c992edca57b61b4a74b
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-math.xsd: sha256:3213ef1631606250f5010b42cad7ef716f7c59426367798e33c374c0ec391d3a
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd: sha256:12264f3c03d738311cd9237d212f1c07479e70f0cbe1ae725d29b36539aef637
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/sml.xsd: sha256:beffeed56945c22a77440122c8bdc426f3fcbe7f3b12ea0976c770d1f8d54578
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-main.xsd: sha256:f5ee623b08b6a66935e5aced2f5d8ad0fc71bf9e8e833cd490150c0fa94b8763
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd: sha256:585bedc1313b40888dcc544cb74cd939a105ee674f3b1d3aa1cc6d34f70ff155
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd: sha256:133c9f64a5c5d573b78d0a474122b22506d8eadb5e063f67cdbbb8fa2f161d0e
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd: sha256:6bdeb169c3717eb01108853bd9fc5a3750fb1fa5b82abbdd854d49855a40f519
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd: sha256:475dcae1e7d1ea46232db6f8481040c15e53a52a3c256831d3df204212b0e831
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/wml.xsd: sha256:c2dd9f61f892deae6acd8d20771ea79b12018af25f3bf8d06639c8542d218cfd
+    .claude/skills/pptx/scripts/office/schemas/ISO-IEC29500-4_2016/xml.xsd: sha256:a539aa2fb154fa50e0f5cc97e6ad7cbc66f8ec3e3746f61ec6a8b0d5d15ecdf2
+    .claude/skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd: sha256:9e0b7209fc69ab11987900404540969976000c5ebe4d4f58c43dc3842886bf3a
+    .claude/skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd: sha256:451958454e8588dfc7cd945981ada142ca06ff3307937f5700df059c2b307fa8
+    .claude/skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-digSig.xsd: sha256:6de111e11403f7cd49027400755bae0ea1cabef2815f09bd40a24f0017613b24
+    .claude/skills/pptx/scripts/office/schemas/ecma/fouth-edition/opc-relationships.xsd: sha256:f565adfef5a502044abc3a9153e157edc25af78304d335994afb958874b15e26
+    .claude/skills/pptx/scripts/office/schemas/mce/mc.xsd: sha256:3a37e461ecf5a8670fdec34029703401f8728ab9c96ec1739a6ae58d55212413
+    .claude/skills/pptx/scripts/office/schemas/microsoft/wml-2010.xsd: sha256:568b26ee156cb9549aa439ca2158965f77b7c1602b7e0316f40ac6cf586e35f2
+    .claude/skills/pptx/scripts/office/schemas/microsoft/wml-2012.xsd: sha256:0fa75578a000439a7988ba0c59fdc69f774bbd416cbacc14d07125b3f686cb74
+    .claude/skills/pptx/scripts/office/schemas/microsoft/wml-2018.xsd: sha256:be0ff793a22dd31384650c3a4da14c2fa8062751c2e97b0e5ee852bda13c60ad
+    .claude/skills/pptx/scripts/office/schemas/microsoft/wml-cex-2018.xsd: sha256:fddc2b880cabb9005aebbc7e783e53c19fec1c03df7d0e2f2076a33a0fdfd081
+    .claude/skills/pptx/scripts/office/schemas/microsoft/wml-cid-2016.xsd: sha256:127ca209fa73d7cb708449cb355c871867948a96e4a74f7bf5811ef62d17991d
+    .claude/skills/pptx/scripts/office/schemas/microsoft/wml-sdtdatahash-2020.xsd: sha256:842e7163409c8d74f4d7088a8bc99500d80bc75332681a0980055b08f374a604
+    .claude/skills/pptx/scripts/office/schemas/microsoft/wml-symex-2015.xsd: sha256:16f6f8072249f431370723c2cd8974672e0d9c897e00e97dd918079df934871b
+    .claude/skills/pptx/scripts/office/soffice.py: sha256:a3e21840e29e32f947d5286028931b96eaf2dee63f75d883b8eb19c943c80aa0
+    .claude/skills/pptx/scripts/office/unpack.py: sha256:83f69cecc87910183654c06345837244402e8a99edbf3bdddc1cf72f11304b62
+    .claude/skills/pptx/scripts/office/validate.py: sha256:1aef24f8e316965a0584c30859776bd2c82a9fb69f72d79cfed041119cf95514
+    .claude/skills/pptx/scripts/office/validators/__init__.py: sha256:83e0f035c5abea238d3f2c3968afbd511ed022b527b7c9cb60a9434cc34ff987
+    .claude/skills/pptx/scripts/office/validators/base.py: sha256:d6358b67252df4dbfe4fa6647423a765960c949346ef6a8c4eb8722bb1108d25
+    .claude/skills/pptx/scripts/office/validators/docx.py: sha256:0ef04ce86b2e6b6a1cb088c0276fd0bd5b770d96fdfe7a6cc73d005feb3f0345
+    .claude/skills/pptx/scripts/office/validators/pptx.py: sha256:f937961e62a5fa0d002b8dc51a4c4e2cd8fcd59fe65853fa54edaca3fe99eccc
+    .claude/skills/pptx/scripts/office/validators/redlining.py: sha256:f4c33fdb9da0651d1d9aa76f0d5294cc9955869339ae131b2f75f3b2e366cb40
+    .claude/skills/pptx/scripts/thumbnail.py: sha256:e959ecd4f19735161218bc44d0648a46da17874323fb3e19c2e9cb50cefe6ce7
+    .claude/skills/skill-creator/LICENSE.txt: sha256:bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362
+    .claude/skills/skill-creator/SKILL.md: sha256:dcd4803e61e913e6fc27294184cd3a71f09f5e924ff20c8a9a20173e7b3c2bcf
+    .claude/skills/skill-creator/agents/analyzer.md: sha256:bf68f4cac5a56c673a928c2e6d619586c5b93ea364026ab37547772cb45a663a
+    .claude/skills/skill-creator/agents/comparator.md: sha256:fe1fc9787c495d864c5d6eada47396478572325fde1b33a96d78bf4b849b7a3e
+    .claude/skills/skill-creator/agents/grader.md: sha256:57134da0c1a4eea33fbd74a1c9c44aa814f07d6bc64de303edb586f941e5d21a
+    .claude/skills/skill-creator/assets/eval_review.html: sha256:ce477dcc74dc1c0d1d3352646a79167b5a63634e936b1019160025065974e452
+    .claude/skills/skill-creator/eval-viewer/generate_review.py: sha256:fc9d1b9243fe5ab6012ebd579bd76d0035de1b79fd3b969de114defab26478fb
+    .claude/skills/skill-creator/eval-viewer/viewer.html: sha256:a53213426ee1100441d701a3a0d49cda7a842f992d2c36463f4d3cc0258575fa
+    .claude/skills/skill-creator/references/schemas.md: sha256:8e8876180a8989b406a4d3edddf875b04cdfd5805cc8616686d552b11ce4455f
+    .claude/skills/skill-creator/scripts/__init__.py: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    .claude/skills/skill-creator/scripts/aggregate_benchmark.py: sha256:123ef128ea5ccc01a4b1ac212ef5567f21e9c13d3d240609780beeb3200c49aa
+    .claude/skills/skill-creator/scripts/generate_report.py: sha256:13df7118a3c50c83c4c3250a606d5f2b20b25a3d44cbc392b3d669ec75281453
+    .claude/skills/skill-creator/scripts/improve_description.py: sha256:87d864570220b699fac52da309d2d6efdb060647bfebc74f768128e646accf80
+    .claude/skills/skill-creator/scripts/package_skill.py: sha256:1a33059b0db1ef73375d46d513e5ea81369d2e8838c970597b0d52ddef8d1c0f
+    .claude/skills/skill-creator/scripts/quick_validate.py: sha256:67cf5703402013936c8fb75ad6a1afecd8841d45cc5e606b634eb05825fde365
+    .claude/skills/skill-creator/scripts/run_eval.py: sha256:43e3b8f80dbf69c343967ba77e268fae991d9fa3ed68b32a0ff02532cd48657f
+    .claude/skills/skill-creator/scripts/run_loop.py: sha256:7bd6f674203168520517eec94c55f493c0d154339b061b4d7c0f0dad187d0f21
+    .claude/skills/skill-creator/scripts/utils.py: sha256:3af8ae62c40c73ab712207436a0d9a981e845f25c5a7040229eb189cc8e45bb1
+    .claude/skills/slack-gif-creator/LICENSE.txt: sha256:bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362
+    .claude/skills/slack-gif-creator/SKILL.md: sha256:2efca615ce55a3edd8fc05c779068a8085816617991987e446606403cd3abb22
+    .claude/skills/slack-gif-creator/core/easing.py: sha256:60bc943449802541f0f0881a874faa7ef408aaaf0b758fde756664ada7740452
+    .claude/skills/slack-gif-creator/core/frame_composer.py: sha256:a127ea8f2a58893ea10a5c7b5cab4e2010af6515adc538676eb0cc14f5a03985
+    .claude/skills/slack-gif-creator/core/gif_builder.py: sha256:b6f50d738c491ee0438a2e86e897f71cdab9792494ba4605f140befb0bddbf89
+    .claude/skills/slack-gif-creator/core/validators.py: sha256:56bd19e3aae05f8387d78ec8185d6098b3dc909d1fa041211753da37212528a3
+    .claude/skills/slack-gif-creator/requirements.txt: sha256:edc7108a0c6b56183566c71ee96830f6dc791e3b41952112d9cb56b33a6bd757
+    .claude/skills/theme-factory/LICENSE.txt: sha256:bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362
+    .claude/skills/theme-factory/SKILL.md: sha256:c35893e221e28895c52143cc11bf30e41a44817796b39d4b15727dadc9796552
+    .claude/skills/theme-factory/theme-showcase.pdf: sha256:3e126eca9fe99088051f7cb984c97cedb31c7d9e09ce0ba5d61bd01e70a0d253
+    .claude/skills/theme-factory/themes/arctic-frost.md: sha256:868a75a8fb5b2a61d0f0ab87c437fe632d3cbab6371c418f06aa2816ac109ae0
+    .claude/skills/theme-factory/themes/botanical-garden.md: sha256:222cb8e7496abc9b75b29453c809fb9839e7e4b01fa45deecdd896b38d087765
+    .claude/skills/theme-factory/themes/desert-rose.md: sha256:bd065b8629be3b64655183927e248e3d892a27b8d184b009cfba89c96102744f
+    .claude/skills/theme-factory/themes/forest-canopy.md: sha256:ecb722efa24688e808b5bf323c334ca2349e989cfddd72ce8400ce5d4c4bd3e7
+    .claude/skills/theme-factory/themes/golden-hour.md: sha256:3444a00df971d3c2f06b665e21a2e9eb5d7d7d6f6281f2758773b8345776a139
+    .claude/skills/theme-factory/themes/midnight-galaxy.md: sha256:0e134c4c0324df41e34ac314269aa6829cd378cf3c304b31858d0cd158d2f944
+    .claude/skills/theme-factory/themes/modern-minimalist.md: sha256:b8bc572b75948d4df69c401af703b9262ed6820a3ceb270da30a529e92763614
+    .claude/skills/theme-factory/themes/ocean-depths.md: sha256:a7ad8eec85341dbfcb2665da827a4b6a4baee08ab3335ac02421f18e6b46b2e2
+    .claude/skills/theme-factory/themes/sunset-boulevard.md: sha256:658af11ab04be4923692571081ffb42a428141ae537703117b9236d9f8ee22a3
+    .claude/skills/theme-factory/themes/tech-innovation.md: sha256:183648163026dd5eeba3df5effa335b55ba333c3ee1fe215278605e55f40a52a
+    .claude/skills/web-artifacts-builder/LICENSE.txt: sha256:bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362
+    .claude/skills/web-artifacts-builder/SKILL.md: sha256:81c5002c6643b0de7b8710b00e7a9038daa6fb9b68d59870ee6adb12da8d10f8
+    .claude/skills/web-artifacts-builder/scripts/bundle-artifact.sh: sha256:abf0e480bf6585b56fab8526a407dfb7dc740812bddd70c636e1e8f3df5f9618
+    .claude/skills/web-artifacts-builder/scripts/init-artifact.sh: sha256:355e5dd4382aaaee91f01f1627eaeab30b2676ffa8d9b3ec328a1ae450ebccaa
+    .claude/skills/web-artifacts-builder/scripts/shadcn-components.tar.gz: sha256:1296f069e825de7933de7e8ac63672495cacce3f88f2dc45554dbcddbcbca60f
+    .claude/skills/webapp-testing/LICENSE.txt: sha256:bc6b3af2f331cbc7fb0da1344efb2cbe5877a31498b4d70dbc7000f3405a1362
+    .claude/skills/webapp-testing/SKILL.md: sha256:51b7349e77ec63b7744a6f63647e7566a0b4d2e301121cc10e8c2113af6556a2
+    .claude/skills/webapp-testing/examples/console_logging.py: sha256:ea46877289acb82da7e7ce59d0bc37c8977cd57e2a006d0c88d7a1c625bf95da
+    .claude/skills/webapp-testing/examples/element_discovery.py: sha256:d63c89604a22f8845d724e95dda45db49b1bf57c25ce0a83afbb7b8da3d402f0
+    .claude/skills/webapp-testing/examples/static_html_automation.py: sha256:9d533aafb875ee3ab8b8ebf8f5b9003ac8d999da3d09b285cce252e623140064
+    .claude/skills/webapp-testing/scripts/with_server.py: sha256:b0dcf4918935b795f4eda9821579b9902119235ff4447f687a30286e7d0925fd
+    .claude/skills/xlsx/LICENSE.txt: sha256:79f6d8f5b427252fa3b1c11ecdbdb6bf610b944f7530b4de78f770f38741cfaa
+    .claude/skills/xlsx/SKILL.md: sha256:dd316db7785a6be12966c2a2d848931fbf5f518b3cdb0a66fa62ee835ead1cfc
+    .claude/skills/xlsx/scripts/office/helpers/__init__.py: sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    .claude/skills/xlsx/scripts/office/helpers/merge_runs.py: sha256:7c40ed838b88639c51f9ffdcfd564b568f26832b78fe44008c0e01b742669ca7
+    .claude/skills/xlsx/scripts/office/helpers/simplify_redlines.py: sha256:560cb55978a834c505406eb18e2c61f62f998fc7a2d8e9721b9c563b42597896
+    .claude/skills/xlsx/scripts/office/pack.py: sha256:b1800987e568261a31f462df8e1303d386e9e6ccc11a75ef46e60cc528c20683
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chart.xsd: sha256:41b93bd8857cc68b1e43be2806a872d736a9bdd6566900062d8fdb57d7bbb354
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-chartDrawing.xsd: sha256:3fd0586f2637b98bb9886f0e0b67d89e1cc987c2d158cc7deb5f5b9890ced412
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-diagram.xsd: sha256:29b254ee0d10414a8504b5a08149c7baec35a60d5ff607d6b3f492aa36815f40
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-lockedCanvas.xsd: sha256:5cb76dabd8b97d1e9308a1700b90c20139be4d50792d21a7f09789f5cccd6026
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-main.xsd: sha256:5375417f0f5394b8dd1a7035b9679151f19a6b65df309dec10cfb4a420cb00e9
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-picture.xsd: sha256:5d389d42befbebd91945d620242347caecd3367f9a3a7cf8d97949507ae1f53c
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-spreadsheetDrawing.xsd: sha256:b4532b6d258832953fbb3ee4c711f4fe25d3faf46a10644b2505f17010d01e88
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/dml-wordprocessingDrawing.xsd: sha256:bdad416b096b61d37b71603b2c949484f9070c830bdaeba93bf35e15c8900614
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/pml.xsd: sha256:d173c3e5d61e42e2e3a97226c632fd2ab7cc481fc4e492365b87024ab546daff
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-additionalCharacteristics.xsd: sha256:3c6709101c6aaa82888df5d8795c33f9e857196790eb320d9194e64be2b6bdd8
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-bibliography.xsd: sha256:0b364451dc36a48dd6dae0f3b6ada05fd9b71e5208211f8ee5537d7e51a587e2
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-commonSimpleTypes.xsd: sha256:e2abacbb9a55ce1365f8961bc1b1395bbc811e512b111000d8c333f98458dece
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlDataProperties.xsd: sha256:0ef4bb354ff44b923564c4ddbdda5987919d220225129ec94614a618ceafc281
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-customXmlSchemaProperties.xsd: sha256:0d103b99a4a8652f8871552a69d42d2a3760ac6a5e3ef02d979c4273257ff6a4
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesCustom.xsd: sha256:9c085407751b9061c1f996f6c39ce58451be22a8d334f09175f0e89e42736285
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesExtended.xsd: sha256:bc92e36ccd233722d4c5869bec71ddc7b12e2df56059942cce5a39065cc9c368
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-documentPropertiesVariantTypes.xsd: sha256:7b5b7413e2c895b1e148e82e292a117d53c7ec65b0696c992edca57b61b4a74b
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-math.xsd: sha256:3213ef1631606250f5010b42cad7ef716f7c59426367798e33c374c0ec391d3a
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/shared-relationshipReference.xsd: sha256:12264f3c03d738311cd9237d212f1c07479e70f0cbe1ae725d29b36539aef637
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/sml.xsd: sha256:beffeed56945c22a77440122c8bdc426f3fcbe7f3b12ea0976c770d1f8d54578
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-main.xsd: sha256:f5ee623b08b6a66935e5aced2f5d8ad0fc71bf9e8e833cd490150c0fa94b8763
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-officeDrawing.xsd: sha256:585bedc1313b40888dcc544cb74cd939a105ee674f3b1d3aa1cc6d34f70ff155
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-presentationDrawing.xsd: sha256:133c9f64a5c5d573b78d0a474122b22506d8eadb5e063f67cdbbb8fa2f161d0e
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-spreadsheetDrawing.xsd: sha256:6bdeb169c3717eb01108853bd9fc5a3750fb1fa5b82abbdd854d49855a40f519
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/vml-wordprocessingDrawing.xsd: sha256:475dcae1e7d1ea46232db6f8481040c15e53a52a3c256831d3df204212b0e831
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/wml.xsd: sha256:c2dd9f61f892deae6acd8d20771ea79b12018af25f3bf8d06639c8542d218cfd
+    .claude/skills/xlsx/scripts/office/schemas/ISO-IEC29500-4_2016/xml.xsd: sha256:a539aa2fb154fa50e0f5cc97e6ad7cbc66f8ec3e3746f61ec6a8b0d5d15ecdf2
+    .claude/skills/xlsx/scripts/office/schemas/ecma/fouth-edition/opc-contentTypes.xsd: sha256:9e0b7209fc69ab11987900404540969976000c5ebe4d4f58c43dc3842886bf3a
+    .claude/skills/xlsx/scripts/office/schemas/ecma/fouth-edition/opc-coreProperties.xsd: sha256:451958454e8588dfc7cd945981ada142ca06ff3307937f5700df059c2b307fa8
+    .claude/skills/xlsx/scripts/office/schemas/ecma/fouth-edition/opc-digSig.xsd: sha256:6de111e11403f7cd49027400755bae0ea1cabef2815f09bd40a24f0017613b24
+    .claude/skills/xlsx/scripts/office/schemas/ecma/fouth-edition/opc-relationships.xsd: sha256:f565adfef5a502044abc3a9153e157edc25af78304d335994afb958874b15e26
+    .claude/skills/xlsx/scripts/office/schemas/mce/mc.xsd: sha256:3a37e461ecf5a8670fdec34029703401f8728ab9c96ec1739a6ae58d55212413
+    .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-2010.xsd: sha256:568b26ee156cb9549aa439ca2158965f77b7c1602b7e0316f40ac6cf586e35f2
+    .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-2012.xsd: sha256:0fa75578a000439a7988ba0c59fdc69f774bbd416cbacc14d07125b3f686cb74
+    .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-2018.xsd: sha256:be0ff793a22dd31384650c3a4da14c2fa8062751c2e97b0e5ee852bda13c60ad
+    .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-cex-2018.xsd: sha256:fddc2b880cabb9005aebbc7e783e53c19fec1c03df7d0e2f2076a33a0fdfd081
+    .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-cid-2016.xsd: sha256:127ca209fa73d7cb708449cb355c871867948a96e4a74f7bf5811ef62d17991d
+    .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-sdtdatahash-2020.xsd: sha256:842e7163409c8d74f4d7088a8bc99500d80bc75332681a0980055b08f374a604
+    .claude/skills/xlsx/scripts/office/schemas/microsoft/wml-symex-2015.xsd: sha256:16f6f8072249f431370723c2cd8974672e0d9c897e00e97dd918079df934871b
+    .claude/skills/xlsx/scripts/office/soffice.py: sha256:a3e21840e29e32f947d5286028931b96eaf2dee63f75d883b8eb19c943c80aa0
+    .claude/skills/xlsx/scripts/office/unpack.py: sha256:83f69cecc87910183654c06345837244402e8a99edbf3bdddc1cf72f11304b62
+    .claude/skills/xlsx/scripts/office/validate.py: sha256:1aef24f8e316965a0584c30859776bd2c82a9fb69f72d79cfed041119cf95514
+    .claude/skills/xlsx/scripts/office/validators/__init__.py: sha256:83e0f035c5abea238d3f2c3968afbd511ed022b527b7c9cb60a9434cc34ff987
+    .claude/skills/xlsx/scripts/office/validators/base.py: sha256:d6358b67252df4dbfe4fa6647423a765960c949346ef6a8c4eb8722bb1108d25
+    .claude/skills/xlsx/scripts/office/validators/docx.py: sha256:0ef04ce86b2e6b6a1cb088c0276fd0bd5b770d96fdfe7a6cc73d005feb3f0345
+    .claude/skills/xlsx/scripts/office/validators/pptx.py: sha256:f937961e62a5fa0d002b8dc51a4c4e2cd8fcd59fe65853fa54edaca3fe99eccc
+    .claude/skills/xlsx/scripts/office/validators/redlining.py: sha256:f4c33fdb9da0651d1d9aa76f0d5294cc9955869339ae131b2f75f3b2e366cb40
+    .claude/skills/xlsx/scripts/recalc.py: sha256:cf419d15e02965aeaec17773c05b61303f7f520f67fa2696547e7da07502eac7
   content_hash: sha256:91959dd47c219df6af45ed9d3f4be4302b00041e447254fdda0c51767b24e57b
 - repo_url: currents-dev/playwright-best-practices-skill
   name: playwright-best-practices-skill
@@ -53,6 +828,133 @@ dependencies:
   deployed_files:
   - .agents/skills/playwright-best-practices-skill
   - .claude/skills/playwright-best-practices-skill
+  - .claude/skills/playwright-best-practices-skill/.agnix.toml
+  - .claude/skills/playwright-best-practices-skill/.github/workflows/validate-skill.yml
+  - .claude/skills/playwright-best-practices-skill/LICENSE.md
+  - .claude/skills/playwright-best-practices-skill/README.md
+  - .claude/skills/playwright-best-practices-skill/SKILL.md
+  - .claude/skills/playwright-best-practices-skill/advanced/authentication-flows.md
+  - .claude/skills/playwright-best-practices-skill/advanced/authentication.md
+  - .claude/skills/playwright-best-practices-skill/advanced/clock-mocking.md
+  - .claude/skills/playwright-best-practices-skill/advanced/mobile-testing.md
+  - .claude/skills/playwright-best-practices-skill/advanced/multi-context.md
+  - .claude/skills/playwright-best-practices-skill/advanced/multi-user.md
+  - .claude/skills/playwright-best-practices-skill/advanced/network-advanced.md
+  - .claude/skills/playwright-best-practices-skill/advanced/third-party.md
+  - .claude/skills/playwright-best-practices-skill/architecture/pom-vs-fixtures.md
+  - .claude/skills/playwright-best-practices-skill/architecture/test-architecture.md
+  - .claude/skills/playwright-best-practices-skill/architecture/when-to-mock.md
+  - .claude/skills/playwright-best-practices-skill/browser-apis/browser-apis.md
+  - .claude/skills/playwright-best-practices-skill/browser-apis/iframes.md
+  - .claude/skills/playwright-best-practices-skill/browser-apis/service-workers.md
+  - .claude/skills/playwright-best-practices-skill/browser-apis/websockets.md
+  - .claude/skills/playwright-best-practices-skill/core/annotations.md
+  - .claude/skills/playwright-best-practices-skill/core/assertions-waiting.md
+  - .claude/skills/playwright-best-practices-skill/core/configuration.md
+  - .claude/skills/playwright-best-practices-skill/core/fixtures-hooks.md
+  - .claude/skills/playwright-best-practices-skill/core/global-setup.md
+  - .claude/skills/playwright-best-practices-skill/core/locators.md
+  - .claude/skills/playwright-best-practices-skill/core/page-object-model.md
+  - .claude/skills/playwright-best-practices-skill/core/projects-dependencies.md
+  - .claude/skills/playwright-best-practices-skill/core/test-data.md
+  - .claude/skills/playwright-best-practices-skill/core/test-suite-structure.md
+  - .claude/skills/playwright-best-practices-skill/core/test-tags.md
+  - .claude/skills/playwright-best-practices-skill/debugging/console-errors.md
+  - .claude/skills/playwright-best-practices-skill/debugging/debugging.md
+  - .claude/skills/playwright-best-practices-skill/debugging/error-testing.md
+  - .claude/skills/playwright-best-practices-skill/debugging/flaky-tests.md
+  - .claude/skills/playwright-best-practices-skill/frameworks/angular.md
+  - .claude/skills/playwright-best-practices-skill/frameworks/nextjs.md
+  - .claude/skills/playwright-best-practices-skill/frameworks/react.md
+  - .claude/skills/playwright-best-practices-skill/frameworks/vue.md
+  - .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/ci-cd.md
+  - .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/docker.md
+  - .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/github-actions.md
+  - .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/gitlab.md
+  - .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/other-providers.md
+  - .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/parallel-sharding.md
+  - .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/performance.md
+  - .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/reporting.md
+  - .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/test-coverage.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/accessibility.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/api-testing.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/browser-extensions.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/canvas-webgl.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/component-testing.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/drag-drop.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/electron.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/file-operations.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/file-upload-download.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/forms-validation.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/graphql-testing.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/i18n.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/performance-testing.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/security-testing.md
+  - .claude/skills/playwright-best-practices-skill/testing-patterns/visual-regression.md
+  deployed_file_hashes:
+    .claude/skills/playwright-best-practices-skill/.agnix.toml: sha256:3065a65058a2be51e48ad768b43b9468d0c1f3026402252a968b3a840d6ae08d
+    .claude/skills/playwright-best-practices-skill/.github/workflows/validate-skill.yml: sha256:d258f78240104676c9d4a8b8ca7033f285699e0a80447b0f6791f04bced37e80
+    .claude/skills/playwright-best-practices-skill/LICENSE.md: sha256:2b98cdd2800845a1230f2ad4b310901e3c9ae9364ddebb01e90a2ebe6d953d82
+    .claude/skills/playwright-best-practices-skill/README.md: sha256:ab96dc47d58823c6878d96d2e8887a77d0fc3666b323e225066a8b159c7b7f28
+    .claude/skills/playwright-best-practices-skill/SKILL.md: sha256:d54f14eb2da39b9c1b9135b2705f21623fa7e27ac490225686daa360e34aa6d8
+    .claude/skills/playwright-best-practices-skill/advanced/authentication-flows.md: sha256:b6549421bf78de9304638480ee3e9eb8f65031ea2fba54aa7c69be7afb7001a0
+    .claude/skills/playwright-best-practices-skill/advanced/authentication.md: sha256:058c3afa13ccc609f130ed9c7fd007b2f88dd9477d715b83ea132eb46deba755
+    .claude/skills/playwright-best-practices-skill/advanced/clock-mocking.md: sha256:de7e78df2f8576e4e1ffe0a4993b8d5832cbbd63477daf511837872cd89afd9c
+    .claude/skills/playwright-best-practices-skill/advanced/mobile-testing.md: sha256:2c1cadd409279925bf048475f2d1da0de9a704da21a367a98a3c24bac95f1921
+    .claude/skills/playwright-best-practices-skill/advanced/multi-context.md: sha256:abe87f8f8d49fbf4b7a240105a51db7cbcd5622c86a8df31f481450903da4be2
+    .claude/skills/playwright-best-practices-skill/advanced/multi-user.md: sha256:fe102fd66a7c3f866dd6fe3fba638c71f9690971676ee2244f1cb43b53d07417
+    .claude/skills/playwright-best-practices-skill/advanced/network-advanced.md: sha256:49e5ec7411b5d388d700b36450fc54ab185a3f538088661fbd9a628df85073c0
+    .claude/skills/playwright-best-practices-skill/advanced/third-party.md: sha256:d9d07130ecb13e5e2548a59f9ed1fd76dfc58426fd5ab3de3d4589c8567313ee
+    .claude/skills/playwright-best-practices-skill/architecture/pom-vs-fixtures.md: sha256:6619745a7ddad8c3734433325b9a09825a539a695f532aeea62e112fd8d74699
+    .claude/skills/playwright-best-practices-skill/architecture/test-architecture.md: sha256:9f3b7e45ecbc3cadf21aaaaf3e0ce8feb0bd0a8b110f46fff1285b614f770ba2
+    .claude/skills/playwright-best-practices-skill/architecture/when-to-mock.md: sha256:919f5b8c07a477b446988734809f109a404d008e9a4bfd7744bd0d521693f84f
+    .claude/skills/playwright-best-practices-skill/browser-apis/browser-apis.md: sha256:c8eb673179ddee87566ad2bed11bc3060e00d72463a7554b9cd35c12551f65b4
+    .claude/skills/playwright-best-practices-skill/browser-apis/iframes.md: sha256:1cf746991a1431a5f1b42ce6dc89530d534a1d04d302c8bf2211130a4e3bb817
+    .claude/skills/playwright-best-practices-skill/browser-apis/service-workers.md: sha256:c771ba9b5d26f18f1555fca583f365b9ecc2cdd26394bdbafe7e5bf0be0a635f
+    .claude/skills/playwright-best-practices-skill/browser-apis/websockets.md: sha256:ed8a75b08e89720ea2c77d3adb4504530f9dfab2c140de423e29ae68a80f36c2
+    .claude/skills/playwright-best-practices-skill/core/annotations.md: sha256:f1aac6ca31db4b485a55b80fb69073ba5bb3a994c14868f25d87056e6bebbab6
+    .claude/skills/playwright-best-practices-skill/core/assertions-waiting.md: sha256:8cdc5673d148aa3a187544aae13973996c690c8c125bd770a243c0ba5c6744cd
+    .claude/skills/playwright-best-practices-skill/core/configuration.md: sha256:d375dbb84d133a70cae42c660302323b0330346614986e5f50c190dc3da0d2d8
+    .claude/skills/playwright-best-practices-skill/core/fixtures-hooks.md: sha256:057018bd070b01e9ac1e469a80ff0df8de3e9a1ac2148be3e7c0fcb2256988e6
+    .claude/skills/playwright-best-practices-skill/core/global-setup.md: sha256:d59548fb70ee60f9270d4a1a2d68e89ae4cadffd0ec55b4c41a651e9ac70ed72
+    .claude/skills/playwright-best-practices-skill/core/locators.md: sha256:888e6c2562aa28fe1a9efb36775c8cf0e77fdcc75b197c0fb66c4f0eda402378
+    .claude/skills/playwright-best-practices-skill/core/page-object-model.md: sha256:b1ceaba7a8ce019f4ec4bfe41b9c94b452ae93f87312a78c0ae71b4e1787357e
+    .claude/skills/playwright-best-practices-skill/core/projects-dependencies.md: sha256:d04ec97f78e1d4767c1ae20fdeab8f4407f574d182c3a313fb43a26146b05f19
+    .claude/skills/playwright-best-practices-skill/core/test-data.md: sha256:a3ca72e9583de070bdc6808e0a59502601cb1455d180fdfe418ac9150fd7b62f
+    .claude/skills/playwright-best-practices-skill/core/test-suite-structure.md: sha256:638a72c8d01826a842096ca2a90bd6108d27a31a0d28d209833d14379abac9ee
+    .claude/skills/playwright-best-practices-skill/core/test-tags.md: sha256:affc1e8550bfad113557670c97e050864ca5837df4fcebc322dd0b8ac6af5853
+    .claude/skills/playwright-best-practices-skill/debugging/console-errors.md: sha256:7332c92af9af3217516d012360621709750c1c191ecd588eaa77ecf1fd3c1450
+    .claude/skills/playwright-best-practices-skill/debugging/debugging.md: sha256:ca751fe90673d51f7fdb28b3cab827bb7a76d745d006df21f6d7220ff5e4b112
+    .claude/skills/playwright-best-practices-skill/debugging/error-testing.md: sha256:3ad834d850816d9b5bffb456175a41fd88bd399fa2d7b098a4cb1bc12914d940
+    .claude/skills/playwright-best-practices-skill/debugging/flaky-tests.md: sha256:027dfe989ef2abf9fb8d1ab1e8b0602ee0c5026c93bb3ee69c3b2ffbbcd559f8
+    .claude/skills/playwright-best-practices-skill/frameworks/angular.md: sha256:4acd7095d3556dd09a486c7ef30e0a6af1bab1cbfe2645739cca32914ef93009
+    .claude/skills/playwright-best-practices-skill/frameworks/nextjs.md: sha256:1a6370ebb6f9b871e59027673e641fc968d24943d37ec73caad6e6b8463d7a4b
+    .claude/skills/playwright-best-practices-skill/frameworks/react.md: sha256:67f248dfafd356c37354a9bc65c6306e9e48343f983c0352b78ffbc67a7d8391
+    .claude/skills/playwright-best-practices-skill/frameworks/vue.md: sha256:b35f8d561dd9b5ebe8b86be7408ff4dbf03e189649714d790943ce763abb6718
+    .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/ci-cd.md: sha256:a6951b34dbfc4eabaad53cc5ff63edea3ca7eb35c455a1b34a73992e9572757a
+    .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/docker.md: sha256:ba0318c1060fe7d2235899e03ab998e588581becc0da49c3562a78fdd71b6526
+    .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/github-actions.md: sha256:1f243a1b43c3a25fd29484a3789f65e38a1725588149b88e9996b37e0e7c608f
+    .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/gitlab.md: sha256:91d73a21bfa8f238a719a04700390f01866f1de9dc70a064e09705ebc60f8b72
+    .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/other-providers.md: sha256:6aca1c5e00cb179853ee85b8f340481d59c2c938a49eea412f1d13a5e04a230a
+    .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/parallel-sharding.md: sha256:81837bf4cc6e034053a0cbc00d9e7347f5cd573ceef61db49b0587ddbeba7a23
+    .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/performance.md: sha256:01073c6bc622a7e2d347dbbea066dd8b05cb394c7717e2b2a8b26ea6f1e6e838
+    .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/reporting.md: sha256:e7bd41103689230d3fe3d5f7019f95048548e5a1b8d70da7617cc3897236efd7
+    .claude/skills/playwright-best-practices-skill/infrastructure-ci-cd/test-coverage.md: sha256:b70eb2fa03e5cf3d4d7b98d4b342083fee1ea9092023d2c0c0cb685bfd8aa303
+    .claude/skills/playwright-best-practices-skill/testing-patterns/accessibility.md: sha256:a52a8d1590c841f8470ee6bea8ea73c052010a36ae9a6afed7939d12bdbf800a
+    .claude/skills/playwright-best-practices-skill/testing-patterns/api-testing.md: sha256:b7b94a9015655e4d8f1826b440d5270fc8a7d969466d80aad4e7196faf60079f
+    .claude/skills/playwright-best-practices-skill/testing-patterns/browser-extensions.md: sha256:2f05f8f62f02ced311802c44e96198db3ceade61d2224501939ded091e952ee2
+    .claude/skills/playwright-best-practices-skill/testing-patterns/canvas-webgl.md: sha256:39d62688c1e74a2e5af44efa03204be268fb2f4f62661d58aeffedfd3385998f
+    .claude/skills/playwright-best-practices-skill/testing-patterns/component-testing.md: sha256:2fb0d0d5053ccc0353022337beba2fa76b68389c6461b363cafacc32e8fa0c68
+    .claude/skills/playwright-best-practices-skill/testing-patterns/drag-drop.md: sha256:14c470974e736566e1c7a1c7f10c9d5d8b66085ec5c8179a6b3c33002252541d
+    .claude/skills/playwright-best-practices-skill/testing-patterns/electron.md: sha256:093d00d665b96befa45d63385f32de34065785ef87f992526a333be91f83478c
+    .claude/skills/playwright-best-practices-skill/testing-patterns/file-operations.md: sha256:50f3818af9a2c5a9d1e83c832c7324c7bc94c0c93899c9cedb40d534e4335f60
+    .claude/skills/playwright-best-practices-skill/testing-patterns/file-upload-download.md: sha256:2aa6a50f0f3e8703f08f4365065d6e79350f1ef7ae4646662ab67d66e8e1d3c7
+    .claude/skills/playwright-best-practices-skill/testing-patterns/forms-validation.md: sha256:124cc991bd22106d202f6c0d7e15c79edb3dc4ca683b2fedfa700b6512df647a
+    .claude/skills/playwright-best-practices-skill/testing-patterns/graphql-testing.md: sha256:25706e8c8133a86ae01a7579fab4d17000d01d4e5d2c67c174da6bcd9dbf1a36
+    .claude/skills/playwright-best-practices-skill/testing-patterns/i18n.md: sha256:348fd0817e83ce9ac1318ad2ff87f9ac5b52de6c21aecdbd99690538214c87f1
+    .claude/skills/playwright-best-practices-skill/testing-patterns/performance-testing.md: sha256:0faccd5ec785b4c66466f194ce9c8d1b9e257674e5be5c1ef5dd8864538bde5b
+    .claude/skills/playwright-best-practices-skill/testing-patterns/security-testing.md: sha256:c03fe6ead5ec78bfe20af45e05ab587d054f77f8e1a6d26dd7791f06be7cabd7
+    .claude/skills/playwright-best-practices-skill/testing-patterns/visual-regression.md: sha256:b58d614c2d34f6b63df6a6aaa9d255a90dd4e4e5475db8227b6ea43c8a079a33
   content_hash: sha256:4a2c8b6165b46914f587131006256040286185918e6ee5903ad070087cdb53bc
 - repo_url: feature-sliced/skills
   name: skills
@@ -62,6 +964,25 @@ dependencies:
   virtual_path: feature-sliced-design
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/feature-sliced-design
+  - .claude/skills/feature-sliced-design/SKILL.md
+  - .claude/skills/feature-sliced-design/references/asset-handling.md
+  - .claude/skills/feature-sliced-design/references/cross-import-patterns.md
+  - .claude/skills/feature-sliced-design/references/excessive-entities.md
+  - .claude/skills/feature-sliced-design/references/framework-integration.md
+  - .claude/skills/feature-sliced-design/references/layer-structure.md
+  - .claude/skills/feature-sliced-design/references/migration-guide.md
+  - .claude/skills/feature-sliced-design/references/practical-examples.md
+  deployed_file_hashes:
+    .claude/skills/feature-sliced-design/SKILL.md: sha256:37d2a6cccd3999326d4f44fd5ef2f76dd1859e084ab2c29061cf5af44cd225e0
+    .claude/skills/feature-sliced-design/references/asset-handling.md: sha256:958383cc4270870217250f46de6cfa549e3ddab7ffbf07bf3b369e3d774745a7
+    .claude/skills/feature-sliced-design/references/cross-import-patterns.md: sha256:2d9410a342194bde77a094ca5e53dfe30233b7cc8e85481ecbf8c54d4d3ee820
+    .claude/skills/feature-sliced-design/references/excessive-entities.md: sha256:2edd71570151b3a14cded60b998665703d3481c06f7614b096f2bb3717866f1e
+    .claude/skills/feature-sliced-design/references/framework-integration.md: sha256:600fb79bc1cd05651b3d0879bdde797f71e125e9b0937d78b04dd2da56a89090
+    .claude/skills/feature-sliced-design/references/layer-structure.md: sha256:1e5ed85541c9332ae140c2069b7dcd92339eaca6dfbd81cb600666f11958d7e7
+    .claude/skills/feature-sliced-design/references/migration-guide.md: sha256:05e181f4eeec7d0b4062a7bd71e4fe6a14a22b6094c7beee0ede734b400cfdf1
+    .claude/skills/feature-sliced-design/references/practical-examples.md: sha256:f0148c9bebb5559d235106488e02aeef571ec99e5ea7f0c6cae681f9eea47f47
   content_hash: sha256:352d32fc64864842ae400f7bbaed21c3e6b962a8ab8f09c1a7b90813cf9c6003
 - repo_url: manaflow-ai/cmux
   name: cmux
@@ -71,6 +992,21 @@ dependencies:
   virtual_path: skills/cmux
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/cmux
+  - .claude/skills/cmux/SKILL.md
+  - .claude/skills/cmux/agents/openai.yaml
+  - .claude/skills/cmux/references/handles-and-identify.md
+  - .claude/skills/cmux/references/panes-surfaces.md
+  - .claude/skills/cmux/references/trigger-flash-and-health.md
+  - .claude/skills/cmux/references/windows-workspaces.md
+  deployed_file_hashes:
+    .claude/skills/cmux/SKILL.md: sha256:890e0ceb19923bff004d189cb499a7ed1356c6fbe18292edca48c7a092371393
+    .claude/skills/cmux/agents/openai.yaml: sha256:7efa5af3c070a391d7477d065f150aaf8305dd2e18994cbe5e54b0fae83a7681
+    .claude/skills/cmux/references/handles-and-identify.md: sha256:c8186c8e8b7616e3b196eb82f39eedddc53882a0deab1ada807ac4303a91a36b
+    .claude/skills/cmux/references/panes-surfaces.md: sha256:40e3e8db79919a0cec22a45589485fc9a4ad1abfb9d8136d133be66f423d9266
+    .claude/skills/cmux/references/trigger-flash-and-health.md: sha256:4a9666a398e1285eda72454442a62fb99ef7d300b13a108f960b8821c01507b0
+    .claude/skills/cmux/references/windows-workspaces.md: sha256:ec84fc1c437320234ba8192c43e173910ea44dc77dd47d5229c37c95ca5c07bd
   content_hash: sha256:aaef6c329ccf3a246474621c114e90e35a182f25a4ead925135587e5f7f01a22
 - repo_url: manaflow-ai/cmux
   name: cmux
@@ -80,6 +1016,31 @@ dependencies:
   virtual_path: skills/cmux-browser
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/cmux-browser
+  - .claude/skills/cmux-browser/SKILL.md
+  - .claude/skills/cmux-browser/agents/openai.yaml
+  - .claude/skills/cmux-browser/references/authentication.md
+  - .claude/skills/cmux-browser/references/commands.md
+  - .claude/skills/cmux-browser/references/proxy-support.md
+  - .claude/skills/cmux-browser/references/session-management.md
+  - .claude/skills/cmux-browser/references/snapshot-refs.md
+  - .claude/skills/cmux-browser/references/video-recording.md
+  - .claude/skills/cmux-browser/templates/authenticated-session.sh
+  - .claude/skills/cmux-browser/templates/capture-workflow.sh
+  - .claude/skills/cmux-browser/templates/form-automation.sh
+  deployed_file_hashes:
+    .claude/skills/cmux-browser/SKILL.md: sha256:3dea0af2946c156fc9be29fe438e33d3124e9811207b59d78b6033e03d269b74
+    .claude/skills/cmux-browser/agents/openai.yaml: sha256:cdaa4e8dda292db314c5e5f5ab8975635be039b8876dfd9c41c098da302f59e5
+    .claude/skills/cmux-browser/references/authentication.md: sha256:b1282e8454e5bcd469fcbc6a5dc5e9eea04544add10ec0aa0290a9dbc2219eae
+    .claude/skills/cmux-browser/references/commands.md: sha256:e4028daeca7d6ea62795aab035e233bf8d1f6f1fdb70a4077b1aeb4f1ca5122b
+    .claude/skills/cmux-browser/references/proxy-support.md: sha256:68bf4eead7c099773cae8ebb1276ea21476627eac63675601ac0400bea9183e1
+    .claude/skills/cmux-browser/references/session-management.md: sha256:9f13666b31ac8b0032fc1932b48a72701894e8c7f17d73aa7edd4341036eb696
+    .claude/skills/cmux-browser/references/snapshot-refs.md: sha256:f9ba1bc73f239dbb884287203c5f472a8096c3426efb2617675067625f58dfec
+    .claude/skills/cmux-browser/references/video-recording.md: sha256:6dbc8e248902bd0c35b885fcc99f504ff733351f616947e6dd7afe4d3647498d
+    .claude/skills/cmux-browser/templates/authenticated-session.sh: sha256:138ddd070519092f38b21c1e72206d901e726610d205a34e9a93bc3efb2888df
+    .claude/skills/cmux-browser/templates/capture-workflow.sh: sha256:339d9de6320dfaae72534d36f0b7d5476b12a2ba9c95f0e2f74960e72cf49ca2
+    .claude/skills/cmux-browser/templates/form-automation.sh: sha256:6ec05ca74e999688ea2455c1e4d11f37e426cee9604ece7b2cacfbdfe44a3506
   content_hash: sha256:aa16020e62743b6c5b3c71e523e7b9faed231b2e3c3e21b04d03bbead93c0d9e
 - repo_url: manaflow-ai/cmux
   name: cmux
@@ -89,6 +1050,15 @@ dependencies:
   virtual_path: skills/cmux-customization
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/cmux-customization
+  - .claude/skills/cmux-customization/SKILL.md
+  - .claude/skills/cmux-customization/agents/openai.yaml
+  - .claude/skills/cmux-customization/references/examples.md
+  deployed_file_hashes:
+    .claude/skills/cmux-customization/SKILL.md: sha256:8ed1c3435d36c2673565d5bfb9a45b4e82ea2c9bab1a708854d9f91673ce6450
+    .claude/skills/cmux-customization/agents/openai.yaml: sha256:eea84547356e78f52016a174a3e944b62577a3dc7a5abed3221026164c97b01e
+    .claude/skills/cmux-customization/references/examples.md: sha256:b6dc9d0d530e71394c24a60a2f1a2d03898c13f7e8c45f6743a27a8acc1b91ec
   content_hash: sha256:ff2ca2e7fce755264c4dfd40cd14ec0a192145f179fdc741ed528e089bd18c17
 - repo_url: manaflow-ai/cmux
   name: cmux
@@ -98,6 +1068,15 @@ dependencies:
   virtual_path: skills/cmux-diagnostics
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/cmux-diagnostics
+  - .claude/skills/cmux-diagnostics/SKILL.md
+  - .claude/skills/cmux-diagnostics/agents/openai.yaml
+  - .claude/skills/cmux-diagnostics/scripts/cmux-diagnostics
+  deployed_file_hashes:
+    .claude/skills/cmux-diagnostics/SKILL.md: sha256:315bab38550d5854a7529fdd2f6a2b0c7286e9fe2e688b292365b2eb74076891
+    .claude/skills/cmux-diagnostics/agents/openai.yaml: sha256:3aed2dabf774d0e1d3ebada50a3b968c1dc8d1ad6ee1bbf732e9175cdfe3a074
+    .claude/skills/cmux-diagnostics/scripts/cmux-diagnostics: sha256:a31298f444b6315975f17a95810159ca308e69cc45c05cb85a595e9422461ef3
   content_hash: sha256:81215b4612f788f26e2e05b32954e1b021d415735553561a3c13b0edafd7e7fb
 - repo_url: manaflow-ai/cmux
   name: cmux
@@ -107,6 +1086,13 @@ dependencies:
   virtual_path: skills/cmux-keyboard-shortcuts
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/cmux-keyboard-shortcuts
+  - .claude/skills/cmux-keyboard-shortcuts/SKILL.md
+  - .claude/skills/cmux-keyboard-shortcuts/agents/openai.yaml
+  deployed_file_hashes:
+    .claude/skills/cmux-keyboard-shortcuts/SKILL.md: sha256:d201a817e171c16428d40d691beca742149acd46758fa78aa6ae216cc3a26e6a
+    .claude/skills/cmux-keyboard-shortcuts/agents/openai.yaml: sha256:0142780353095ada7b03820cad4e86a1e6819c9814e8868f018f09142c3b4884
   content_hash: sha256:eb39e8be80571101ff2a9820d44ac4e57415ac7ee7e27f46c81bf18d97b70554
 - repo_url: manaflow-ai/cmux
   name: cmux
@@ -116,6 +1102,17 @@ dependencies:
   virtual_path: skills/cmux-markdown
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/cmux-markdown
+  - .claude/skills/cmux-markdown/SKILL.md
+  - .claude/skills/cmux-markdown/agents/openai.yaml
+  - .claude/skills/cmux-markdown/references/commands.md
+  - .claude/skills/cmux-markdown/references/live-reload.md
+  deployed_file_hashes:
+    .claude/skills/cmux-markdown/SKILL.md: sha256:b5e5abbee4557bce296c51488d4b747bfd57c83d05a2a3faaaa5f531fd77d2a2
+    .claude/skills/cmux-markdown/agents/openai.yaml: sha256:fb6ae24128e30cd45bd14c36655af33112acb0fa4bd4a64d1043954f553231b5
+    .claude/skills/cmux-markdown/references/commands.md: sha256:7c7bb4977169e998332d57d1a7ffe9f0f66d1621601d58213fccee17536a8554
+    .claude/skills/cmux-markdown/references/live-reload.md: sha256:fd100c8c096991605e466c80eabb4058b946d9107822fd6a6396bc67e85132f0
   content_hash: sha256:e50204ae328a00a8a62d6a43c403bc2ee2f7e913f529e6dbcc682c3d48921818
 - repo_url: manaflow-ai/cmux
   name: cmux
@@ -125,6 +1122,19 @@ dependencies:
   virtual_path: skills/cmux-settings
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/cmux-settings
+  - .claude/skills/cmux-settings/SKILL.md
+  - .claude/skills/cmux-settings/agents/openai.yaml
+  - .claude/skills/cmux-settings/references/all-keys.md
+  - .claude/skills/cmux-settings/references/shortcut-actions.md
+  - .claude/skills/cmux-settings/scripts/cmux-settings
+  deployed_file_hashes:
+    .claude/skills/cmux-settings/SKILL.md: sha256:84b744c8ccc68a2cd5cfefa38faf0c5939bd69ef135ea4374b33d4f0234ef11f
+    .claude/skills/cmux-settings/agents/openai.yaml: sha256:3e6713f9c335147fbbcb04d3d50f3f994c97e915d4af2f315d8fb51f4a4f336f
+    .claude/skills/cmux-settings/references/all-keys.md: sha256:45f616a013b22ed041cd9081711903787b2481a6ab01e5c87701141ab02f7c0e
+    .claude/skills/cmux-settings/references/shortcut-actions.md: sha256:30386cde9084d48f29245aa07542c0f0a736d975db951ccb324a1f82106b2cd3
+    .claude/skills/cmux-settings/scripts/cmux-settings: sha256:82555b970584c7072bb046ad4a4e02b81630d553e41dbda34d6710b0af843bb3
   content_hash: sha256:88be6e4b5e376a9faca5ea3a2fb377bd4827bb85c1e087058dbac6fa5f940116
 - repo_url: manaflow-ai/cmux
   name: cmux
@@ -134,6 +1144,15 @@ dependencies:
   virtual_path: skills/cmux-socket-policy
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/cmux-socket-policy
+  - .claude/skills/cmux-socket-policy/SKILL.md
+  - .claude/skills/cmux-socket-policy/agents/openai.yaml
+  - .claude/skills/cmux-socket-policy/references/threading-and-focus.md
+  deployed_file_hashes:
+    .claude/skills/cmux-socket-policy/SKILL.md: sha256:47580a3f5187889a3fa1fdefb97b55b797aedf1321c3b4b584779539e1cb176a
+    .claude/skills/cmux-socket-policy/agents/openai.yaml: sha256:f7e7ca2e6419bfaccf7e4a2893674d638854c6675d35edb0fe6013a2a9997399
+    .claude/skills/cmux-socket-policy/references/threading-and-focus.md: sha256:f0e83a30bd3c9a7eec121c1a52c503cf76408a55916ff75a150a18d8ad2001a7
   content_hash: sha256:bebf2e11fdb5c5dbbf84272257b05d2ad0df3207018989ddd26a3235ee4fcb62
 - repo_url: manaflow-ai/cmux
   name: cmux
@@ -143,6 +1162,15 @@ dependencies:
   virtual_path: skills/cmux-workspace
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/cmux-workspace
+  - .claude/skills/cmux-workspace/SKILL.md
+  - .claude/skills/cmux-workspace/agents/openai.yaml
+  - .claude/skills/cmux-workspace/references/commands.md
+  deployed_file_hashes:
+    .claude/skills/cmux-workspace/SKILL.md: sha256:5f8c0b41951b0ac906167f16d015ca708c39fe878f27e504f322e237ca61ed12
+    .claude/skills/cmux-workspace/agents/openai.yaml: sha256:fb505a3163fb9f9aba2fb4a8f14e5b5956f9ba927f3a2fb51b23585eed5c7d80
+    .claude/skills/cmux-workspace/references/commands.md: sha256:976f3226c1e13c3be50da601842512bf7ab052379e5c8ffc452e19bf34021313
   content_hash: sha256:ee69bbbf783ac02f156527dd207a8ad021586a9b4ba6152e309103fd35453398
 - repo_url: mattpocock/skills
   name: skills
@@ -152,6 +1180,11 @@ dependencies:
   virtual_path: skills/productivity/grilling
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/grilling
+  - .claude/skills/grilling/SKILL.md
+  deployed_file_hashes:
+    .claude/skills/grilling/SKILL.md: sha256:fe00af3e1815f97c0a7644605479328a726b5cd95ba6ef56a4be2a92fae6c20f
   content_hash: sha256:ef685a6fa0bbe73b05bbd8dc1ec97258191587f07c6aa7dbc9006675ceb8f90f
 - repo_url: shadcn-ui/ui
   name: ui
@@ -164,6 +1197,33 @@ dependencies:
   deployed_files:
   - .agents/skills/shadcn
   - .claude/skills/shadcn
+  - .claude/skills/shadcn/SKILL.md
+  - .claude/skills/shadcn/agents/openai.yml
+  - .claude/skills/shadcn/assets/shadcn-small.png
+  - .claude/skills/shadcn/assets/shadcn.png
+  - .claude/skills/shadcn/cli.md
+  - .claude/skills/shadcn/customization.md
+  - .claude/skills/shadcn/evals/evals.json
+  - .claude/skills/shadcn/mcp.md
+  - .claude/skills/shadcn/rules/base-vs-radix.md
+  - .claude/skills/shadcn/rules/composition.md
+  - .claude/skills/shadcn/rules/forms.md
+  - .claude/skills/shadcn/rules/icons.md
+  - .claude/skills/shadcn/rules/styling.md
+  deployed_file_hashes:
+    .claude/skills/shadcn/SKILL.md: sha256:c5a5c3a8e380ab7d49369c68a715b2da6b1bcc449898cfdf787bbab8cb13a5d9
+    .claude/skills/shadcn/agents/openai.yml: sha256:35db91b1eef58b2abe01da9b88577de5a44e233b740cd93d692ddeeadd2afe4d
+    .claude/skills/shadcn/assets/shadcn-small.png: sha256:0ecc62d682727f68fc4937eed19960c706714fa084d44f63028d611ae02bf3d7
+    .claude/skills/shadcn/assets/shadcn.png: sha256:7d60ad6fec4d89a0d44ba5a3c9283d2fea0047af5467f9227040e20d927d39b7
+    .claude/skills/shadcn/cli.md: sha256:870161eac345ef1c7f158ca98559e3847a530ce5f799da3476e24fc4a9472f60
+    .claude/skills/shadcn/customization.md: sha256:84c1d47168c4b8adb5840e4af30a4e373ae3377c1110478c8974f398dd63f5ba
+    .claude/skills/shadcn/evals/evals.json: sha256:97ebb931d690578ee64e445d84f406be2a8799812d38d3cb1bb216e68291eb2b
+    .claude/skills/shadcn/mcp.md: sha256:f391dc7acbe609dd3fe04b1ae5cd2005ded6b6d51a238201ea41d7d16a6da26a
+    .claude/skills/shadcn/rules/base-vs-radix.md: sha256:2b2deb47d004285220c1fc6b38bb2edc2d0ccbcdafd031b0b189d5d8ed0d1ba8
+    .claude/skills/shadcn/rules/composition.md: sha256:de068e5aa5351dd8e4af7bfb7a6333302445c15527eaeee521d8591e95e7d709
+    .claude/skills/shadcn/rules/forms.md: sha256:29593e14381e34626f8e0e9c15c59f3394b92a0623af6a6ec94585400123853c
+    .claude/skills/shadcn/rules/icons.md: sha256:d4a58266648872d9ee07d0c2368843a1cb88b8253b7f528dd7bda9d68b6c2535
+    .claude/skills/shadcn/rules/styling.md: sha256:4a71da3fc53d8efbedac26946e5b13b53d1edf71583d62088ccc2b8cc7b5fef7
   content_hash: sha256:e9d76d55c14a21546595524cdc44466d191c0da4e183298949ae881b8b6d5e24
 - repo_url: vercel-labs/agent-skills
   name: agent-skills
@@ -176,6 +1236,159 @@ dependencies:
   deployed_files:
   - .agents/skills/react-best-practices
   - .claude/skills/react-best-practices
+  - .claude/skills/react-best-practices/AGENTS.md
+  - .claude/skills/react-best-practices/README.md
+  - .claude/skills/react-best-practices/SKILL.md
+  - .claude/skills/react-best-practices/metadata.json
+  - .claude/skills/react-best-practices/rules/_sections.md
+  - .claude/skills/react-best-practices/rules/_template.md
+  - .claude/skills/react-best-practices/rules/advanced-effect-event-deps.md
+  - .claude/skills/react-best-practices/rules/advanced-event-handler-refs.md
+  - .claude/skills/react-best-practices/rules/advanced-init-once.md
+  - .claude/skills/react-best-practices/rules/advanced-use-latest.md
+  - .claude/skills/react-best-practices/rules/async-api-routes.md
+  - .claude/skills/react-best-practices/rules/async-cheap-condition-before-await.md
+  - .claude/skills/react-best-practices/rules/async-defer-await.md
+  - .claude/skills/react-best-practices/rules/async-dependencies.md
+  - .claude/skills/react-best-practices/rules/async-parallel.md
+  - .claude/skills/react-best-practices/rules/async-suspense-boundaries.md
+  - .claude/skills/react-best-practices/rules/bundle-analyzable-paths.md
+  - .claude/skills/react-best-practices/rules/bundle-barrel-imports.md
+  - .claude/skills/react-best-practices/rules/bundle-conditional.md
+  - .claude/skills/react-best-practices/rules/bundle-defer-third-party.md
+  - .claude/skills/react-best-practices/rules/bundle-dynamic-imports.md
+  - .claude/skills/react-best-practices/rules/bundle-preload.md
+  - .claude/skills/react-best-practices/rules/client-event-listeners.md
+  - .claude/skills/react-best-practices/rules/client-localstorage-schema.md
+  - .claude/skills/react-best-practices/rules/client-passive-event-listeners.md
+  - .claude/skills/react-best-practices/rules/client-swr-dedup.md
+  - .claude/skills/react-best-practices/rules/js-batch-dom-css.md
+  - .claude/skills/react-best-practices/rules/js-cache-function-results.md
+  - .claude/skills/react-best-practices/rules/js-cache-property-access.md
+  - .claude/skills/react-best-practices/rules/js-cache-storage.md
+  - .claude/skills/react-best-practices/rules/js-combine-iterations.md
+  - .claude/skills/react-best-practices/rules/js-early-exit.md
+  - .claude/skills/react-best-practices/rules/js-flatmap-filter.md
+  - .claude/skills/react-best-practices/rules/js-hoist-regexp.md
+  - .claude/skills/react-best-practices/rules/js-index-maps.md
+  - .claude/skills/react-best-practices/rules/js-length-check-first.md
+  - .claude/skills/react-best-practices/rules/js-min-max-loop.md
+  - .claude/skills/react-best-practices/rules/js-request-idle-callback.md
+  - .claude/skills/react-best-practices/rules/js-set-map-lookups.md
+  - .claude/skills/react-best-practices/rules/js-tosorted-immutable.md
+  - .claude/skills/react-best-practices/rules/rendering-activity.md
+  - .claude/skills/react-best-practices/rules/rendering-animate-svg-wrapper.md
+  - .claude/skills/react-best-practices/rules/rendering-conditional-render.md
+  - .claude/skills/react-best-practices/rules/rendering-content-visibility.md
+  - .claude/skills/react-best-practices/rules/rendering-hoist-jsx.md
+  - .claude/skills/react-best-practices/rules/rendering-hydration-no-flicker.md
+  - .claude/skills/react-best-practices/rules/rendering-hydration-suppress-warning.md
+  - .claude/skills/react-best-practices/rules/rendering-resource-hints.md
+  - .claude/skills/react-best-practices/rules/rendering-script-defer-async.md
+  - .claude/skills/react-best-practices/rules/rendering-svg-precision.md
+  - .claude/skills/react-best-practices/rules/rendering-usetransition-loading.md
+  - .claude/skills/react-best-practices/rules/rerender-defer-reads.md
+  - .claude/skills/react-best-practices/rules/rerender-dependencies.md
+  - .claude/skills/react-best-practices/rules/rerender-derived-state-no-effect.md
+  - .claude/skills/react-best-practices/rules/rerender-derived-state.md
+  - .claude/skills/react-best-practices/rules/rerender-functional-setstate.md
+  - .claude/skills/react-best-practices/rules/rerender-lazy-state-init.md
+  - .claude/skills/react-best-practices/rules/rerender-memo-with-default-value.md
+  - .claude/skills/react-best-practices/rules/rerender-memo.md
+  - .claude/skills/react-best-practices/rules/rerender-move-effect-to-event.md
+  - .claude/skills/react-best-practices/rules/rerender-no-inline-components.md
+  - .claude/skills/react-best-practices/rules/rerender-simple-expression-in-memo.md
+  - .claude/skills/react-best-practices/rules/rerender-split-combined-hooks.md
+  - .claude/skills/react-best-practices/rules/rerender-transitions.md
+  - .claude/skills/react-best-practices/rules/rerender-use-deferred-value.md
+  - .claude/skills/react-best-practices/rules/rerender-use-ref-transient-values.md
+  - .claude/skills/react-best-practices/rules/server-after-nonblocking.md
+  - .claude/skills/react-best-practices/rules/server-auth-actions.md
+  - .claude/skills/react-best-practices/rules/server-cache-lru.md
+  - .claude/skills/react-best-practices/rules/server-cache-react.md
+  - .claude/skills/react-best-practices/rules/server-dedup-props.md
+  - .claude/skills/react-best-practices/rules/server-hoist-static-io.md
+  - .claude/skills/react-best-practices/rules/server-no-shared-module-state.md
+  - .claude/skills/react-best-practices/rules/server-parallel-fetching.md
+  - .claude/skills/react-best-practices/rules/server-parallel-nested-fetching.md
+  - .claude/skills/react-best-practices/rules/server-serialization.md
+  deployed_file_hashes:
+    .claude/skills/react-best-practices/AGENTS.md: sha256:fc93e7421177bbf869cce892bc60a6c83a4517d974bc3bf65c4e2c1e58a6ccf6
+    .claude/skills/react-best-practices/README.md: sha256:9eafb2123d3b8b2aef41fba0db2648a3f4f49996f8c7c8bb2c86263befd8b48a
+    .claude/skills/react-best-practices/SKILL.md: sha256:71ed7794962fa6e803ee83030517b5b93a9f70fbfeb431ec4535c5480a8d8355
+    .claude/skills/react-best-practices/metadata.json: sha256:c4e18bac3290fbe1b471a605867d4df68b03144ea26b8befdbe8f9d8fd124354
+    .claude/skills/react-best-practices/rules/_sections.md: sha256:01c59969e4e867f0708c8f8ef9c6d87fab9a07d0586244f429ff84013db8a115
+    .claude/skills/react-best-practices/rules/_template.md: sha256:99df2a3ea088c6c22de2484ddc7e964d0e9923846f44c63380343ecc64455442
+    .claude/skills/react-best-practices/rules/advanced-effect-event-deps.md: sha256:55ed8f9f27a1bff803d6fa55828176207714b02123cbb97ddb8a90d88024a723
+    .claude/skills/react-best-practices/rules/advanced-event-handler-refs.md: sha256:a3097edeecfb2ff6851cd66ed8cdf0617c3c88180504bee824aa6e75a215bbbc
+    .claude/skills/react-best-practices/rules/advanced-init-once.md: sha256:3e4dc22173eb0e2b6dcf583e3babd862b8696328f8f59aee7c4d746c5bc05f6c
+    .claude/skills/react-best-practices/rules/advanced-use-latest.md: sha256:8a3f64dfe5a77d1564248faf17fe662ae75b55d497a243cb30b38eb07ccbbf9a
+    .claude/skills/react-best-practices/rules/async-api-routes.md: sha256:523338540d73427dc14c0cbb19f2741ebccdf8b105a7b2c1b33d2905cf237a42
+    .claude/skills/react-best-practices/rules/async-cheap-condition-before-await.md: sha256:03107c1f70a293cd58a8abc5474c5548e20ea4efdf01b6d45aae7ad0ac1cb32c
+    .claude/skills/react-best-practices/rules/async-defer-await.md: sha256:f3c142d090615abdcc99d31c123be37b31f0f1ed8d9ec9f7789a3bc6883ae0fb
+    .claude/skills/react-best-practices/rules/async-dependencies.md: sha256:16ef469f877e30c6b8e1e1b4bc3e527312fa3c6318cb785a4eca186ea236131a
+    .claude/skills/react-best-practices/rules/async-parallel.md: sha256:6d2f841896279e976dfcdc1ac89e70771ac188baadfd43c096b5706cb838b961
+    .claude/skills/react-best-practices/rules/async-suspense-boundaries.md: sha256:de05fedac2eb7ae563b887b5a424464ec3dfaf84e5b7797467ebe2a796ac8afc
+    .claude/skills/react-best-practices/rules/bundle-analyzable-paths.md: sha256:62090b5c815fd71bf1133dce754f51abc16a9456d0ccd025fd627de27726e92a
+    .claude/skills/react-best-practices/rules/bundle-barrel-imports.md: sha256:e648f6d54525f07a691357040ca5bff6ea3424788a91ff63812adb29622a671b
+    .claude/skills/react-best-practices/rules/bundle-conditional.md: sha256:09c8259c3efb04fc0abb8e412ccbda217c222ae8118516283e571c995fe3a7d4
+    .claude/skills/react-best-practices/rules/bundle-defer-third-party.md: sha256:3719fb47b191e8db4fe22686ec88448ad5af9e6838585425abbe103d0b642e37
+    .claude/skills/react-best-practices/rules/bundle-dynamic-imports.md: sha256:401817a7369f315fc5a68a1095742ff7d53d0461906880dc9d64a41495ee1986
+    .claude/skills/react-best-practices/rules/bundle-preload.md: sha256:d1f7cc28da7cd5ab249acd287edc5b761afcfb194e9cb62cd44c5f3543db2de2
+    .claude/skills/react-best-practices/rules/client-event-listeners.md: sha256:242a873349febc1ce685e85617994784dbab92c2eaa68aed7fed5a83e7680e93
+    .claude/skills/react-best-practices/rules/client-localstorage-schema.md: sha256:0fb7cdf9dc93fdf22f87e3669f953fb9d4ac9b0be42eec4a29fe9a2560610b88
+    .claude/skills/react-best-practices/rules/client-passive-event-listeners.md: sha256:1f35016f9053de69e884ee9be00654e37979c2ca85f5e57764dc2626ff7acb4b
+    .claude/skills/react-best-practices/rules/client-swr-dedup.md: sha256:644652c39c6cc00de8d1c77a7273612e868dc3f7edda30764164c12ec0f764a3
+    .claude/skills/react-best-practices/rules/js-batch-dom-css.md: sha256:480b891b9eaf96e929dc1e964274a4828e3a78009b7d00ccd965a0d425215959
+    .claude/skills/react-best-practices/rules/js-cache-function-results.md: sha256:3daaa11d24f4295cb6be8bc6f407f2ce83cc7b5bd1f0e68891ea8ab835721dc7
+    .claude/skills/react-best-practices/rules/js-cache-property-access.md: sha256:73e47431e74878a927061bf0ddc7cd91a7556cb35d2573f3421e82300d9ae311
+    .claude/skills/react-best-practices/rules/js-cache-storage.md: sha256:11b826b0433898c1ece2d3547010d8e77db9fb240185748c45db91493de9b6cc
+    .claude/skills/react-best-practices/rules/js-combine-iterations.md: sha256:71add08aeeb43091d4ff4c0b2842cce8b4bdef8ad3e732cc034bb5a84827e746
+    .claude/skills/react-best-practices/rules/js-early-exit.md: sha256:925ce5ce87f3347186ca62212f29cc6baa2b8c85a96d2720ad07c3d0abf781c0
+    .claude/skills/react-best-practices/rules/js-flatmap-filter.md: sha256:9e5b166a41914d975bef7635467f8fb32cd98b5c3126c0bc6f163490812fb5f0
+    .claude/skills/react-best-practices/rules/js-hoist-regexp.md: sha256:f9e9aef2f7c2307dd7310f283df85dcada45fc43e9bb941b0c3aa414dec21ec4
+    .claude/skills/react-best-practices/rules/js-index-maps.md: sha256:5df1bdc2cfabb2c98abd55d26762e5c18189535c2e686184f426082e62920391
+    .claude/skills/react-best-practices/rules/js-length-check-first.md: sha256:8b54a311c826b299272f29187fc58bc55772a04c4a72eeb29456ee96dc9fc624
+    .claude/skills/react-best-practices/rules/js-min-max-loop.md: sha256:87dfb67e2f39df6ad8bcfb5b78c5fb364d3c07554ad188a202408d99f3763421
+    .claude/skills/react-best-practices/rules/js-request-idle-callback.md: sha256:ee08f83905b4011abbc33d594033157d77561b5bbd9b36b04f0f409581ffec32
+    .claude/skills/react-best-practices/rules/js-set-map-lookups.md: sha256:a7fd781a6ba9ad49065961b6f9a90ef486bf6b648390e1a08704025f98e1642b
+    .claude/skills/react-best-practices/rules/js-tosorted-immutable.md: sha256:d0a5e1b0fec48a0a81397957e2f068e224329f7c42cb5feeed8aae6fa64025e8
+    .claude/skills/react-best-practices/rules/rendering-activity.md: sha256:1e5e7eaf3555e61d6a2e900089c676527d26259501db5594f59544b6c664f85a
+    .claude/skills/react-best-practices/rules/rendering-animate-svg-wrapper.md: sha256:9c6ae0ca7a51434e803887c64cded760956579a1452ccb80a461a03f9c937c77
+    .claude/skills/react-best-practices/rules/rendering-conditional-render.md: sha256:2ec2fa23c4148285144687050c52369adba3da2fbe3d486f8d3e0aad8f06f2bc
+    .claude/skills/react-best-practices/rules/rendering-content-visibility.md: sha256:64eee6d5b916fe74df33363994b27fc7f71bea3bcedc7ee04bda23107ca3e6e4
+    .claude/skills/react-best-practices/rules/rendering-hoist-jsx.md: sha256:93b229560fae92005ed9a2a829064607b39b2e984e92d221d05b2d41df2b7c0e
+    .claude/skills/react-best-practices/rules/rendering-hydration-no-flicker.md: sha256:dc7ab358c67c177bca6e6f360fbc935ebe4efa928c0ba3ebd3f9f3d9e2000ca3
+    .claude/skills/react-best-practices/rules/rendering-hydration-suppress-warning.md: sha256:915bacb934e2927d84b37a3f3d225a47b309ac8f9e494ed2bcb66ce07c5676a2
+    .claude/skills/react-best-practices/rules/rendering-resource-hints.md: sha256:351b1095d641717b930f1b2253282b7120af3023bc74e06c17675168d4286864
+    .claude/skills/react-best-practices/rules/rendering-script-defer-async.md: sha256:4cea07b7875ba7fc2c7465ff23b63a2bb334f90aaf2d9293d38d67b05fdb32ab
+    .claude/skills/react-best-practices/rules/rendering-svg-precision.md: sha256:ed468533f6e95f622859c884b122cf21f9f593ed6bb3d500a54de4b9f9bcb9fb
+    .claude/skills/react-best-practices/rules/rendering-usetransition-loading.md: sha256:3a1249c3f13026b6f54ab5712c388df219d6af01b12aa542749acd99a46f4bc1
+    .claude/skills/react-best-practices/rules/rerender-defer-reads.md: sha256:234050a77faf50cb306be10a9e15bd4421134ab5907e75f13e6d78e2bd262dc9
+    .claude/skills/react-best-practices/rules/rerender-dependencies.md: sha256:17eb5830956fb56486fd3cfc7431f5849d39751730c05ad9e77dd4f0c27169c5
+    .claude/skills/react-best-practices/rules/rerender-derived-state-no-effect.md: sha256:cb11ec76f50aa7b6847269f02d79b120c889a30d9ecd2c1d578f75144419c77a
+    .claude/skills/react-best-practices/rules/rerender-derived-state.md: sha256:1c326bb67b01fb084eb00c8911b0a7cff54681c2315b629f88e49b64eaa6481d
+    .claude/skills/react-best-practices/rules/rerender-functional-setstate.md: sha256:5e68df6b2ae8058e67f476ff1ac67bde159f5a9d18df439e46eabcdeb7b52e58
+    .claude/skills/react-best-practices/rules/rerender-lazy-state-init.md: sha256:4ae844740f266fc8cbf050701230286624a2440ec5be67b9a63d9edc3c580573
+    .claude/skills/react-best-practices/rules/rerender-memo-with-default-value.md: sha256:81c47476564ad8a79fc68fc442734255ca7d6829424359464503fda0a9f9a0dd
+    .claude/skills/react-best-practices/rules/rerender-memo.md: sha256:1f258990c2f27ff6256b3cc5c43300631bb3f0d81f749aed08d07fcdcc131dd1
+    .claude/skills/react-best-practices/rules/rerender-move-effect-to-event.md: sha256:abc2cbf167bee056743023351e96806a411d3398da8802093620aecf0721f029
+    .claude/skills/react-best-practices/rules/rerender-no-inline-components.md: sha256:1cc32907a770272524ba682eef9e7efdd8ad4533b6f89b718a1fcd7d1d0eb6a3
+    .claude/skills/react-best-practices/rules/rerender-simple-expression-in-memo.md: sha256:5bdcf2d1558ba5204e643c887b7b4060f89630969425651eb68e96427d97f800
+    .claude/skills/react-best-practices/rules/rerender-split-combined-hooks.md: sha256:6f45d703343484ef9acef9388397f3642966ae6a5a258899a0cf1f9977cfbf6c
+    .claude/skills/react-best-practices/rules/rerender-transitions.md: sha256:60f4033909a62df5e5b8c601494f9e50a562e2f8c1c2d81eac24f38142265f1c
+    .claude/skills/react-best-practices/rules/rerender-use-deferred-value.md: sha256:8c3579576a61a949884167745dcfaf1d5426ba305cc61fd0a79602d70fda4909
+    .claude/skills/react-best-practices/rules/rerender-use-ref-transient-values.md: sha256:f1a649af9d1d0b5c762f6c9c4c1c70c90d7df82aa10296ee87aadb78c1b76c54
+    .claude/skills/react-best-practices/rules/server-after-nonblocking.md: sha256:d0b8d24a3db9f0f65f9e2bddbf230b0e03a5f60e1229d93a4a18f5e7a991c7c2
+    .claude/skills/react-best-practices/rules/server-auth-actions.md: sha256:a2ca8aa102839251c7971ec784560fab943c20b36fe6f80365d4110c13260c23
+    .claude/skills/react-best-practices/rules/server-cache-lru.md: sha256:1924b64561841923b88a657085097a0aeba3e0ba2d5470b9f5c15cc10d6ae70f
+    .claude/skills/react-best-practices/rules/server-cache-react.md: sha256:fddeea6c870bb3da4134b61d54b7d09b83d2603f929b7547cd3dc1dc269edd5c
+    .claude/skills/react-best-practices/rules/server-dedup-props.md: sha256:c2747424cdac46be62f835f245a0aa887b0090b416d28e2ac8676702645eeb37
+    .claude/skills/react-best-practices/rules/server-hoist-static-io.md: sha256:5abea4dd882b13661bd5f7dfb93f9e547d5f08176c61c448ade91b210ed5d49f
+    .claude/skills/react-best-practices/rules/server-no-shared-module-state.md: sha256:4d869bf1cd2f1632e5ca4c0e64b1cf0e71c5f5a0f940bc8a22174d205e735ed7
+    .claude/skills/react-best-practices/rules/server-parallel-fetching.md: sha256:569a2e9fc04f9606686cd75c5894ef8781b502786a7fffe241396846c7733472
+    .claude/skills/react-best-practices/rules/server-parallel-nested-fetching.md: sha256:ad5d9656984d4a959997a2367bf59cc6632297b4634a1dd13a087939d83f30b3
+    .claude/skills/react-best-practices/rules/server-serialization.md: sha256:f4c7d68b29c82381baad059c4a7f09e868e71ec9c3115a26ad3ae7d24c0dfe1f
   content_hash: sha256:74f142d28d360d78e8bac4f239a84c87f0ced9015729bc72b5458d82ff45b015
 - repo_url: vercel-labs/next-skills
   name: next-skills
@@ -188,6 +1401,47 @@ dependencies:
   deployed_files:
   - .agents/skills/next-best-practices
   - .claude/skills/next-best-practices
+  - .claude/skills/next-best-practices/SKILL.md
+  - .claude/skills/next-best-practices/async-patterns.md
+  - .claude/skills/next-best-practices/bundling.md
+  - .claude/skills/next-best-practices/data-patterns.md
+  - .claude/skills/next-best-practices/debug-tricks.md
+  - .claude/skills/next-best-practices/directives.md
+  - .claude/skills/next-best-practices/error-handling.md
+  - .claude/skills/next-best-practices/file-conventions.md
+  - .claude/skills/next-best-practices/font.md
+  - .claude/skills/next-best-practices/functions.md
+  - .claude/skills/next-best-practices/hydration-error.md
+  - .claude/skills/next-best-practices/image.md
+  - .claude/skills/next-best-practices/metadata.md
+  - .claude/skills/next-best-practices/parallel-routes.md
+  - .claude/skills/next-best-practices/route-handlers.md
+  - .claude/skills/next-best-practices/rsc-boundaries.md
+  - .claude/skills/next-best-practices/runtime-selection.md
+  - .claude/skills/next-best-practices/scripts.md
+  - .claude/skills/next-best-practices/self-hosting.md
+  - .claude/skills/next-best-practices/suspense-boundaries.md
+  deployed_file_hashes:
+    .claude/skills/next-best-practices/SKILL.md: sha256:c78f952d4e98bf3694856dbf70c03a6037d4e258ff3701f2642bfdf108549a25
+    .claude/skills/next-best-practices/async-patterns.md: sha256:3a5e4a91d8399f0922c4a3b15b3490fbeb7396f976139a92311ea34cfa300584
+    .claude/skills/next-best-practices/bundling.md: sha256:5496b337073985068c61527e0a89fbf7088faa47b9f92d2dd09a7d070cb48a7c
+    .claude/skills/next-best-practices/data-patterns.md: sha256:538c8e24cd60eded9825a9461f2c644f5e6e5203d95aa4bf7c9486412bcc7aa1
+    .claude/skills/next-best-practices/debug-tricks.md: sha256:62617a7cb131a2111f9f033617404fadb3458d56aeb0643f75aa5b2e43abf192
+    .claude/skills/next-best-practices/directives.md: sha256:60b82ee24a8d43631da59beeec11f46ab25ce83c8000578f2222ecb6b6cadf4d
+    .claude/skills/next-best-practices/error-handling.md: sha256:30b4e825b625df01d4a7c441591ac46782aab4f913432e96f408153d5fa62098
+    .claude/skills/next-best-practices/file-conventions.md: sha256:0fed8bd429983c930c95eab3ab0254d4f2c128068fa290d758a057e3467252c3
+    .claude/skills/next-best-practices/font.md: sha256:cb1f8d43e8fbca39839056b4621724837858bdace13e73bf3faf69abca318a21
+    .claude/skills/next-best-practices/functions.md: sha256:39a8a418af501d7132d289f4b5dd6cae59d1bfa6fda941d502fc29bb0204e079
+    .claude/skills/next-best-practices/hydration-error.md: sha256:d4baec07ab818045e284c45dd24422685ac934a38ea325139651f664a94eff57
+    .claude/skills/next-best-practices/image.md: sha256:231a15ddea67fe0b965762cc89993ca5aaeb0c35c0e67767bd53ca138ec04c05
+    .claude/skills/next-best-practices/metadata.md: sha256:19b00274877056f222f2284be5ade2479690e79e86af9a0466bc9d209506a95d
+    .claude/skills/next-best-practices/parallel-routes.md: sha256:d8a1c2546d90af2b37e22a4a56a1978555af0d62a7683e349ce3e3287ab8a4af
+    .claude/skills/next-best-practices/route-handlers.md: sha256:976a17de8024b3a65063350ae0fb6b9b617293f06358305800c858f58b015680
+    .claude/skills/next-best-practices/rsc-boundaries.md: sha256:2b50b0310884609efc9f2620fbb81ef83a30a810544e449ff669c55935d5b920
+    .claude/skills/next-best-practices/runtime-selection.md: sha256:7abb95f9af0f4769e7e9e91aba94a5787ed16e2c4009a140c8577a3a49828060
+    .claude/skills/next-best-practices/scripts.md: sha256:fff3bc7530d5af472e2825fde69a26218c9e58acba74d60913f403baab4628a3
+    .claude/skills/next-best-practices/self-hosting.md: sha256:f59e9afa0ff4dcbe20374dff13517ccec3ac6a239ef6d02e0ee8863cf9fc7082
+    .claude/skills/next-best-practices/suspense-boundaries.md: sha256:63e2e7125b1a1a9d652dd301814ad7140f8ab3ad6726b2b53df76a89d9bc262a
   content_hash: sha256:4bf1b21f7a66848642c150cab284f24c004ad6da0f717eed4fe9db74eaa6b6a8
 - repo_url: yoshiko-pg/difit
   name: difit
@@ -197,6 +1451,13 @@ dependencies:
   virtual_path: skills/difit
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/difit
+  - .claude/skills/difit/SKILL.md
+  - .claude/skills/difit/agents/openai.yaml
+  deployed_file_hashes:
+    .claude/skills/difit/SKILL.md: sha256:8171ee2b19d85ba4702e4a0d190e63803ec9d5e91416530c78a63ba86808c97b
+    .claude/skills/difit/agents/openai.yaml: sha256:305d35f2ee4dda20d4c7fbe1eb18fda366f3e84d9ff84b2111d4faa3a608007f
   content_hash: sha256:d7183ec34bc1b776e8e54cf34efd1bf8be8b04bdb424e5efcfbb3faa5f095db7
 - repo_url: yoshiko-pg/difit
   name: difit
@@ -206,6 +1467,13 @@ dependencies:
   virtual_path: skills/difit-review
   is_virtual: true
   package_type: claude_skill
+  deployed_files:
+  - .claude/skills/difit-review
+  - .claude/skills/difit-review/SKILL.md
+  - .claude/skills/difit-review/agents/openai.yaml
+  deployed_file_hashes:
+    .claude/skills/difit-review/SKILL.md: sha256:778555921c3d63e932d987a2b2181442b2f4a21767692a621d94a1b536cddfe8
+    .claude/skills/difit-review/agents/openai.yaml: sha256:8436c3a9d6f88c3c2852856f4a1cf4be19ca2f3f44bc5d629d43612ba57ab70b
   content_hash: sha256:4f95a432d8a359a2c3a8d320b98c871dda13d03b8583fe202528890e767e8c30
 mcp_servers:
 - doist/todoist-ai
