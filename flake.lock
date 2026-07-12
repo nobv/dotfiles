@@ -20,6 +20,26 @@
         "type": "github"
       }
     },
+    "den": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1783827180,
+        "narHash": "sha256-xe1eHYf1ZkWLkTncWVphBDySFx1vrN62JHkoRdDE8ik=",
+        "ref": "refs/heads/main",
+        "rev": "aaf4c1878f445bd8817bfba89656128ff2a17a60",
+        "revCount": 45,
+        "type": "git",
+        "url": "ssh://git@github.com/nobv/den"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/nobv/den"
+      }
+    },
     "determinate": {
       "inputs": {
         "determinate-nixd-aarch64-darwin": "determinate-nixd-aarch64-darwin",
@@ -335,6 +355,7 @@
     "root": {
       "inputs": {
         "darwin": "darwin",
+        "den": "den",
         "determinate": "determinate",
         "git-hooks": "git-hooks",
         "home-manager": "home-manager",
