@@ -228,6 +228,7 @@
       flux.enable = true;
       google-drive.enable = true;
       google-japanese-ime.enable = true;
+      insta360-link-controller.enable = true;
       istat-menus.enable = true;
       karabiner-elements.enable = true;
       leader-key.enable = false;
