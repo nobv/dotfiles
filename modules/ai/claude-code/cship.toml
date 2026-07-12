@@ -27,10 +27,18 @@ critical_threshold = 20
 critical_style = "bold red"
 
 [cship.model]
-format = "Model: $value"
+format = "[Model: $value]($style)"
+style = "bold"
+haiku_style = "green"
+sonnet_style = "cyan"
+opus_style = "magenta"
 
 [cship.effort]
-format = "Effort: $value"
+format = "[Effort: $value]($style)"
+style = "dim"
+high_style = "yellow"
+xhigh_style = "bold yellow"
+max_style = "bold red"
 
 [cship.vim]
 format = "Vim: $value"
