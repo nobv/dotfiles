@@ -27,11 +27,13 @@ critical_threshold = 20
 critical_style = "bold red"
 
 [cship.model]
+# Starship defaults clash with plain color names here: directory=bold cyan,
+# git_branch=bold purple, git_status=bold red. Use truecolor hex to stay distinct.
 format = "[Model: $value]($style)"
 style = "bold"
-haiku_style = "green"
-sonnet_style = "cyan"
-opus_style = "magenta"
+haiku_style = "bold fg:#9ece6a"
+sonnet_style = "bold fg:#7aa2f7"
+opus_style = "bold fg:#e0af68"
 
 [cship.effort]
 format = "[Effort: $value]($style)"
