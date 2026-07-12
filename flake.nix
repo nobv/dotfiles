@@ -20,6 +20,15 @@
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Den — desk-metaphor context switcher. git+ssh so the private repo is
+    # fetched with the existing SSH keys (no nix access-tokens needed);
+    # `github:nobv/den` becomes an option once the repo is public.
+    # Local iteration without pushing: `just den build-local` / `switch-local`
+    den = {
+      url = "git+ssh://git@github.com/nobv/den";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -31,6 +40,7 @@
       darwin,
       home-manager,
       git-hooks,
+      den,
     }:
     let
       system = "aarch64-darwin";

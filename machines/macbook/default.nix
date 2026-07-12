@@ -194,6 +194,7 @@
     system = {
       aerospace.enable = true;
       blueutil.enable = true;
+      den.enable = true;
       flashspace.enable = true;
       fonts.enable = true;
       homebrew.enable = true;
