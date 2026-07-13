@@ -29,8 +29,10 @@ critical_style = "bold red"
 [cship.model]
 # Starship defaults clash with plain color names here: directory=bold cyan,
 # git_branch=bold purple, git_status=bold red. Use truecolor hex to stay distinct.
+# `style` also covers models cship doesn't know yet (e.g. Fable/Mythos) until
+# https://github.com/stephenleo/cship/pull/195 lands with dedicated *_style keys.
 format = "[Model: $value]($style)"
-style = "bold"
+style = "bold fg:#bb9af7"
 haiku_style = "bold fg:#9ece6a"
 sonnet_style = "bold fg:#7aa2f7"
 opus_style = "bold fg:#e0af68"
