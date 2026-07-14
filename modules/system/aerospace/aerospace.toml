@@ -130,6 +130,10 @@ alt-shift-equal = 'resize smart +50'
 # 'break' is the one shared, domain-independent workspace — see the desk-model
 # note near the top of this file. See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 alt-b = 'workspace break'
+# Send the focused window to 'break' (the on-window-detected rules below only
+# place windows at launch; this is the manual escape hatch for the rest).
+# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+alt-shift-b = 'move-node-to-workspace break'
 
 alt-shift-f = 'fullscreen'
 
