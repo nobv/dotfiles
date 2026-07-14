@@ -25,9 +25,13 @@
     # fetched with the existing SSH keys (no nix access-tokens needed);
     # `github:nobv/den` becomes an option once the repo is public.
     # Local iteration without pushing: `just den build-local` / `switch-local`
+    #
+    # Deliberately no `inputs.nixpkgs.follows`: den's release CI builds desk
+    # against den's own flake.lock, and `just den pull` imports that exact
+    # closure. A follows override here would change the drv and every pull
+    # would miss the cache — desk would compile locally again.
     den = {
       url = "git+ssh://git@github.com/nobv/den";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
