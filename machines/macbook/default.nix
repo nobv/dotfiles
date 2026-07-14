@@ -124,8 +124,10 @@
       cursor.enable = false;
       emacs.enable = false;
       jetbrains.enable = true;
-      lazyvim.enable = true;
-      neovim.enable = true;
+      neovim = {
+        enable = true;
+        lazyvim.enable = true;
+      };
       typora.enable = true;
       vim.enable = false;
       vscode.enable = true;

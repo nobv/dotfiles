@@ -100,8 +100,10 @@
 
     editors = {
       jetbrains.enable = true;
-      lazyvim.enable = true;
-      neovim.enable = true;
+      neovim = {
+        enable = true;
+        lazyvim.enable = true;
+      };
       typora.enable = true;
       vscode.enable = true;
     };
