@@ -14,8 +14,33 @@ set working-directory := '..'
 MACHINE := env("DOTFILES_MACHINE", "macbook")
 
 # Local den checkout: DEN_PATH env wins; default asks ghq for the repo by
-# name, so host/owner moves and GHQ_ROOT changes need no edit here
-DEN_PATH := env("DEN_PATH", `ghq list --full-path --exact den | head -n1`)
+# name, so host/owner moves and GHQ_ROOT changes need no edit here.
+#
+# ghq cannot see den yet: GHQ_ROOT already points inside the desk
+# (~/Desk/repos) while den still sits in the pre-Den ~/src — the repo
+# migration has not run. An empty DEN_PATH is dangerous rather than merely
+# broken, because `git -C ""` is a silent no-op: the recipes below would then
+# push *dotfiles* while believing they push den. Fall back to the ~/src
+# checkout, and let `check-path` refuse anything that is not den.
+DEN_PATH := env("DEN_PATH", `p=$(ghq list --full-path --exact den 2>/dev/null | head -n1); [ -n "$p" ] || p="$HOME/src/github.com/nobv/den"; printf %s "$p"`)
+
+# Refuse to act on anything that is not a den checkout (see DEN_PATH above)
+[private]
+check-path:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [ -z "{{ DEN_PATH }}" ] || [ ! -d "{{ DEN_PATH }}/.git" ]; then
+        echo "no den checkout at '{{ DEN_PATH }}' (GHQ_ROOT=${GHQ_ROOT:-unset}) — pass DEN_PATH=/path/to/den" >&2
+        exit 1
+    fi
+    origin=$(git -C "{{ DEN_PATH }}" remote get-url origin 2>/dev/null || true)
+    case "$origin" in
+        *nobv/den*) ;;
+        *)
+            echo "'{{ DEN_PATH }}' is not den (origin: ${origin:-none}) — refusing to push or build it as den" >&2
+            exit 1
+            ;;
+    esac
 
 DEN_REPO := 'nobv/den'
 DEN_GIT_URL := 'ssh://git@github.com/nobv/den'
@@ -23,7 +48,7 @@ DEN_GIT_URL := 'ssh://git@github.com/nobv/den'
 # Push den main, pin the den input to a release tag's rev, import that tag's
 # CI-built closure, and build to validate. Defaults to the latest release;
 # pass a tag to pin an older one (`just den update v0.2.0`).
-update tag="":
+update tag="": check-path
     #!/usr/bin/env bash
     set -euo pipefail
     if [ -n "$(git -C "{{ DEN_PATH }}" status --porcelain)" ]; then
@@ -106,9 +131,9 @@ pull:
     echo "imported: $out"
 
 # Build against the local den working tree (no push; flake.lock untouched)
-build-local:
+build-local: check-path
     nix build .#darwinConfigurations.{{ MACHINE }}.system --override-input den "path:{{ DEN_PATH }}" --no-write-lock-file
 
 # Switch against the local den working tree (temporary testing; next `just nix switch` reverts to the pinned rev)
-switch-local:
+switch-local: check-path
     sudo darwin-rebuild switch --flake .#{{ MACHINE }} --override-input den "path:{{ DEN_PATH }}" --no-write-lock-file
