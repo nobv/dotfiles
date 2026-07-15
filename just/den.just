@@ -15,38 +15,31 @@ MACHINE := env("DOTFILES_MACHINE", "macbook")
 
 # Local den checkout: DEN_PATH env wins; otherwise locate it so no path is
 # baked in — den's home changes (the repo migration moves it from ~/src into a
-# desk, and host/owner could move again). `ghq list` alone is not enough: the
-# active GHQ_ROOT points at one desk and hides the other ghq roots, so den can
-# be present yet invisible. Search every root ghq knows about — GHQ_ROOT, the
-# configured ghq.root(s), and `ghq root --all` — first by ghq's own layout,
-# then, for any other layout, by matching the origin remote rather than the
-# path. An empty result is left empty on purpose: `git -C ""` is a silent
-# no-op that would push *dotfiles* believing it is den, so `check-path` turns
-# "not found" into a hard error instead of a wrong push.
+# desk, and host/owner could move again). Let ghq resolve the layout: it knows
+# where repos live under each root, so nothing here assumes a host/owner
+# subpath. The active GHQ_ROOT hides the other roots, so gather every root ghq
+# knows about — GHQ_ROOT, the configured ghq.root(s), and `ghq root --all` —
+# feed their union back to ghq, and match `den` by name; the origin remote then
+# confirms it is *this* den (not some other repo also named den). An empty
+# result is left empty on purpose: `git -C ""` is a silent no-op that would
+# push *dotfiles* believing it is den, so `check-path` turns "not found" into a
+# hard error instead of a wrong push.
 DEN_PATH := env("DEN_PATH", `
-    roots() {
-        printf '%s\n' "${GHQ_ROOT:-}" | tr ':' '\n'
-        git config --get-all ghq.root 2>/dev/null
-        ghq root --all 2>/dev/null
-    }
-    expand() { case "$1" in "~"|"~/"*) printf '%s' "$HOME${1#\~}";; *) printf '%s' "$1";; esac; }
-    found=$(roots | while read -r r; do
-        [ -n "$r" ] || continue; r=$(expand "$r")
-        [ -d "$r/github.com/nobv/den/.git" ] && { printf '%s' "$r/github.com/nobv/den"; break; }
-    done)
-    if [ -z "$found" ]; then
-        found=$(roots | while read -r r; do
-            [ -n "$r" ] || continue; r=$(expand "$r")
-            [ -d "$r" ] || continue
-            find "$r" -maxdepth 4 -type d -name .git 2>/dev/null | while read -r g; do
-                d=${g%/.git}
-                case "$(git -C "$d" remote get-url origin 2>/dev/null)" in
-                    *nobv/den*) printf '%s' "$d"; break;;
-                esac
-            done
-        done | head -n1)
-    fi
-    printf '%s' "$found"
+    roots=$(
+        { printf '%s\n' "${GHQ_ROOT:-}" | tr ':' '\n'
+          git config --get-all ghq.root 2>/dev/null
+          ghq root --all 2>/dev/null
+        } | while read -r r; do
+            [ -n "$r" ] || continue
+            case "$r" in "~"|"~/"*) r="$HOME${r#\~}";; esac
+            printf '%s\n' "$r"
+        done | awk '!seen[$0]++' | paste -sd: -
+    )
+    GHQ_ROOT="$roots" ghq list --full-path --exact den 2>/dev/null | while read -r d; do
+        case "$(git -C "$d" remote get-url origin 2>/dev/null)" in
+            *nobv/den*) printf '%s' "$d"; break;;
+        esac
+    done
 `)
 
 # Refuse to act on anything that is not a den checkout (see DEN_PATH above)
