@@ -177,11 +177,22 @@ alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
 # on-window-detected places a window at launch only (alt-b / alt-shift-b are the
-# manual escape hatches for the rest). Taxonomy (design D6): hands-on tools = wagon
-# (floating, carried across switches), reference material = shelf (tiled, off-monitor),
-# personal life/comms = break (tiled, shared). No rule → stays on its own desk.
+# manual escape hatches for the rest). A window with no rule stays on its own desk,
+# tiled — that is the default and the common case. The rules below are only for the
+# three domain-independent categories (design D6). Sort a window by asking, in order:
+#
+#   1. Wagon  — is it a TOOL I keep using no matter which desk I'm at?
+#               → floating. floating is the carry marker: desk switch drags it along.
+#   2. Shelf  — is it REFERENCE material I want in view but don't drive?
+#               → tiled on 'shelf', parked on a side monitor, never carried.
+#   3. Break  — is it PERSONAL life/comms, off the clock?
+#               → tiled on 'break', the shared off-desk room reached by alt-b.
+#
+# float vs tiled = carried vs settled. Shelf and break are both tiled (settled) and
+# split only by reference-vs-personal; a work-only tool that isn't carried needs no
+# rule — it settles on its own desk. Only floating things ride the wagon.
 
-# Wagon — floating, follows you across desk switches
+# Wagon — a tool used across desks; floating so desk switch carries it along
 [[on-window-detected]]
 if.app-id = 'com.1password.1password'
 run = 'layout floating'
@@ -198,7 +209,7 @@ run = 'layout floating'
 if.app-id = 'com.anthropic.claudefordesktop'
 run = 'layout floating'
 
-# Break — personal life/comms, tiled on the shared 'break' workspace
+# Break — personal life/comms, off the clock; tiled on the shared 'break' workspace
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
 run = 'move-node-to-workspace break'
@@ -219,7 +230,7 @@ run = 'move-node-to-workspace break'
 if.app-id = 'com.apple.Music'
 run = 'move-node-to-workspace break'
 
-# Shelf — reference material, tiled on the off-monitor 'shelf' workspace
+# Shelf — reference kept in view but not driven; tiled on the off-monitor 'shelf'
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = 'move-node-to-workspace shelf'
