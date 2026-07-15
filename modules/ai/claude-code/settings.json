@@ -68,6 +68,5 @@
   "theme": "dark",
   "editorMode": "vim",
   "autoCompactEnabled": false,
-  "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "agentPushNotifEnabled": true
 }
