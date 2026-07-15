@@ -13,9 +13,52 @@ set working-directory := '..'
 
 MACHINE := env("DOTFILES_MACHINE", "macbook")
 
-# Local den checkout: DEN_PATH env wins; default asks ghq for the repo by
-# name, so host/owner moves and GHQ_ROOT changes need no edit here
-DEN_PATH := env("DEN_PATH", `ghq list --full-path --exact den | head -n1`)
+# Local den checkout: DEN_PATH env wins; otherwise locate it so no path is
+# baked in — den's home changes (the repo migration moves it from ~/src into a
+# desk, and host/owner could move again). Let ghq resolve the layout: it knows
+# where repos live under each root, so nothing here assumes a host/owner
+# subpath. The active GHQ_ROOT hides the other roots, so gather every root ghq
+# knows about — GHQ_ROOT, the configured ghq.root(s), and `ghq root --all` —
+# feed their union back to ghq, and match `den` by name; the origin remote then
+# confirms it is *this* den (not some other repo also named den). An empty
+# result is left empty on purpose: `git -C ""` is a silent no-op that would
+# push *dotfiles* believing it is den, so `check-path` turns "not found" into a
+# hard error instead of a wrong push.
+DEN_PATH := env("DEN_PATH", `
+    roots=$(
+        { printf '%s\n' "${GHQ_ROOT:-}" | tr ':' '\n'
+          git config --get-all ghq.root 2>/dev/null
+          ghq root --all 2>/dev/null
+        } | while read -r r; do
+            [ -n "$r" ] || continue
+            case "$r" in "~"|"~/"*) r="$HOME${r#\~}";; esac
+            printf '%s\n' "$r"
+        done | awk '!seen[$0]++' | paste -sd: -
+    )
+    GHQ_ROOT="$roots" ghq list --full-path --exact den 2>/dev/null | while read -r d; do
+        case "$(git -C "$d" remote get-url origin 2>/dev/null)" in
+            *nobv/den*) printf '%s' "$d"; break;;
+        esac
+    done
+`)
+
+# Refuse to act on anything that is not a den checkout (see DEN_PATH above)
+[private]
+check-path:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [ -z "{{ DEN_PATH }}" ] || [ ! -d "{{ DEN_PATH }}/.git" ]; then
+        echo "no den checkout at '{{ DEN_PATH }}' (GHQ_ROOT=${GHQ_ROOT:-unset}) — pass DEN_PATH=/path/to/den" >&2
+        exit 1
+    fi
+    origin=$(git -C "{{ DEN_PATH }}" remote get-url origin 2>/dev/null || true)
+    case "$origin" in
+        *nobv/den*) ;;
+        *)
+            echo "'{{ DEN_PATH }}' is not den (origin: ${origin:-none}) — refusing to push or build it as den" >&2
+            exit 1
+            ;;
+    esac
 
 DEN_REPO := 'nobv/den'
 DEN_GIT_URL := 'ssh://git@github.com/nobv/den'
@@ -23,7 +66,7 @@ DEN_GIT_URL := 'ssh://git@github.com/nobv/den'
 # Push den main, pin the den input to a release tag's rev, import that tag's
 # CI-built closure, and build to validate. Defaults to the latest release;
 # pass a tag to pin an older one (`just den update v0.2.0`).
-update tag="":
+update tag="": check-path
     #!/usr/bin/env bash
     set -euo pipefail
     if [ -n "$(git -C "{{ DEN_PATH }}" status --porcelain)" ]; then
@@ -106,9 +149,9 @@ pull:
     echo "imported: $out"
 
 # Build against the local den working tree (no push; flake.lock untouched)
-build-local:
+build-local: check-path
     nix build .#darwinConfigurations.{{ MACHINE }}.system --override-input den "path:{{ DEN_PATH }}" --no-write-lock-file
 
 # Switch against the local den working tree (temporary testing; next `just nix switch` reverts to the pinned rev)
-switch-local:
+switch-local: check-path
     sudo darwin-rebuild switch --flake .#{{ MACHINE }} --override-input den "path:{{ DEN_PATH }}" --no-write-lock-file
