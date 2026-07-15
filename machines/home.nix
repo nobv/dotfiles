@@ -8,11 +8,16 @@
 {
   # Common Home Manager configuration shared across all machines
   home-manager = {
-    # No activation backups: the only file that drifts to a real one is Claude's
-    # settings.json, and it carries `force = true` so activation just re-links it
-    # (drift is captured into the repo by `just claude` backport, not a *.backup).
-    # A collision on any other file is a genuine surprise — let activation abort
-    # loudly and name it, rather than pile up silent timestamped backups.
+    # Fixed-name backup net for a file that drifts to a real one. This is the
+    # simple form #50 had to abandon, because Claude's settings.json drifts every
+    # activation and a fixed `.backup` then collides with the previous one and
+    # aborts. That drifter now carries `force = true` (see the claude-code module),
+    # so it's re-linked without a backup and never reaches this path — which frees
+    # the fixed name to serve as a graceful net for *unexpected* drift: a file that
+    # drifts once is moved to `<file>.backup` and activation proceeds. A file that
+    # drifts *repeatedly* collides with its own `.backup` and aborts — the signal
+    # to force it too. One backup per file, so nothing accumulates.
+    backupFileExtension = "backup";
     useGlobalPkgs = true;
     useUserPackages = true;
     users.${username} = {
