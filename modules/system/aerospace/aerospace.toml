@@ -4,20 +4,26 @@
 # See: https://nikitabobko.github.io/AeroSpace/guide#config-version
 config-version = 2
 
-# 'break' is the only workspace AeroSpace itself knows about (see desk-model note
-# below); keep it alive even when it's empty and invisible, matching what
-# config-version = 1 inferred automatically from this file's keybindings.
-persistent-workspaces = ['break']
+# 'break' and 'shelf' are the workspaces AeroSpace itself knows about — the
+# domain-independent ones (see desk-model note below). Keep them alive even when
+# empty and invisible, matching what config-version = 1 inferred automatically
+# from this file's keybindings.
+persistent-workspaces = ['break', 'shelf']
 
 # Desk model: each desk (domain) owns one AeroSpace workspace, switched exclusively
 # via the desk CLI — never bind desk switching to an AeroSpace key here. A window's
 # default home is its own desk's tiled surface (no on-window-detected rule needed).
-# Two exceptions:
+# Three exceptions, all domain-independent (design D6 addendum):
 #   - floating windows are the "wagon": they follow you across desk switches instead
 #     of staying tiled on one desk.
-#   - 'break' is the one shared, domain-independent workspace (bound to alt-b) for
-#     life/comms apps that don't belong to a single desk; its residents stay tiled,
-#     not floating, so they don't get swept along as wagon passengers.
+#   - 'break' is the shared workspace (bound to alt-b) for life/comms apps that don't
+#     belong to a single desk; its residents stay tiled, not floating, so they don't
+#     get swept along as wagon passengers.
+#   - 'shelf' is the always-on reference surface, pinned to a non-main monitor by the
+#     force-assignment below; like break, its residents are tiled (floating would make
+#     them wagon passengers). Desks and break time-share the main monitor; the shelf
+#     sits off to the side. A desk gets no force-assignment (D8: no domain names in
+#     this layer) — desk switch moves the active desk onto main at runtime instead.
 
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
@@ -75,6 +81,15 @@ outer.left = 10
 outer.bottom = 10
 outer.top = 10
 outer.right = 10
+
+# Pin the domain-independent workspaces to monitors. The shelf fallback array covers
+# every rig from one line: home (1 external + built-in) and clamshell (2 external)
+# resolve 'secondary'; the lid-open 3-way (2 external + built-in) has no 'secondary'
+# (that pattern is 2-monitor-only) and falls through to 'built-in'. The spare face on
+# a 3-way rig is left unassigned — the desk self-heals onto main on the next switch.
+[workspace-to-monitor-force-assignment]
+break = 'main'
+shelf = ['secondary', 'built-in']
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -161,10 +176,29 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
+# on-window-detected places a window at launch only (alt-b / alt-shift-b are the
+# manual escape hatches for the rest). Taxonomy (design D6): hands-on tools = wagon
+# (floating, carried across switches), reference material = shelf (tiled, off-monitor),
+# personal life/comms = break (tiled, shared). No rule → stays on its own desk.
+
+# Wagon — floating, follows you across desk switches
 [[on-window-detected]]
-if.app-id = 'com.apple.finder'
+if.app-id = 'com.1password.1password'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-id = 'com.electron.aqua-voice'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = 'layout floating'
+
+# Break — personal life/comms, tiled on the shared 'break' workspace
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
 run = 'move-node-to-workspace break'
@@ -178,46 +212,27 @@ if.app-id = 'com.apple.reminders'
 run = 'move-node-to-workspace break'
 
 [[on-window-detected]]
-if.app-id = 'com.davetech.habit'
-run = 'move-node-to-workspace break'
-
-[[on-window-detected]]
-if.app-id = 'com.1password.1password'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.Music'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.electron.aqua-voice'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'ai.perplexity.mac'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.openai.chat'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.anthropic.claudefordesktop'
-run = 'layout floating'
-
-[[on-window-detected]]
 if.app-id = 'jp.naver.line.mac'
 run = 'move-node-to-workspace break'
 
 [[on-window-detected]]
-if.app-id = 'com.readdle.SparkDesktop'
+if.app-id = 'com.apple.Music'
 run = 'move-node-to-workspace break'
+
+# Shelf — reference material, tiled on the off-monitor 'shelf' workspace
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'move-node-to-workspace shelf'
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+run = 'move-node-to-workspace shelf'
 
 [[on-window-detected]]
 if.app-id = 'org.zotero.zotero'
-run = 'layout floating'
+run = 'move-node-to-workspace shelf'
 
 [[on-window-detected]]
 if.app-id = 'com.amazon.Lassen'
-run = 'layout floating'
+run = 'move-node-to-workspace shelf'
 
