@@ -13,16 +13,41 @@ set working-directory := '..'
 
 MACHINE := env("DOTFILES_MACHINE", "macbook")
 
-# Local den checkout: DEN_PATH env wins; default asks ghq for the repo by
-# name, so host/owner moves and GHQ_ROOT changes need no edit here.
-#
-# ghq cannot see den yet: GHQ_ROOT already points inside the desk
-# (~/Desk/repos) while den still sits in the pre-Den ~/src — the repo
-# migration has not run. An empty DEN_PATH is dangerous rather than merely
-# broken, because `git -C ""` is a silent no-op: the recipes below would then
-# push *dotfiles* while believing they push den. Fall back to the ~/src
-# checkout, and let `check-path` refuse anything that is not den.
-DEN_PATH := env("DEN_PATH", `p=$(ghq list --full-path --exact den 2>/dev/null | head -n1); [ -n "$p" ] || p="$HOME/src/github.com/nobv/den"; printf %s "$p"`)
+# Local den checkout: DEN_PATH env wins; otherwise locate it so no path is
+# baked in — den's home changes (the repo migration moves it from ~/src into a
+# desk, and host/owner could move again). `ghq list` alone is not enough: the
+# active GHQ_ROOT points at one desk and hides the other ghq roots, so den can
+# be present yet invisible. Search every root ghq knows about — GHQ_ROOT, the
+# configured ghq.root(s), and `ghq root --all` — first by ghq's own layout,
+# then, for any other layout, by matching the origin remote rather than the
+# path. An empty result is left empty on purpose: `git -C ""` is a silent
+# no-op that would push *dotfiles* believing it is den, so `check-path` turns
+# "not found" into a hard error instead of a wrong push.
+DEN_PATH := env("DEN_PATH", `
+    roots() {
+        printf '%s\n' "${GHQ_ROOT:-}" | tr ':' '\n'
+        git config --get-all ghq.root 2>/dev/null
+        ghq root --all 2>/dev/null
+    }
+    expand() { case "$1" in "~"|"~/"*) printf '%s' "$HOME${1#\~}";; *) printf '%s' "$1";; esac; }
+    found=$(roots | while read -r r; do
+        [ -n "$r" ] || continue; r=$(expand "$r")
+        [ -d "$r/github.com/nobv/den/.git" ] && { printf '%s' "$r/github.com/nobv/den"; break; }
+    done)
+    if [ -z "$found" ]; then
+        found=$(roots | while read -r r; do
+            [ -n "$r" ] || continue; r=$(expand "$r")
+            [ -d "$r" ] || continue
+            find "$r" -maxdepth 4 -type d -name .git 2>/dev/null | while read -r g; do
+                d=${g%/.git}
+                case "$(git -C "$d" remote get-url origin 2>/dev/null)" in
+                    *nobv/den*) printf '%s' "$d"; break;;
+                esac
+            done
+        done | head -n1)
+    fi
+    printf '%s' "$found"
+`)
 
 # Refuse to act on anything that is not a den checkout (see DEN_PATH above)
 [private]
