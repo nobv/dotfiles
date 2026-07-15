@@ -14,6 +14,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "sonnet",
   "enableAllProjectMcpServers": true,
   "hooks": {
     "SessionStart": [
@@ -49,7 +50,8 @@
     "ralph-loop@claude-plugins-official": true,
     "linear@claude-plugins-official": true,
     "slack@claude-plugins-official": true,
-    "github@claude-plugins-official": true
+    "github@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "thedotmack": {
@@ -61,6 +63,7 @@
   },
   "language": "japanese",
   "effortLevel": "xhigh",
+  "advisorModel": "fable",
   "tui": "fullscreen",
   "theme": "dark",
   "editorMode": "vim",
