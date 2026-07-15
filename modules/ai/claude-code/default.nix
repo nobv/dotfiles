@@ -95,7 +95,14 @@ in
         home.file = mkMerge (
           [
             {
-              ".claude/settings.json".source = mkSymlink cfg.settingsSource;
+              # Claude rewrites this into a real file at runtime, so it collides
+              # with the symlink on every activation. force = true re-links it
+              # without a backup; live drift is captured by `just claude` backport,
+              # not a *.backup pile (see machines/home.nix — no backupCommand).
+              ".claude/settings.json" = {
+                source = mkSymlink cfg.settingsSource;
+                force = true;
+              };
               ".claude/CLAUDE.md".source = mkSymlink sharedClaudeMd;
               ".claude/commands/difit.md".source = mkSymlink "modules/ai/claude-code/commands/difit.md";
               # difit/difit-review skills now come from upstream via apm
@@ -104,7 +111,12 @@ in
             }
           ]
           ++ (mapAttrsToList (_: profile: {
-            "${homeRel profile}/settings.json".source = mkSymlink profile.settingsSource;
+            # Same as ~/.claude/settings.json: force the re-link so a profile whose
+            # settings.json has drifted to a real file doesn't abort activation.
+            "${homeRel profile}/settings.json" = {
+              source = mkSymlink profile.settingsSource;
+              force = true;
+            };
             "${homeRel profile}/CLAUDE.md".source = mkSymlink sharedClaudeMd;
             # Share user-scope skills + commands (~/.claude/{skills,commands}) so
             # profiles also see them; otherwise personal/apm skills and custom

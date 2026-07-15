@@ -8,14 +8,11 @@
 {
   # Common Home Manager configuration shared across all machines
   home-manager = {
-    # Timestamped backups so activation never aborts on an existing *.backup.
-    # (backupCommand receives the target path as $1; it is mutually exclusive
-    # with backupFileExtension. settings.json can drift to a real file, so each
-    # activation needs a unique backup name instead of a fixed ".backup".)
-    backupCommand = "${pkgs.writeShellScript "hm-backup" ''
-      target="$1"
-      ${pkgs.coreutils}/bin/mv "$target" "$target.backup.$(${pkgs.coreutils}/bin/date +%Y%m%d-%H%M%S)"
-    ''}";
+    # No activation backups: the only file that drifts to a real one is Claude's
+    # settings.json, and it carries `force = true` so activation just re-links it
+    # (drift is captured into the repo by `just claude` backport, not a *.backup).
+    # A collision on any other file is a genuine surprise — let activation abort
+    # loudly and name it, rather than pile up silent timestamped backups.
     useGlobalPkgs = true;
     useUserPackages = true;
     users.${username} = {
