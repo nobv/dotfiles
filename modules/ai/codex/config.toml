@@ -1,0 +1,23 @@
+# Codex system-layer defaults, deployed to /etc/codex/config.toml.
+#
+# Lowest-priority config layer, below ~/.codex/config.toml — /statusline still
+# overrides these. Codex never writes here, which is what makes this the one
+# codex config safe to track in the repo (see default.nix).
+#
+# status_line takes an ordered list of built-in item ids; arbitrary text,
+# command output and custom colors are not supported. Items mirror cship.toml
+# (Claude Code's statusline), plus `permissions` which has no cship analogue.
+
+[tui]
+status_line = [
+  "model-with-reasoning", # cship: model + effort
+  "permissions",          # codex-only: sandbox / permission profile
+  "current-dir",          # cship: directory
+  "git-branch",           # cship: git_branch
+  "branch-changes",       # cship: git_status
+  "context-remaining",    # cship: context_bar
+  "five-hour-limit",      # cship: usage_limits five_hour
+  "weekly-limit",         # cship: usage_limits seven_day
+  "used-tokens",          # nearest thing to cship: cost
+]
+status_line_use_colors = true
