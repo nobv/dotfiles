@@ -26,10 +26,11 @@ in
         independently and can run simultaneously. Note `codex --profile` is
         unrelated: it layers config.toml sections and never switches accounts.
 
-        Unlike claude-code there is no repo-tracked config — codex and the
+        Unlike claude-code the user config is not repo-tracked — codex and the
         ChatGPT desktop app rewrite ~/.codex/config.toml live (MCP servers,
         [projects] trust levels), so each profile symlinks the LIVE shared
-        files (config.toml, AGENTS.md, prompts/, rules/) from ~/.codex.
+        files (config.toml, AGENTS.md, prompts/, rules/) from ~/.codex. Only
+        the read-only system layer (/etc/codex/config.toml) is tracked.
 
         Per-repo switching is usually better done with a `.envrc` containing
         `use codex_profile <name>` (no entry here needed). Declare a profile
@@ -65,6 +66,12 @@ in
         "codex-app"
       ];
     };
+
+    # Codex reads /etc/codex/config.toml as its lowest-priority layer and never
+    # writes to it, so unlike ~/.codex/config.toml it is safe to track here.
+    # The user config stays live/machine-local and still wins, so /statusline
+    # can override these on top.
+    environment.etc."codex/config.toml".source = ./config.toml;
 
     home-manager.users.${username} =
       { config, lib, ... }:
