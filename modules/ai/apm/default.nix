@@ -37,8 +37,14 @@ in
         # independently observable.
         home.file = {
           ".apm/apm.yml".source = ./apm.yml;
-          ".apm/apm.lock.yaml".source =
-            config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/ai/apm/apm.lock.yaml";
+          # apm sync rewrites this into a real file at runtime, so it
+          # collides with the symlink on every activation (same as Claude's
+          # settings.json / Codex's config.toml). force = true re-links it
+          # without a *.backup pile.
+          ".apm/apm.lock.yaml" = {
+            source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/ai/apm/apm.lock.yaml";
+            force = true;
+          };
         };
       };
   };
