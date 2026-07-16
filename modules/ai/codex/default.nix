@@ -71,7 +71,10 @@ in
     # writes to it, so unlike ~/.codex/config.toml it is safe to track here.
     # The user config stays live/machine-local and still wins, so /statusline
     # can override these on top.
-    environment.etc."codex/config.toml".source = ./config.toml;
+    # Embed the file in the generated /etc closure.  `source = ./config.toml`
+    # leaves /etc/static pointing at the flake's source-store path, which may
+    # be garbage-collected independently of the active system generation.
+    environment.etc."codex/config.toml".text = builtins.readFile ./config.toml;
 
     home-manager.users.${username} =
       { config, lib, ... }:
