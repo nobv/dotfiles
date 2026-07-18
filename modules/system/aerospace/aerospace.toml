@@ -65,7 +65,6 @@ key-mapping.preset = 'qwerty'
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
-on-focus-changed = ['exec-and-forget ~/.config/aerospace/follow-aqua-voice.sh']
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
