@@ -110,6 +110,7 @@
 
     # Programming languages
     languages = {
+      bun.enable = true;
       c.enable = false;
       deno.enable = false;
       dhall.enable = false;
