@@ -36,13 +36,13 @@
 
     communication = {
       beeper.enable = false;
-      deepl.enable = true;
+      deepl.enable = false;
       discord.enable = true;
       line.enable = true;
       messenger.enable = true;
-      readdle-spark.enable = true;
+      readdle-spark.enable = false;
       slack.enable = true;
-      telegram.enable = true;
+      telegram.enable = false;
       zoom.enable = true;
     };
 
@@ -102,7 +102,7 @@
       };
 
       vcs = {
-        fork.enable = true;
+        fork.enable = false;
         git.enable = true;
         github.enable = true;
         gh-dash.enable = true;
@@ -123,14 +123,14 @@
     editors = {
       cursor.enable = false;
       emacs.enable = false;
-      jetbrains.enable = true;
+      jetbrains.enable = false;
       neovim = {
         enable = true;
         lazyvim.enable = true;
       };
       typora.enable = true;
       vim.enable = false;
-      vscode.enable = true;
+      vscode.enable = false;
       xcode.enable = true;
       zed.enable = true;
     };
@@ -174,13 +174,13 @@
       heptabase.enable = true;
       japanese-dictionary.enable = true;
       kindle.enable = true;
-      linear-linear.enable = true;
+      linear-linear.enable = false;
       logseq.enable = true;
       mdbook.enable = false;
-      miro.enable = true;
+      miro.enable = false;
       notion.enable = false;
       obsidian.enable = true;
-      post-it.enable = true;
+      post-it.enable = false;
       raycast.enable = true;
       streaks.enable = false;
       things3.enable = true;
@@ -201,19 +201,19 @@
       aerospace.enable = true;
       blueutil.enable = true;
       den.enable = true;
-      flashspace.enable = true;
+      flashspace.enable = false;
       fonts.enable = true;
       homebrew.enable = true;
       lima.enable = true;
-      multipass.enable = true;
+      multipass.enable = false;
       sketchybar.enable = true;
       utm.enable = true;
     };
 
     # Terminal configuration
     terminal = {
-      cmux.enable = true;
-      ghostty.enable = true;
+      cmux.enable = false;
+      ghostty.enable = false;
       iTerm2.enable = false;
       lf.enable = true;
       starship.enable = true;
@@ -228,7 +228,7 @@
       alt-tab.enable = true;
       appcleaner.enable = true;
       aqua-voice.enable = true;
-      bartender.enable = false;
+      bartender.enable = true;
       battery.enable = true;
       cleanshot.enable = true;
       deskpad.enable = true;
@@ -242,14 +242,14 @@
       logi-options-plus.enable = true;
       meetingbar.enable = true;
       mos.enable = true;
-      sanebar.enable = false;
+      sanebar.enable = true;
       spotify.enable = true;
-      textsniper.enable = true;
-      thaw.enable = true;
+      textsniper.enable = false;
+      thaw.enable = false;
       the-unarchiver.enable = true;
       typeless.enable = true;
       yoink.enable = true;
-      zappy.enable = true;
+      zappy.enable = false;
     };
   };
 }
