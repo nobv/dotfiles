@@ -8,28 +8,28 @@ targets:
 
 dependencies:
   apm:
-    - anthropics/skills
-    - currents-dev/playwright-best-practices-skill
-    - shadcn-ui/ui/skills/shadcn
-    - vercel-labs/agent-skills/skills/react-best-practices
-    - vercel-labs/next-skills/skills/next-best-practices
+    - anthropics/skills#f458cee
+    - currents-dev/playwright-best-practices-skill#ef329e7
+    - shadcn-ui/ui/skills/shadcn#731e6dd
+    - vercel-labs/agent-skills/skills/react-best-practices#7defe2d
+    - vercel-labs/next-skills/skills/next-best-practices#dc1de9c
     # difit diff-viewer review skills (upstream source; replaces local vendoring)
-    - yoshiko-pg/difit/skills/difit
-    - yoshiko-pg/difit/skills/difit-review
+    - yoshiko-pg/difit/skills/difit#59df369
+    - yoshiko-pg/difit/skills/difit-review#59df369
     # cmux CLI control skills (drive workspaces, browser surface, socket API)
-    - manaflow-ai/cmux/skills/cmux
-    - manaflow-ai/cmux/skills/cmux-workspace
-    - manaflow-ai/cmux/skills/cmux-browser
-    - manaflow-ai/cmux/skills/cmux-socket-policy
-    - manaflow-ai/cmux/skills/cmux-keyboard-shortcuts
-    - manaflow-ai/cmux/skills/cmux-settings
-    - manaflow-ai/cmux/skills/cmux-customization
-    - manaflow-ai/cmux/skills/cmux-markdown
-    - manaflow-ai/cmux/skills/cmux-diagnostics
+    - manaflow-ai/cmux/skills/cmux#39df334
+    - manaflow-ai/cmux/skills/cmux-workspace#39df334
+    - manaflow-ai/cmux/skills/cmux-browser#39df334
+    - manaflow-ai/cmux/skills/cmux-socket-policy#39df334
+    - manaflow-ai/cmux/skills/cmux-keyboard-shortcuts#39df334
+    - manaflow-ai/cmux/skills/cmux-settings#39df334
+    - manaflow-ai/cmux/skills/cmux-customization#39df334
+    - manaflow-ai/cmux/skills/cmux-markdown#39df334
+    - manaflow-ai/cmux/skills/cmux-diagnostics#39df334
     # grilling: relentlessly stress-test a plan/design before building
-    - mattpocock/skills/skills/productivity/grilling
+    - mattpocock/skills/skills/productivity/grilling#1445797
     # Feature-Sliced Design v2.1 methodology skill (fsd.how)
-    - feature-sliced/skills/feature-sliced-design
+    - feature-sliced/skills/feature-sliced-design#653e7f3
   mcp:
     - name: io.github.github/github-mcp-server
       transport: http
