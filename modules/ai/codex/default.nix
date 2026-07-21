@@ -63,7 +63,6 @@ in
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [
         "codex"
-        "codex-app"
       ];
     };
 
