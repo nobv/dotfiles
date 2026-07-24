@@ -27,7 +27,7 @@ The `Justfile` uses modules under `just/`. Recipes are invoked as `just <module>
 - Enter development shell: `just nix dev`
 - Fast-forward `main`: `just git sync`
 - apm: `just apm sync` (install locked) · `just apm lock` (relock) · `just apm update` · `just apm outdated` · `just apm audit`
-- Claude native plugins: `just claude plugins`
+- Claude native plugins: `just claude plugins` (primary config dir + every profile under `~/.config/claude/profiles/*`)
 
 To target a different machine, set the env var (CLI `MACHINE=…` does not work across modules): `DOTFILES_MACHINE=work just nix switch`
 
