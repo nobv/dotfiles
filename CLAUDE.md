@@ -15,7 +15,7 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 
 ### just commands (recommended)
 The `Justfile` uses modules under `just/`. Recipes are invoked as `just <module> <recipe>` (e.g. `just apm lock`); the `::` form (`just apm::lock`) is equivalent. Run `just` to list everything, `just --list <module>` for one group.
-- Apply everything (ff `main` → switch → apm sync): `just apply`
+- Apply everything (ff `main` → switch → apm sync → claude plugins): `just apply`
 - Apply configuration: `just nix switch`
 - Build without root (worktree-safe validation): `just nix build`
 - Dry-run activation (needs root; pre-`switch` check on `main`): `just nix dry-run`
@@ -163,7 +163,7 @@ All code-changing work happens inside a git worktree, is validated rootless, and
 
    Do **not** use `just nix dry-run` / `darwin-rebuild … --dry-run` here — they require root and activate against the live system.
 4. Commit to the worktree's branch (Conventional Commits, single line).
-5. After merging into `main`, apply with `just nix switch` (or `just apply` to also ff `main` + apm sync) — **never `switch` from a worktree** (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent).
+5. After merging into `main`, apply with `just nix switch` (or `just apply` to also ff `main` + apm sync + claude plugins) — **never `switch` from a worktree** (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent).
 6. Once the work is done and the PR is merged, remove the worktree with `ExitWorktree` (`action: "remove"`) so `.claude/worktrees/` stays clean — don't leave stale worktrees around.
 
 ### Adding a new module
