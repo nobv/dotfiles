@@ -106,11 +106,31 @@ in
         # Activation tolerates dangling out-of-store symlinks, but codex fails
         # at runtime when it mkdirs through a dangling directory link on a
         # fresh machine — ensure the shared target dirs exist.
-        home.activation = mkIf (cfg.profiles != { }) {
-          ensureCodexSharedDirs = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-            mkdir -p ${codexHome}/prompts ${codexHome}/rules
-          '';
-        };
+        #
+        # The same pass relinks profiles created ad hoc by `use codex_profile`,
+        # which are deliberately not declared in `profiles` above (their names
+        # identify workplaces and this repo is public). config.toml / AGENTS.md
+        # are relinked unconditionally — codex rewrites config.toml atomically,
+        # turning the symlink into a real file. prompts / rules are left alone
+        # when they are real directories: that is profile-local data, not drift.
+        home.activation.linkCodexProfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          mkdir -p ${codexHome}/prompts ${codexHome}/rules
+
+          profiles_root="${config.home.homeDirectory}/.config/codex/profiles"
+          if [ -d "$profiles_root" ]; then
+            for dir in "$profiles_root"/*/; do
+              dir="''${dir%/}"
+              [ -d "$dir" ] || continue
+              ln -sfn "${codexHome}/config.toml" "$dir/config.toml"
+              ln -sfn "${codexHome}/AGENTS.md" "$dir/AGENTS.md"
+              for shared in prompts rules; do
+                if [ -L "$dir/$shared" ] || [ ! -e "$dir/$shared" ]; then
+                  ln -sfn "${codexHome}/$shared" "$dir/$shared"
+                fi
+              done
+            done
+          fi
+        '';
 
         # `cx-<name>` launches the CLI, `cx-<name>-app` the desktop app, each
         # with that profile's isolated CODEX_HOME (-n: new instance, so two

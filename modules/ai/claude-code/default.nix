@@ -84,7 +84,7 @@ in
     ];
 
     home-manager.users.${username} =
-      { config, ... }:
+      { config, lib, ... }:
       let
         mkSymlink = path: config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/${path}";
         sharedClaudeMd = "modules/ai/claude-code/CLAUDE.md";
@@ -127,6 +127,32 @@ in
               config.lib.file.mkOutOfStoreSymlink "/Users/${username}/.claude/commands";
           }) cfg.profiles)
         );
+
+        # Profiles created ad hoc by `use claude_profile` are deliberately not
+        # declared in `profiles` above — their names identify workplaces and this
+        # repo is public. Re-establish their links by scanning the profiles root
+        # instead, so the shared config survives without naming anything here.
+        # Claude rewrites settings.json atomically, replacing the symlink with a
+        # real file (the same drift ~/.claude/settings.json needs force = true
+        # for), so settings.json / CLAUDE.md are relinked unconditionally.
+        # skills / commands are only relinked when absent or already a symlink —
+        # a real directory there is profile-local data, not drift.
+        home.activation.linkClaudeProfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          profiles_root="${config.home.homeDirectory}/.config/claude/profiles"
+          if [ -d "$profiles_root" ]; then
+            for dir in "$profiles_root"/*/; do
+              dir="''${dir%/}"
+              [ -d "$dir" ] || continue
+              ln -sfn "${dotfilesPath}/${cfg.settingsSource}" "$dir/settings.json"
+              ln -sfn "${dotfilesPath}/${sharedClaudeMd}" "$dir/CLAUDE.md"
+              for shared in skills commands; do
+                if [ -L "$dir/$shared" ] || [ ! -e "$dir/$shared" ]; then
+                  ln -sfn "${config.home.homeDirectory}/.claude/$shared" "$dir/$shared"
+                fi
+              done
+            done
+          fi
+        '';
 
         # `cc-<name>` launches Claude Code with that profile's isolated config dir.
         programs.zsh.shellAliases = mapAttrs' (
