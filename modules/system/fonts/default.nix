@@ -22,6 +22,7 @@ in
       nerd-fonts.hack
       nerd-fonts.hasklug
       nerd-fonts.fira-code
+      udev-gothic-nf
     ];
   };
 }
