@@ -172,14 +172,14 @@
       drafts.enable = true;
       fantastical.enable = false;
       heptabase.enable = true;
-      japanese-dictionary.enable = true;
+      japanese-dictionary.enable = false;
       kindle.enable = true;
       linear-linear.enable = false;
       logseq.enable = true;
       mdbook.enable = false;
       miro.enable = false;
       notion.enable = false;
-      obsidian.enable = true;
+      obsidian.enable = false;
       post-it.enable = false;
       raycast.enable = true;
       streaks.enable = false;
@@ -213,7 +213,7 @@
     # Terminal configuration
     terminal = {
       cmux.enable = false;
-      ghostty.enable = false;
+      ghostty.enable = true;
       iTerm2.enable = false;
       lf.enable = true;
       starship.enable = true;

@@ -8,9 +8,11 @@
       "WebFetch(domain:github.com)",
       "Bash(grep:*)",
       "WebSearch",
-      "Bash(find /Users/nobv/.dotfiles/modules -type f -name \"default.nix\" -exec grep -l \"npm\\\\|python\\\\|cargo\\\\|git clone\" {} \\\\; | head -5)",
+      "Bash(find modules -type f -name \"default.nix\" -exec grep -l \"npm\\\\|python\\\\|cargo\\\\|git clone\" {} \\\\; | head -5)",
       "WebFetch(domain:workmux.raine.dev)",
-      "Bash(find /Users/nobv/.dotfiles -name *microvm* -o -name *lima* -o -name *utm*)"
+      "Bash(find . -name *microvm* -o -name *lima* -o -name *utm*)",
+      "Bash(timeout 60 nix eval nixpkgs#bun.pname)",
+      "Bash(timeout 60 nix search nixpkgs bun)"
     ]
   },
   "enableAllProjectMcpServers": false
