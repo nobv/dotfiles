@@ -1,3 +1,8 @@
+# Every surface attaches to the persistent herdr session (den's dev.sh
+# agents live in the same session). Absolute path: ghostty does not get
+# brew's PATH when launched from the Dock.
+command = /opt/homebrew/bin/herdr
+
 font-family = HackGen Console NF
 font-size = 15
 font-thicken = true
