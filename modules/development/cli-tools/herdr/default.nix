@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  username,
   ...
 }:
 
@@ -9,6 +10,7 @@ with lib;
 
 let
   cfg = config.modules.development.cli-tools.herdr;
+  dotfilesPath = "/Users/${username}/.dotfiles";
 in
 {
   options.modules.development.cli-tools.herdr = {
@@ -35,5 +37,22 @@ in
         RunAtLoad = true;
       };
     };
+
+    home-manager.users.${username} =
+      { config, ... }:
+      {
+        # Only config.toml is linked — the rest of ~/.config/herdr is runtime
+        # state (logs, sockets, session.json). `herdr config reset-keys` and
+        # onboarding rewrite the file in place, which replaces the symlink
+        # with a plain file; re-run `just nix switch` to restore the link.
+        xdg.configFile."herdr/config.toml".source =
+          config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/development/cli-tools/herdr/config.toml";
+
+        # herdr is a brew binary, so the completion function cannot be built
+        # into the Nix profile; generate it at shell start instead.
+        programs.zsh.initContent = ''
+          command -v herdr >/dev/null 2>&1 && eval "$(herdr completion zsh)"
+        '';
+      };
   };
 }
