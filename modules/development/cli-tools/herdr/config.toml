@@ -7,6 +7,12 @@ pane_history = true
 [ui]
 agent_panel_sort = "spaces"
 
+[keys]
+# tmux-trained muscle memory. Costs ctrl+a in shells (beginning-of-line;
+# use Home) and vim's increment — ctrl+space was rejected because it is
+# LazyVim's completion trigger.
+prefix = "ctrl+a"
+
 # vim-herdr-navigation: ctrl+h/j/k/l move pane focus, but are forwarded into
 # panes running vim so Neovim splits and herdr panes share one set of keys
 # (the Neovim side lives in the lazyvim config, loaded via config/keymaps.lua).
