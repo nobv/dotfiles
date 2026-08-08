@@ -307,6 +307,19 @@ If builds fail after updating inputs:
 3. Rollback lock file: `git checkout flake.lock`
 4. Report compatibility issues to the respective input repository
 
+### `just apm sync` / `just apply` Fails with "package manifest not found"
+apm CLI 0.27.0 has a regression in `--frozen` validation: full-repo `claude_skill` dependencies without their own `apm.yml` (e.g. `currents-dev/playwright-best-practices-skill`) fail to resolve a `version`, and `--frozen` then looks for a per-package manifest that doesn't exist, erroring with `package manifest not found ... re-run 'apm install' to restore it`. Plain `apm install -g` (no `--frozen`) still succeeds — only the frozen/CI-safe check is affected.
+- Workaround: pin Homebrew's `apm` at 0.25.0 until upstream fixes it:
+  ```sh
+  TAP_PATH=$(brew --repository microsoft/apm)
+  cd "$TAP_PATH" && git log --oneline -- Formula/apm.rb   # find the v0.25.0 commit
+  git checkout <commit> -- Formula/apm.rb
+  brew uninstall apm && brew install microsoft/apm/apm
+  git checkout HEAD -- Formula/apm.rb                      # restore tap to latest
+  brew pin apm
+  ```
+- Once fixed upstream: `brew unpin apm && brew upgrade apm`
+
 ## Installation Script Architecture
 - `install`: Bootstrap script that handles system preparation (Xcode CLT, system updates) before repo cloning
 - `setup.sh`: Main installer that handles Nix installation, Homebrew, and Darwin configuration
