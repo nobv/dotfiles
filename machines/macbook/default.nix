@@ -155,6 +155,7 @@
 
     media = {
       ffmpeg.enable = true;
+      finetune.enable = true;
       graphviz.enable = false;
       imagemagic.enable = false;
       yt-dlp.enable = true;
