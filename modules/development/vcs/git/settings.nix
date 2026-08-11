@@ -14,7 +14,7 @@
   };
 
   ghq = {
-    root = [ "~/src" ];
+    root = [ "~/Desk/repos" ];
   };
 
   push = {
