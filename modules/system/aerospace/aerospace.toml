@@ -19,10 +19,12 @@ persistent-workspaces = ['break', 'shelf']
 #   - 'break' is the shared workspace (bound to alt-b) for life/comms apps that don't
 #     belong to a single desk; its residents stay tiled, not floating, so they don't
 #     get swept along as wagon passengers.
-#   - 'shelf' is the always-on reference surface, pinned to a non-main monitor by the
-#     force-assignment below; like break, its residents are tiled (floating would make
-#     them wagon passengers). Desks and break time-share the main monitor; the shelf
-#     sits off to the side. A desk gets no force-assignment (D8: no domain names in
+#   - 'shelf' is the reference surface, pinned to a non-main monitor by the
+#     force-assignment below when one exists; like break, its residents are tiled
+#     (floating would make them wagon passengers). Desks and break time-share the
+#     main monitor; the shelf sits off to the side when a side monitor exists, and
+#     otherwise time-shares main like break does, reached via alt-s (peek, then
+#     alt-tab back). A desk gets no force-assignment (D8: no domain names in
 #     this layer) — desk switch moves the active desk onto main at runtime instead.
 
 # You can use it to add commands that run after login to macOS user session.
@@ -141,13 +143,19 @@ alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 
 # Desk switching itself happens via the desk CLI, not AeroSpace workspace keys.
-# 'break' is the one shared, domain-independent workspace — see the desk-model
-# note near the top of this file. See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+# 'break' and 'shelf' are the shared, domain-independent workspaces — see the
+# desk-model note near the top of this file. See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 alt-b = 'workspace break'
-# Send the focused window to 'break' (the on-window-detected rules below only
-# place windows at launch; this is the manual escape hatch for the rest).
+# Peek at the shelf and return with alt-tab (workspace-back-and-forth). On a
+# single-monitor rig the shelf has no side monitor to sit on, so this is the
+# way to glance at reference material; cross-workspace drag-and-drop goes
+# through Yoink (its panel is invisible to AeroSpace and survives switches).
+alt-s = 'workspace shelf'
+# Send the focused window to 'break' / 'shelf' (the on-window-detected rules
+# below only place windows at launch; these are the manual escape hatches).
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-b = 'move-node-to-workspace break'
+alt-shift-s = 'move-node-to-workspace shelf'
 
 alt-shift-f = 'fullscreen'
 
