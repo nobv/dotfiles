@@ -100,13 +100,6 @@ in
           # G: pop up lazygit
           bind-key G display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " lazygit " -E "lazygit"
 
-          # a: jump to (or create) a per-session window for an agent CLI / dotfiles editing
-          bind-key a display-menu -T " agent / dotfiles " \
-            "Claude"   c "run-shell 'tmux select-window -t claude 2>/dev/null || tmux new-window -n claude -c \"#{pane_current_path}\" claude'" \
-            "Codex"    x "run-shell 'tmux select-window -t codex 2>/dev/null || tmux new-window -n codex -c \"#{pane_current_path}\" codex'" \
-            "Gemini"   g "run-shell 'tmux select-window -t gemini 2>/dev/null || tmux new-window -n gemini -c \"#{pane_current_path}\" gemini'" \
-            "Dotfiles" d "run-shell 'tmux select-window -t dotfiles 2>/dev/null || tmux new-window -n dotfiles -c ~/.dotfiles vim'"
-
           # Copy mode (vi-style)
           bind-key -T copy-mode-vi v send-keys -X begin-selection
           bind-key -T copy-mode-vi y send-keys -X copy-pipe-no-clear "pbcopy"
