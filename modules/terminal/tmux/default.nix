@@ -77,14 +77,34 @@ in
           # 連打系（resize-pane など）の repeat 受付時間を短く
           set -g repeat-time 300
 
-          # | でペインを縦に分割する
-          bind | split-window -h
+          # ウィンドウを閉じた時に番号を詰める
+          set -g renumber-windows on
 
-          # - でペインを横に分割する
-          bind - split-window -v
+          # 現在のセッションが (continuum の再起動等で) 破棄されても
+          # クライアントは他のセッションにアタッチしたままにする
+          set -g detach-on-destroy off
+
+          # | でペインを縦に分割し、常に均等幅に整列する
+          bind | split-window -h -c "#{pane_current_path}" \; select-layout even-horizontal
+
+          # - でペインを横に分割し、常に均等高さに整列する
+          bind - split-window -v -c "#{pane_current_path}" \; select-layout even-vertical
 
           # アクティビティモニタリング
           setw -g monitor-activity on
+
+          # g: カレントディレクトリでスクラッチシェルを popup 表示
+          bind-key g display-popup -d "#{pane_current_path}" -w 80% -h 80% -T " scratch " -E "zsh"
+
+          # G: lazygit を popup 表示
+          bind-key G display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " lazygit " -E "lazygit"
+
+          # a: Claude/Codex/Gemini/dotfiles 編集を専用 window に切り替え (無ければ作成)
+          bind-key a display-menu -T " agent / dotfiles " \
+            "Claude"   c "run-shell 'tmux select-window -t claude 2>/dev/null || tmux new-window -n claude claude'" \
+            "Codex"    x "run-shell 'tmux select-window -t codex 2>/dev/null || tmux new-window -n codex codex'" \
+            "Gemini"   g "run-shell 'tmux select-window -t gemini 2>/dev/null || tmux new-window -n gemini gemini'" \
+            "Dotfiles" d "run-shell 'tmux select-window -t dotfiles 2>/dev/null || tmux new-window -n dotfiles -c ~/.dotfiles vim'"
 
           # コピーモード (vi風)
           bind-key -T copy-mode-vi v send-keys -X begin-selection
@@ -136,6 +156,9 @@ in
           }
           {
             plugin = tmux-agent-indicator; # https://github.com/accessd/tmux-agent-indicator
+          }
+          {
+            plugin = tmux-thumbs; # https://github.com/fcsonline/tmux-thumbs (prefix Space でヒント表示)
           }
         ];
       };
