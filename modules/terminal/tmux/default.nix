@@ -29,8 +29,8 @@ let
           'if (( $(sw_vers -productVersion | cut -d. -f1) >= 15 )); then'
     '';
   });
-  # Claude Code / Codex の hooks から pane border・window title に
-  # running / needs-input / done を表示する (nixpkgs 未収載)
+  # Shows running / needs-input / done on the pane border and window title,
+  # driven by Claude Code / Codex hooks (not packaged in nixpkgs)
   tmux-agent-indicator = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "tmux-agent-indicator";
     version = "unstable-2026-07-26";
@@ -50,9 +50,9 @@ in
 
   config = mkIf cfg.enable {
     home-manager.users.${username} = {
-      # Claude Code hooks (modules/ai/claude-code/settings.json) は
-      # $HOME/.tmux/plugins/tmux-agent-indicator/scripts/agent-state.sh を
-      # 参照するため、nix store の実体へ安定パスで symlink を張る
+      # Claude Code hooks (modules/ai/claude-code/settings.json) reference
+      # $HOME/.tmux/plugins/tmux-agent-indicator/scripts/agent-state.sh directly,
+      # so symlink it to the nix store path at a stable location
       home.file.".tmux/plugins/tmux-agent-indicator".source =
         "${tmux-agent-indicator}/share/tmux-plugins/tmux-agent-indicator";
 
@@ -71,48 +71,49 @@ in
         shell = "${pkgs.zsh}/bin/zsh";
         terminal = "tmux-256color";
         extraConfig = ''
-          # 設定ファイルをリロードする
+          # Reload the config file
           bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
 
-          # 連打系（resize-pane など）の repeat 受付時間を短く
+          # Shorten the repeat-time window for rapid-fire binds (e.g. resize-pane)
           set -g repeat-time 300
 
-          # ウィンドウを閉じた時に番号を詰める
+          # Renumber windows so there are no gaps after closing one
           set -g renumber-windows on
 
-          # 現在のセッションが (continuum の再起動等で) 破棄されても
-          # クライアントは他のセッションにアタッチしたままにする
+          # When the session you're attached to is destroyed (e.g. its last
+          # window closes), land on another live session instead of detaching
+          # all the way out to the outer shell
           set -g detach-on-destroy off
 
-          # | でペインを縦に分割し、常に均等幅に整列する
+          # | splits into columns and keeps them evenly sized
           bind | split-window -h -c "#{pane_current_path}" \; select-layout even-horizontal
 
-          # - でペインを横に分割し、常に均等高さに整列する
+          # - splits into rows and keeps them evenly sized
           bind - split-window -v -c "#{pane_current_path}" \; select-layout even-vertical
 
-          # アクティビティモニタリング
+          # Activity monitoring
           setw -g monitor-activity on
 
-          # g: カレントディレクトリでスクラッチシェルを popup 表示
+          # g: pop up a scratch shell in the current pane's directory
           bind-key g display-popup -d "#{pane_current_path}" -w 80% -h 80% -T " scratch " -E "zsh"
 
-          # G: lazygit を popup 表示
+          # G: pop up lazygit
           bind-key G display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " lazygit " -E "lazygit"
 
-          # a: Claude/Codex/Gemini/dotfiles 編集を専用 window に切り替え (無ければ作成)
+          # a: jump to (or create) a per-session window for an agent CLI / dotfiles editing
           bind-key a display-menu -T " agent / dotfiles " \
-            "Claude"   c "run-shell 'tmux select-window -t claude 2>/dev/null || tmux new-window -n claude claude'" \
-            "Codex"    x "run-shell 'tmux select-window -t codex 2>/dev/null || tmux new-window -n codex codex'" \
-            "Gemini"   g "run-shell 'tmux select-window -t gemini 2>/dev/null || tmux new-window -n gemini gemini'" \
+            "Claude"   c "run-shell 'tmux select-window -t claude 2>/dev/null || tmux new-window -n claude -c \"#{pane_current_path}\" claude'" \
+            "Codex"    x "run-shell 'tmux select-window -t codex 2>/dev/null || tmux new-window -n codex -c \"#{pane_current_path}\" codex'" \
+            "Gemini"   g "run-shell 'tmux select-window -t gemini 2>/dev/null || tmux new-window -n gemini -c \"#{pane_current_path}\" gemini'" \
             "Dotfiles" d "run-shell 'tmux select-window -t dotfiles 2>/dev/null || tmux new-window -n dotfiles -c ~/.dotfiles vim'"
 
-          # コピーモード (vi風)
+          # Copy mode (vi-style)
           bind-key -T copy-mode-vi v send-keys -X begin-selection
           bind-key -T copy-mode-vi y send-keys -X copy-pipe-no-clear "pbcopy"
           unbind -T copy-mode-vi Enter
           bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-no-clear "pbcopy"
 
-          # 拡張キー対応 (Shift+Enter 等)
+          # Extended key support (e.g. Shift+Enter)
           # https://github.com/anthropics/claude-code/issues/6072#issuecomment-3864208228
           set -s extended-keys on
           set -as terminal-features 'xterm*:extkeys'
@@ -122,10 +123,10 @@ in
           {
             plugin = dracula-patched; # https://draculatheme.com/tmux
             extraConfig = ''
-              # git branch/status は starship (shell) / cship (Claude Code) /
-              # codex statusline / neovim lualine のいずれかに常に表示され、
-              # battery/cpu/ram/network/time は iStat Menus (menu bar) と重複するため
-              # tmux 側では持たず、セッション/ウィンドウ表示に専念させる
+              # git branch/status is already shown by starship (shell), cship
+              # (Claude Code), the codex statusline, or neovim's lualine, and
+              # battery/cpu/ram/network/time duplicate iStat Menus (menu bar).
+              # Drop both here and keep tmux focused on session/window display.
               set -g @dracula-plugins ""
               set -g @dracula-show-powerline true
               set -g @dracula-show-flags true
@@ -158,7 +159,7 @@ in
             plugin = tmux-agent-indicator; # https://github.com/accessd/tmux-agent-indicator
           }
           {
-            plugin = tmux-thumbs; # https://github.com/fcsonline/tmux-thumbs (prefix Space でヒント表示)
+            plugin = tmux-thumbs; # https://github.com/fcsonline/tmux-thumbs (prefix Space shows hints)
           }
         ];
       };
