@@ -94,6 +94,9 @@ in
           # Activity monitoring
           setw -g monitor-activity on
 
+          # Thicken pane borders (makes agent-indicator's state colors easier to see)
+          set -g pane-border-lines heavy
+
           # t: pop up a scratch shell in the current pane's directory
           # (overrides the stock clock-mode bind)
           bind-key t display-popup -d "#{pane_current_path}" -w 80% -h 80% -T " scratch " -E "zsh"
@@ -151,6 +154,20 @@ in
           }
           {
             plugin = tmux-agent-indicator; # https://github.com/accessd/tmux-agent-indicator
+            extraConfig = ''
+              # Border colors matched to the dracula palette (the default ANSI
+              # green/yellow have weak contrast against dracula's normal
+              # border color #bd93f9)
+              set -g @agent-indicator-done-border '#50fa7b'
+              set -g @agent-indicator-needs-input-border '#f1fa8c'
+
+              # Extend the notification display duration (default 5000ms)
+              set -g @agent-indicator-notification-duration '8000'
+
+              # Also fire a native macOS notification alongside tmux's
+              # display-message, so it's noticeable even when focus is elsewhere
+              set -g @agent-indicator-notification-command 'osascript -e "display notification \"$AGENT_STATE in $AGENT_SESSION:$AGENT_WINDOW\" with title \"Claude Code\" sound name \"Glass\""'
+            '';
           }
           {
             plugin = tmux-thumbs; # https://github.com/fcsonline/tmux-thumbs (prefix Space shows hints)
