@@ -82,7 +82,8 @@
     "slack@claude-plugins-official": true,
     "github@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
-    "codex@openai-codex": true
+    "codex@openai-codex": true,
+    "workmux-status@workmux": true
   },
   "extraKnownMarketplaces": {
     "thedotmack": {
@@ -95,6 +96,12 @@
       "source": {
         "source": "github",
         "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "workmux": {
+      "source": {
+        "source": "github",
+        "repo": "raine/workmux"
       }
     }
   },
