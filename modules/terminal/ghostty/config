@@ -11,3 +11,8 @@ adjust-cell-height = 5%
 theme = dracula
 background = 14151b
 minimum-contrast = 2.5
+
+# desk switch の深い休止は旧机のタイル窓を閉じる。この確認ダイアログが
+# 出るとプロセスが待ち状態のまま止まり、実質的に切り替えが完了しない
+# （den 側では検出できない）。ghostty からは自動で閉じられる前提にする。
+confirm-close-surface = false
