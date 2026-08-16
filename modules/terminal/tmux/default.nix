@@ -124,7 +124,9 @@ in
               # (Claude Code), the codex statusline, or neovim's lualine, and
               # battery/cpu/ram/network/time duplicate iStat Menus (menu bar).
               # Drop both here and keep tmux focused on session/window display.
-              set -g @dracula-plugins ""
+              # Must be " " not "": dracula treats "" as unset and falls back
+              # to its "battery network weather" default.
+              set -g @dracula-plugins " "
               set -g @dracula-show-powerline true
               set -g @dracula-show-flags true
               set -g @dracula-border-contrast true
