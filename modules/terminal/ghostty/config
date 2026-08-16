@@ -11,3 +11,5 @@ adjust-cell-height = 5%
 theme = dracula
 background = 14151b
 minimum-contrast = 2.5
+
+confirm-close-surface = false
