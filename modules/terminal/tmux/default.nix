@@ -124,7 +124,14 @@ in
               # (Claude Code), the codex statusline, or neovim's lualine, and
               # battery/cpu/ram/network/time duplicate iStat Menus (menu bar).
               # Drop both here and keep tmux focused on session/window display.
-              set -g @dracula-plugins ""
+              #
+              # NOTE: this must NOT be "" (empty string). Dracula's
+              # get_tmux_option() treats an empty value as "unset" and falls
+              # back to its default of "battery network weather", silently
+              # re-enabling the segments this is meant to disable. A single
+              # space survives the emptiness check but still splits into zero
+              # plugin names.
+              set -g @dracula-plugins " "
               set -g @dracula-show-powerline true
               set -g @dracula-show-flags true
               set -g @dracula-border-contrast true
