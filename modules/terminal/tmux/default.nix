@@ -94,8 +94,9 @@ in
           # Activity monitoring
           setw -g monitor-activity on
 
-          # g: pop up a scratch shell in the current pane's directory
-          bind-key g display-popup -d "#{pane_current_path}" -w 80% -h 80% -T " scratch " -E "zsh"
+          # t: pop up a scratch shell in the current pane's directory
+          # (overrides the stock clock-mode bind)
+          bind-key t display-popup -d "#{pane_current_path}" -w 80% -h 80% -T " scratch " -E "zsh"
 
           # G: pop up lazygit
           bind-key G display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " lazygit " -E "lazygit"
