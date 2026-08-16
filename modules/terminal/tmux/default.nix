@@ -91,6 +91,11 @@ in
           # - splits into rows and keeps them evenly sized
           bind - split-window -v -c "#{pane_current_path}" \; select-layout even-vertical
 
+          # Re-even remaining panes when one closes (explicit kill-pane or
+          # the pane's shell/process exiting on its own)
+          set-hook -g after-kill-pane "select-layout"
+          set-hook -g pane-exited "select-layout"
+
           # Activity monitoring
           setw -g monitor-activity on
 
