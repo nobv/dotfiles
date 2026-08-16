@@ -175,8 +175,10 @@ in
               set -g @agent-indicator-notification-duration '8000'
 
               # Also fire a native macOS notification alongside tmux's
-              # display-message, so it's noticeable even when focus is elsewhere
-              set -g @agent-indicator-notification-command 'osascript -e "display notification \"$AGENT_STATE in $AGENT_SESSION:$AGENT_WINDOW\" with title \"Claude Code\" sound name \"Glass\""'
+              # display-message, so it's noticeable even when focus is elsewhere.
+              # $AGENT_NAME makes this correct for any agent (claude, codex, ...),
+              # not just Claude Code.
+              set -g @agent-indicator-notification-command 'osascript -e "display notification \"$AGENT_STATE in $AGENT_SESSION:$AGENT_WINDOW\" with title \"$AGENT_NAME\" sound name \"Glass\""'
             '';
           }
           {
