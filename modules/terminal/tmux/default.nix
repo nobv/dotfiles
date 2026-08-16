@@ -86,6 +86,9 @@ in
           # アクティビティモニタリング
           setw -g monitor-activity on
 
+          # pane境界線を太くする (agent-indicator の状態色を視認しやすくするため)
+          set -g pane-border-lines heavy
+
           # コピーモード (vi風)
           bind-key -T copy-mode-vi v send-keys -X begin-selection
           bind-key -T copy-mode-vi y send-keys -X copy-pipe-no-clear "pbcopy"
@@ -139,6 +142,19 @@ in
           }
           {
             plugin = tmux-agent-indicator; # https://github.com/accessd/tmux-agent-indicator
+            extraConfig = ''
+              # dracula パレットに合わせた border 色 (デフォルトの ANSI green/yellow は
+              # dracula の通常時 border 色 #bd93f9 との対比が弱く視認しづらいため)
+              set -g @agent-indicator-done-border '#50fa7b'
+              set -g @agent-indicator-needs-input-border '#f1fa8c'
+
+              # 通知の表示時間を延長 (デフォルト5000ms)
+              set -g @agent-indicator-notification-duration '8000'
+
+              # tmux の display-message に加え、フォーカス外でも気づけるよう
+              # macOS ネイティブ通知を鳴らす
+              set -g @agent-indicator-notification-command 'osascript -e "display notification \"$AGENT_STATE in $AGENT_SESSION:$AGENT_WINDOW\" with title \"Claude Code\" sound name \"Glass\""'
+            '';
           }
         ];
       };
