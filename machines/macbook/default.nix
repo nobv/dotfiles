@@ -164,6 +164,7 @@
     productivity = {
       #      amphetamine.enable = false;
       affine.enable = false;
+      alfred.enable = true;
       anki.enable = true;
       capacities.enable = false;
       clickup.enable = false;
