@@ -29,8 +29,8 @@ let
           'if (( $(sw_vers -productVersion | cut -d. -f1) >= 15 )); then'
     '';
   });
-  # Claude Code / Codex の hooks から pane border・window title に
-  # running / needs-input / done を表示する (nixpkgs 未収載)
+  # Shows running / needs-input / done on the pane border and window title,
+  # driven by Claude Code / Codex hooks (not packaged in nixpkgs)
   tmux-agent-indicator = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "tmux-agent-indicator";
     version = "unstable-2026-07-26";
@@ -50,9 +50,9 @@ in
 
   config = mkIf cfg.enable {
     home-manager.users.${username} = {
-      # Claude Code hooks (modules/ai/claude-code/settings.json) は
-      # $HOME/.tmux/plugins/tmux-agent-indicator/scripts/agent-state.sh を
-      # 参照するため、nix store の実体へ安定パスで symlink を張る
+      # Claude Code hooks (modules/ai/claude-code/settings.json) reference
+      # $HOME/.tmux/plugins/tmux-agent-indicator/scripts/agent-state.sh directly,
+      # so symlink it to the nix store path at a stable location
       home.file.".tmux/plugins/tmux-agent-indicator".source =
         "${tmux-agent-indicator}/share/tmux-plugins/tmux-agent-indicator";
 
@@ -71,31 +71,46 @@ in
         shell = "${pkgs.zsh}/bin/zsh";
         terminal = "tmux-256color";
         extraConfig = ''
-          # 設定ファイルをリロードする
+          # Reload the config file
           bind r source-file ~/.config/tmux/tmux.conf \; display "Reloaded!"
 
-          # 連打系（resize-pane など）の repeat 受付時間を短く
+          # Shorten the repeat-time window for rapid-fire binds (e.g. resize-pane)
           set -g repeat-time 300
 
-          # | でペインを縦に分割する
-          bind | split-window -h
+          # Renumber windows so there are no gaps after closing one
+          set -g renumber-windows on
 
-          # - でペインを横に分割する
-          bind - split-window -v
+          # When the session you're attached to is destroyed (e.g. its last
+          # window closes), land on another live session instead of detaching
+          # all the way out to the outer shell
+          set -g detach-on-destroy off
 
-          # アクティビティモニタリング
+          # | splits into columns and keeps them evenly sized
+          bind | split-window -h -c "#{pane_current_path}" \; select-layout even-horizontal
+
+          # - splits into rows and keeps them evenly sized
+          bind - split-window -v -c "#{pane_current_path}" \; select-layout even-vertical
+
+          # Activity monitoring
           setw -g monitor-activity on
 
-          # pane境界線を太くする (agent-indicator の状態色を視認しやすくするため)
+          # Thicken pane borders (makes agent-indicator's state colors easier to see)
           set -g pane-border-lines heavy
 
-          # コピーモード (vi風)
+          # t: pop up a scratch shell in the current pane's directory
+          # (overrides the stock clock-mode bind)
+          bind-key t display-popup -d "#{pane_current_path}" -w 80% -h 80% -T " scratch " -E "zsh"
+
+          # G: pop up lazygit
+          bind-key G display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " lazygit " -E "lazygit"
+
+          # Copy mode (vi-style)
           bind-key -T copy-mode-vi v send-keys -X begin-selection
           bind-key -T copy-mode-vi y send-keys -X copy-pipe-no-clear "pbcopy"
           unbind -T copy-mode-vi Enter
           bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-no-clear "pbcopy"
 
-          # 拡張キー対応 (Shift+Enter 等)
+          # Extended key support (e.g. Shift+Enter)
           # https://github.com/anthropics/claude-code/issues/6072#issuecomment-3864208228
           set -s extended-keys on
           set -as terminal-features 'xterm*:extkeys'
@@ -105,18 +120,15 @@ in
           {
             plugin = dracula-patched; # https://draculatheme.com/tmux
             extraConfig = ''
-              set -g @dracula-plugins 'git battery cpu-usage ram-usage network time'
+              # git branch/status is already shown by starship (shell), cship
+              # (Claude Code), the codex statusline, or neovim's lualine, and
+              # battery/cpu/ram/network/time duplicate iStat Menus (menu bar).
+              # Drop both here and keep tmux focused on session/window display.
+              set -g @dracula-plugins ""
               set -g @dracula-show-powerline true
               set -g @dracula-show-flags true
               set -g @dracula-border-contrast true
-              set -g @dracula-show-empty-plugins false
               set -g @dracula-show-left-icon session
-              set -g @dracula-military-time true
-              set -g @dracula-show-timezone false
-              set -g @dracula-cpu-display-load true
-              set -g @dracula-show-battery-status true
-              set -g @dracula-git-show-remote-status true
-              set -g @dracula-git-no-repo-message ""
               set -g status-position top
             '';
           }
@@ -143,18 +155,22 @@ in
           {
             plugin = tmux-agent-indicator; # https://github.com/accessd/tmux-agent-indicator
             extraConfig = ''
-              # dracula パレットに合わせた border 色 (デフォルトの ANSI green/yellow は
-              # dracula の通常時 border 色 #bd93f9 との対比が弱く視認しづらいため)
+              # Border colors matched to the dracula palette (the default ANSI
+              # green/yellow have weak contrast against dracula's normal
+              # border color #bd93f9)
               set -g @agent-indicator-done-border '#50fa7b'
               set -g @agent-indicator-needs-input-border '#f1fa8c'
 
-              # 通知の表示時間を延長 (デフォルト5000ms)
+              # Extend the notification display duration (default 5000ms)
               set -g @agent-indicator-notification-duration '8000'
 
-              # tmux の display-message に加え、フォーカス外でも気づけるよう
-              # macOS ネイティブ通知を鳴らす
+              # Also fire a native macOS notification alongside tmux's
+              # display-message, so it's noticeable even when focus is elsewhere
               set -g @agent-indicator-notification-command 'osascript -e "display notification \"$AGENT_STATE in $AGENT_SESSION:$AGENT_WINDOW\" with title \"Claude Code\" sound name \"Glass\""'
             '';
+          }
+          {
+            plugin = tmux-thumbs; # https://github.com/fcsonline/tmux-thumbs (prefix Space shows hints)
           }
         ];
       };
