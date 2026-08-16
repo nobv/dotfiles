@@ -109,6 +109,9 @@ in
           # G: pop up lazygit
           bind-key G display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " lazygit " -E "lazygit"
 
+          # W: pop up workmux dashboard
+          bind-key W display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " workmux " -E "workmux dashboard"
+
           # Copy mode (vi-style)
           bind-key -T copy-mode-vi v send-keys -X begin-selection
           bind-key -T copy-mode-vi y send-keys -X copy-pipe-no-clear "pbcopy"
