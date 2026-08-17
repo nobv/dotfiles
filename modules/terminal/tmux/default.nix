@@ -85,16 +85,21 @@ in
           # all the way out to the outer shell
           set -g detach-on-destroy off
 
-          # | splits into columns and keeps them evenly sized
-          bind | split-window -h -c "#{pane_current_path}" \; select-layout even-horizontal
+          # | splits the current pane into columns, - into rows. `select-layout
+          # -E` then evens out only the new pane's siblings (the panes sharing
+          # its parent cell), so nesting survives. The named layouts
+          # (even-horizontal / even-vertical) must not be used here: they
+          # rebuild the whole window as one flat row/column, flattening every
+          # nested split.
+          bind | split-window -h -c "#{pane_current_path}" \; select-layout -E
+          bind - split-window -v -c "#{pane_current_path}" \; select-layout -E
 
-          # - splits into rows and keeps them evenly sized
-          bind - split-window -v -c "#{pane_current_path}" \; select-layout even-vertical
-
-          # Re-even remaining panes when one closes (explicit kill-pane or
-          # the pane's shell/process exiting on its own)
-          set-hook -g after-kill-pane "select-layout"
-          set-hook -g pane-exited "select-layout"
+          # Re-even the remaining siblings when a pane closes (explicit
+          # kill-pane or the pane's shell/process exiting on its own). `-E` is
+          # required: bare `select-layout` reapplies the window's last preset
+          # layout, which would flatten the nesting again.
+          set-hook -g after-kill-pane "select-layout -E"
+          set-hook -g pane-exited "select-layout -E"
 
           # Name auto-renamed windows after their directory. The stock format
           # uses #{pane_current_command}, which for agent CLIs is their version
