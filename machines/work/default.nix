@@ -15,6 +15,7 @@
   # Enable modules using actual directory structure paths
   modules = {
     ai = {
+      apm.enable = true;
       chatgpt.enable = false;
       claude.enable = true;
       claude-code = {
@@ -55,6 +56,7 @@
         fd.enable = true;
         fzf.enable = true;
         gnused.enable = true;
+        herdr.enable = true;
         jq.enable = true;
         navi.enable = true;
         parallel.enable = true;
@@ -87,10 +89,11 @@
         github.enable = true;
         gh-dash.enable = true;
         pre-commit.enable = true;
+        difit.enable = true;
         workmux = {
           enable = true;
           sandbox = {
-            enable = true;
+            enable = false;
             cpus = 4;
             memory = "8GiB";
           };
@@ -99,13 +102,14 @@
     };
 
     editors = {
-      jetbrains.enable = true;
+      jetbrains.enable = false;
       neovim = {
         enable = true;
         lazyvim.enable = true;
       };
       typora.enable = true;
-      vscode.enable = true;
+      vscode.enable = false;
+      zed.enable = true;
     };
 
     # Programming languages
@@ -127,11 +131,11 @@
     };
 
     productivity = {
-      capacities.enable = true;
-      heptabase.enable = true;
+      capacities.enable = false;
+      heptabase.enable = false;
       linear-linear.enable = true;
       mdbook.enable = false;
-      obsidian.enable = true;
+      obsidian.enable = false;
       raycast.enable = true;
       todoist.enable = true;
       zotero.enable = true;
@@ -145,6 +149,7 @@
     # System tools
     system = {
       aerospace.enable = true;
+      den.enable = true;
       flashspace.enable = true;
       fonts.enable = true;
       homebrew.enable = true;
@@ -154,6 +159,7 @@
 
     # Terminal configuration
     terminal = {
+      cmux.enable = true;
       lf.enable = true;
       starship.enable = true;
       tmux.enable = true;
@@ -165,15 +171,17 @@
 
     # Utilities
     utilities = {
+      alt-tab.enable = true;
       battery.enable = true;
       cleanshot.enable = true;
       deskpad.enable = true;
       flux.enable = true;
       google-japanese-ime.enable = true;
-      thaw.enable = true;
       karabiner-elements.enable = true;
       logi-options-plus.enable = true;
       meetingbar.enable = true;
+      thaw.enable = true;
+      typeless.enable = true;
     };
   };
 }
