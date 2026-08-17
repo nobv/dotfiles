@@ -68,30 +68,26 @@ Example usage:
 - `darwin-rebuild switch --flake .#macmini`
 
 ## Machine-Specific Configuration
-- Each machine requires a `config.nix` file containing machine-specific settings
-- Files located at `machines/<machine>/config.nix` with format `{ username = "your-username"; }`
-- **These files are NOT tracked in git** (machine-specific settings should remain local)
-- Configuration is generated from `templates/machine-config.nix.template` during setup
+- Each machine requires `machines/<machine>/config.nix`, format `{ username = "your-username"; }`
+- **`username` is the only key read.** `flake.nix` (`mkDarwinSystem`) destructures nothing else, and it is
+  the sole value threaded into modules via `specialArgs`. Adding `hostname` or `gitEmail` there has no effect
+  unless `flake.nix` is taught to read them
+- **These files ARE tracked in git**, and the three machines are not consistent about it:
+  - `machines/macbook/config.nix`, `machines/macmini/config.nix` — real username committed
+  - `machines/work/config.nix` — the `REPLACE_WITH_YOUR_USERNAME` placeholder is committed, and the real
+    username lives only as a permanent uncommitted modification on that machine. So a fresh `nix build` in a
+    worktree fails for `work` until you write the username in locally (do not commit it)
+- `.gitignore:47` carries a **commented-out** `machines/work/config.nix` rule, which is why the file is
+  tracked despite `setup.sh` describing it as git-ignored
 
 ### Configuration Setup
 **Automatic (Recommended):**
-- Run `./setup.sh -m <machine>` - it will automatically generate `config.nix` from template
-- Prompts for username and creates the file with proper format
+- Run `./setup.sh -m <machine>` — it writes `config.nix` inline (heredoc, `setup.sh:132-139`) when missing,
+  then prompts for the username and `sed`s out the placeholder. There is no `templates/` directory
 
 **Manual Setup:**
-1. Copy template: `cp templates/machine-config.nix.template machines/<machine>/config.nix`
-2. Edit the file and replace placeholders:
-   - `REPLACE_WITH_YOUR_USERNAME` → your actual username
-   - Add any machine-specific settings as needed
-
-### Configuration Format
-```nix
-{
-  username = "your-username";  # Required: your system username
-  # hostname = "custom-hostname";  # Optional: override default hostname
-  # gitEmail = "work@company.com";  # Optional: machine-specific git email
-}
-```
+1. Create `machines/<machine>/config.nix` with the format above
+2. Replace `REPLACE_WITH_YOUR_USERNAME` with your actual username
 
 ## Interactive Module Management
 
@@ -287,6 +283,8 @@ Error: `Please update machines/<machine>/config.nix with your actual username`
 - Edit `machines/<machine>/config.nix`
 - Replace `REPLACE_WITH_YOUR_USERNAME` with your actual username
 - Or run `./setup.sh -m <machine>` to regenerate config
+- **Hits every new worktree on `work`**, because the placeholder is what's committed (see Machine-Specific
+  Configuration). Write the username into the worktree's copy and leave it unstaged
 
 ### Module Not Found After Adding
 If a new module isn't recognized:
