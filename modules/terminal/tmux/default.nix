@@ -96,6 +96,12 @@ in
           set-hook -g after-kill-pane "select-layout"
           set-hook -g pane-exited "select-layout"
 
+          # Name auto-renamed windows after their directory. The stock format
+          # uses #{pane_current_command}, which for agent CLIs is their version
+          # string ("2.1.233"). Windows renamed by hand are unaffected — tmux
+          # turns automatic-rename off per-window on a manual rename-window.
+          set -g automatic-rename-format '#{?pane_in_mode,[tmux],#{b:pane_current_path}}#{?pane_dead,[dead],}'
+
           # Activity monitoring
           setw -g monitor-activity on
 
@@ -118,11 +124,16 @@ in
           # ("2.1.233"). Truncated so a long task name cannot push the border
           # past the pane width.
           #
+          # The directory is shown on inactive panes only: automatic-rename
+          # already puts the ACTIVE pane's directory in the window name, and
+          # panes within one window often sit in different worktrees, so this
+          # is the only place an inactive pane's worktree shows up.
+          #
           # Pink rather than dracula's #bd93f9: that is also the theme's default
           # border colour, and it stays clear of the green/yellow the
           # agent-indicator states below use.
           set -g pane-border-status top
-          set -g pane-border-format ' #{b:pane_current_path} │ #{=40:pane_title} '
+          set -g pane-border-format '#{?pane_active, ,  #{b:pane_current_path} │ }#{=40:pane_title} '
           set -g pane-border-style 'fg=#44475a'
           set -g pane-active-border-style 'bg=#ff79c6,fg=#282a36,bold'
 
