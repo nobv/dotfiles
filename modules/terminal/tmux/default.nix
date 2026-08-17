@@ -109,6 +109,9 @@ in
           # G: pop up lazygit
           bind-key G display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " lazygit " -E "lazygit"
 
+          # W: pop up workmux dashboard
+          bind-key W display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " workmux " -E "workmux dashboard"
+
           # Copy mode (vi-style)
           bind-key -T copy-mode-vi v send-keys -X begin-selection
           bind-key -T copy-mode-vi y send-keys -X copy-pipe-no-clear "pbcopy"
@@ -172,8 +175,10 @@ in
               set -g @agent-indicator-notification-duration '8000'
 
               # Also fire a native macOS notification alongside tmux's
-              # display-message, so it's noticeable even when focus is elsewhere
-              set -g @agent-indicator-notification-command 'osascript -e "display notification \"$AGENT_STATE in $AGENT_SESSION:$AGENT_WINDOW\" with title \"Claude Code\" sound name \"Glass\""'
+              # display-message, so it's noticeable even when focus is elsewhere.
+              # $AGENT_NAME makes this correct for any agent (claude, codex, ...),
+              # not just Claude Code.
+              set -g @agent-indicator-notification-command 'osascript -e "display notification \"$AGENT_STATE in $AGENT_SESSION:$AGENT_WINDOW\" with title \"$AGENT_NAME\" sound name \"Glass\""'
             '';
           }
           {
