@@ -23,6 +23,7 @@ in
         autoUpdate = true;
         cleanup = "zap";
         upgrade = true;
+        extraFlags = [ "--force-cleanup" ];
       };
       global = {
         brewfile = true;
