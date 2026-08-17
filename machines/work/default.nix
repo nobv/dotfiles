@@ -143,6 +143,10 @@
 
     security = {
       "1password".enable = true;
+      "1password-cli" = {
+        enable = true;
+        shellPlugins.enable = true;
+      };
       trivy.enable = true;
     };
 
