@@ -6,12 +6,6 @@
   ...
 }:
 {
-  system.defaults = {
-    dock = {
-      orientation = "right";
-    };
-  };
-
   security = {
     pam = {
       services = {
