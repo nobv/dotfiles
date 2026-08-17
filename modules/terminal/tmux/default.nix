@@ -127,12 +127,19 @@ in
           # pane_title (not pane_current_command) is what agent CLIs set to the
           # current task — the command name is just their version string
           # ("2.1.233"). Truncated so a long task name cannot push the border
-          # past the pane width.
+          # past the pane width. The zsh config (modules/terminal/zsh/.zshrc)
+          # sets pane_title to the running command and clears it back to "" on
+          # returning to the prompt, so agent-set titles never linger after
+          # the agent exits; when pane_title is empty (idle shell) the current
+          # directory is shown instead of tmux's hostname default.
           #
-          # The directory is shown on inactive panes only: automatic-rename
-          # already puts the ACTIVE pane's directory in the window name, and
-          # panes within one window often sit in different worktrees, so this
-          # is the only place an inactive pane's worktree shows up.
+          # The directory is shown a second time on inactive panes only, and
+          # only alongside a non-empty title: automatic-rename already puts
+          # the ACTIVE pane's directory in the window name, and panes within
+          # one window often sit in different worktrees, so this is the only
+          # place an inactive pane's worktree shows up while it's busy. When
+          # idle, the title slot already reads as the directory, so this
+          # would just duplicate it.
           #
           # Border colour means focus and nothing else, so it can never be
           # wrong: agent-indicator's border channel is off below because it
@@ -141,7 +148,7 @@ in
           # sitting in. Per-pane agent state is carried in the title instead,
           # via the @pstate pane option set by the agent hooks.
           set -g pane-border-status top
-          set -g pane-border-format '#{?pane_active, ,  #{b:pane_current_path} │ }#{?#{==:#{@pstate},needs-input},#[fg=#f1fa8c#,bold]⏸ #[default],#{?#{==:#{@pstate},done},#[fg=#50fa7b#,bold]✅ #[default],}}#{=40:pane_title} '
+          set -g pane-border-format '#{?pane_active, ,  #{?pane_title,#{b:pane_current_path} │ ,}}#{?#{==:#{@pstate},needs-input},#[fg=#f1fa8c#,bold]⏸ #[default],#{?#{==:#{@pstate},done},#[fg=#50fa7b#,bold]✅ #[default],}}#{?pane_title,#{=40:pane_title},#{b:pane_current_path}} '
           set -g pane-border-style 'fg=#44475a'
           set -g pane-active-border-style 'bg=#ff79c6,fg=#282a36,bold'
 
