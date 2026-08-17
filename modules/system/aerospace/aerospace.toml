@@ -4,6 +4,13 @@
 # See: https://nikitabobko.github.io/AeroSpace/guide#config-version
 config-version = 2
 
+# This file is an out-of-store symlink into the dotfiles repo, so an edit is live the
+# moment it is saved; auto-reload makes AeroSpace pick it up without a reload-config
+# call. Two gotchas: this is a top-level key, so it must stay above every table (put it
+# below one and TOML scopes it into that table — 'Unknown key'), and the watcher only
+# starts after one manual reload, so run 'aerospace reload-config' once after adopting it.
+auto-reload-config = true
+
 # 'break' and 'shelf' are the workspaces AeroSpace itself knows about — the
 # domain-independent ones (see desk-model note below). Keep them alive even when
 # empty and invisible, matching what config-version = 1 inferred automatically
@@ -207,59 +214,37 @@ alt-shift-l = ['join-with right', 'mode main']
 # floating now means two different things depending on workspace: on a desk it's the
 # carry marker (wagon), on break/shelf it's settled furniture that desk's carry logic
 # explicitly skips by workspace. Tiled with no rule = the plain desk-scoped default.
+#
+# One rule per category, not one per app: the bundle-id list IS the rule, so there is no
+# separate list that could drift out of sync with it. Sorting a new app means dropping
+# its id into the right alternation and saving — auto-reload does the rest. Three points
+# of mechanics, all load-bearing:
+#   - the regex must be double-quoted inside the single-quoted expression. '\.' reads as
+#     an escape in AeroSpace's shell expression language and '$' is reserved in a bare
+#     word; neither survives outside the inner quotes.
+#   - '~=' is a containment match, so anchor with ^...$ — otherwise 'com.foo' also
+#     matches 'com.foobar'.
+#   - only the first matching callback runs (no check-further-callbacks here), so the
+#     three sets must stay disjoint; an id listed twice silently loses its second home.
+# Menu-bar agents and overlays (Raycast, Bartender, CleanShot X, Yoink, FineTune, …) never
+# reach these callbacks at all — a rule for one of them is dead weight, not a safe no-op.
 
 # Wagon — a tool used across desks; floating so desk switch carries it along
+# 1Password · Aqua Voice · Claude · ChatGPT · ChatGPT Classic · Typeless · Todoist ·
+# Heptabase · Logseq · Obsidian
 [[on-window-detected]]
-if.app-id = 'com.1password.1password'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.electron.aqua-voice'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.openai.chat'
-run = 'layout floating'
-
-[[on-window-detected]]
-if.app-id = 'com.anthropic.claudefordesktop'
+if = 'test %{app-bundle-id} ~= "^(com\.1password\.1password|com\.electron\.aqua-voice|com\.anthropic\.claudefordesktop|com\.openai\.codex|com\.openai\.chat|now\.typeless\.desktop|com\.todoist\.mac\.Todoist|app\.projectmeta\.projectmeta|com\.logseq\.logseq|md\.obsidian)$"'
 run = 'layout floating'
 
 # Break — personal life/comms, off the clock; floating, pinned to the shared 'break' workspace
+# Calendar · Reminders · Things3 · LINE · Messages · Beeper · Rakuten Link · Discord · Music · Spotify
 [[on-window-detected]]
-if.app-id = 'com.apple.iCal'
-run = ['move-node-to-workspace break', 'layout floating']
-
-[[on-window-detected]]
-if.app-id = 'com.culturedcode.ThingsMac'
-run = ['move-node-to-workspace break', 'layout floating']
-
-[[on-window-detected]]
-if.app-id = 'com.apple.reminders'
-run = ['move-node-to-workspace break', 'layout floating']
-
-[[on-window-detected]]
-if.app-id = 'jp.naver.line.mac'
-run = ['move-node-to-workspace break', 'layout floating']
-
-[[on-window-detected]]
-if.app-id = 'com.apple.Music'
+if = 'test %{app-bundle-id} ~= "^(com\.apple\.iCal|com\.apple\.reminders|com\.culturedcode\.ThingsMac|jp\.naver\.line\.mac|com\.apple\.MobileSMS|im\.beeper|jp\.co\.rakuten\.link|com\.hnc\.Discord|com\.apple\.Music|com\.spotify\.client)$"'
 run = ['move-node-to-workspace break', 'layout floating']
 
 # Shelf — reference kept in view but not driven; floating, pinned to the off-monitor 'shelf'
+# Finder · Preview · Books · Amazon Kindle · Zotero
 [[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = ['move-node-to-workspace shelf', 'layout floating']
-
-[[on-window-detected]]
-if.app-id = 'md.obsidian'
-run = ['move-node-to-workspace shelf', 'layout floating']
-
-[[on-window-detected]]
-if.app-id = 'org.zotero.zotero'
-run = ['move-node-to-workspace shelf', 'layout floating']
-
-[[on-window-detected]]
-if.app-id = 'com.amazon.Lassen'
+if = 'test %{app-bundle-id} ~= "^(com\.apple\.finder|com\.apple\.Preview|com\.apple\.iBooksX|com\.amazon\.Lassen|org\.zotero\.zotero)$"'
 run = ['move-node-to-workspace shelf', 'layout floating']
 
