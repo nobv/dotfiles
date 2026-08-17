@@ -142,11 +142,22 @@
     };
 
     security = {
-      "1password".enable = true;
+      "1password" = {
+        enable = true;
+        sshAgent = {
+          enable = true;
+          keys = [ { item = "GitHub (work)"; } ];
+        };
+        gitSigning = {
+          enable = true;
+          key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILvaDGyNYvnvYfjQJ5adS/wL0eYDZNJdJNaEuPWgkVVC";
+        };
+      };
       "1password-cli" = {
         enable = true;
         shellPlugins.enable = true;
       };
+      ssh.enable = true;
       trivy.enable = true;
     };
 

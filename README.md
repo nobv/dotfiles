@@ -74,7 +74,7 @@ Applications and tools are organized by function for intuitive management:
 - **Languages**: python, nodejs, rust, go, and more
 - **Media**: spotify, kindle
 - **Productivity**: notion, obsidian, things3, amphetamine, and more
-- **Security**: 1password, 1password-cli, wireguard
+- **Security**: 1password, 1password-cli, ssh, wireguard
 - **System**: homebrew, aerospace, fonts
 - **Terminal**: zsh, starship, wezterm
 - **Utilities**: raycast, karabiner-elements, flux, and more
