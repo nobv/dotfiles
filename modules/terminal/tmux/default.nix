@@ -152,12 +152,9 @@ in
           set -g pane-border-style 'fg=#44475a'
           set -g pane-active-border-style 'bg=#ff79c6,fg=#282a36,bold'
 
-          # Focusing a pane clears its pending marker — you have now seen it.
-          # No -t: tmux does not expand #{...} formats in an option's target
-          # argument, so `-t "#{pane_id}"` was treated as a literal pane name
-          # and failed with "No such pane" on every focus change. A hook runs
-          # with the triggering pane as its current target, so plain
-          # `set-option -p` already resolves to the right pane.
+          # No -t: tmux doesn't expand #{...} in an option's target, so
+          # -t "#{pane_id}" was literal and failed with "No such pane".
+          # A hook already targets the triggering pane, so -p is enough.
           set-hook -g pane-focus-in 'set-option -p @pstate ""'
 
           # t: pop up a scratch shell in the current pane's directory
