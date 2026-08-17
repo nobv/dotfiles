@@ -24,6 +24,9 @@ let
       vault = "${k.vault}"
     ''
   ) cfg.sshAgent.keys;
+
+  # Imported, not read off programs.git.settings — this module writes there too.
+  gitEmail = (import ../../development/vcs/git/settings.nix).user.email;
 in
 {
   options.modules.security."1password" = {
@@ -96,14 +99,18 @@ in
     })
 
     (mkIf cfg.gitSigning.enable {
-      # signing.* rather than settings: it reaches iniContent with mkDefault, so
-      # a machine can override it, and it avoids fighting over ownership of
-      # programs.git.settings with modules/development/vcs/git.
-      home-manager.users.${username}.programs.git.signing = {
-        format = "ssh";
-        signer = opSshSign;
-        key = cfg.gitSigning.key;
-        signByDefault = true;
+      home-manager.users.${username} = {
+        programs.git.signing = {
+          format = "ssh";
+          signer = opSshSign;
+          key = cfg.gitSigning.key;
+          signByDefault = true;
+        };
+
+        # Local verification only; without it `git log --show-signature` reports
+        # "No signature" on commits it did sign.
+        programs.git.settings.gpg.ssh.allowedSignersFile = "/Users/${username}/.config/git/allowed_signers";
+        home.file.".config/git/allowed_signers".text = "${gitEmail} ${cfg.gitSigning.key}\n";
       };
     })
 
