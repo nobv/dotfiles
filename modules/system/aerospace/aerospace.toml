@@ -13,19 +13,23 @@ persistent-workspaces = ['break', 'shelf']
 # Desk model: each desk (domain) owns one AeroSpace workspace, switched exclusively
 # via the desk CLI — never bind desk switching to an AeroSpace key here. A window's
 # default home is its own desk's tiled surface (no on-window-detected rule needed).
-# Three exceptions, all domain-independent (design D6 addendum):
+# Three exceptions, all domain-independent (design D6 addendum, wagon-scope revision):
 #   - floating windows are the "wagon": they follow you across desk switches instead
 #     of staying tiled on one desk.
 #   - 'break' is the shared workspace (bound to alt-b) for life/comms apps that don't
-#     belong to a single desk; its residents stay tiled, not floating, so they don't
-#     get swept along as wagon passengers.
+#     belong to a single desk. Its residents are floating — room furniture, not
+#     wagon passengers: desk (wagon-scope) excludes break/shelf from carry by
+#     workspace, so floating no longer means "gets swept along" for them. Floating
+#     also lets a break resident be peeked from whichever desk is active (Yoink
+#     handles drag-and-drop across the switch — its panel is invisible to AeroSpace).
 #   - 'shelf' is the reference surface, pinned to a non-main monitor by the
-#     force-assignment below when one exists; like break, its residents are tiled
-#     (floating would make them wagon passengers). Desks and break time-share the
-#     main monitor; the shelf sits off to the side when a side monitor exists, and
-#     otherwise time-shares main like break does, reached via alt-s (peek, then
-#     alt-tab back). A desk gets no force-assignment (D8: no domain names in
-#     this layer) — desk switch moves the active desk onto main at runtime instead.
+#     force-assignment below when one exists. Same rule as break: residents are
+#     floating, not carried (desk excludes break/shelf from carry). Desks and break
+#     time-share the main monitor; the shelf sits off to the side when a side
+#     monitor exists, and otherwise time-shares main like break does, reached via
+#     alt-s (peek, then alt-tab back). A desk gets no force-assignment (D8: no
+#     domain names in this layer) — desk switch moves the active desk onto main at
+#     runtime instead.
 
 # You can use it to add commands that run after login to macOS user session.
 # 'start-at-login' needs to be 'true' for 'after-login-command' to work
@@ -186,18 +190,23 @@ alt-shift-l = ['join-with right', 'mode main']
 # on-window-detected places a window at launch only (alt-b / alt-shift-b are the
 # manual escape hatches for the rest). A window with no rule stays on its own desk,
 # tiled — that is the default and the common case. The rules below are only for the
-# three domain-independent categories (design D6). Sort a window by asking, in order:
+# three domain-independent categories (design D6 addendum, wagon-scope revision).
+# Sort a window by asking, in order:
 #
 #   1. Wagon  — is it a TOOL I keep using no matter which desk I'm at?
-#               → floating. floating is the carry marker: desk switch drags it along.
+#               → floating, no workspace assignment. desk switch drags it along.
 #   2. Shelf  — is it REFERENCE material I want in view but don't drive?
-#               → tiled on 'shelf', parked on a side monitor, never carried.
+#               → floating, pinned to 'shelf'. desk (wagon-scope) excludes break/shelf
+#                 from carry by workspace, so it stays put across switches — room
+#                 furniture, not a wagon passenger — while still being peekable
+#                 (alt-s) or a drag-and-drop target (Yoink) from whichever desk is active.
 #   3. Break  — is it PERSONAL life/comms, off the clock?
-#               → tiled on 'break', the shared off-desk room reached by alt-b.
+#               → floating, pinned to 'break', the shared off-desk room reached by
+#                 alt-b. Same carry exclusion as shelf.
 #
-# float vs tiled = carried vs settled. Shelf and break are both tiled (settled) and
-# split only by reference-vs-personal; a work-only tool that isn't carried needs no
-# rule — it settles on its own desk. Only floating things ride the wagon.
+# floating now means two different things depending on workspace: on a desk it's the
+# carry marker (wagon), on break/shelf it's settled furniture that desk's carry logic
+# explicitly skips by workspace. Tiled with no rule = the plain desk-scoped default.
 
 # Wagon — a tool used across desks; floating so desk switch carries it along
 [[on-window-detected]]
@@ -216,41 +225,41 @@ run = 'layout floating'
 if.app-id = 'com.anthropic.claudefordesktop'
 run = 'layout floating'
 
-# Break — personal life/comms, off the clock; tiled on the shared 'break' workspace
+# Break — personal life/comms, off the clock; floating, pinned to the shared 'break' workspace
 [[on-window-detected]]
 if.app-id = 'com.apple.iCal'
-run = 'move-node-to-workspace break'
+run = ['move-node-to-workspace break', 'layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.culturedcode.ThingsMac'
-run = 'move-node-to-workspace break'
+run = ['move-node-to-workspace break', 'layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.reminders'
-run = 'move-node-to-workspace break'
+run = ['move-node-to-workspace break', 'layout floating']
 
 [[on-window-detected]]
 if.app-id = 'jp.naver.line.mac'
-run = 'move-node-to-workspace break'
+run = ['move-node-to-workspace break', 'layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.Music'
-run = 'move-node-to-workspace break'
+run = ['move-node-to-workspace break', 'layout floating']
 
-# Shelf — reference kept in view but not driven; tiled on the off-monitor 'shelf'
+# Shelf — reference kept in view but not driven; floating, pinned to the off-monitor 'shelf'
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
-run = 'move-node-to-workspace shelf'
+run = ['move-node-to-workspace shelf', 'layout floating']
 
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
-run = 'move-node-to-workspace shelf'
+run = ['move-node-to-workspace shelf', 'layout floating']
 
 [[on-window-detected]]
 if.app-id = 'org.zotero.zotero'
-run = 'move-node-to-workspace shelf'
+run = ['move-node-to-workspace shelf', 'layout floating']
 
 [[on-window-detected]]
 if.app-id = 'com.amazon.Lassen'
-run = 'move-node-to-workspace shelf'
+run = ['move-node-to-workspace shelf', 'layout floating']
 
