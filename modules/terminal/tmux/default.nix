@@ -102,6 +102,30 @@ in
           # Thicken pane borders (makes agent-indicator's state colors easier to see)
           set -g pane-border-lines heavy
 
+          # Dim inactive panes so the focused one stands out. window-style only
+          # covers cells the running program left at default fg/bg (most
+          # prompt/TUI output sets its own colors, so this alone is subtle) —
+          # the border below is the primary focus cue.
+          set -g window-style 'fg=#44475a,bg=#0a0a10'
+          set -g window-active-style 'fg=#f8f8f2,bg=#282a36'
+
+          # Turn the active pane's top border into a filled title bar. Inactive
+          # panes keep a thin dim line, so the focused pane reads at a glance
+          # even when its content paints its own colors.
+          #
+          # pane_title (not pane_current_command) is what agent CLIs set to the
+          # current task — the command name is just their version string
+          # ("2.1.233"). Truncated so a long task name cannot push the border
+          # past the pane width.
+          #
+          # Pink rather than dracula's #bd93f9: that is also the theme's default
+          # border colour, and it stays clear of the green/yellow the
+          # agent-indicator states below use.
+          set -g pane-border-status top
+          set -g pane-border-format ' #{b:pane_current_path} │ #{=40:pane_title} '
+          set -g pane-border-style 'fg=#44475a'
+          set -g pane-active-border-style 'bg=#ff79c6,fg=#282a36,bold'
+
           # t: pop up a scratch shell in the current pane's directory
           # (overrides the stock clock-mode bind)
           bind-key t display-popup -d "#{pane_current_path}" -w 80% -h 80% -T " scratch " -E "zsh"
@@ -167,9 +191,14 @@ in
             extraConfig = ''
               # Border colors matched to the dracula palette (the default ANSI
               # green/yellow have weak contrast against dracula's normal
-              # border color #bd93f9)
-              set -g @agent-indicator-done-border '#50fa7b'
-              set -g @agent-indicator-needs-input-border '#f1fa8c'
+              # border color #bd93f9).
+              #
+              # The plugin builds the style as `fg=<value>,bold`, so appending
+              # `,bg=...` here makes the state border a filled bar matching the
+              # idle pane-active-border-style above — otherwise a state change
+              # would swap the filled bar for a thin line.
+              set -g @agent-indicator-done-border '#282a36,bg=#50fa7b'
+              set -g @agent-indicator-needs-input-border '#282a36,bg=#f1fa8c'
 
               # Extend the notification display duration (default 5000ms)
               set -g @agent-indicator-notification-duration '8000'
