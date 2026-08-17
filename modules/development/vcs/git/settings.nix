@@ -25,4 +25,10 @@
   init = {
     defaultBranch = "main";
   };
+
+  url = {
+    "git@github.com:" = {
+      insteadOf = "https://github.com/";
+    };
+  };
 }
