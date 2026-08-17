@@ -206,7 +206,7 @@ Modules are organized by function for intuitive discovery and management:
 - `languages/`: Programming language environments (python, nodejs, rust, go, etc.)
 - `media/`: Media and entertainment (spotify, kindle)
 - `productivity/`: Productivity tools (notion, obsidian, things3, amphetamine, etc.)
-- `security/`: Security tools (1password, 1password-cli, wireguard)
+- `security/`: Security tools (1password, 1password-cli, ssh, wireguard)
 - `system/`: System-level configurations (homebrew, aerospace, fonts)
 - `terminal/`: Terminal and shell configurations (zsh, starship, wezterm)
 - `utilities/`: General utilities (raycast, karabiner-elements, flux, etc.)
