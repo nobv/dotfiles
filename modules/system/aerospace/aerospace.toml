@@ -230,10 +230,10 @@ alt-shift-l = ['join-with right', 'mode main']
 # reach these callbacks at all — a rule for one of them is dead weight, not a safe no-op.
 
 # Wagon — a tool used across desks; floating so desk switch carries it along
-# 1Password · Aqua Voice · Claude · ChatGPT · ChatGPT Classic · Typeless · Todoist ·
-# Heptabase · Logseq · Obsidian
+# Finder · 1Password · Aqua Voice · Claude · ChatGPT · ChatGPT Classic · Typeless ·
+# Todoist · Heptabase · Logseq · Obsidian
 [[on-window-detected]]
-if = 'test %{app-bundle-id} ~= "^(com\.1password\.1password|com\.electron\.aqua-voice|com\.anthropic\.claudefordesktop|com\.openai\.codex|com\.openai\.chat|now\.typeless\.desktop|com\.todoist\.mac\.Todoist|app\.projectmeta\.projectmeta|com\.logseq\.logseq|md\.obsidian)$"'
+if = 'test %{app-bundle-id} ~= "^(com\.apple\.finder|com\.1password\.1password|com\.electron\.aqua-voice|com\.anthropic\.claudefordesktop|com\.openai\.codex|com\.openai\.chat|now\.typeless\.desktop|com\.todoist\.mac\.Todoist|app\.projectmeta\.projectmeta|com\.logseq\.logseq|md\.obsidian)$"'
 run = 'layout floating'
 
 # Break — personal life/comms, off the clock; floating, pinned to the shared 'break' workspace
@@ -243,8 +243,8 @@ if = 'test %{app-bundle-id} ~= "^(com\.apple\.iCal|com\.apple\.reminders|com\.cu
 run = ['move-node-to-workspace break', 'layout floating']
 
 # Shelf — reference kept in view but not driven; floating, pinned to the off-monitor 'shelf'
-# Finder · Preview · Books · Amazon Kindle · Zotero
+# Preview · Books · Amazon Kindle · Zotero
 [[on-window-detected]]
-if = 'test %{app-bundle-id} ~= "^(com\.apple\.finder|com\.apple\.Preview|com\.apple\.iBooksX|com\.amazon\.Lassen|org\.zotero\.zotero)$"'
+if = 'test %{app-bundle-id} ~= "^(com\.apple\.Preview|com\.apple\.iBooksX|com\.amazon\.Lassen|org\.zotero\.zotero)$"'
 run = ['move-node-to-workspace shelf', 'layout floating']
 
