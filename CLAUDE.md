@@ -308,17 +308,17 @@ If builds fail after updating inputs:
 4. Report compatibility issues to the respective input repository
 
 ### `just apm sync` / `just apply` Fails with "package manifest not found"
-apm CLI 0.27.0 has a regression in `--frozen` validation: full-repo `claude_skill` dependencies without their own `apm.yml` (e.g. `currents-dev/playwright-best-practices-skill`) fail to resolve a `version`, and `--frozen` then looks for a per-package manifest that doesn't exist, erroring with `package manifest not found ... re-run 'apm install' to restore it`. Plain `apm install -g` (no `--frozen`) still succeeds — only the frozen/CI-safe check is affected.
-- Workaround: pin Homebrew's `apm` at 0.25.0 until upstream fixes it:
+This is a known regression introduced in apm 0.27.0: [microsoft/apm#2443](https://github.com/microsoft/apm/issues/2443) (open, accepted, fix PRs #2446/#2492 not yet merged as of v0.28.0). 0.27.0's `_enforce_frozen` added an MCP config validation pass that checks every locked dependency for an `apm.yml`. The exemption for packages that ship no `apm.yml` by design (`_allows_missing_manifest`) is gated behind `is_virtual_subdirectory()`, so a **repo-root `claude_skill`** (repo root holds `SKILL.md`, no `apm.yml` — e.g. `currents-dev/playwright-best-practices-skill`) gets rejected before its on-disk shape is ever probed. This only fires when the project also declares `mcp:` servers (`check_mcp` must be true) — in this repo `currents-dev/playwright-best-practices-skill` is the only dependency shaped that way. Plain `apm install -g` (no `--frozen`) still succeeds, and `apm audit` reports `No drift detected` — the lockfile is not actually stale, so the error's own advice (`re-run 'apm install' to restore it`) can never resolve it.
+- Workaround: pin Homebrew's `apm` at 0.26.0 (the last version before the regression; do not use 0.25.0 — 0.26.0 also carries an unrelated `is_virtual` audit fix from #2214 that's worth keeping):
   ```sh
   TAP_PATH=$(brew --repository microsoft/apm)
-  cd "$TAP_PATH" && git log --oneline -- Formula/apm.rb   # find the v0.25.0 commit
+  cd "$TAP_PATH" && git log --oneline -- Formula/apm.rb   # find the v0.26.0 commit
   git checkout <commit> -- Formula/apm.rb
   brew uninstall apm && brew install microsoft/apm/apm
   git checkout HEAD -- Formula/apm.rb                      # restore tap to latest
   brew pin apm
   ```
-- Once fixed upstream: `brew unpin apm && brew upgrade apm`
+- Once fixed upstream (track #2443 / #2446 / #2492): `brew unpin apm && brew upgrade apm`
 
 ## Installation Script Architecture
 - `install`: Bootstrap script that handles system preparation (Xcode CLT, system updates) before repo cloning
