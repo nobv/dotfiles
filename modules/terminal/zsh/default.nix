@@ -18,6 +18,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    # Avoid running compinit twice (nix-darwin's /etc/zshrc and this
+    # module's ~/.zshrc, with different fpaths): it was rewriting
+    # ~/.zcompdump on every shell start, adding ~1s per tmux pane.
+    programs.zsh.enableGlobalCompInit = false;
+
     home-manager.users.${username}.programs.zsh = {
       enable = true;
       enableCompletion = true;
