@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>customSites</key>
+	<dict>
+		<key>08F7EF38-5502-49DC-9C16-7F681F8D01B5</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>nixopt</string>
+			<key>text</key>
+			<string>Search NixOS options for '{query}'</string>
+			<key>url</key>
+			<string>https://search.nixos.org/options?query={query}</string>
+		</dict>
+		<key>30C1648E-9488-40DE-A1E8-61921EFC4798</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>nixpkgs</string>
+			<key>text</key>
+			<string>Search Nixpkgs for '{query}'</string>
+			<key>url</key>
+			<string>https://search.nixos.org/packages?query={query}</string>
+		</dict>
+		<key>BA616890-DA64-4A55-9744-12811B6785B9</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>ghn</string>
+			<key>text</key>
+			<string>Search my GitHub repositories for '{query}'</string>
+			<key>url</key>
+			<string>https://github.com/nobv?tab=repositories&amp;q={query}</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
