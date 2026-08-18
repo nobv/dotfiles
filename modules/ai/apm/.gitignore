@@ -1,0 +1,2 @@
+# Installed dependencies, restored by `just apm sync` from apm.lock.yaml.
+apm_modules/

@@ -1,0 +1,6 @@
+*/env.local
+*/claude-code/settings.json
+
+# Left commented deliberately: the placeholder username in work/config.nix is
+# committed, and the real one stays as a local modification on that machine.
+# work/config.nix
