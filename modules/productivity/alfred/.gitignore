@@ -1,0 +1,5 @@
+# Workflows belong to their own upstreams, not here: third-party ones
+# auto-update in place, and the self-made one is versioned in nobv/den.
+#   com.alfredapp.vitor.1password   github.com/alfredapp/1password-workflow
+#   jp.van-guard.den.desk-switcher  nobv/den, alfred/
+Alfred.alfredpreferences/workflows/
