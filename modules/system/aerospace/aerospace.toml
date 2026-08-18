@@ -231,9 +231,9 @@ alt-shift-l = ['join-with right', 'mode main']
 
 # Wagon — a tool used across desks; floating so desk switch carries it along
 # Finder · 1Password · Aqua Voice · Claude · ChatGPT · ChatGPT Classic · Typeless ·
-# Todoist · Heptabase · Logseq · Obsidian
+# Todoist · Heptabase · Logseq · Obsidian · Typora
 [[on-window-detected]]
-if = 'test %{app-bundle-id} ~= "^(com\.apple\.finder|com\.1password\.1password|com\.electron\.aqua-voice|com\.anthropic\.claudefordesktop|com\.openai\.codex|com\.openai\.chat|now\.typeless\.desktop|com\.todoist\.mac\.Todoist|app\.projectmeta\.projectmeta|com\.logseq\.logseq|md\.obsidian)$"'
+if = 'test %{app-bundle-id} ~= "^(com\.apple\.finder|com\.1password\.1password|com\.electron\.aqua-voice|com\.anthropic\.claudefordesktop|com\.openai\.codex|com\.openai\.chat|now\.typeless\.desktop|com\.todoist\.mac\.Todoist|app\.projectmeta\.projectmeta|com\.logseq\.logseq|md\.obsidian|abnerworks\.Typora)$"'
 run = 'layout floating'
 
 # Break — personal life/comms, off the clock; floating, pinned to the shared 'break' workspace
