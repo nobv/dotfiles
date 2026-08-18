@@ -1,35 +1,12 @@
-# tmux
-.tmux/plugins/*
-.tmux/resurrect/*
-
-# emacs
-modules/editor/emacs/.emacs.d/elpa/*
-modules/editor/emacs/.emacs.d/network-security.data
-modules/editor/emacs/.emacs.d/backups/*
-modules/editor/emacs/.emacs.d/recentf
-modules/editor/emacs/.emacs.d/undohist
-modules/editor/emacs/.emacs.d/transient/*
-modules/editor/emacs/.emacs.d/ac-comphist.dat
-modules/editor/emacs/.emacs.d/auto-save-list/*
-modules/editor/emacs/.emacs.d/.lsp-session-v1
-
-## spacemacs
-modules/editor/emacs/.spacemacs.d/.spacemacs.env
-modules/editor/emacs/.spacemacs.d/configs/*
-!modules/editor/emacs/.spacemacs.d/configs/.gitkeep
-
-## vscode
-.vscode/extensions/*
-.vscode/argv.json
+# Repository-wide ignores only. Rules that belong to a single module or
+# directory live in a .gitignore inside it.
 
 ## ide
 .idea/
 
 ## misc
 bin/rust-analyzer
-conda.yaml
 .log
-
 
 ## flakes
 result
@@ -37,16 +14,6 @@ result
 # git-hooks.nix (auto-generated)
 .pre-commit-config.yaml
 
-
 # Claude Code
 .claude/settings.local.json
 .claude/worktrees/
-
-
-# machines
-# machines/work/config.nix
-machines/*/env.local
-machines/*/claude-code/settings.json
-
-# APM dependencies
-apm_modules/

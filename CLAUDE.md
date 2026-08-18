@@ -77,7 +77,7 @@ Example usage:
   - `machines/work/config.nix` — the `REPLACE_WITH_YOUR_USERNAME` placeholder is committed, and the real
     username lives only as a permanent uncommitted modification on that machine. So a fresh `nix build` in a
     worktree fails for `work` until you write the username in locally (do not commit it)
-- `.gitignore:47` carries a **commented-out** `machines/work/config.nix` rule, which is why the file is
+- `machines/.gitignore` carries a **commented-out** `work/config.nix` rule, which is why the file is
   tracked despite `setup.sh` describing it as git-ignored
 
 ### Configuration Setup
@@ -131,6 +131,7 @@ The `scripts/enable-module.sh` script provides an interactive interface for mana
 - **Homebrew dependency**: For modules using Homebrew, wrap homebrew config with `mkIf (config.modules.system.homebrew.enable or false)`
 - **File organization**: Place modules in appropriate functional categories (see Module Categories below)
 - **Adding new modules**: Simply create the module in appropriate category directory - it will be auto-discovered
+- **Ignore rules**: Put module-specific ignores in a `.gitignore` inside the module directory (paths relative to it). The root `.gitignore` is for repository-wide rules only
 
 ## Commit Guidelines
 - Use Conventional Commits: `<type>(<optional scope>): <description>`
