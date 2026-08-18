@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+# This directory is an out-of-store symlink into the dotfiles repo, so an edit is
+# live once `sketchybar --reload` runs (sketchybar has no config watcher of its
+# own — unlike AeroSpace, saving alone changes nothing).
+#
+# Scope: this bar exists for exactly one thing — showing which desk you are
+# actually at (`~/Desk`) versus which AeroSpace workspace has focus. It is NOT a
+# menu bar replacement. `position=bottom` is what makes that possible: sketchybar
+# draws its own bar rather than adding items to the system one, so `position=top`
+# would overlap the macOS menu bar and force reimplementing clock, battery and
+# volume here. Moving to the top later is a one-line change plus that work.
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+sketchybar --bar \
+  position=bottom \
+  height=28 \
+  blur_radius=30 \
+  color=0x40000000
+
+sketchybar --default \
+  padding_left=5 \
+  padding_right=5 \
+  icon.font="Hack Nerd Font:Bold:14.0" \
+  label.font="Hack Nerd Font:Bold:13.0" \
+  icon.color=0xffffffff \
+  label.color=0xffffffff \
+  icon.padding_left=4 \
+  icon.padding_right=4 \
+  label.padding_left=4 \
+  label.padding_right=4
+
+# Polling, not events: the case worth catching is the desync, where `~/Desk`
+# moves but the workspace does not — so an AeroSpace-side event (or
+# `exec-on-workspace-change`) is silent exactly when it matters. Both probes cost
+# ~20ms combined, so a 1s tick is cheap.
+sketchybar --add item desk left \
+  --set desk update_freq=1 script="$PLUGIN_DIR/desk.sh"
+
+# Force the script to run once at startup so the bar is never blank.
+sketchybar --update
