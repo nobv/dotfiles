@@ -20,12 +20,11 @@ export ORANGE=0xffffb86c # temperature
 export YELLOW=0xfff1fa8c # battery
 export RED=0xffff5555    # desync
 
-# Written as escapes, not as the characters: these are Private Use Area
-# codepoints and get silently dropped by editors and tooling, which turns them
-# into empty strings that still look right in a diff.
-#
-# Verified present in HackGenConsoleNF-Bold.ttf. Not a formality — Nerd Fonts v3
-# moved nf-fa-memory, and the old U+F538 is genuinely absent.
+# Escapes, not the characters themselves: these are Private Use Area codepoints
+# and get silently dropped by editors and tooling, leaving empty strings that
+# still look correct in a diff. Every one is verified present in
+# HackGenConsoleNF-Bold.ttf — nf-fa-memory moved in Nerd Fonts v3, so the old
+# U+F538 is genuinely absent.
 export ICON_DESK=$'\xef\x84\x88'        # U+F108 desktop
 export ICON_WARN=$'\xef\x81\xb1'        # U+F071 warning
 export ICON_APP=$'\xef\x8b\x90'         # U+F2D0 window_maximize

@@ -18,15 +18,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    # The bar sits where the menu bar was, so keeping both would cost the height
-    # twice (AeroSpace needs reserved space for sketchybar either way). Hidden is
-    # not gone: the pointer at the top edge still reveals it, which is how items
-    # not on the bar are reached.
+    # The bar sits where the menu bar was; keeping both would cost the height
+    # twice. Hidden is not gone — the pointer at the top edge still reveals it.
     #
-    # Both keys together are "Automatically hide and show the menu bar: Always" in
-    # System Settings; _HIHideMenuBar alone leaves it at "On Desktop Only".
-    # The second has no nix-darwin option, hence CustomUserPreferences.
-    # Takes effect on the next login; `killall SystemUIServer` applies it sooner.
+    # Both keys together are "hide the menu bar: Always"; _HIHideMenuBar alone
+    # leaves it at "On Desktop Only". The second has no nix-darwin option, hence
+    # CustomUserPreferences. Takes effect on the next login.
     system.defaults.NSGlobalDomain._HIHideMenuBar = true;
     system.defaults.CustomUserPreferences."NSGlobalDomain".AppleMenuBarVisibleInFullscreen = false;
 
@@ -57,11 +54,9 @@ in
         EnvironmentVariables = {
           # Required by the formula's caveat; sketchybar refuses a non-UTF-8 locale.
           LANG = "en_US.UTF-8";
-          # launchd gives an agent a bare PATH and every binary the plugins call
-          # sits outside it — desk, jq, the Homebrew tools, and battery in
-          # /usr/local/bin. A gap here breaks only at runtime: `nix build` stays
-          # green, and a plugin run from a shell inherits that shell's PATH, so
-          # testing misses it too.
+          # Every binary the plugins call sits outside launchd's bare PATH. A gap
+          # here breaks only at runtime — `nix build` stays green, and a plugin
+          # run from a shell inherits that shell's PATH, so testing misses it too.
           PATH = concatStringsSep ":" [
             "/etc/profiles/per-user/${username}/bin"
             "/run/current-system/sw/bin"

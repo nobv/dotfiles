@@ -2,16 +2,14 @@
 
 # Identify a menu-bar item so it can be aliased into the bar.
 #
-# `sketchybar --query default_menu_items` names most items
-# `Control Center,Item-0(N)`, where N is a position index that moves whenever the
-# menu-bar order changes — measured here: FineTune went 13 -> 17 -> 18 -> 20 in
-# one session. Items with a real name (`com.bjango.istatmenus.cpu`) are stable
-# and need no help; this is for the rest.
-#
 #   ./find-menu-item.sh          lay every unidentified item on the bar, labelled
 #                                with its index, and print the mapping
 #   ./find-menu-item.sh --sizes  measure what each alias actually captures
 #   sketchybar --reload          undo
+#
+# Most items are named `Control Center,Item-0(N)`, where N is a position index
+# that moves with menu-bar order — FineTune went 13 -> 17 -> 18 -> 20 in one
+# session here. Items with a real name are stable and need no help.
 #
 # Two traps: menu-bar managers that reposition items (Bartender) make aliases
 # capture the wrong rect, so quit them before probing; and a name like

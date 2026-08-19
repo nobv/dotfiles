@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 
 # The `battery` CLI holds this machine at 80% by flipping an SMC charging bit, so
-# "plugged in" and "charging" are different states. pmset only knows the former,
-# `battery status` knows the latter — without it, a deliberate hold reads as a
-# fault.
+# "plugged in" and "charging" are different states. pmset only knows the former —
+# without `battery status`, a deliberate hold reads as a fault.
 
 source "$(dirname "$0")/../colors.sh"
 

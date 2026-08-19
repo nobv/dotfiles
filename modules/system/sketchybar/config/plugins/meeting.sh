@@ -1,17 +1,14 @@
 #!/usr/bin/env bash
 
-# Read from the macOS calendar store directly. MeetingBar's own
-# eventStoreProvider is "MacOS Calendar App", so this is the same source — going
-# through it would only add an alias that cannot be addressed stably. Freshness
-# is therefore set by Calendar.app's sync interval, not by this script.
+# Reads the macOS calendar store directly. MeetingBar's own eventStoreProvider is
+# "MacOS Calendar App", so this is the same source; going through it would only
+# add an alias that cannot be addressed stably.
 #
-# Which calendars to show is taken from MeetingBar's own selection at runtime,
-# for two reasons: this repo is public and calendar names are email addresses, so
-# nothing about them can be committed; and it keeps the pill and MeetingBar
-# showing the same thing, with MeetingBar's settings pane as the place to choose.
-# With MeetingBar absent, falls back to every calendar.
+# Which calendars to show comes from MeetingBar's selection at runtime: this repo
+# is public and calendar names are email addresses, so nothing about them can be
+# committed, and MeetingBar's settings pane doubles as the picker.
 #
-# Hidden when nothing is scheduled. Note that a denied Calendar permission looks
+# Hidden when nothing is scheduled — note that a denied Calendar permission looks
 # identical to an empty day.
 
 source "$(dirname "$0")/../colors.sh"

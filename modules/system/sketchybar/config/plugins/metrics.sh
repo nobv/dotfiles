@@ -1,27 +1,21 @@
 #!/usr/bin/env bash
 
-# CPU, memory, swap and temperature from a single macmon sample.
+# CPU, memory, swap and temperature from a single macmon sample — cheaper than
+# polling `ps` and `vm_stat` separately (11ms/s vs 30ms/s) and consistent, since
+# every number comes from one definition.
 #
-# One process for four numbers is both cheaper and more consistent than reading
-# each from its own tool: macmon costs ~110ms of CPU (the rest of its ~0.4s wall
-# time is waiting on IOReport), against ~30ms/s for polling `ps` and `vm_stat`
-# every 2s.
+# macmon's ram_usage matches Activity Monitor. Two obvious alternatives do not:
+# `top` counts inactive pages and never drops below ~95%, and
+# active+wired+compressed from vm_stat undercounts by ~8 points because inactive
+# *anonymous* pages are app memory too.
 #
-# It also settles what "memory used" means. `top` counts inactive pages and so
-# never drops below ~95%; summing active+wired+compressed from vm_stat undercounts
-# by ~8 points because inactive *anonymous* pages are app memory too. macmon's
-# ram_usage matches Activity Monitor.
-#
-# Temperature has no unprivileged alternative at all — the SMC needs root (which
-# is why iStat Menus installs a daemon) and ioreg lists the sensor nodes without
-# values.
+# Temperature has no unprivileged alternative — the SMC needs root (which is why
+# iStat Menus installs a daemon) and ioreg lists the sensor nodes without values.
 
 source "$(dirname "$0")/../colors.sh"
 
-# 300ms of sampling, not the shortest possible: CPU usage over 50ms swings by
-# tens of points between ticks. The CPU cost is the same either way — the extra
-# time is spent waiting, not computing. Verified against load: idle reads 6%,
-# eight busy loops read 99-100%, and it drops straight back.
+# 300ms, not the shortest possible: CPU usage over 50ms swings by tens of points
+# between ticks, and the extra time is spent waiting, not computing.
 sample="$(macmon pipe -s 1 -i 300 2>/dev/null)"
 
 if [ -z "$sample" ]; then
@@ -34,8 +28,7 @@ fi
 read -r cpu_pct ram_pct swap_bytes celsius <<EOF
 $(
   printf '%s' "$sample" | jq -r '
-    # E and P clusters report separately; this machine has 4 of each, so a plain
-    # mean is the weighted mean.
+    # E and P clusters report separately; 4 of each here, so a plain mean works.
     ((.ecpu_usage[1] + .pcpu_usage[1]) / 2 * 100 | round),
     (.memory.ram_usage / .memory.ram_total * 100 | round),
     .memory.swap_usage,
@@ -44,10 +37,7 @@ $(
 )
 EOF
 
-##### CPU #####
 sketchybar --set cpu label="${cpu_pct}%"
-
-##### Memory, with swap stacked above it #####
 sketchybar --set memory label="${ram_pct}%"
 
 if [ "$ram_pct" -ge 90 ]; then
@@ -58,8 +48,8 @@ else
   mem_cap="$CYAN"
 fi
 
-# Swap in use means the machine is already paying for the pressure, so it is
-# worth a line of its own rather than being folded into the percentage.
+# Swap in use means the machine is already paying for the pressure, so it gets a
+# line of its own instead of being folded into the percentage.
 if [ "${swap_bytes:-0}" -lt 1048576 ]; then
   swap_label="—"
   swap_color="$COMMENT"
@@ -81,7 +71,6 @@ fi
 sketchybar --set memory.top label="$swap_label" label.color="$swap_color"
 sketchybar --set memory.cap background.color="$mem_cap"
 
-##### Temperature #####
 sketchybar --set temp label="${celsius}°"
 if [ "$celsius" -ge 80 ]; then
   sketchybar --set temp.cap background.color="$RED"

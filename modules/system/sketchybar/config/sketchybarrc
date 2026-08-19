@@ -1,13 +1,10 @@
 #!/usr/bin/env bash
 
-# Out-of-store symlink into the dotfiles repo. sketchybar has no config watcher,
-# so an edit needs `sketchybar --reload`.
+# Edits need `sketchybar --reload`; there is no config watcher.
 #
-# The bar lives in the hidden menu bar's strip: macOS excludes that strip from
-# visibleFrame even while hidden, so AeroSpace never tiles over it and
-# aerospace.toml's gaps.outer.top is just the gap below the bar, not its height.
-# Keep BAR_HEIGHT at or under the strip (33px here) or the bar will overhang into
-# the tiles.
+# The bar sits in the hidden menu bar's strip, which macOS keeps excluding from
+# visibleFrame — so AeroSpace never tiles over it, and gaps.outer.top is the gap
+# below the bar rather than its height. Keep BAR_HEIGHT at or under 33px.
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 source "$CONFIG_DIR/colors.sh"
@@ -15,7 +12,8 @@ source "$CONFIG_DIR/colors.sh"
 BAR_HEIGHT=32
 PILL_HEIGHT=24
 PILL_RADIUS=6
-FONT="HackGen Console NF" # same as Ghostty; carries Nerd Font glyphs and Japanese
+PILL_GAP=8
+FONT="HackGen Console NF" # same as Ghostty; has Nerd Font glyphs and Japanese
 
 sketchybar --bar \
   position=top \
@@ -24,10 +22,8 @@ sketchybar --bar \
   padding_left=14 \
   padding_right=6
 
-# sketchybar centres the item box, but HackGen's metrics leave both text and
-# glyphs sitting 1px low inside it. Positive is up; 1 was picked by putting
-# candidates side by side on the bar and comparing, and it holds for every glyph
-# in use, so no item needs its own correction.
+# y_offset=1: HackGen's metrics leave text and glyphs a pixel low in the centred
+# item box. Positive is up.
 sketchybar --default \
   icon.font="$FONT:Bold:13.0" \
   label.font="$FONT:Bold:12.0" \
@@ -38,8 +34,8 @@ sketchybar --default \
   padding_left=0 \
   padding_right=0
 
-PILL_GAP=8
-
+# Item padding lands inside the bracket and brackets take none of their own, so
+# without this pills butt together into one continuous bar.
 add_gap() {
   sketchybar --add item "$1" "$2"
   sketchybar --set "$1" \
@@ -49,17 +45,11 @@ add_gap() {
     label.drawing=off
 }
 
-# A pill is a coloured cap plus a label, with a bracket drawing the body behind
-# both — sketchybar cannot round one side of an item, so the cap sits inside the
-# bracket. `left` stacks left-to-right and `right` stacks right-to-left, so the
-# add order flips to keep the cap on the left.
+# Coloured cap + label, with a bracket drawing the body behind both. `left`
+# stacks left-to-right and `right` right-to-left, so the add order flips.
 add_pill() {
   local name="$1" side="$2" icon="$3" cap_color="$4"
 
-  # The cap matches the bracket's height and radius so it reads as the left half
-  # of one pill; any smaller and it floats inside as a separate island. Spacing
-  # between pills comes from the outer padding on the two end items, since the
-  # bracket only wraps what its members occupy.
   local cap_args=(
     icon="$icon"
     icon.color="$CAP_FG"
@@ -80,9 +70,6 @@ add_pill() {
     padding_right=0
   )
 
-  # An item's own padding lands inside its bracket, and brackets take no padding
-  # of their own, so neighbouring pills would butt together into one continuous
-  # bar. The gap is a real item, left out of the bracket.
   if [ "$side" = "left" ]; then
     sketchybar --add item "$name.cap" left --set "$name.cap" "${cap_args[@]}"
     sketchybar --add item "$name" left --set "$name" "${label_args[@]}"
@@ -173,7 +160,7 @@ add_pill temp right "$ICON_TEMP" "$ORANGE"
 add_stacked_pill memory "$ICON_MEM" "$CYAN"
 add_pill cpu right "$ICON_CPU" "$GREEN"
 
-# One macmon sample fills cpu, memory, swap and temp, so only this item carries a
+# One macmon sample fills cpu, memory, swap and temp, so only this item runs a
 # script — it updates the other two as a side effect.
 sketchybar --set cpu script="$PLUGIN_DIR/metrics.sh" update_freq=10
 

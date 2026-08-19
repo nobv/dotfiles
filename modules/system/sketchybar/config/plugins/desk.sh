@@ -5,8 +5,8 @@
 # into one domain's windows while everything else lands in another — the state
 # this item exists to make visible.
 #
-# break / shelf are not that: they are stepped into on purpose (alt-b / alt-s),
-# so they read as neutral instead of a warning.
+# break / shelf are stepped into on purpose (alt-b / alt-s), so they read as
+# neutral rather than a warning.
 
 source "$(dirname "$0")/../colors.sh"
 
@@ -24,9 +24,7 @@ if [ -z "$desk" ]; then
   icon="$ICON_WARN"
   cap="$RED"
   body="$PILL_WARN"
-  # Not red — the filled red body already carries the alarm, and red on red is
-  # unreadable.
-  text="$FG"
+  text="$FG" # red on the red body is unreadable
   label="desk?"
 elif [ -z "$workspace" ]; then
   # AeroSpace is down; the desk is still true but nothing can be compared.
