@@ -24,11 +24,17 @@ sketchybar --bar \
   padding_left=14 \
   padding_right=6
 
+# sketchybar centres the item box, but HackGen's metrics leave both text and
+# glyphs sitting 1px low inside it. Positive is up; 1 was picked by putting
+# candidates side by side on the bar and comparing, and it holds for every glyph
+# in use, so no item needs its own correction.
 sketchybar --default \
   icon.font="$FONT:Bold:13.0" \
   label.font="$FONT:Bold:12.0" \
   icon.color="$FG" \
   label.color="$FG" \
+  icon.y_offset=1 \
+  label.y_offset=1 \
   padding_left=0 \
   padding_right=0
 
