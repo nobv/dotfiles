@@ -206,6 +206,7 @@
     system = {
       aerospace.enable = true;
       blueutil.enable = true;
+      borders.enable = true;
       den.enable = true;
       flashspace.enable = false;
       fonts.enable = true;

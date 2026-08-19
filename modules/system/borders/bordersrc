@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Out-of-store symlink into the dotfiles repo. Re-run `borders` with new options
+# to apply a change; a running instance picks them up.
+#
+# Only the focused window is outlined. AeroSpace tiles, so every window's edge is
+# already obvious — drawing all of them would just add lines. Colours follow the
+# same Dracula palette as sketchybar (purple, matching the desk pill).
+
+options=(
+  style=round
+  width=4.0
+  hidpi=off
+  active_color=0xffbd93f9
+  inactive_color=0x00000000
+)
+
+borders "${options[@]}"
