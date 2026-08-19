@@ -5,6 +5,12 @@
 # through it would only add an alias that cannot be addressed stably. Freshness
 # is therefore set by Calendar.app's sync interval, not by this script.
 #
+# Which calendars to show is taken from MeetingBar's own selection at runtime,
+# for two reasons: this repo is public and calendar names are email addresses, so
+# nothing about them can be committed; and it keeps the pill and MeetingBar
+# showing the same thing, with MeetingBar's settings pane as the place to choose.
+# With MeetingBar absent, falls back to every calendar.
+#
 # Hidden when nothing is scheduled. Note that a denied Calendar permission looks
 # identical to an empty day.
 
@@ -12,8 +18,14 @@ source "$(dirname "$0")/../colors.sh"
 
 MAX_TITLE=22
 
+calendars="$(
+  defaults read leits.MeetingBar selectedCalendarIDs 2>/dev/null \
+    | grep -o '"[^"]*"' | tr -d '"' | paste -sd, -
+)"
+
 event="$(
   icalBuddy -n -nc -nrd -ea -b '' -li 1 \
+    ${calendars:+-ic "$calendars"} \
     -iep 'datetime,title' -df '' -tf '%H:%M' \
     eventsToday 2>/dev/null
 )"
