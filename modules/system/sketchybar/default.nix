@@ -18,6 +18,17 @@ in
   };
 
   config = mkIf cfg.enable {
+    # The bar replaces the macOS menu bar rather than sitting alongside it, so the
+    # native one has to go: AeroSpace tiles windows over anything that is not the
+    # native menu bar, meaning a visible sketchybar needs reserved space
+    # (aerospace.toml `gaps.outer.top`), and reserving space for both bars would
+    # cost the height twice. Hidden is not gone — moving the pointer to the top
+    # edge still reveals the native bar, which is the access path for menu-bar
+    # items not aliased into sketchybar.
+    #
+    # Takes effect on the next login; `killall SystemUIServer` applies it sooner.
+    system.defaults.NSGlobalDomain._HIHideMenuBar = true;
+
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       taps = [
         {
@@ -27,6 +38,17 @@ in
       ];
       brews = [
         { name = "sketchybar"; }
+        # Reads CPU temperature through IOReport, which — unlike the SMC and
+        # powermetrics — needs no privileges. Without it the temperature item
+        # would have to mirror iStat Menus' rendering, since iStat gets the same
+        # numbers from a root daemon this config has no reason to duplicate.
+        # From homebrew-core (no tap), and ahead of nixpkgs: 0.8.2 vs 0.6.1.
+        { name = "macmon"; }
+        # Next calendar event. Reads the macOS calendar store directly — the same
+        # source MeetingBar uses (its eventStoreProvider is "MacOS Calendar App",
+        # not the Google API), so this replaces MeetingBar's rendering without
+        # losing anything. Needs Calendar access granted to sketchybar.
+        { name = "ical-buddy"; }
       ];
     };
 

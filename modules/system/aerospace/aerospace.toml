@@ -91,7 +91,13 @@ inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
-outer.top = 10
+# Reserved for sketchybar, and it must equal that bar's height (see
+# modules/system/sketchybar/config/sketchybarrc). AeroSpace steps around the
+# native menu bar automatically but knows nothing about sketchybar's window, so
+# without this the tiles simply cover the bar — measured, not theoretical.
+# The native menu bar is hidden (_HIHideMenuBar), so this replaces its 24px
+# rather than adding to it.
+outer.top = 32
 outer.right = 10
 
 # Pin the domain-independent workspaces to monitors. The shelf fallback array covers

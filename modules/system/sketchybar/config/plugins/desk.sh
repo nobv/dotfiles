@@ -9,52 +9,52 @@
 # lands in another — that is the state this item exists to make visible.
 #
 # break / shelf are not drift. They are the domain-independent workspaces you
-# step into on purpose (alt-b / alt-s), so they render as neutral secondary text
-# rather than a warning; warning on them would fire every time the shelf is
-# peeked at.
+# step into on purpose (alt-b / alt-s), so they render as neutral rather than a
+# warning; warning on them would fire every time the shelf is peeked at.
 #
 # PATH is supplied by the launchd agent (see default.nix) — a login shell's PATH
 # is not inherited here, so `desk`, `aerospace` and `jq` would otherwise all be
 # missing at runtime while everything still builds fine.
 
-COLOR_OK=0xffffffff
-COLOR_NEUTRAL=0xff999999
-COLOR_WARN=0xffff5f5f
-
-ICON_DESK=""    # nf-fa-desktop
-ICON_WARN=""    # nf-fa-warning
+source "$(dirname "$0")/../colors.sh"
 
 desk="$(desk list --json 2>/dev/null | jq -r '.current // empty' 2>/dev/null)"
 workspace="$(aerospace list-workspaces --focused 2>/dev/null)"
+
+# Defaults: matched.
+icon="$ICON_DESK"
+cap="$PURPLE"
+body="$PILL"
+text="$FG"
+label="$desk"
 
 if [ -z "$desk" ]; then
   # den is not answering (not deployed, or ~/Desk is broken). Say so rather than
   # rendering an empty item that reads as "no problem".
   icon="$ICON_WARN"
+  cap="$RED"
+  body="$PILL_WARN"
+  text="$RED"
   label="desk?"
-  color="$COLOR_WARN"
 elif [ -z "$workspace" ]; then
   # AeroSpace is not running, so there is nothing to compare against. The desk is
   # still true, so show it — dimmed, to mark the comparison as unavailable.
-  icon="$ICON_DESK"
-  label="$desk"
-  color="$COLOR_NEUTRAL"
+  cap="$COMMENT"
+  text="$COMMENT"
 elif [ "$desk" = "$workspace" ]; then
-  icon="$ICON_DESK"
-  label="$desk"
-  color="$COLOR_OK"
+  : # defaults
 elif [ "$workspace" = "break" ] || [ "$workspace" = "shelf" ]; then
-  icon="$ICON_DESK"
+  cap="$COMMENT"
+  text="$COMMENT"
   label="$desk · $workspace"
-  color="$COLOR_NEUTRAL"
 else
   icon="$ICON_WARN"
+  cap="$RED"
+  body="$PILL_WARN"
+  text="$RED"
   label="$desk ≠ $workspace"
-  color="$COLOR_WARN"
 fi
 
-sketchybar --set "$NAME" \
-  icon="$icon" \
-  label="$label" \
-  icon.color="$color" \
-  label.color="$color"
+sketchybar --set "$NAME" label="$label" label.color="$text"
+sketchybar --set "$NAME.cap" icon="$icon" background.color="$cap"
+sketchybar --set "$NAME.pill" background.color="$body"
