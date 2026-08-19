@@ -1,0 +1,170 @@
+#!/usr/bin/env bash
+
+# Edits need `sketchybar --reload`; there is no config watcher.
+#
+# The bar sits in the hidden menu bar's strip, which macOS keeps excluding from
+# visibleFrame — so AeroSpace never tiles over it, and gaps.outer.top is the gap
+# below the bar rather than its height. Keep BAR_HEIGHT at or under 33px.
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+source "$CONFIG_DIR/colors.sh"
+
+BAR_HEIGHT=32
+PILL_HEIGHT=24
+PILL_RADIUS=6
+PILL_GAP=8
+FONT="HackGen Console NF" # same as Ghostty; has Nerd Font glyphs and Japanese
+
+sketchybar --bar \
+  position=top \
+  height="$BAR_HEIGHT" \
+  color="$BAR_BG" \
+  padding_left=14 \
+  padding_right=6
+
+# y_offset=1: HackGen's metrics leave text and glyphs a pixel low in the centred
+# item box. Positive is up.
+sketchybar --default \
+  icon.font="$FONT:Bold:13.0" \
+  label.font="$FONT:Bold:12.0" \
+  icon.color="$FG" \
+  label.color="$FG" \
+  icon.y_offset=1 \
+  label.y_offset=1 \
+  padding_left=0 \
+  padding_right=0
+
+# Item padding lands inside the bracket and brackets take none of their own, so
+# without this pills butt together into one continuous bar.
+add_gap() {
+  sketchybar --add item "$1" "$2"
+  sketchybar --set "$1" \
+    width="$PILL_GAP" \
+    background.drawing=off \
+    icon.drawing=off \
+    label.drawing=off
+}
+
+# Coloured cap + label, with a bracket drawing the body behind both. `left`
+# stacks left-to-right and `right` right-to-left, so the add order flips.
+add_pill() {
+  local name="$1" side="$2" icon="$3" cap_color="$4"
+
+  local cap_args=(
+    icon="$icon"
+    icon.color="$CAP_FG"
+    icon.padding_left=9
+    icon.padding_right=9
+    label.drawing=off
+    background.color="$cap_color"
+    background.corner_radius="$PILL_RADIUS"
+    background.height="$PILL_HEIGHT"
+    padding_left=0
+    padding_right=0
+  )
+  local label_args=(
+    icon.drawing=off
+    label.padding_left=9
+    label.padding_right=11
+    padding_left=0
+    padding_right=0
+  )
+
+  if [ "$side" = "left" ]; then
+    sketchybar --add item "$name.cap" left --set "$name.cap" "${cap_args[@]}"
+    sketchybar --add item "$name" left --set "$name" "${label_args[@]}"
+    add_gap "$name.gap" left
+  else
+    add_gap "$name.gap" right
+    sketchybar --add item "$name" right --set "$name" "${label_args[@]}"
+    sketchybar --add item "$name.cap" right --set "$name.cap" "${cap_args[@]}"
+  fi
+
+  sketchybar --add bracket "$name.pill" "$name.cap" "$name" \
+    --set "$name.pill" \
+    background.color="$PILL" \
+    background.corner_radius="$PILL_RADIUS" \
+    background.height="$PILL_HEIGHT"
+}
+
+# Two lines in one pill. sketchybar has no multi-line item, so the lines are two
+# items pushed apart with y_offset; width=0 on the first makes the second start
+# at the same x instead of beside it.
+add_stacked_pill() {
+  local name="$1" icon="$2" cap_color="$3"
+
+  add_gap "$name.gap" right
+
+  sketchybar --add item "$name" right
+  sketchybar --set "$name" \
+    icon.drawing=off \
+    width=0 \
+    y_offset=-6 \
+    label.font="$FONT:Bold:9.0" \
+    label.padding_left=9 \
+    label.padding_right=11 \
+    padding_left=0 \
+    padding_right=0
+
+  sketchybar --add item "$name.top" right
+  sketchybar --set "$name.top" \
+    icon.drawing=off \
+    y_offset=6 \
+    label.font="$FONT:Bold:9.0" \
+    label.padding_left=9 \
+    label.padding_right=11 \
+    padding_left=0 \
+    padding_right=0
+
+  sketchybar --add item "$name.cap" right
+  sketchybar --set "$name.cap" \
+    icon="$icon" \
+    icon.color="$CAP_FG" \
+    icon.padding_left=9 \
+    icon.padding_right=9 \
+    label.drawing=off \
+    background.color="$cap_color" \
+    background.corner_radius="$PILL_RADIUS" \
+    background.height="$PILL_HEIGHT" \
+    padding_left=0 \
+    padding_right=0
+
+  sketchybar --add bracket "$name.pill" "$name.cap" "$name.top" "$name" \
+    --set "$name.pill" \
+    background.color="$PILL" \
+    background.corner_radius="$PILL_RADIUS" \
+    background.height="$PILL_HEIGHT"
+}
+
+##### Left #####
+
+# Polled, not event-driven: the case worth catching is `~/Desk` moving while the
+# workspace does not, and an AeroSpace event is silent exactly then.
+add_pill desk left "$ICON_DESK" "$PURPLE"
+sketchybar --set desk script="$PLUGIN_DIR/desk.sh" update_freq=1
+
+add_pill front_app left "$ICON_APP" "$COMMENT"
+sketchybar --set front_app script="$PLUGIN_DIR/front_app.sh"
+sketchybar --subscribe front_app front_app_switched
+
+##### Right — added right-to-left #####
+
+add_pill clock right "$ICON_CLOCK" "$COMMENT"
+sketchybar --set clock script="$PLUGIN_DIR/clock.sh" update_freq=10
+
+add_stacked_pill battery "$ICON_BATT" "$YELLOW"
+sketchybar --set battery script="$PLUGIN_DIR/battery.sh" update_freq=60
+sketchybar --subscribe battery system_woke power_source_change
+
+add_pill temp right "$ICON_TEMP" "$ORANGE"
+add_stacked_pill memory "$ICON_MEM" "$CYAN"
+add_pill cpu right "$ICON_CPU" "$GREEN"
+
+# One macmon sample fills cpu, memory, swap and temp, so only this item runs a
+# script — it updates the other two as a side effect.
+sketchybar --set cpu script="$PLUGIN_DIR/metrics.sh" update_freq=10
+
+add_pill meeting right "$ICON_CAL" "$PINK"
+sketchybar --set meeting script="$PLUGIN_DIR/meeting.sh" update_freq=30
+
+sketchybar --update
