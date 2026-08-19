@@ -167,6 +167,11 @@ add_pill front_app left "$ICON_APP" "$COMMENT"
 sketchybar --set front_app script="$PLUGIN_DIR/front_app.sh"
 sketchybar --subscribe front_app front_app_switched
 
+# On the right, this item sat right at the middle gap's edge — exactly where the
+# built-in display's notch is. On the left it's pushed clear of centre instead.
+add_pill meeting left "$ICON_CAL" "$PINK"
+sketchybar --set meeting script="$PLUGIN_DIR/meeting.sh" update_freq=30
+
 ##### Right — added right-to-left #####
 
 add_pill clock right "$ICON_CLOCK" "$COMMENT"
@@ -183,8 +188,5 @@ add_pill cpu right "$ICON_CPU" "$GREEN"
 # One macmon sample fills cpu, memory, swap and temp, so only this item runs a
 # script — it updates the other two as a side effect.
 sketchybar --set cpu script="$PLUGIN_DIR/metrics.sh" update_freq=10
-
-add_pill meeting right "$ICON_CAL" "$PINK"
-sketchybar --set meeting script="$PLUGIN_DIR/meeting.sh" update_freq=30
 
 sketchybar --update
