@@ -91,14 +91,18 @@ inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
-# sketchybar's height plus the same margin as the other sides. With the menu bar
-# hidden, visibleFrame starts at the very top, so the bar's own strip has to be
-# reserved here or the tiles slide underneath it.
+# Per monitor, because the two rigs need different amounts.
 #
-# One value is enough while running clamshell. A notched built-in display would
-# need less, since its visibleFrame already starts below the notch — that case
-# wants the per-monitor form: [{ monitor."built-in" = 10 }, 42]
-outer.top = 42
+# With the menu bar hidden, an external display's visibleFrame starts at the very
+# top of the screen, so nothing reserves sketchybar's strip — its height (32) plus
+# the margin used on the other sides (10) has to be held back here, or the tiles
+# slide underneath it.
+#
+# The built-in display has a notch, and macOS keeps that band out of visibleFrame
+# whatever the menu bar is doing. sketchybar draws inside it, so only the margin
+# is needed. (Measured on the external monitor; the built-in value follows from
+# the notch but has not been checked on screen yet.)
+outer.top = [{ monitor."built-in" = 10 }, 42]
 outer.right = 10
 
 # Pin the domain-independent workspaces to monitors. The shelf fallback array covers
