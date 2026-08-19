@@ -13,14 +13,15 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 source "$CONFIG_DIR/colors.sh"
 
 BAR_HEIGHT=32
+PILL_HEIGHT=24
+PILL_RADIUS=6
 FONT="HackGen Console NF" # same as Ghostty; carries Nerd Font glyphs and Japanese
 
 sketchybar --bar \
   position=top \
   height="$BAR_HEIGHT" \
   color="$BAR_BG" \
-  blur_radius=30 \
-  padding_left=6 \
+  padding_left=14 \
   padding_right=6
 
 sketchybar --default \
@@ -31,6 +32,17 @@ sketchybar --default \
   padding_left=0 \
   padding_right=0
 
+PILL_GAP=8
+
+add_gap() {
+  sketchybar --add item "$1" "$2"
+  sketchybar --set "$1" \
+    width="$PILL_GAP" \
+    background.drawing=off \
+    icon.drawing=off \
+    label.drawing=off
+}
+
 # A pill is a coloured cap plus a label, with a bracket drawing the body behind
 # both — sketchybar cannot round one side of an item, so the cap sits inside the
 # bracket. `left` stacks left-to-right and `right` stacks right-to-left, so the
@@ -38,26 +50,39 @@ sketchybar --default \
 add_pill() {
   local name="$1" side="$2" icon="$3" cap_color="$4"
 
+  # The cap matches the bracket's height and radius so it reads as the left half
+  # of one pill; any smaller and it floats inside as a separate island. Spacing
+  # between pills comes from the outer padding on the two end items, since the
+  # bracket only wraps what its members occupy.
   local cap_args=(
     icon="$icon"
     icon.color="$CAP_FG"
-    icon.padding_left=8
-    icon.padding_right=8
+    icon.padding_left=9
+    icon.padding_right=9
     label.drawing=off
     background.color="$cap_color"
-    background.corner_radius=5
-    background.height=22
+    background.corner_radius="$PILL_RADIUS"
+    background.height="$PILL_HEIGHT"
+    padding_left=0
+    padding_right=0
   )
   local label_args=(
     icon.drawing=off
-    label.padding_left=8
-    label.padding_right=9
+    label.padding_left=9
+    label.padding_right=11
+    padding_left=0
+    padding_right=0
   )
 
+  # An item's own padding lands inside its bracket, and brackets take no padding
+  # of their own, so neighbouring pills would butt together into one continuous
+  # bar. The gap is a real item, left out of the bracket.
   if [ "$side" = "left" ]; then
     sketchybar --add item "$name.cap" left --set "$name.cap" "${cap_args[@]}"
     sketchybar --add item "$name" left --set "$name" "${label_args[@]}"
+    add_gap "$name.gap" left
   else
+    add_gap "$name.gap" right
     sketchybar --add item "$name" right --set "$name" "${label_args[@]}"
     sketchybar --add item "$name.cap" right --set "$name.cap" "${cap_args[@]}"
   fi
@@ -65,8 +90,8 @@ add_pill() {
   sketchybar --add bracket "$name.pill" "$name.cap" "$name" \
     --set "$name.pill" \
     background.color="$PILL" \
-    background.corner_radius=6 \
-    background.height=24
+    background.corner_radius="$PILL_RADIUS" \
+    background.height="$PILL_HEIGHT"
 }
 
 # Two lines in one pill. sketchybar has no multi-line item, so the lines are two
@@ -75,39 +100,47 @@ add_pill() {
 add_stacked_pill() {
   local name="$1" icon="$2" cap_color="$3"
 
+  add_gap "$name.gap" right
+
   sketchybar --add item "$name" right
   sketchybar --set "$name" \
     icon.drawing=off \
     width=0 \
     y_offset=-6 \
     label.font="$FONT:Bold:9.0" \
-    label.padding_left=8 \
-    label.padding_right=9
+    label.padding_left=9 \
+    label.padding_right=11 \
+    padding_left=0 \
+    padding_right=0
 
   sketchybar --add item "$name.top" right
   sketchybar --set "$name.top" \
     icon.drawing=off \
     y_offset=6 \
     label.font="$FONT:Bold:9.0" \
-    label.padding_left=8 \
-    label.padding_right=9
+    label.padding_left=9 \
+    label.padding_right=11 \
+    padding_left=0 \
+    padding_right=0
 
   sketchybar --add item "$name.cap" right
   sketchybar --set "$name.cap" \
     icon="$icon" \
     icon.color="$CAP_FG" \
-    icon.padding_left=8 \
-    icon.padding_right=8 \
+    icon.padding_left=9 \
+    icon.padding_right=9 \
     label.drawing=off \
     background.color="$cap_color" \
-    background.corner_radius=5 \
-    background.height=22
+    background.corner_radius="$PILL_RADIUS" \
+    background.height="$PILL_HEIGHT" \
+    padding_left=0 \
+    padding_right=0
 
   sketchybar --add bracket "$name.pill" "$name.cap" "$name.top" "$name" \
     --set "$name.pill" \
     background.color="$PILL" \
-    background.corner_radius=6 \
-    background.height=24
+    background.corner_radius="$PILL_RADIUS" \
+    background.height="$PILL_HEIGHT"
 }
 
 ##### Left #####

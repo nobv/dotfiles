@@ -3,9 +3,10 @@
 # Dracula, matching Ghostty and tmux. Sourced by sketchybarrc and by every plugin
 # (a plugin is a separate process and inherits none of sketchybarrc's variables).
 
-export BAR_BG=0x9e282a36
-export PILL=0x8044475a
-export PILL_WARN=0x59ff5555
+# The bar itself draws nothing; the pills float over the wallpaper.
+export BAR_BG=0x00000000
+export PILL=0xf044475a
+export PILL_WARN=0xb0ff5555
 export FG=0xfff8f8f2
 export COMMENT=0xff6272a4
 export CAP_FG=0xff282a36 # text on a coloured cap

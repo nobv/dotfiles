@@ -24,7 +24,9 @@ if [ -z "$desk" ]; then
   icon="$ICON_WARN"
   cap="$RED"
   body="$PILL_WARN"
-  text="$RED"
+  # Not red — the filled red body already carries the alarm, and red on red is
+  # unreadable.
+  text="$FG"
   label="desk?"
 elif [ -z "$workspace" ]; then
   # AeroSpace is down; the desk is still true but nothing can be compared.
@@ -40,7 +42,7 @@ else
   icon="$ICON_WARN"
   cap="$RED"
   body="$PILL_WARN"
-  text="$RED"
+  text="$FG"
   label="$desk ≠ $workspace"
 fi
 
