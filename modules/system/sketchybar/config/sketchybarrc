@@ -3,8 +3,11 @@
 # Out-of-store symlink into the dotfiles repo. sketchybar has no config watcher,
 # so an edit needs `sketchybar --reload`.
 #
-# Three values must stay in sync, or the tiles cover the bar:
-#   BAR_HEIGHT here  ==  aerospace.toml gaps.outer.top  +  _HIHideMenuBar in default.nix
+# The bar lives in the hidden menu bar's strip: macOS excludes that strip from
+# visibleFrame even while hidden, so AeroSpace never tiles over it and
+# aerospace.toml's gaps.outer.top is just the gap below the bar, not its height.
+# Keep BAR_HEIGHT at or under the strip (33px here) or the bar will overhang into
+# the tiles.
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 source "$CONFIG_DIR/colors.sh"

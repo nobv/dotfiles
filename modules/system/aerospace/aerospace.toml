@@ -91,10 +91,11 @@ inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
-# Reserved for sketchybar; must equal BAR_HEIGHT in its sketchybarrc. AeroSpace
-# steps around the native menu bar but not sketchybar's window, so without this
-# the tiles cover the bar.
-outer.top = 32
+# Not sketchybar's height: macOS keeps excluding the menu bar strip (33px here)
+# from visibleFrame even while it is hidden, and sketchybar draws inside that
+# strip, so the bar is already clear of the tiles. This is only the gap below it,
+# matching the other three sides.
+outer.top = 10
 outer.right = 10
 
 # Pin the domain-independent workspaces to monitors. The shelf fallback array covers
