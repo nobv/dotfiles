@@ -13,6 +13,7 @@
 # iStat Menus installs a daemon) and ioreg lists the sensor nodes without values.
 
 source "$(dirname "$0")/../colors.sh"
+source "$(dirname "$0")/../stacked.sh"
 
 # 300ms, not the shortest possible: CPU usage over 50ms swings by tens of points
 # between ticks, and the extra time is spent waiting, not computing.
@@ -70,6 +71,8 @@ fi
 
 sketchybar --set memory.top label="$swap_label" label.color="$swap_color"
 sketchybar --set memory.cap background.color="$mem_cap"
+
+align_stacked memory
 
 sketchybar --set temp label="${celsius}°"
 if [ "$celsius" -ge 80 ]; then
