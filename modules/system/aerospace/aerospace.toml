@@ -91,7 +91,10 @@ inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
-outer.top = 10
+# External: with the menu bar hidden, visibleFrame reaches the top of the screen,
+# so sketchybar's height (32) plus the margin must be held back or tiles cover it.
+# Built-in: the notch is outside visibleFrame already, so only the margin is left.
+outer.top = [{ monitor."built-in" = 10 }, 42]
 outer.right = 10
 
 # Pin the domain-independent workspaces to monitors. The shelf fallback array covers

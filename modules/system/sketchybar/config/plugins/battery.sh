@@ -40,7 +40,7 @@ if [ "$on_ac" = 0 ]; then
 elif [ "$smc_allows" = 1 ]; then
   icon="$ICON_BATT_CHARGE"
   cap="$GREEN"
-  top="${estimate:+$estimate full}"
+  top="${estimate:+$estimate to full}"
   top="${top:-charging}"
 else
   icon="$ICON_BATT_HOLD"

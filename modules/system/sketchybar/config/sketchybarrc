@@ -2,9 +2,10 @@
 
 # Edits need `sketchybar --reload`; there is no config watcher.
 #
-# The bar sits in the hidden menu bar's strip, which macOS keeps excluding from
-# visibleFrame — so AeroSpace never tiles over it, and gaps.outer.top is the gap
-# below the bar rather than its height. Keep BAR_HEIGHT at or under 33px.
+# aerospace.toml's gaps.outer.top must reserve BAR_HEIGHT, or tiles cover the bar.
+#
+# The revealed menu bar draws over this bar and that cannot be fixed here:
+# `topmost=on` wins the layer but swallows the clicks meant for the menus.
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 source "$CONFIG_DIR/colors.sh"
@@ -25,8 +26,8 @@ sketchybar --bar \
 # y_offset=1: HackGen's metrics leave text and glyphs a pixel low in the centred
 # item box. Positive is up.
 sketchybar --default \
-  icon.font="$FONT:Bold:13.0" \
-  label.font="$FONT:Bold:12.0" \
+  icon.font="$FONT:Bold:14.0" \
+  label.font="$FONT:Bold:13.0" \
   icon.color="$FG" \
   label.color="$FG" \
   icon.y_offset=1 \
@@ -45,8 +46,7 @@ add_gap() {
     label.drawing=off
 }
 
-# Coloured cap + label, with a bracket drawing the body behind both. `left`
-# stacks left-to-right and `right` right-to-left, so the add order flips.
+# `left` stacks left-to-right and `right` right-to-left, so the add order flips.
 add_pill() {
   local name="$1" side="$2" icon="$3" cap_color="$4"
 
@@ -100,7 +100,7 @@ add_stacked_pill() {
     icon.drawing=off \
     width=0 \
     y_offset=-6 \
-    label.font="$FONT:Bold:9.0" \
+    label.font="$FONT:Bold:10.0" \
     label.padding_left=9 \
     label.padding_right=11 \
     padding_left=0 \
@@ -110,7 +110,7 @@ add_stacked_pill() {
   sketchybar --set "$name.top" \
     icon.drawing=off \
     y_offset=6 \
-    label.font="$FONT:Bold:9.0" \
+    label.font="$FONT:Bold:10.0" \
     label.padding_left=9 \
     label.padding_right=11 \
     padding_left=0 \
@@ -137,6 +137,22 @@ add_stacked_pill() {
 }
 
 ##### Left #####
+
+# Where the menu bar keeps its Apple logo. A lone cap, white because that is the
+# one cap colour no metric has claimed.
+sketchybar --add item apple left
+sketchybar --set apple \
+  icon="$ICON_APPLE" \
+  icon.color="$CAP_FG" \
+  icon.padding_left=9 \
+  icon.padding_right=9 \
+  label.drawing=off \
+  background.color="$FG" \
+  background.corner_radius="$PILL_RADIUS" \
+  background.height="$PILL_HEIGHT" \
+  padding_left=0 \
+  padding_right=0
+add_gap apple.gap left
 
 # Polled, not event-driven: the case worth catching is `~/Desk` moving while the
 # workspace does not, and an AeroSpace event is silent exactly then.
