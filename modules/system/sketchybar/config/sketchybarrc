@@ -25,8 +25,8 @@ sketchybar --bar \
 # y_offset=1: HackGen's metrics leave text and glyphs a pixel low in the centred
 # item box. Positive is up.
 sketchybar --default \
-  icon.font="$FONT:Bold:13.0" \
-  label.font="$FONT:Bold:12.0" \
+  icon.font="$FONT:Bold:14.0" \
+  label.font="$FONT:Bold:13.0" \
   icon.color="$FG" \
   label.color="$FG" \
   icon.y_offset=1 \
@@ -100,7 +100,7 @@ add_stacked_pill() {
     icon.drawing=off \
     width=0 \
     y_offset=-6 \
-    label.font="$FONT:Bold:9.0" \
+    label.font="$FONT:Bold:10.0" \
     label.padding_left=9 \
     label.padding_right=11 \
     padding_left=0 \
@@ -110,7 +110,7 @@ add_stacked_pill() {
   sketchybar --set "$name.top" \
     icon.drawing=off \
     y_offset=6 \
-    label.font="$FONT:Bold:9.0" \
+    label.font="$FONT:Bold:10.0" \
     label.padding_left=9 \
     label.padding_right=11 \
     padding_left=0 \
