@@ -2,27 +2,21 @@
 
 # Identify a menu-bar item so it can be aliased into the bar.
 #
-# Why this exists: `sketchybar --query default_menu_items` names most items
-# `Control Center,Item-0(N)`, where N is a position index that changes whenever
-# the menu-bar order changes — a measured example: FineTune moved 13 -> 17 -> 20
-# across a single session. Items with a real name (`com.bjango.istatmenus.cpu`,
-# `FineTune,FineTune`) are stable and need no help; this script is for the rest.
+# `sketchybar --query default_menu_items` names most items
+# `Control Center,Item-0(N)`, where N is a position index that moves whenever the
+# menu-bar order changes — measured here: FineTune went 13 -> 17 -> 18 -> 20 in
+# one session. Items with a real name (`com.bjango.istatmenus.cpu`) are stable
+# and need no help; this is for the rest.
 #
-# Usage:
-#   ./find-menu-item.sh          lay every unidentified item on the bar, each
-#                                labelled with its index, and print the mapping
+#   ./find-menu-item.sh          lay every unidentified item on the bar, labelled
+#                                with its index, and print the mapping
 #   ./find-menu-item.sh --sizes  measure what each alias actually captures
-#   sketchybar --reload          undo (this script never edits the config)
+#   sketchybar --reload          undo
 #
-# Read the bar, note which index shows the app you want, then take the full name
-# from the printed mapping and add it to sketchybarrc.
-#
-# Two traps, both hit during the original investigation:
-#   - Menu-bar managers that reposition items (Bartender) make aliases capture
-#     the WRONG rect — neighbouring items bleed in. Quit them before probing.
-#   - A name like `FineTune,FineTune` can refer to the app's window rather than
-#     its menu-bar icon; it renders as a ~528px slab. Check --sizes: a real icon
-#     is roughly 25-80px wide.
+# Two traps: menu-bar managers that reposition items (Bartender) make aliases
+# capture the wrong rect, so quit them before probing; and a name like
+# `FineTune,FineTune` can refer to the app's window rather than its icon, showing
+# up as a ~528px slab. A real icon is roughly 25-80px wide.
 
 set -u
 
@@ -41,7 +35,6 @@ fi
 
 idx=0
 while IFS= read -r item; do
-  # Skip what is already identified or known not to be an icon.
   case "$item" in
     *istatmenus* | *",Clock("* | *BentoBox* | *FocusModes* | *NowPlaying* | \
       *",WiFi("* | *Bluetooth* | *Siri* | *",Battery("* | *raycastIcon* | \
@@ -59,7 +52,7 @@ while IFS= read -r item; do
     icon.drawing=off \
     label="$n" \
     label.color=0xffffff00 \
-    label.font="Hack Nerd Font:Bold:12.0" \
+    label.font="HackGen Console NF:Bold:12.0" \
     label.padding_left=10 \
     label.padding_right=1 >/dev/null
 

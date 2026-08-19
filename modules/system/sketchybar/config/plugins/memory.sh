@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-# "Used" here means active + wired + compressed, against total RAM — the same
-# definition Activity Monitor's memory-used figure follows. Inactive pages are
-# deliberately excluded: macOS keeps them populated as cache and reclaims them on
-# demand, so counting them would pin the number near 100% permanently and make it
-# say nothing.
+# active + wired + compressed, the same definition Activity Monitor uses.
+# Inactive pages are excluded on purpose: macOS keeps them as reclaimable cache,
+# so counting them pins the number near 100% and it stops saying anything.
 #
-# vm_stat costs 18ms. The page size is read from vm_stat's own header rather than
-# assumed to be 4096 — Apple Silicon uses 16384.
+# Page size comes from vm_stat's header rather than being assumed — Apple Silicon
+# uses 16384, not 4096.
 
 source "$(dirname "$0")/../colors.sh"
 

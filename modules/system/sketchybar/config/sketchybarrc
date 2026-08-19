@@ -1,55 +1,16 @@
 #!/usr/bin/env bash
 
-# This directory is an out-of-store symlink into the dotfiles repo. sketchybar has
-# no config watcher of its own (unlike AeroSpace), so an edit needs
-# `sketchybar --reload` to show up.
+# Out-of-store symlink into the dotfiles repo. sketchybar has no config watcher,
+# so an edit needs `sketchybar --reload`.
 #
-# This bar REPLACES the macOS menu bar rather than sitting alongside it. That is
-# not a stylistic choice: AeroSpace tiles windows over anything that is not the
-# native menu bar, so a sketchybar at the bottom — or at the top without hiding
-# the native one — is simply covered by the tiles. Making it visible requires
-# reserving space via `gaps.outer.top`, and once the space is reserved it costs
-# nothing extra to put the bar where the menu bar used to be.
-#
-# Three numbers move together and must stay in sync:
-#   - BAR_HEIGHT below
-#   - aerospace.toml  gaps.outer.top  == BAR_HEIGHT (else tiles cover the bar)
-#   - default.nix     _HIHideMenuBar = true (else the native bar overlaps)
-#
-# Hiding the native bar does not remove it: moving the pointer to the top edge
-# still reveals it, which is how menu-bar items not mirrored here are reached
-# (1Password, CleanShot, Alfred, volume, WiFi, input source…).
+# Three values must stay in sync, or the tiles cover the bar:
+#   BAR_HEIGHT here  ==  aerospace.toml gaps.outer.top  +  _HIHideMenuBar in default.nix
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
-
-# Palette and glyphs, shared with every plugin.
 source "$CONFIG_DIR/colors.sh"
 
 BAR_HEIGHT=32
-
-# Same face as Ghostty and tmux. HackGen carries both the Nerd Font glyphs and a
-# Japanese set, so a desk or app name in Japanese renders instead of falling back
-# mid-label.
-FONT="HackGen Console NF"
-
-##### Menu-bar items mirrored into the bar #####
-# Nothing is mirrored any more — every item here is drawn from data this config
-# reads itself, in this palette and this font.
-#
-# Aliasing was tried and rejected. An alias mirrors another app's menu-bar
-# rendering: it keeps that app's colours and layout, forwards no clicks, and — for
-# an app without a stable menu-bar name — can only be addressed as
-# `Control Center,Item-0(N)`, where N is a position index that shifts with
-# menu-bar order (measured on this machine: FineTune moved 13 -> 17 -> 18 -> 20
-# across one session). An item spelled that way silently starts showing a
-# different app.
-#
-# To bring another menu-bar app in anyway, tools/find-menu-item.sh lays every
-# candidate out with its index; `--sizes` ranks them by captured width, which is
-# how a text-rendering item is told apart from an icon. Two traps it documents:
-# menu-bar managers that reposition items (Bartender) make aliases capture the
-# wrong rect entirely, and a name like `FineTune,FineTune` can refer to the app's
-# window rather than its icon.
+FONT="HackGen Console NF" # same as Ghostty; carries Nerd Font glyphs and Japanese
 
 sketchybar --bar \
   position=top \
@@ -67,13 +28,10 @@ sketchybar --default \
   padding_left=0 \
   padding_right=0
 
-# A pill is three pieces: a coloured cap holding the icon, a label item, and a
-# bracket drawing the shared body behind both. sketchybar cannot round one side
-# of an item, so the cap sits inside the bracket rather than being flush with it.
-#
-# Order matters and differs per side: items added to `left` stack left-to-right,
-# items added to `right` stack right-to-left. The cap must end up on the left in
-# both cases, so the add order flips.
+# A pill is a coloured cap plus a label, with a bracket drawing the body behind
+# both — sketchybar cannot round one side of an item, so the cap sits inside the
+# bracket. `left` stacks left-to-right and `right` stacks right-to-left, so the
+# add order flips to keep the cap on the left.
 add_pill() {
   local name="$1" side="$2" icon="$3" cap_color="$4"
 
@@ -108,51 +66,12 @@ add_pill() {
     background.height=24
 }
 
-# An alias cannot be given a label, so its pill is a cap plus the alias itself.
-add_alias_pill() {
-  local name="$1" side="$2" icon="$3" cap_color="$4" target="$5"
-
-  [ -z "$target" ] && return 0
-
-  local cap_args=(
-    icon="$icon"
-    icon.color="$CAP_FG"
-    icon.padding_left=8
-    icon.padding_right=8
-    label.drawing=off
-    background.color="$cap_color"
-    background.corner_radius=5
-    background.height=22
-  )
-
-  if [ "$side" = "left" ]; then
-    sketchybar --add item "$name.cap" left --set "$name.cap" "${cap_args[@]}"
-    sketchybar --add alias "$target" left
-  else
-    sketchybar --add alias "$target" right
-    sketchybar --add item "$name.cap" right --set "$name.cap" "${cap_args[@]}"
-  fi
-
-  sketchybar --set "$target" \
-    alias.scale=1.0 \
-    padding_left=4 \
-    padding_right=7
-
-  sketchybar --add bracket "$name.pill" "$name.cap" "$target" \
-    --set "$name.pill" \
-    background.color="$PILL" \
-    background.corner_radius=6 \
-    background.height=24
-}
-
-# Two lines in the width of one, the way iStat stacks them. sketchybar has no
-# multi-line item, so this is two items pushed apart with y_offset and overlapped
-# by giving the first one width=0 — a zero-width item consumes no horizontal
-# space, so the next one starts at the same x instead of beside it.
+# Two lines in one pill. sketchybar has no multi-line item, so the lines are two
+# items pushed apart with y_offset; width=0 on the first makes the second start
+# at the same x instead of beside it.
 add_stacked_pill() {
   local name="$1" icon="$2" cap_color="$3"
 
-  # Right side: added right-to-left, so the bottom line goes down first.
   sketchybar --add item "$name" right
   sketchybar --set "$name" \
     icon.drawing=off \
@@ -162,8 +81,6 @@ add_stacked_pill() {
     label.padding_left=8 \
     label.padding_right=9
 
-  # The upper line's colour is set by the plugin, which tints it to match the cap
-  # — a muted grey at this size disappears into the translucent bar.
   sketchybar --add item "$name.top" right
   sketchybar --set "$name.top" \
     icon.drawing=off \
@@ -190,23 +107,18 @@ add_stacked_pill() {
     background.height=24
 }
 
-##### Left — the reason this bar exists #####
+##### Left #####
 
-# Polling, not events: the case worth catching is the desync, where `~/Desk`
-# moves but the workspace does not, so an AeroSpace-side event (or
-# `exec-on-workspace-change`) is silent exactly when it matters. Both probes cost
-# ~23ms combined, so a 1s tick is cheap.
+# Polled, not event-driven: the case worth catching is `~/Desk` moving while the
+# workspace does not, and an AeroSpace event is silent exactly then.
 add_pill desk left "$ICON_DESK" "$PURPLE"
 sketchybar --set desk script="$PLUGIN_DIR/desk.sh" update_freq=1
 
-# Which window actually has focus is hard to read off a tiled layout.
 add_pill front_app left "$ICON_APP" "$COMMENT"
 sketchybar --set front_app script="$PLUGIN_DIR/front_app.sh"
 sketchybar --subscribe front_app front_app_switched
 
-##### Right — what the native menu bar used to carry #####
-# Added right-to-left, so this reads bottom-up on screen:
-#   meeting · memory · cpu · temperature · battery · clock
+##### Right — added right-to-left #####
 
 add_pill clock right "$ICON_CLOCK" "$COMMENT"
 sketchybar --set clock script="$PLUGIN_DIR/clock.sh" update_freq=10
@@ -215,8 +127,7 @@ add_stacked_pill battery "$ICON_BATT" "$YELLOW"
 sketchybar --set battery script="$PLUGIN_DIR/battery.sh" update_freq=60
 sketchybar --subscribe battery system_woke power_source_change
 
-# Slow on purpose: each reading costs macmon ~1.2s of IOReport setup. See
-# plugins/temp.sh for why this is not read from the SMC like iStat does.
+# Slow because each reading costs macmon ~1.2s of setup.
 add_pill temp right "$ICON_TEMP" "$ORANGE"
 sketchybar --set temp script="$PLUGIN_DIR/temp.sh" update_freq=30
 
@@ -226,10 +137,7 @@ sketchybar --set cpu script="$PLUGIN_DIR/cpu.sh" update_freq=2
 add_pill memory right "$ICON_MEM" "$CYAN"
 sketchybar --set memory script="$PLUGIN_DIR/memory.sh" update_freq=2
 
-# 30s is well inside the Calendar sync interval, so a shorter tick would only
-# re-read the same store — but it keeps the countdown honest to the minute.
 add_pill meeting right "$ICON_CAL" "$PINK"
 sketchybar --set meeting script="$PLUGIN_DIR/meeting.sh" update_freq=30
 
-# Force every script to run once so the bar is never blank at startup.
 sketchybar --update

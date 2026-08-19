@@ -234,11 +234,7 @@
       alt-tab.enable = true;
       appcleaner.enable = true;
       aqua-voice.enable = true;
-      # Superseded by sketchybar. Bartender repositions menu-bar items, which
-      # makes sketchybar's aliases capture the wrong rect (neighbouring items
-      # bleed in — measured). With the native menu bar hidden there is also
-      # nothing left for it to tidy.
-      bartender.enable = false;
+      bartender.enable = true;
       battery.enable = true;
       cleanshot.enable = true;
       deskpad.enable = true;

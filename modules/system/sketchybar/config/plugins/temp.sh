@@ -1,19 +1,11 @@
 #!/usr/bin/env bash
 
-# CPU temperature, read without root.
+# macmon reads the sensors through IOReport, which needs no privileges. The
+# alternatives all do: the SMC (what iStat Menus runs a root daemon for) and
+# powermetrics. `ioreg` lists the sensor nodes but carries no values.
 #
-# The obvious routes both need privileges: the SMC (IOKit AppleSMC) is what iStat
-# Menus reads through the root daemon it installs, and `powermetrics` refuses to
-# run unprivileged. `ioreg` is not an escape hatch either — the sensor nodes are
-# listed (`smctempsensor0`, `sensor = "mTPL"`) but carry no values.
-#
-# macmon reaches the same counters through IOReport, which needs no privileges at
-# all, so this stays a plain user-level poll and the number can be drawn in our
-# own colours rather than mirrored from another app's menu-bar rendering.
-#
-# Cost: ~1.2s per sample, essentially all of it macmon's IOReport setup —
-# shortening `-i` does not help. Hence the slow tick in sketchybarrc; temperature
-# does not move fast enough for that to matter.
+# ~1.2s per sample, essentially all of it macmon's setup — shortening `-i` does
+# not help, hence the slow tick in sketchybarrc.
 
 source "$(dirname "$0")/../colors.sh"
 
@@ -27,7 +19,6 @@ fi
 
 rounded="$(printf '%.0f' "$celsius")"
 
-# Sustained load on this machine sits in the 60s; 80 is where the fans commit.
 if [ "$rounded" -ge 80 ]; then
   cap="$RED"
 else

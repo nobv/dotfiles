@@ -18,13 +18,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    # The bar replaces the macOS menu bar rather than sitting alongside it, so the
-    # native one has to go: AeroSpace tiles windows over anything that is not the
-    # native menu bar, meaning a visible sketchybar needs reserved space
-    # (aerospace.toml `gaps.outer.top`), and reserving space for both bars would
-    # cost the height twice. Hidden is not gone — moving the pointer to the top
-    # edge still reveals the native bar, which is the access path for menu-bar
-    # items not aliased into sketchybar.
+    # The bar sits where the menu bar was, so keeping both would cost the height
+    # twice (AeroSpace needs reserved space for sketchybar either way). Hidden is
+    # not gone: the pointer at the top edge still reveals it, which is how items
+    # not on the bar are reached.
     #
     # Takes effect on the next login; `killall SystemUIServer` applies it sooner.
     system.defaults.NSGlobalDomain._HIHideMenuBar = true;
@@ -38,38 +35,29 @@ in
       ];
       brews = [
         { name = "sketchybar"; }
-        # Reads CPU temperature through IOReport, which — unlike the SMC and
-        # powermetrics — needs no privileges. Without it the temperature item
-        # would have to mirror iStat Menus' rendering, since iStat gets the same
-        # numbers from a root daemon this config has no reason to duplicate.
-        # From homebrew-core (no tap), and ahead of nixpkgs: 0.8.2 vs 0.6.1.
+        # CPU temperature without root (IOReport, unlike the SMC and
+        # powermetrics). homebrew-core, and ahead of nixpkgs: 0.8.2 vs 0.6.1.
         { name = "macmon"; }
-        # Next calendar event. Reads the macOS calendar store directly — the same
-        # source MeetingBar uses (its eventStoreProvider is "MacOS Calendar App",
-        # not the Google API), so this replaces MeetingBar's rendering without
-        # losing anything. Needs Calendar access granted to sketchybar.
+        # Next calendar event. Needs Calendar access granted to sketchybar.
         { name = "ical-buddy"; }
       ];
     };
 
     # Declarative replacement for `brew services start sketchybar`, so the bar has
-    # exactly one owner. Enabling the module starts the bar — a status bar that is
-    # installed but not running is the state this module was in for a year.
+    # exactly one owner.
     launchd.user.agents.sketchybar = {
       serviceConfig = {
         ProgramArguments = [ "/opt/homebrew/bin/sketchybar" ];
         KeepAlive = true;
         RunAtLoad = true;
         EnvironmentVariables = {
-          # Required by the formula's own caveat; sketchybar refuses a non-UTF-8 locale.
+          # Required by the formula's caveat; sketchybar refuses a non-UTF-8 locale.
           LANG = "en_US.UTF-8";
-          # launchd hands an agent a bare PATH, and every binary the plugins call
-          # lives outside it: desk (Nix user profile), jq (system Nix profile),
-          # aerospace / macmon / icalBuddy / sketchybar itself (Homebrew), and
-          # battery (its installer puts it in /usr/local/bin, not Homebrew's
-          # prefix). A missing entry here breaks only at runtime — `nix build`
-          # stays green either way, and a plugin started from a shell inherits
-          # that shell's PATH, so it does not show up in testing either.
+          # launchd gives an agent a bare PATH and every binary the plugins call
+          # sits outside it — desk, jq, the Homebrew tools, and battery in
+          # /usr/local/bin. A gap here breaks only at runtime: `nix build` stays
+          # green, and a plugin run from a shell inherits that shell's PATH, so
+          # testing misses it too.
           PATH = concatStringsSep ":" [
             "/etc/profiles/per-user/${username}/bin"
             "/run/current-system/sw/bin"
@@ -87,14 +75,9 @@ in
     home-manager.users.${username} =
       { config, ... }:
       {
-        # The whole directory is linked rather than each file: $PLUGIN_DIR resolves
-        # against CONFIG_DIR, so the plugins have to live inside the same tree.
-        # config/ is a subdirectory instead of the module root so that default.nix
-        # does not end up inside ~/.config/sketchybar.
-        #
-        # Editing a linked file is live in the repo sense but not on screen —
-        # sketchybar has no config watcher, so run `sketchybar --reload` after a
-        # change (unlike aerospace.toml, where saving is enough).
+        # Linked as a directory because $PLUGIN_DIR resolves against CONFIG_DIR;
+        # config/ is a subdirectory so default.nix stays out of ~/.config.
+        # Edits need `sketchybar --reload` — there is no config watcher.
         xdg.configFile."sketchybar".source =
           config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/system/sketchybar/config";
       };
