@@ -23,8 +23,12 @@ in
     # not gone: the pointer at the top edge still reveals it, which is how items
     # not on the bar are reached.
     #
+    # Both keys together are "Automatically hide and show the menu bar: Always" in
+    # System Settings; _HIHideMenuBar alone leaves it at "On Desktop Only".
+    # The second has no nix-darwin option, hence CustomUserPreferences.
     # Takes effect on the next login; `killall SystemUIServer` applies it sooner.
     system.defaults.NSGlobalDomain._HIHideMenuBar = true;
+    system.defaults.CustomUserPreferences."NSGlobalDomain".AppleMenuBarVisibleInFullscreen = false;
 
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       taps = [
