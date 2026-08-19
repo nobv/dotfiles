@@ -5,6 +5,11 @@
 # The bar sits in the hidden menu bar's strip, which macOS keeps excluding from
 # visibleFrame — so AeroSpace never tiles over it, and gaps.outer.top is the gap
 # below the bar rather than its height. Keep BAR_HEIGHT at or under 33px.
+#
+# Revealing the menu bar (pointer at the top edge) draws it over this bar, and
+# that cannot be avoided: `topmost=on` puts the bar in front but then swallows
+# the clicks meant for the menus (tested). The yabai fix for this
+# (menubar_opacity=0) needs yabai, which cannot run alongside AeroSpace.
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 source "$CONFIG_DIR/colors.sh"
