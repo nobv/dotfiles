@@ -4,8 +4,9 @@
 #
 # aerospace.toml's gaps.outer.top must reserve BAR_HEIGHT, or tiles cover the bar.
 #
-# The revealed menu bar draws over this bar and that cannot be fixed here:
-# `topmost=on` wins the layer but swallows the clicks meant for the menus.
+# The revealed menu bar would draw over this bar; sketchybar-toggle hides the bar
+# while the pointer is up there instead. `topmost=window` is what it expects —
+# `topmost=on` wins the layer outright but swallows the clicks meant for the menus.
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 source "$CONFIG_DIR/colors.sh"
@@ -20,6 +21,7 @@ sketchybar --bar \
   position=top \
   height="$BAR_HEIGHT" \
   color="$BAR_BG" \
+  topmost=window \
   padding_left=14 \
   padding_right=6
 
