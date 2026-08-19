@@ -26,6 +26,7 @@ export RED=0xffff5555    # desync
 # HackGenConsoleNF-Bold.ttf — nf-fa-memory moved in Nerd Fonts v3, so the old
 # U+F538 is genuinely absent.
 export ICON_APPLE=$'\xef\x85\xb9'       # U+F179 apple
+export ICON_APP=$'\xef\x8b\x90'         # U+F2D0 window_maximize
 export ICON_DESK=$'\xef\x84\x88'        # U+F108 desktop
 export ICON_WARN=$'\xef\x81\xb1'        # U+F071 warning
 export ICON_CAL=$'\xef\x81\xb3'         # U+F073 calendar

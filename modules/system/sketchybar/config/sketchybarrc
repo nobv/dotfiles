@@ -143,15 +143,28 @@ add_stacked_pill() {
 
 ##### Left #####
 
+# Where the menu bar keeps its Apple logo. A lone cap, white because that is the
+# one cap colour no metric has claimed.
+sketchybar --add item apple left
+sketchybar --set apple \
+  icon="$ICON_APPLE" \
+  icon.color="$CAP_FG" \
+  icon.padding_left=9 \
+  icon.padding_right=9 \
+  label.drawing=off \
+  background.color="$FG" \
+  background.corner_radius="$PILL_RADIUS" \
+  background.height="$PILL_HEIGHT" \
+  padding_left=0 \
+  padding_right=0
+add_gap apple.gap left
+
 # Polled, not event-driven: the case worth catching is `~/Desk` moving while the
 # workspace does not, and an AeroSpace event is silent exactly then.
 add_pill desk left "$ICON_DESK" "$PURPLE"
 sketchybar --set desk script="$PLUGIN_DIR/desk.sh" update_freq=1
 
-# The Apple logo rides on the front-app pill rather than standing alone: a lone
-# cap has half the parts of every other pill and no information to colour by.
-# White is the one cap colour not already spoken for by a metric.
-add_pill front_app left "$ICON_APPLE" "$FG"
+add_pill front_app left "$ICON_APP" "$COMMENT"
 sketchybar --set front_app script="$PLUGIN_DIR/front_app.sh"
 sketchybar --subscribe front_app front_app_switched
 
