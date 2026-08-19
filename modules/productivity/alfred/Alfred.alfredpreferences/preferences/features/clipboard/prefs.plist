@@ -11,6 +11,10 @@
 		<key>string</key>
 		<string>C</string>
 	</dict>
+	<key>ignoreRemoteClipboardFileLists</key>
+	<false/>
+	<key>limit</key>
+	<integer>4</integer>
 	<key>persistFor</key>
 	<integer>3</integer>
 	<key>persistForFiles</key>

@@ -3,8 +3,8 @@
 
 # Workflows belong to their own upstreams, not here: third-party ones
 # auto-update in place, and the self-made one is versioned in nobv/den.
-#   com.alfredapp.vitor.1password   github.com/alfredapp/1password-workflow
-#   jp.van-guard.den.desk-switcher  nobv/den, alfred/
+#   1Password          github.com/alfredapp/1password-workflow
+#   Den Desk Switcher  nobv/den, alfred/
 Alfred.alfredpreferences/workflows/
 
 # Alfred Remote pages. Deleting them in the GUI does not stick: Alfred re-seeds
