@@ -38,26 +38,39 @@ sketchybar --set "$NAME.pill" drawing=on
 title="$(printf '%s' "$event" | sed -n '1p')"
 span="$(printf '%s' "$event" | sed -n '2p' | tr -d '[:space:]')" # 12:00-13:00
 start="${span%%-*}"
+end="${span##*-}"
 
 if [ ${#title} -gt "$MAX_TITLE" ]; then
   title="${title:0:$((MAX_TITLE - 1))}…"
 fi
 
+# Minutes since midnight, so the arithmetic stays in shell builtins.
 now_minutes=$((10#$(date '+%H') * 60 + 10#$(date '+%M')))
 start_minutes=$((10#${start%%:*} * 60 + 10#${start##*:}))
+end_minutes=$((10#${end%%:*} * 60 + 10#${end##*:}))
+# An event crossing midnight ends "before" it starts on this scale.
+[ "$end_minutes" -lt "$start_minutes" ] && end_minutes=$((end_minutes + 1440))
+
 until_start=$((start_minutes - now_minutes))
 
+humanise() {
+  if [ "$1" -ge 60 ]; then
+    printf '%dh %dm' "$(($1 / 60))" "$(($1 % 60))"
+  else
+    printf '%dm' "$1"
+  fi
+}
+
 if [ "$until_start" -le 0 ]; then
-  # -n includes an event already under way; say so rather than counting up.
-  when="now"
+  # -n includes an event already under way. What matters then is not that it
+  # started but how much of it is left — that is the number you act on when
+  # deciding whether to start something else.
+  when="now ($(humanise $((end_minutes - now_minutes))) left)"
   cap="$RED"
-elif [ "$until_start" -lt 60 ]; then
-  when="in ${until_start}m"
+else
+  when="in $(humanise "$until_start")"
   # Under ten minutes is the point where it stops being background information.
   if [ "$until_start" -le 10 ]; then cap="$ORANGE"; else cap="$PINK"; fi
-else
-  when="in $((until_start / 60))h $((until_start % 60))m"
-  cap="$PINK"
 fi
 
 sketchybar --set "$NAME" label="$title  $when"
