@@ -50,7 +50,7 @@ while IFS= read -r item; do
     icon.drawing=off \
     label="$n" \
     label.color=0xffffff00 \
-    label.font="HackGen Console NF:Bold:12.0" \
+    label.font="UDEV Gothic 35NFLG:Bold:12.0" \
     label.padding_left=10 \
     label.padding_right=1 >/dev/null
 
