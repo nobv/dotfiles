@@ -103,6 +103,7 @@ add_stacked_pill() {
     width=0 \
     y_offset=-6 \
     label.font="$FONT:Bold:10.0" \
+    label.align=center \
     label.padding_left=9 \
     label.padding_right=11 \
     padding_left=0 \
@@ -113,6 +114,7 @@ add_stacked_pill() {
     icon.drawing=off \
     y_offset=6 \
     label.font="$FONT:Bold:10.0" \
+    label.align=center \
     label.padding_left=9 \
     label.padding_right=11 \
     padding_left=0 \

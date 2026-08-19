@@ -5,6 +5,7 @@
 # without `battery status`, a deliberate hold reads as a fault.
 
 source "$(dirname "$0")/../colors.sh"
+source "$(dirname "$0")/../stacked.sh"
 
 power="$(pmset -g batt)"
 smc="$(battery status 2>/dev/null)"
@@ -52,3 +53,5 @@ sketchybar --set "$NAME" label="${pct}%"
 # Tinted to match the cap: a muted grey at 9pt disappears into the bar.
 sketchybar --set "$NAME.top" label="$top" label.color="$cap"
 sketchybar --set "$NAME.cap" icon="$icon" background.color="$cap"
+
+align_stacked "$NAME"
