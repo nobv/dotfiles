@@ -23,7 +23,7 @@ export RED=0xffff5555    # desync
 # Escapes, not the characters themselves: these are Private Use Area codepoints
 # and get silently dropped by editors and tooling, leaving empty strings that
 # still look correct in a diff. Every one is verified present in
-# HackGenConsoleNF-Bold.ttf — nf-fa-memory moved in Nerd Fonts v3, so the old
+# UDEVGothic35NFLG-Bold.ttf — nf-fa-memory moved in Nerd Fonts v3, so the old
 # U+F538 is genuinely absent.
 export ICON_APPLE=$'\xef\x85\xb9'       # U+F179 apple
 export ICON_APP=$'\xef\x8b\x90'         # U+F2D0 window_maximize

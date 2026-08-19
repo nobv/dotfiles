@@ -3,8 +3,10 @@
 # brew's PATH when launched from the Dock.
 command = /opt/homebrew/bin/herdr
 
-font-family = HackGen Console NF
+font-family = UDEV Gothic 35NFLG
 font-size = 15
+# Ghostty 1.2 turned ligatures off by default.
+font-feature = calt
 font-thicken = true
 font-thicken-strength = 100
 adjust-cell-height = 5%
