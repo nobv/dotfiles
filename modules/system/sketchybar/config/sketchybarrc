@@ -2,14 +2,10 @@
 
 # Edits need `sketchybar --reload`; there is no config watcher.
 #
-# With the menu bar hidden, visibleFrame starts at the very top of the screen, so
-# nothing reserves this bar's strip — aerospace.toml's gaps.outer.top must cover
-# BAR_HEIGHT plus the margin, or the tiles slide underneath.
+# aerospace.toml's gaps.outer.top must reserve BAR_HEIGHT, or tiles cover the bar.
 #
-# Revealing the menu bar (pointer at the top edge) draws it over this bar, and
-# that cannot be avoided: `topmost=on` puts the bar in front but then swallows
-# the clicks meant for the menus (tested). The yabai fix for this
-# (menubar_opacity=0) needs yabai, which cannot run alongside AeroSpace.
+# The revealed menu bar draws over this bar and that cannot be fixed here:
+# `topmost=on` wins the layer but swallows the clicks meant for the menus.
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 source "$CONFIG_DIR/colors.sh"
@@ -50,8 +46,7 @@ add_gap() {
     label.drawing=off
 }
 
-# Coloured cap + label, with a bracket drawing the body behind both. `left`
-# stacks left-to-right and `right` right-to-left, so the add order flips.
+# `left` stacks left-to-right and `right` right-to-left, so the add order flips.
 add_pill() {
   local name="$1" side="$2" icon="$3" cap_color="$4"
 

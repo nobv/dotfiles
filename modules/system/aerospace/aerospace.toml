@@ -91,17 +91,9 @@ inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
-# Per monitor, because the two rigs need different amounts.
-#
-# With the menu bar hidden, an external display's visibleFrame starts at the very
-# top of the screen, so nothing reserves sketchybar's strip — its height (32) plus
-# the margin used on the other sides (10) has to be held back here, or the tiles
-# slide underneath it.
-#
-# The built-in display has a notch, and macOS keeps that band out of visibleFrame
-# whatever the menu bar is doing. sketchybar draws inside it, so only the margin
-# is needed. (Measured on the external monitor; the built-in value follows from
-# the notch but has not been checked on screen yet.)
+# External: with the menu bar hidden, visibleFrame reaches the top of the screen,
+# so sketchybar's height (32) plus the margin must be held back or tiles cover it.
+# Built-in: the notch is outside visibleFrame already, so only the margin is left.
 outer.top = [{ monitor."built-in" = 10 }, 42]
 outer.right = 10
 
