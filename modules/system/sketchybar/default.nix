@@ -87,9 +87,16 @@ in
     # Polls NSEvent.mouseLocation and hides the bar near the top edge, so the
     # revealed menu bar does not land on top of it. Needs no permissions — the
     # location API is readable without Input Monitoring or Accessibility.
+    #
+    # The default trigger zone of 10px hides the bar well before macOS reveals the
+    # menu bar, leaving a band where neither is drawn. 3px lines the two up.
     launchd.user.agents.sketchybar-toggle = mkIf cfg.toggle.enable {
       serviceConfig = {
-        ProgramArguments = [ "/opt/homebrew/bin/sketchybar-toggle" ];
+        ProgramArguments = [
+          "/opt/homebrew/bin/sketchybar-toggle"
+          "--trigger-zone"
+          "3"
+        ];
         KeepAlive = true;
         RunAtLoad = true;
         EnvironmentVariables = {
