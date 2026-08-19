@@ -30,14 +30,18 @@ case "$smc" in
   *) smc_allows=0 ;;
 esac
 
+# pmset reports the same "H:MM" shape for both directions, so the word matters:
+# on battery it is time left, while charging it is time until full.
 if [ "$on_ac" = 0 ]; then
   icon="$ICON_BATT"
-  top="${estimate:-—}"
+  top="${estimate:+$estimate left}"
+  top="${top:-—}"
   if [ "$pct" -le 20 ]; then cap="$RED"; else cap="$YELLOW"; fi
 elif [ "$smc_allows" = 1 ]; then
   icon="$ICON_BATT_CHARGE"
   cap="$GREEN"
-  top="${estimate:-charging}"
+  top="${estimate:+$estimate full}"
+  top="${top:-charging}"
 else
   icon="$ICON_BATT_HOLD"
   cap="$CYAN"
