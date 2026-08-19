@@ -2,6 +2,30 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ⚠️ This repository is PUBLIC
+
+`github.com/nobv/dotfiles` is a public repository. **Everything committed here is world-readable, permanently, including anything removed in a later commit.** Treat this as a hard constraint, not a preference.
+
+**Never commit personal or identifying information**, including but not limited to:
+
+- Email addresses, domain names, company names, real names
+- Calendar names, account names, machine hostnames, network SSIDs
+- File paths that embed any of the above
+- API keys, tokens, license keys, or anything else secret
+- Screenshots, logs, or example output containing the above
+
+This applies to code, comments, commit messages, PR titles and descriptions alike. Use placeholders in examples — `acme.example`, `user@example.com` (`.example` is reserved by RFC 2606 and cannot exist).
+
+**When a feature genuinely needs personal values, do not commit them.** Read them at runtime from somewhere outside the repository instead:
+
+- Another app's settings (`defaults read <bundle-id> <key>`)
+- A gitignored local file
+- The environment, or a private config the tool already owns
+
+Example: the sketchybar calendar item reads which calendars to show from MeetingBar's own preferences at runtime, because calendar names on this machine are email addresses. The repository holds only the logic.
+
+**Before committing, grep the diff for identifiers.** They arrive most often through example output pasted into comments or PR descriptions, not through code.
+
 ## Architecture Overview
 This is a Nix Darwin configuration using flakes and Home Manager for macOS system and user environment management. The architecture consists of:
 
