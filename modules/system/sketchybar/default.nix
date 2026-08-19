@@ -63,14 +63,18 @@ in
         EnvironmentVariables = {
           # Required by the formula's own caveat; sketchybar refuses a non-UTF-8 locale.
           LANG = "en_US.UTF-8";
-          # launchd hands an agent a bare PATH, and every probe the desk item makes
+          # launchd hands an agent a bare PATH, and every binary the plugins call
           # lives outside it: desk (Nix user profile), jq (system Nix profile),
-          # aerospace and sketchybar itself (Homebrew). A missing entry here breaks
-          # only at runtime — `nix build` stays green either way.
+          # aerospace / macmon / icalBuddy / sketchybar itself (Homebrew), and
+          # battery (its installer puts it in /usr/local/bin, not Homebrew's
+          # prefix). A missing entry here breaks only at runtime — `nix build`
+          # stays green either way, and a plugin started from a shell inherits
+          # that shell's PATH, so it does not show up in testing either.
           PATH = concatStringsSep ":" [
             "/etc/profiles/per-user/${username}/bin"
             "/run/current-system/sw/bin"
             "/opt/homebrew/bin"
+            "/usr/local/bin"
             "/usr/bin"
             "/bin"
             "/usr/sbin"
