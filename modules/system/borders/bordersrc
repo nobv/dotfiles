@@ -6,11 +6,14 @@
 # Only the focused window is outlined. AeroSpace tiles, so every window's edge is
 # already obvious — drawing all of them would just add lines. Colours follow the
 # same Dracula palette as sketchybar (purple, matching the desk pill).
+#
+# The width was settled by eye. Note it exceeds gaps.inner (10) in aerospace.toml,
+# so adjacent windows' borders meet.
 
 options=(
   style=round
-  width=4.0
-  hidpi=off
+  width=11.0
+  hidpi=on
   active_color=0xffbd93f9
   inactive_color=0x00000000
 )

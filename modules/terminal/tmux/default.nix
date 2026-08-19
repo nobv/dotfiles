@@ -120,9 +120,10 @@ in
           set -g window-style 'fg=#44475a,bg=#0a0a10'
           set -g window-active-style 'fg=#f8f8f2,bg=#282a36'
 
-          # Turn the active pane's top border into a filled title bar. Inactive
-          # panes keep a thin dim line, so the focused pane reads at a glance
-          # even when its content paints its own colors.
+          # The active pane's top border carries its title. It used to be a
+          # filled bar, which JankyBorders made redundant — that already outlines
+          # the focused window, so a solid band here was a second, louder answer
+          # to the same question. Now it is a coloured line in the same purple.
           #
           # pane_title (not pane_current_command) is what agent CLIs set to the
           # current task — the command name is just their version string
@@ -150,7 +151,7 @@ in
           set -g pane-border-status top
           set -g pane-border-format '#{?pane_active, ,  #{?pane_title,#{b:pane_current_path} │ ,}}#{?#{==:#{@pstate},needs-input},#[fg=#f1fa8c#,bold]⏸ #[default],#{?#{==:#{@pstate},done},#[fg=#50fa7b#,bold]✅ #[default],}}#{?pane_title,#{=40:pane_title},#{b:pane_current_path}} '
           set -g pane-border-style 'fg=#44475a'
-          set -g pane-active-border-style 'bg=#ff79c6,fg=#282a36,bold'
+          set -g pane-active-border-style 'fg=#bd93f9,bold'
 
           # No -t: tmux doesn't expand #{...} in an option's target, so
           # -t "#{pane_id}" was literal and failed with "No such pane".
