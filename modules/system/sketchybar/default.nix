@@ -15,6 +15,10 @@ in
 {
   options.modules.system.sketchybar = {
     enable = mkEnableOption "Highly customizable macOS status bar replacement";
+    toggle.enable = mkEnableOption ''
+      sketchybar-toggle, which hides the bar while the pointer is at the top edge
+      so the revealed menu bar does not draw over it
+    '';
   };
 
   config = mkIf cfg.enable {
@@ -33,6 +37,12 @@ in
           name = "FelixKratz/formulae";
           trusted = true;
         }
+      ]
+      ++ optionals cfg.toggle.enable [
+        {
+          name = "malpern/tap";
+          trusted = true;
+        }
       ];
       brews = [
         { name = "sketchybar"; }
@@ -41,6 +51,9 @@ in
         { name = "macmon"; }
         # Next calendar event. Needs Calendar access granted to sketchybar.
         { name = "ical-buddy"; }
+      ]
+      ++ optionals cfg.toggle.enable [
+        { name = "sketchybar-toggle"; }
       ];
     };
 
@@ -66,6 +79,25 @@ in
             "/bin"
             "/usr/sbin"
             "/sbin"
+          ];
+        };
+      };
+    };
+
+    # Polls NSEvent.mouseLocation and hides the bar near the top edge, so the
+    # revealed menu bar does not land on top of it. Needs no permissions — the
+    # location API is readable without Input Monitoring or Accessibility.
+    launchd.user.agents.sketchybar-toggle = mkIf cfg.toggle.enable {
+      serviceConfig = {
+        ProgramArguments = [ "/opt/homebrew/bin/sketchybar-toggle" ];
+        KeepAlive = true;
+        RunAtLoad = true;
+        EnvironmentVariables = {
+          LANG = "en_US.UTF-8";
+          PATH = concatStringsSep ":" [
+            "/opt/homebrew/bin"
+            "/usr/bin"
+            "/bin"
           ];
         };
       };

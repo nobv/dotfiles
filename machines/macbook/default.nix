@@ -213,7 +213,10 @@
       homebrew.enable = true;
       lima.enable = true;
       multipass.enable = false;
-      sketchybar.enable = true;
+      sketchybar = {
+        enable = true;
+        toggle.enable = true;
+      };
       utm.enable = true;
     };
 
