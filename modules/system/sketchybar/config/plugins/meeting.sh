@@ -86,12 +86,9 @@ if [ -n "$event" ]; then
     label="$title  tomorrow $start"
   fi
 elif [ -n "$(icalBuddy calendars 2>/dev/null)" ]; then
-  # icalBuddy itself is reachable and just found nothing in range.
   cap="$COMMENT"
   label="no events"
 else
-  # icalBuddy failing usually means the Calendar permission was pulled; without
-  # this check that would look identical to a genuinely empty day.
   icon="$ICON_WARN"
   cap="$RED"
   body="$PILL_WARN"
