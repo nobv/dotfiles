@@ -111,13 +111,22 @@ in
     };
 
     home-manager.users.${username} =
-      { config, ... }:
+      { config, lib, ... }:
       {
         # Linked as a directory because $PLUGIN_DIR resolves against CONFIG_DIR;
         # config/ is a subdirectory so default.nix stays out of ~/.config.
-        # Edits need `sketchybar --reload` — there is no config watcher.
         xdg.configFile."sketchybar".source =
           config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/system/sketchybar/config";
+
+        # nix-darwin reloads launchd agents (activate's "setting up user launchd
+        # services") before home-manager runs, so on first enable sketchybar
+        # starts with ~/.config/sketchybar not there yet and sits with an empty
+        # bar. Restart after writeBoundary, once the symlink is in place. There
+        # is no config watcher, so this also covers picking up ordinary config
+        # edits after `switch`.
+        home.activation.restartSketchybar = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          run /bin/launchctl kickstart -k "gui/$(id -u)/org.nixos.sketchybar" || true
+        '';
       };
   };
 }

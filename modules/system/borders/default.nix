@@ -47,10 +47,18 @@ in
     };
 
     home-manager.users.${username} =
-      { config, ... }:
+      { config, lib, ... }:
       {
         xdg.configFile."borders/bordersrc".source =
           config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/system/borders/bordersrc";
+
+        # Same ordering trap as sketchybar (FelixKratz's other bar tool, same
+        # launchd-before-home-manager race): ~/.config/borders isn't written yet
+        # when the agent starts on first enable, so borders sits on its
+        # built-in defaults. Restart once writeBoundary has linked the config.
+        home.activation.restartBorders = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          run /bin/launchctl kickstart -k "gui/$(id -u)/org.nixos.borders" || true
+        '';
       };
   };
 }

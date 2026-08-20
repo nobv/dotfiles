@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-# Out-of-store symlink into the dotfiles repo. Re-run `borders` with new options
-# to apply a change; a running instance picks them up.
+# Out-of-store symlink into the dotfiles repo. `just nix switch` restarts the
+# running instance for you (modules/system/borders/default.nix); editing this
+# file directly without switching needs a manual re-run of `borders` with the
+# new options — a running instance picks them up.
 #
 # Only the focused window is outlined. AeroSpace tiles, so every window's edge is
 # already obvious — drawing all of them would just add lines. Colours follow the
