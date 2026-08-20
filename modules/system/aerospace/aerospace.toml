@@ -141,10 +141,13 @@ alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-h = 'focus left'
-alt-j = 'focus down'
-alt-k = 'focus up'
-alt-l = 'focus right'
+# --ignore-floating keeps hjkl on tiled windows (skips the wagon, e.g. Typeless's
+# status pill). --wrap-around is required alongside it: without a tiling parent,
+# floating windows would otherwise leave hjkl unresponsive while focused.
+alt-h = 'focus --ignore-floating --wrap-around left'
+alt-j = 'focus --ignore-floating --wrap-around down'
+alt-k = 'focus --ignore-floating --wrap-around up'
+alt-l = 'focus --ignore-floating --wrap-around right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
