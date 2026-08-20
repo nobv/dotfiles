@@ -6,6 +6,8 @@ setopt pushd_ignore_dups
 # completions (compinit の後に実行される)
 source <(kubectl completion zsh)
 eval "$(workmux completions zsh)"
+# wm is a wrapper (see below), so it doesn't inherit workmux's completion by name
+compdef wm=workmux
 
 # tmux のペインボーダーに出る pane_title を管理する。
 # 素の zsh は OSC タイトルを出さないため、放っておくと tmux のデフォルト値である
@@ -37,6 +39,11 @@ add-zsh-hook precmd _pane_title_precmd
 wm() {
   [[ "$1" == "add" ]] && git fetch origin --quiet
   command workmux "$@"
+}
+
+# wmp <number|url> [add flags...] -> wm add --pr <number|url> [add flags...]
+wmp() {
+  wm add --pr "$@"
 }
 
 g() {
