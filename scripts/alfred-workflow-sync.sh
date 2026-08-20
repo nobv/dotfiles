@@ -236,8 +236,13 @@ report_unmanaged
 if [ "${INSTALLED_COUNT}" -gt 0 ]; then
     log_success "Installed ${INSTALLED_COUNT} workflow(s)"
     log_info "Restart Alfred if they do not show up in Preferences"
-else
+elif [ "${FAILED}" -eq 0 ]; then
     log_success "All manifest workflows are already installed"
+fi
+
+# Last, so a failed run does not end on a success line
+if [ "${FAILED}" -ne 0 ]; then
+    log_error "Some workflows could not be installed — see the errors above"
 fi
 
 exit "${FAILED}"
