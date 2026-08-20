@@ -132,6 +132,10 @@
       shellscript.enable = true;
     };
 
+    media = {
+      finetune.enable = true;
+    };
+
     productivity = {
       alfred.enable = true;
       capacities.enable = false;
@@ -167,12 +171,17 @@
     # System tools
     system = {
       aerospace.enable = true;
+      borders.enable = true;
       den.enable = true;
       flashspace.enable = true;
       fonts.enable = true;
       homebrew.enable = true;
       lima.enable = true;
       multipass.enable = true;
+      sketchybar = {
+        enable = true;
+        toggle.enable = true;
+      };
     };
 
     # Terminal configuration
