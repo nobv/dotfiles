@@ -38,6 +38,16 @@ let
     sidebar:
       position: left
       layout: tiles
+
+    # Reuses the authenticated Claude Code CLI; haiku keeps naming calls cheap.
+    auto_name:
+      command: "claude --model haiku -p"
+      system_prompt: |
+        Generate a Conventional Commits branch name in the form
+        <type>/<short-kebab-description>, where <type> is one of: feat, fix,
+        docs, style, refactor, perf, test, build, ci, chore, revert.
+        Output only the branch name, no explanation.
+      background: true
   ''
   + sandboxConfig;
 in
