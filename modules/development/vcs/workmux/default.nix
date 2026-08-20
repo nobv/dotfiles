@@ -23,12 +23,21 @@ let
     ${lib.concatMapStringsSep "\n" (cmd: "    - ${cmd}") cfg.sandbox.hostCommands}
   '';
   configYaml = ''
+    main_branch: main
     base_branch: origin/main
+    worktree_dir: ~/.workmux/{project}
     nerdfont: true
-    worktree_dir: .worktrees
 
-    pre_add:
-      - git fetch origin
+    # dracula owns window-status-format; @workmux_status is embedded there
+    # explicitly instead (modules/terminal/tmux).
+    status_format: false
+
+    dashboard:
+      preview_size: 60
+
+    sidebar:
+      position: left
+      layout: tiles
   ''
   + sandboxConfig;
 in

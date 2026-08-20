@@ -166,26 +166,24 @@ The `scripts/enable-module.sh` script provides an interactive interface for mana
 
 ## Development Workflow
 
-All code-changing work happens inside a git worktree, is validated rootless, and is applied only after merging to `main`.
+All code-changing work happens inside a `workmux` worktree, is validated rootless, and is applied only after merging to `main`.
 
 ### When to use a worktree
 - **Enter**: feature additions, bug fixes, multi-file changes, refactors
 - **Skip**: questions/investigation only, a single trivial edit, a config value tweak, a typo fix
 
 ### Change flow
-1. Call `EnterWorktree` (built-in tool) at the start, passing a name `<type>/<short-kebab-description>` following Conventional Commits (e.g. `feat/todoist-mcp`, `fix/wezterm-config`, `refactor/module-discovery`); same types as commits. `EnterWorktree` does **not** create the branch under that exact name — it prefixes `worktree-` and replaces `/` with `+` (passing `feat/todoist-mcp` yields branch `worktree-feat+todoist-mcp`). Immediately rename the branch to the conventional name before pushing, so the remote branch and PR are Conventional Commits–compliant:
-   ```sh
-   git branch -m <type>/<short-kebab-description>   # e.g. git branch -m feat/todoist-mcp
-   ```
+1. Create the worktree: `workmux add <type>/<short-kebab-description>` following Conventional Commits (e.g. `workmux add feat/todoist-mcp`); same types as commits. Unlike the legacy `EnterWorktree` tool, the branch name is used **as-is** — no `worktree-` prefix, no `/`→`+` mangling — so it's already Conventional Commits–compliant and never needs renaming. This creates the worktree under `~/.workmux/dotfiles/<handle>` (see `.workmux.yaml` for pane layout and file operations) and switches the current tmux window to it.
 2. Implement inside the worktree — edit modules in `modules/<category>/<module>/default.nix`.
 3. Validate **without root**, entirely within the worktree:
    - `just nix check` (`nix flake check`) — syntax
    - `just nix build` (`nix build .#darwinConfigurations.<machine>.system`) — full build, no root
 
    Do **not** use `just nix dry-run` / `darwin-rebuild … --dry-run` here — they require root and activate against the live system.
-4. Commit to the worktree's branch (Conventional Commits, single line).
-5. After merging into `main`, apply with `just nix switch` (or `just apply` to also ff `main` + apm sync + claude plugins) — **never `switch` from a worktree** (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent).
-6. Once the work is done and the PR is merged, remove the worktree with `ExitWorktree` (`action: "remove"`) so `.claude/worktrees/` stays clean — don't leave stale worktrees around.
+4. Commit to the worktree's branch (Conventional Commits, single line). To split unrelated changes into separate commits, ask for it explicitly (e.g. "commit this as two separate changes") — git-surgeon stages the hunks non-interactively instead of committing whole files.
+5. Push and open a PR (`gh pr create`, or workmux's `open-pr` skill). Merge on GitHub. **`workmux merge` is not used** — merging stays PR-based so review history lives on GitHub, not in a local rebase/squash.
+6. After merging into `main`, apply with `just nix switch` (or `just apply` to also ff `main` + apm sync + claude plugins) — **never `switch` from a worktree** (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent).
+7. Once the PR is merged, clean up: `workmux rm <name>`, or sweep everything at once with `workmux rm --gone` (removes every worktree whose upstream branch GitHub deleted on merge).
 
 ### Adding a new module
 1. Create `modules/<category>/<module-name>/`
@@ -201,9 +199,11 @@ If, while working in a worktree, the user starts an **unrelated** task:
 - Pick it up later in its own worktree; continuations/spin-offs of the *current* task are NOT parked — keep them here
 
 ### Notes
-- `EnterWorktree` defaults to base `origin/main` (fresh); uncommitted changes on `main` are not carried into the worktree
-- `EnterWorktree` auto-prefixes the branch with `worktree-` and turns `/` into `+`; rename it with `git branch -m <type>/<short-kebab-description>` (step 1) so the pushed branch/PR follow Conventional Commits. The worktree directory name (`.claude/worktrees/<type>+<desc>`) keeps the `+` form — that's expected and only the branch needs renaming
-- Merges happen only on explicit user request; once the work is merged, remove the worktree with `ExitWorktree` (`action: "remove"`) rather than leaving it on disk
+- `workmux add` defaults to branching from `origin/main`; the `wm` zsh function (`modules/terminal/zsh/.zshrc`) runs `git fetch origin` before every `add` so the branch point is current — workmux itself never fetches
+- `workmux add -b -P <file>` starts the agent in the background with a prompt preloaded from a file, for delegating several tasks in parallel without leaving the current window
+- Tmux prefix bindings (`modules/terminal/tmux`): `C-s`/`C-w` open the workmux dashboard (all worktrees / worktrees tab), `C-t` toggles the sidebar, `L` jumps to the last completed-or-waiting agent, `Tab` toggles back to the previously visited one
+- After a crash, `workmux resurrect` restores worktree windows from persisted state
+- Merges happen only on explicit user request; once the work is merged, remove the worktree with `workmux rm <name>` rather than leaving it on disk
 - The dev shell (`just nix dev` / `nix develop`) provides `nixpkgs-fmt` and `nix-tree`
 - Todoist MCP is managed declaratively via apm (`modules/ai/apm/apm.yml` → `mcp: doist/todoist-ai`); `just apm sync` deploys it to user scope (`~/.claude.json`), available across all projects. `/mcp` authentication may be needed once
 
@@ -308,8 +308,10 @@ Error: `Please update machines/<machine>/config.nix with your actual username`
 - Edit `machines/<machine>/config.nix`
 - Replace `REPLACE_WITH_YOUR_USERNAME` with your actual username
 - Or run `./setup.sh -m <machine>` to regenerate config
-- **Hits every new worktree on `work`**, because the placeholder is what's committed (see Machine-Specific
-  Configuration). Write the username into the worktree's copy and leave it unstaged
+- **Resolved automatically for `workmux add` worktrees**: `.workmux.yaml`'s `files.copy` copies the real
+  `machines/work/config.nix` from `main` into every new worktree, since the placeholder is what's committed
+  (see Machine-Specific Configuration). Only hits worktrees created some other way (e.g. a bare
+  `git worktree add`) — in that case, write the username into the worktree's copy and leave it unstaged
 
 ### Module Not Found After Adding
 If a new module isn't recognized:

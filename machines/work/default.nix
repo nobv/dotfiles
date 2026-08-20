@@ -64,6 +64,7 @@
         procs.enable = true;
         ripgrep.enable = true;
         tree.enable = true;
+        zoxide.enable = true;
       };
       data-and-protocol = {
         dbeaver-community.enable = true;
@@ -90,6 +91,7 @@
         gh-dash.enable = true;
         pre-commit.enable = true;
         difit.enable = true;
+        git-surgeon.enable = true;
         workmux = {
           enable = true;
           sandbox = {

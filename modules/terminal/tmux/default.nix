@@ -42,6 +42,35 @@ let
       hash = "sha256-7Wm1M+yf8hIQGtPSbOyQ84b+yz5DYyGk2//0Fp6TBr8=";
     };
   };
+  # fzf popup for inserting file paths into an AI agent's pane; not
+  # packaged elsewhere, so wrap it with its deps. coreutils-prefixed (not
+  # coreutils) is required: --git-root uses GNU-only grealpath/--relative-to.
+  tmux-file-picker = pkgs.stdenvNoCC.mkDerivation {
+    pname = "tmux-file-picker";
+    version = "unstable-2026-08-20";
+    src = pkgs.fetchFromGitHub {
+      owner = "raine";
+      repo = "tmux-file-picker";
+      rev = "1f48308d26815c1fb5498a640156fd2a86e09e52";
+      hash = "sha256-Y9zp3p22Zlc0dBY5zx+WSRywcU/atROMXj57RzMcQVU=";
+    };
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+    dontBuild = true;
+    installPhase = ''
+      install -Dm755 tmux-file-picker $out/bin/tmux-file-picker
+      wrapProgram $out/bin/tmux-file-picker \
+        --prefix PATH : ${
+          lib.makeBinPath [
+            pkgs.fzf
+            pkgs.fd
+            pkgs.bat
+            pkgs.tree
+            pkgs.zoxide
+            pkgs.coreutils-prefixed
+          ]
+        }
+    '';
+  };
 in
 {
   options.modules.terminal.tmux = {
@@ -49,12 +78,30 @@ in
   };
 
   config = mkIf cfg.enable {
+    # tmux-snaglord: Rust binary, not in nixpkgs — Homebrew tap, like workmux.
+    homebrew = mkIf (config.modules.system.homebrew.enable or false) {
+      taps = [ "raine/tmux-snaglord" ];
+      brews = [ "raine/tmux-snaglord/tmux-snaglord" ];
+    };
+
     home-manager.users.${username} = {
       # Claude Code hooks (modules/ai/claude-code/settings.json) reference
       # $HOME/.tmux/plugins/tmux-agent-indicator/scripts/agent-state.sh directly,
       # so symlink it to the nix store path at a stable location
       home.file.".tmux/plugins/tmux-agent-indicator".source =
         "${tmux-agent-indicator}/share/tmux-plugins/tmux-agent-indicator";
+
+      home.packages = [ tmux-file-picker ];
+
+      # starship's prompt (modules/terminal/starship/config.nix) has no
+      # matching snaglord preset. prompt_lines includes the leading blank
+      # line and the aws/gcloud/kubernetes lines, which never collapse even
+      # when empty.
+      home.file.".config/tmux-snaglord/config.toml".text = ''
+        prompt = "^│[➜✗] "
+        prompt_lines = 7
+        nerd_fonts = true
+      '';
 
       programs.tmux = {
         enable = true;
@@ -158,6 +205,14 @@ in
           # A hook already targets the triggering pane, so -p is enough.
           set-hook -g pane-focus-in 'set-option -p @pstate ""'
 
+          # Insert workmux's per-window status into dracula's format (values
+          # copied from its generated output, only the @workmux_status
+          # conditional added). Must sit in the top-level extraConfig,
+          # evaluated after every plugin's run-shell, to win over dracula's
+          # own window-status-format.
+          set -g window-status-format '#[fg=#f8f8f2]#[bg=#44475a] #I #W#{?@workmux_status, #{@workmux_status},}#{?window_flags,#[fg=#6272a4]#{window_flags},}'
+          set -g window-status-current-format '#[fg=#44475a]#[bg=#6272a4]#[fg=#f8f8f2]#[bg=#6272a4] #I #W#{?@workmux_status, #{@workmux_status},}#{?window_flags,#[fg=#bd93f9]#{window_flags},} #[fg=#6272a4]#[bg=#44475a]'
+
           # t: pop up a scratch shell in the current pane's directory
           # (overrides the stock clock-mode bind)
           bind-key t display-popup -d "#{pane_current_path}" -w 80% -h 80% -T " scratch " -E "zsh"
@@ -165,8 +220,25 @@ in
           # G: pop up lazygit
           bind-key G display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " lazygit " -E "lazygit"
 
-          # W: pop up workmux dashboard
-          bind-key W display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " workmux " -E "workmux dashboard"
+          # workmux's recommended tmux keybindings (https://workmux.raine.dev/guide).
+          # C-s overrides tmux-resurrect's manual save — continuum already
+          # autosaves every 30s, so only the "save now" escape hatch is lost.
+          bind-key C-s display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " workmux " -E "workmux dashboard"
+          bind-key C-w display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " workmux " -E "workmux dashboard --tab worktrees"
+          bind-key C-t run-shell "workmux sidebar"
+          bind-key L run-shell "workmux last-done"
+          bind-key Tab run-shell "workmux last-agent"
+
+          # C-f: fuzzy-pick a file, insert its @-prefixed path into the calling pane.
+          bind-key C-f display-popup -w 80% -h 80% -T " files " -E "tmux-file-picker"
+
+          # Same picker, scoped to Obsidian vault notes. Overrides next-window —
+          # harmless, since `prefix n` does the same thing. $HOME is expanded
+          # by the shell display-popup -E runs under, not hardcoded (public repo).
+          bind-key C-n display-popup -w 80% -h 80% -T " notes " -E "TMUX_FILE_PICKER_FD_FLAGS='-H --type f -e md' tmux-file-picker \"$HOME/Documents/ObsidianVault\""
+
+          # C-y: browse scrollback as searchable command+output blocks, paste back.
+          bind-key C-y display-popup -w 60% -h 60% -T " snaglord " -E "tmux-snaglord"
 
           # Copy mode (vi-style)
           bind-key -T copy-mode-vi v send-keys -X begin-selection

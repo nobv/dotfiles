@@ -16,9 +16,6 @@
   ll = "eza --classify --long --header --git --icons -a";
   ls = "eza";
 
-  # workmux (instead of git worktree)
-  wm = "workmux";
-
   ## }}}
 
   # Shortcusts {{{

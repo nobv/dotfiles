@@ -11,6 +11,7 @@
     ./fork
     ./gh-dash
     ./git
+    ./git-surgeon
     ./github
     ./pre-commit
     ./workmux

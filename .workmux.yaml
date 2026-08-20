@@ -1,0 +1,16 @@
+files:
+  copy:
+    # work's config.nix commits a placeholder username; the real value is
+    # only an uncommitted edit on main. Copy it in so worktree builds don't
+    # fail on the placeholder.
+    - machines/work/config.nix
+  symlink:
+    # Share permission grants across worktrees instead of re-approving them
+    # each time. Trade-off: one worktree's grants apply to all of them.
+    - .claude/settings.local.json
+
+panes:
+  - command: <agent>
+    focus: true
+  - split: horizontal
+    size: 20
