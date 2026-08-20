@@ -38,6 +38,18 @@ let
     sidebar:
       position: left
       layout: tiles
+
+    # `workmux add -A` generates a branch name from a prompt via this
+    # command. Reuses the already-authenticated Claude Code CLI instead of
+    # adding a new API key; haiku keeps this cheap since it's just naming.
+    auto_name:
+      command: "claude --model haiku -p"
+      system_prompt: |
+        Generate a Conventional Commits branch name in the form
+        <type>/<short-kebab-description>, where <type> is one of: feat, fix,
+        docs, style, refactor, perf, test, build, ci, chore, revert.
+        Output only the branch name, no explanation.
+      background: true
   ''
   + sandboxConfig;
 in
