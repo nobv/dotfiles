@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
-# There is no config watcher. `just nix switch` restarts the bar for you
-# (modules/system/sketchybar/default.nix); editing this file directly without
-# switching needs `sketchybar --reload`.
+# Edits need `sketchybar --reload`; there is no config watcher.
 #
 # aerospace.toml's gaps.outer.top must reserve BAR_HEIGHT, or tiles cover the bar.
 #

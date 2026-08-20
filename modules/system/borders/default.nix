@@ -52,10 +52,9 @@ in
         xdg.configFile."borders/bordersrc".source =
           config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/system/borders/bordersrc";
 
-        # Same ordering trap as sketchybar (FelixKratz's other bar tool, same
-        # launchd-before-home-manager race): ~/.config/borders isn't written yet
-        # when the agent starts on first enable, so borders sits on its
-        # built-in defaults. Restart once writeBoundary has linked the config.
+        # Same ordering trap as sketchybar: launchd reloads the agent before
+        # home-manager links ~/.config/borders, so on first enable borders
+        # starts on its built-in defaults.
         home.activation.restartBorders = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
           run /bin/launchctl kickstart -k "gui/$(id -u)/org.nixos.borders" || true
         '';
