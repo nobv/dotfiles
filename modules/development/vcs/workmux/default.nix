@@ -28,6 +28,10 @@ let
     worktree_dir: ~/.workmux/{project}
     nerdfont: true
 
+    # Append new windows at the end instead of next to the current one, so
+    # arrival order stays legible when several worktrees run in parallel.
+    window_placement: rightmost
+
     # dracula owns window-status-format; @workmux_status is embedded there
     # explicitly instead (modules/terminal/tmux).
     status_format: false
