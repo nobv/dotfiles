@@ -82,6 +82,9 @@ add_pill() {
     sketchybar --add item "$name.cap" right --set "$name.cap" "${cap_args[@]}"
   fi
 
+  # `drawing=off` on this bracket only hides its own background — the member
+  # items keep drawing. A plugin that wants to hide the whole pill must set
+  # `drawing=off` on `$name.cap` and `$name` too, not just `$name.pill`.
   sketchybar --add bracket "$name.pill" "$name.cap" "$name" \
     --set "$name.pill" \
     background.color="$PILL" \
@@ -133,6 +136,8 @@ add_stacked_pill() {
     padding_left=0 \
     padding_right=0
 
+  # Same caveat as add_pill's bracket: `drawing=off` here hides only this
+  # bracket's own background, not its member items.
   sketchybar --add bracket "$name.pill" "$name.cap" "$name.top" "$name" \
     --set "$name.pill" \
     background.color="$PILL" \
