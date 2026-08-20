@@ -7,7 +7,22 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        nil_ls = { mason = false },
+        nil_ls = {
+          mason = false,
+          -- Without this, nil prompts "Some flake inputs are not
+          -- available. Fetch them now?" on every file open inside a flake
+          -- (e.g. this repo) whose inputs aren't in the local Nix store.
+          -- autoArchive runs `nix flake archive` for us instead of asking.
+          settings = {
+            ["nil"] = {
+              nix = {
+                flake = {
+                  autoArchive = true,
+                },
+              },
+            },
+          },
+        },
       },
     },
   },
