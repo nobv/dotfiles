@@ -47,10 +47,17 @@ in
     };
 
     home-manager.users.${username} =
-      { config, ... }:
+      { config, lib, ... }:
       {
         xdg.configFile."borders/bordersrc".source =
           config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/system/borders/bordersrc";
+
+        # Same ordering trap as sketchybar: launchd reloads the agent before
+        # home-manager links ~/.config/borders, so on first enable borders
+        # starts on its built-in defaults.
+        home.activation.restartBorders = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+          run /bin/launchctl kickstart -k "gui/$(id -u)/org.nixos.borders" || true
+        '';
       };
   };
 }
