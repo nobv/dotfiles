@@ -39,9 +39,7 @@ let
       position: left
       layout: tiles
 
-    # `workmux add -A` generates a branch name from a prompt via this
-    # command. Reuses the already-authenticated Claude Code CLI instead of
-    # adding a new API key; haiku keeps this cheap since it's just naming.
+    # Reuses the authenticated Claude Code CLI; haiku keeps naming calls cheap.
     auto_name:
       command: "claude --model haiku -p"
       system_prompt: |
