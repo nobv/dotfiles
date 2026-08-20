@@ -11,36 +11,7 @@
   },
   "enableAllProjectMcpServers": true,
   "hooks": {
-    "Notification": [
-      {
-        "matcher": "permission_prompt|elicitation_dialog",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "workmux set-window-status waiting"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "workmux set-window-status working"
-          }
-        ]
-      }
-    ],
     "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "workmux set-window-status done"
-          }
-        ]
-      },
       {
         "hooks": [
           {
@@ -55,14 +26,6 @@
       }
     ],
     "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "workmux set-window-status working"
-          }
-        ]
-      },
       {
         "hooks": [
           {
@@ -127,13 +90,27 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "claude-mem@thedotmack": true
+    "claude-mem@thedotmack": true,
+    "workmux-status@workmux": true,
+    "git-surgeon@git-surgeon": true
   },
   "extraKnownMarketplaces": {
     "thedotmack": {
       "source": {
         "source": "github",
         "repo": "thedotmack/claude-mem"
+      }
+    },
+    "workmux": {
+      "source": {
+        "source": "github",
+        "repo": "raine/workmux"
+      }
+    },
+    "git-surgeon": {
+      "source": {
+        "source": "github",
+        "repo": "raine/git-surgeon"
       }
     }
   },

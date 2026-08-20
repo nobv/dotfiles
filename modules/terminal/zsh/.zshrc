@@ -30,6 +30,15 @@ add-zsh-hook preexec _pane_title_preexec
 add-zsh-hook precmd _pane_title_precmd
 
 # functions
+
+# workmux (instead of git worktree). `add` branches from origin/main, but
+# workmux has no pre-add hook (post_create runs after the worktree exists),
+# so fetch here first — otherwise it branches from a stale ref.
+wm() {
+  [[ "$1" == "add" ]] && git fetch origin --quiet
+  command workmux "$@"
+}
+
 g() {
   local REPO
   REPO=$(ghq list | sort -u | fzf --height 40% --reverse --border)

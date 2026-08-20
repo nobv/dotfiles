@@ -95,7 +95,8 @@
     "github@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
     "codex@openai-codex": true,
-    "workmux-status@workmux": true
+    "workmux-status@workmux": true,
+    "git-surgeon@git-surgeon": true
   },
   "extraKnownMarketplaces": {
     "thedotmack": {
@@ -114,6 +115,12 @@
       "source": {
         "source": "github",
         "repo": "raine/workmux"
+      }
+    },
+    "git-surgeon": {
+      "source": {
+        "source": "github",
+        "repo": "raine/git-surgeon"
       }
     }
   },

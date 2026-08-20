@@ -22,5 +22,6 @@
     ./procs
     ./ripgrep
     ./tree
+    ./zoxide
   ];
 }
