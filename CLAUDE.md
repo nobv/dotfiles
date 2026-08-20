@@ -39,7 +39,7 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 
 ### just commands (recommended)
 The `Justfile` uses modules under `just/`. Recipes are invoked as `just <module> <recipe>` (e.g. `just apm lock`); the `::` form (`just apm::lock`) is equivalent. Run `just` to list everything, `just --list <module>` for one group.
-- Apply everything (ff `main` → switch → apm sync → claude plugins): `just apply`
+- Apply everything (ff `main` → switch → apm sync → claude plugins → alfred sync): `just apply`
 - Apply configuration: `just nix switch`
 - Build without root (worktree-safe validation): `just nix build`
 - Dry-run activation (needs root; pre-`switch` check on `main`): `just nix dry-run`
@@ -52,6 +52,7 @@ The `Justfile` uses modules under `just/`. Recipes are invoked as `just <module>
 - Fast-forward `main`: `just git sync`
 - apm: `just apm sync` (install locked) · `just apm lock` (relock) · `just apm update` · `just apm outdated` · `just apm audit`
 - Claude native plugins: `just claude plugins` (primary config dir + every profile under `~/.config/claude/profiles/*`)
+- Alfred workflows: `just alfred sync` (installs whatever `modules/productivity/alfred/workflows.txt` lists but the machine is missing; skips silently where Alfred is not set up)
 
 To target a different machine, set the env var (CLI `MACHINE=…` does not work across modules): `DOTFILES_MACHINE=work just nix switch`
 
@@ -182,7 +183,7 @@ All code-changing work happens inside a `workmux` worktree, is validated rootles
    Do **not** use `just nix dry-run` / `darwin-rebuild … --dry-run` here — they require root and activate against the live system.
 4. Commit to the worktree's branch (Conventional Commits, single line). To split unrelated changes into separate commits, ask for it explicitly (e.g. "commit this as two separate changes") — git-surgeon stages the hunks non-interactively instead of committing whole files.
 5. Push and open a PR (`gh pr create`, or workmux's `open-pr` skill). Merge on GitHub. **`workmux merge` is not used** — merging stays PR-based so review history lives on GitHub, not in a local rebase/squash.
-6. After merging into `main`, apply with `just nix switch` (or `just apply` to also ff `main` + apm sync + claude plugins) — **never `switch` from a worktree** (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent).
+6. After merging into `main`, apply with `just nix switch` (or `just apply` to also ff `main` + apm sync + claude plugins + alfred sync) — **never `switch` from a worktree** (`mkOutOfStoreSymlink` / `dotfilesPath` point at the `main` checkout, so switching from a worktree is inconsistent).
 7. Once the PR is merged, clean up: `workmux rm <name>`, or sweep everything at once with `workmux rm --gone` (removes every worktree whose upstream branch GitHub deleted on merge).
 
 ### Adding a new module

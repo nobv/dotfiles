@@ -5,6 +5,9 @@
 # auto-update in place, and the self-made one is versioned in nobv/den.
 #   1Password          github.com/alfredapp/1password-workflow
 #   Den Desk Switcher  nobv/den, alfred/
+#
+# What belongs on a machine is recorded in workflows.txt next to this file;
+# `just alfred sync` installs anything missing.
 Alfred.alfredpreferences/workflows/
 
 # Alfred Remote pages. Deleting them in the GUI does not stick: Alfred re-seeds

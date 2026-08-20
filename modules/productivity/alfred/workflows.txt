@@ -1,0 +1,18 @@
+# Alfred workflows this machine should have. One entry per line:
+#
+#   <bundle id>  <gallery author>/<slug>
+#
+# Installed by scripts/alfred-workflow-sync.sh (`just alfred sync`), which
+# fetches https://alfred.app/workflows/<author>/<slug>/download/ — a redirect to
+# a pinned commit in alfredapp/gallery-workflows — and unpacks it into the
+# preferences bundle next to this file.
+#
+# The bundle id is what makes a re-run free: it decides "already installed"
+# locally, so a no-op sync never touches the network.
+#
+# Only Gallery workflows belong here. The self-made desk switcher is installed
+# from the den checkout instead — see the script.
+com.alfredapp.vitor.alfredgallery  alfredapp/alfred-gallery
+com.alfredapp.vitor.1password      alfredapp/1password
+com.alfredapp.vitor.webhighlight   alfredapp/web-highlight
+app.alfred.stephenc.cleanshot      stephenc/cleanshot-x
