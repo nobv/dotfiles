@@ -142,7 +142,7 @@
       heptabase.enable = false;
       linear-linear.enable = true;
       mdbook.enable = false;
-      obsidian.enable = false;
+      obsidian.enable = true;
       raycast.enable = true;
       todoist.enable = true;
       zotero.enable = true;
