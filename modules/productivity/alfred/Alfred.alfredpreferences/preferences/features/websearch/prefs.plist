@@ -37,6 +37,17 @@
 			<key>url</key>
 			<string>https://github.com/nobv?tab=repositories&amp;q={query}</string>
 		</dict>
+		<key>DC477805-067C-43A6-BAFC-4F154C614078</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>amazon</string>
+			<key>text</key>
+			<string>Search Amazon for '{query}'</string>
+			<key>url</key>
+			<string>https://www.amazon.co.jp/s?k={query}</string>
+		</dict>
 	</dict>
 </dict>
 </plist>
