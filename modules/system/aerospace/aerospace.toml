@@ -144,10 +144,24 @@ alt-comma = 'layout accordion horizontal vertical'
 # --ignore-floating keeps hjkl on tiled windows (skips the wagon, e.g. Typeless's
 # status pill). --wrap-around is required alongside it: without a tiling parent,
 # floating windows would otherwise leave hjkl unresponsive while focused.
-alt-h = 'focus --ignore-floating --wrap-around left'
-alt-j = 'focus --ignore-floating --wrap-around down'
-alt-k = 'focus --ignore-floating --wrap-around up'
-alt-l = 'focus --ignore-floating --wrap-around right'
+#
+# That trade-off breaks down for a window pinned in front of everything else by
+# Floaty: it is visible the whole time, yet --ignore-floating makes it the one
+# window hjkl cannot reach. AeroSpace has no per-window escape hatch — the flag
+# is all-or-nothing — so hjkl goes through pin-focus, which reads the pinned
+# window ids from ~/.local/state/aerospace/pinned-windows (written by the Alfred
+# workflow that does the pinning) and lets only those windows win a direction.
+# Floaty pins by mirroring, never by raising the original, so a pinned window is
+# still an ordinary floating window here and stays targetable by id.
+#
+# Every other case — nothing pinned, a tile is nearer, anything unexpected —
+# execs the exact command this replaced, so the line below is still the real
+# behaviour almost all of the time. Source: pin-focus.swift, compiled to
+# ~/.local/bin on switch (see default.nix).
+alt-h = 'exec-and-forget $HOME/.local/bin/aerospace-pin-focus left'
+alt-j = 'exec-and-forget $HOME/.local/bin/aerospace-pin-focus down'
+alt-k = 'exec-and-forget $HOME/.local/bin/aerospace-pin-focus up'
+alt-l = 'exec-and-forget $HOME/.local/bin/aerospace-pin-focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
