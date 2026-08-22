@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# alfred-workflows.sh — keep the Alfred workflows on this machine and the
-# manifest that describes them in step.
+# workflows.sh — keep the Alfred workflows on this machine and the manifest
+# next to this file in step.
 #
 # The preferences bundle is tracked in this repo, but
 # `Alfred.alfredpreferences/workflows/` is gitignored: those folders belong to
@@ -15,12 +15,12 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=lib.sh
-source "${SCRIPT_DIR}/lib.sh"
+MODULE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(cd "${MODULE_DIR}/../../.." && pwd)"
+# shellcheck source=../../../scripts/lib.sh
+source "${REPO_DIR}/scripts/lib.sh"
 
-REPO_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
-MANIFEST="${REPO_DIR}/modules/productivity/alfred/workflows.txt"
+MANIFEST="${MODULE_DIR}/workflows.txt"
 PLIST_BUDDY="/usr/libexec/PlistBuddy"
 GALLERY_BASE="https://alfred.app/workflows"
 
@@ -37,7 +37,7 @@ DEN_WORKFLOW_LABEL="desk switcher"
 
 usage() {
     cat >&2 <<'USAGE'
-usage: alfred-workflows.sh <command>
+usage: workflows.sh <command>
 
   sync   install the manifest's workflows that this machine is missing
   add    append workflows installed here but missing from the manifest
@@ -247,9 +247,9 @@ cmd_sync() {
         log_warning "not in the manifest: ${name:-${dir}} — run \`just alfred add\` to record it"
     done
 
+    # A running Alfred picks new folders up on its own, so nothing to reload here
     if [ "${INSTALLED_COUNT}" -gt 0 ]; then
         log_success "Installed ${INSTALLED_COUNT} workflow(s)"
-        log_info "Restart Alfred if they do not show up in Preferences"
     elif [ "${failed}" -eq 0 ]; then
         log_success "All manifest workflows are already installed"
     fi
