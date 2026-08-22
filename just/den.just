@@ -155,3 +155,9 @@ build-local: check-path
 # Switch against the local den working tree (temporary testing; next `just nix switch` reverts to the pinned rev)
 switch-local: check-path
     sudo darwin-rebuild switch --flake .#{{ MACHINE }} --override-input den "path:{{ DEN_PATH }}" --no-write-lock-file
+
+# Print the resolved den checkout path, empty if there is none. Lets
+# scripts/alfred-workflows.sh reuse the lookup above instead of copying it.
+[private]
+path:
+    @printf '%s' "{{ DEN_PATH }}"

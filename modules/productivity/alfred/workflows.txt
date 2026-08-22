@@ -1,0 +1,11 @@
+# Alfred workflows this machine should have:  <bundle id>  <gallery author>/<slug>
+#
+# `just alfred sync` installs what is missing, `just alfred add` appends what
+# was installed by hand. The bundle id is what lets a synced machine answer
+# "already installed" without touching the network.
+#
+# Gallery workflows only — the self-made desk switcher comes from den instead.
+com.alfredapp.vitor.alfredgallery  alfredapp/alfred-gallery
+com.alfredapp.vitor.1password      alfredapp/1password
+com.alfredapp.vitor.webhighlight   alfredapp/web-highlight
+app.alfred.stephenc.cleanshot      stephenc/cleanshot-x

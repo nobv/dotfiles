@@ -25,6 +25,8 @@ in
     #
     # Once per machine: Alfred Preferences -> Advanced -> Syncing ->
     # Set preferences folder... -> <dotfiles>/modules/productivity/alfred
+    # then `just alfred sync` to install the workflows, which the bundle does
+    # not carry (see .gitignore and workflows.txt next to this file).
     homebrew = mkIf (config.modules.system.homebrew.enable or false) {
       casks = [ "alfred" ];
     };
