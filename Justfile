@@ -3,7 +3,7 @@ mod git 'just/git.just'
 mod apm 'just/apm.just'
 mod claude 'just/claude.just'
 mod den 'just/den.just'
-mod alfred 'just/alfred.just'
+mod alfred 'modules/productivity/alfred/alfred.just'
 
 # List all recipes
 default:

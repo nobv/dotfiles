@@ -38,7 +38,7 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 ## Quick Start Commands
 
 ### just commands (recommended)
-The `Justfile` uses modules under `just/`. Recipes are invoked as `just <module> <recipe>` (e.g. `just apm lock`); the `::` form (`just apm::lock`) is equivalent. Run `just` to list everything, `just --list <module>` for one group.
+The `Justfile` uses modules under `just/`, plus module-local ones that sit with what they drive (`modules/productivity/alfred/alfred.just`). Recipes are invoked as `just <module> <recipe>` (e.g. `just apm lock`); the `::` form (`just apm::lock`) is equivalent. Run `just` to list everything, `just --list <module>` for one group.
 - Apply everything (ff `main` → switch → apm sync → claude plugins → alfred sync): `just apply`
 - Apply configuration: `just nix switch`
 - Build without root (worktree-safe validation): `just nix build`
