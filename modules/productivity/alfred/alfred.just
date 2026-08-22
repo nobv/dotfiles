@@ -1,6 +1,5 @@
-# Alfred recipes. Lives with the module rather than under just/ because
-# everything it drives — the manifest, the preferences bundle — is right here.
-# Recipes run from the repo root.
+# Alfred recipes. Kept with the module because the manifest and the preferences
+# bundle it drives are right here; recipes still run from the repo root.
 set working-directory := '../../..'
 
 # Install the workflows listed in workflows.txt that this machine is missing (idempotent; no-op runs make no network requests)

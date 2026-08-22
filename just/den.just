@@ -156,9 +156,8 @@ build-local: check-path
 switch-local: check-path
     sudo darwin-rebuild switch --flake .#{{ MACHINE }} --override-input den "path:{{ DEN_PATH }}" --no-write-lock-file
 
-# Print the resolved den checkout path, empty if there is none. Exists so
-# scripts/alfred-workflows.sh can install den's Alfred workflow without
-# duplicating the lookup above.
+# Print the resolved den checkout path, empty if there is none. Lets
+# scripts/alfred-workflows.sh reuse the lookup above instead of copying it.
 [private]
 path:
     @printf '%s' "{{ DEN_PATH }}"
