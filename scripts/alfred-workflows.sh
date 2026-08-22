@@ -364,8 +364,10 @@ cmd_add() {
     den_src="$(den_workflow_source)"
     [ -n "${den_src}" ] && den_id="$(plist_value "${den_src}" bundleid)"
 
-    # Collect first, resolve second: one pass over the catalogue either way, and
-    # nothing is written until every candidate has an answer.
+    # Collect first, resolve second, so the catalogue is consulted once and the
+    # "nothing to record" case never touches it. Entries are appended as they
+    # resolve: a name the catalogue cannot settle fails the run without holding
+    # back the ones it could.
     local -a pending_ids=() pending_names=()
     for dir in "${WORKFLOWS_DIR}"/*/; do
         [ -f "${dir}info.plist" ] || continue
