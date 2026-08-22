@@ -52,7 +52,7 @@ The `Justfile` uses modules under `just/`. Recipes are invoked as `just <module>
 - Fast-forward `main`: `just git sync`
 - apm: `just apm sync` (install locked) · `just apm lock` (relock) · `just apm update` · `just apm outdated` · `just apm audit`
 - Claude native plugins: `just claude plugins` (primary config dir + every profile under `~/.config/claude/profiles/*`)
-- Alfred workflows: `just alfred sync` (installs whatever `modules/productivity/alfred/workflows.txt` lists but the machine is missing; skips silently where Alfred is not set up)
+- Alfred workflows: `just alfred sync` (installs whatever `modules/productivity/alfred/workflows.txt` lists but the machine is missing; skips silently where Alfred is not set up) · `just alfred add` (after installing one from the Gallery, records it in the manifest — commit the diff)
 
 To target a different machine, set the env var (CLI `MACHINE=…` does not work across modules): `DOTFILES_MACHINE=work just nix switch`
 

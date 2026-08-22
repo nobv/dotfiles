@@ -2,13 +2,16 @@
 #
 #   <bundle id>  <gallery author>/<slug>
 #
-# Installed by scripts/alfred-workflow-sync.sh (`just alfred sync`), which
+# Installed by scripts/alfred-workflows.sh (`just alfred sync`), which
 # fetches https://alfred.app/workflows/<author>/<slug>/download/ — a redirect to
 # a pinned commit in alfredapp/gallery-workflows — and unpacks it into the
 # preferences bundle next to this file.
 #
 # The bundle id is what makes a re-run free: it decides "already installed"
 # locally, so a no-op sync never touches the network.
+#
+# `just alfred add` appends to this file, resolving a workflow to its slug via
+# the catalogue the Alfred Gallery workflow caches; hand-editing works too.
 #
 # Only Gallery workflows belong here. The self-made desk switcher is installed
 # from the den checkout instead — see the script.
