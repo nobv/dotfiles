@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# alfred-workflows.sh — keep the Alfred workflows on this machine and the
-# manifest that describes them in step.
+# workflows.sh — keep the Alfred workflows on this machine and the manifest
+# next to this file in step.
 #
 # The preferences bundle is tracked in this repo, but
 # `Alfred.alfredpreferences/workflows/` is gitignored: those folders belong to
@@ -9,24 +9,21 @@
 # specific configuration end up, which this public repo must never hold. So the
 # repo records *which* workflows belong here, not what is inside them — the set
 # of workflows follows a machine, per-workflow settings do not.
-#
-# `sync` is idempotent and a no-op run makes no network requests, which is what
-# makes it safe to hang off `just apply`.
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=lib.sh
-source "${SCRIPT_DIR}/lib.sh"
+MODULE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(cd "${MODULE_DIR}/../../.." && pwd)"
+# shellcheck source=../../../scripts/lib.sh
+source "${REPO_DIR}/scripts/lib.sh"
 
-REPO_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
-MANIFEST="${REPO_DIR}/modules/productivity/alfred/workflows.txt"
+MANIFEST="${MODULE_DIR}/workflows.txt"
 PLIST_BUDDY="/usr/libexec/PlistBuddy"
 GALLERY_BASE="https://alfred.app/workflows"
 
-# The Alfred Gallery workflow caches a catalogue of every Gallery workflow —
-# title plus alfred.app URL — which is what lets `add` resolve a slug. Its own
-# release is the fallback for a machine that has never run it.
+# The Alfred Gallery workflow caches a title-to-URL catalogue, which is what
+# lets `add` resolve a slug. Its own release is the fallback for a machine that
+# has never run it.
 GALLERY_CATALOGUE="${HOME}/Library/Caches/com.runningwithcrayons.Alfred/Workflow Data/com.alfredapp.vitor.alfredgallery/cache.json"
 GALLERY_CATALOGUE_REPO="alfredapp/gallery-cache"
 
@@ -37,7 +34,7 @@ DEN_WORKFLOW_LABEL="desk switcher"
 
 usage() {
     cat >&2 <<'USAGE'
-usage: alfred-workflows.sh <command>
+usage: workflows.sh <command>
 
   sync   install the manifest's workflows that this machine is missing
   add    append workflows installed here but missing from the manifest
@@ -51,8 +48,7 @@ need_jq() {
 
 # Alfred keeps the absolute path of the active preferences folder in prefs.json,
 # and nothing here is a symlink to it, so that file is the only honest answer.
-# ALFRED_WORKFLOWS_DIR overrides it, which is how this is tested without
-# touching live Alfred.
+# ALFRED_WORKFLOWS_DIR overrides it, for testing away from live Alfred.
 resolve_workflows_dir() {
     if [ -n "${ALFRED_WORKFLOWS_DIR:-}" ]; then
         printf '%s' "${ALFRED_WORKFLOWS_DIR}"
@@ -249,7 +245,6 @@ cmd_sync() {
 
     if [ "${INSTALLED_COUNT}" -gt 0 ]; then
         log_success "Installed ${INSTALLED_COUNT} workflow(s)"
-        log_info "Restart Alfred if they do not show up in Preferences"
     elif [ "${failed}" -eq 0 ]; then
         log_success "All manifest workflows are already installed"
     fi
@@ -324,7 +319,6 @@ cmd_add() {
     den_src="$(den_workflow_source)"
     [ -n "${den_src}" ] && den_id="$(plist_value "${den_src}" bundleid)"
 
-    # Collect first so the "nothing to record" case never opens the catalogue
     local -a pending_ids=() pending_names=()
     for dir in "${WORKFLOWS_DIR}"/*/; do
         [ -f "${dir}info.plist" ] || continue
@@ -347,8 +341,6 @@ cmd_add() {
 
     ensure_catalogue || { log_error "the Alfred Gallery catalogue is unavailable — add the entries by hand"; return 1; }
 
-    # Entries are appended as they resolve: a name the catalogue cannot settle
-    # fails the run without holding back the ones it could.
     local i added=0 failed=0 matches count url
     for i in "${!pending_ids[@]}"; do
         name="${pending_names[${i}]}"
