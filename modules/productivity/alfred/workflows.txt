@@ -7,3 +7,4 @@ com.alfredapp.vitor.alfredgallery  alfredapp/alfred-gallery
 com.alfredapp.vitor.1password      alfredapp/1password
 com.alfredapp.vitor.webhighlight   alfredapp/web-highlight
 app.alfred.stephenc.cleanshot      stephenc/cleanshot-x
+com.github.vanstrouble.alfred.caffeinedose  vanstrouble/caffeine-dose
