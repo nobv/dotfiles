@@ -23,6 +23,12 @@ in
       nix-direnv = {
         enable = true;
       };
+      config = {
+        global = {
+          # direnv: loading / direnv: export ~PATH ... のログを抑制
+          log_format = "";
+        };
+      };
     };
   };
 }
