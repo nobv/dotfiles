@@ -21,6 +21,7 @@
       claude-code.enable = true;
       codex.enable = true;
       gemini.enable = true;
+      orca.enable = true;
       perplexity.enable = true;
       poe.enable = false;
     };
