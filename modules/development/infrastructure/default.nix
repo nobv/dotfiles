@@ -7,6 +7,7 @@
     ./google-workspace-cli
     ./kubernetes
     ./oci
+    ./sbx
     ./sops
     ./terraform
   ];

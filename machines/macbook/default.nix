@@ -99,6 +99,7 @@
         google-workspace-cli.enable = true;
         kubernetes.enable = true;
         oci.enable = true;
+        sbx.enable = true;
         sops.enable = true;
         terraform.enable = true;
       };
