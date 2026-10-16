@@ -77,6 +77,7 @@
 
       infrastructure = {
         aws.enable = false;
+        databricks-cli.enable = true;
         docker.enable = true;
         gcp.enable = true;
         kubernetes.enable = true;

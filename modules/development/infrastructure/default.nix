@@ -1,6 +1,7 @@
 {
   imports = [
     ./aws
+    ./databricks-cli
     ./docker
     ./firebase-cli
     ./gcp
