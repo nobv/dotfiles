@@ -17,16 +17,22 @@ in
   };
 
   config = mkIf cfg.enable {
-    home-manager.users.${username}.programs.direnv = {
-      enable = true;
-      enableZshIntegration = true;
-      nix-direnv = {
+    home-manager.users.${username}.programs = {
+      zsh.initContent = mkBefore ''
+        export DIRENV_LOG_FORMAT=""
+      '';
+
+      direnv = {
         enable = true;
-      };
-      config = {
-        global = {
-          # direnv: loading / direnv: export ~PATH ... のログを抑制
-          log_format = "";
+        enableZshIntegration = true;
+        nix-direnv = {
+          enable = true;
+        };
+        config = {
+          global = {
+            # direnv: loading / direnv: export ~PATH ... のログを抑制
+            log_format = "";
+          };
         };
       };
     };
