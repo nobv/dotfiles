@@ -36,6 +36,11 @@ in
         home.file = {
           ".config/aerospace/aerospace.toml".source =
             config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/modules/system/aerospace/aerospace.toml";
+
+          ".config/aerospace/follow-aqua-voice.sh" = {
+            source = ./follow-aqua-voice.sh;
+            executable = true;
+          };
         };
 
         # Compiled here rather than built by Nix: pin-focus links against
