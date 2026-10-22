@@ -41,6 +41,10 @@
     "emSign ECC Root CA - C3"
   ];
 
+  # /usr/bin/curl reads /etc/ssl/cert.pem, which macOS has not updated and still
+  # trusts the roots above. Point it at the Nix bundle instead of editing that file.
+  environment.variables.SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+
   system = {
     primaryUser = username;
 
