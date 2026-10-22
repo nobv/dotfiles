@@ -32,6 +32,15 @@
       );
   };
 
+  # Roots with compromised eMudhra intermediates (2026-10), as NixOS does in
+  # nixpkgs#576390. Redundant once cacert >= 3.131.1 is in nixpkgs-unstable.
+  security.pki.caCertificateBlacklist = [
+    "Comodo AAA Services root"
+    "emSign ECC Root CA - G3"
+    "emSign Root CA - C1"
+    "emSign ECC Root CA - C3"
+  ];
+
   system = {
     primaryUser = username;
 
