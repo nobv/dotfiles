@@ -18,7 +18,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      go
+      go-bin
       gopls
       delve
       golangci-lint
@@ -29,6 +29,9 @@ in
     # Go configuration should be in Home Manager context
     home-manager.users.${username}.programs.go = {
       enable = true;
+      # programs.go also installs its package into the user profile; without
+      # this an unpatched pkgs.go stays on PATH there.
+      package = pkgs.go-bin;
       # goPath = "src";
     };
   };

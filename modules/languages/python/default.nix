@@ -19,7 +19,7 @@ in
     # https://github.com/NixOS/nixpkgs/blob/a0dbe47318/doc/languages-frameworks/python.section.md
     environment.systemPackages = with pkgs; [
       # python314
-      uv
+      uv-bin
       ruff
       pyright
       python3Packages.black
