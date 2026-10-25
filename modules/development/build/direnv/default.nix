@@ -20,14 +20,9 @@ in
     home-manager.users.${username}.programs.direnv = {
       enable = true;
       enableZshIntegration = true;
+      silent = true;
       nix-direnv = {
         enable = true;
-      };
-      config = {
-        global = {
-          # direnv: loading / direnv: export ~PATH ... のログを抑制
-          log_format = "";
-        };
       };
     };
   };
