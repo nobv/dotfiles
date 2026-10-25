@@ -20,7 +20,6 @@ in
     home-manager.users.${username}.programs.direnv = {
       enable = true;
       enableZshIntegration = true;
-      # direnv: loading / direnv: export ~PATH ... のログを抑制
       silent = true;
       nix-direnv = {
         enable = true;
