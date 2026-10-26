@@ -10,6 +10,14 @@ with lib;
 
 let
   cfg = config.modules.development.vcs.workmux;
+  removeGuard = pkgs.writeShellApplication {
+    name = "workmux-remove-guard";
+    runtimeInputs = [
+      pkgs.git
+      pkgs.gh
+    ];
+    text = builtins.readFile ./remove-guard.sh;
+  };
   sandboxConfig = lib.optionalString cfg.sandbox.enable ''
 
     sandbox:
@@ -54,6 +62,12 @@ let
         docs, style, refactor, perf, test, build, ci, chore, revert.
         Output only the branch name, no explanation.
       background: true
+
+    # Keeps the default node_modules cleanup, which a custom pre_remove list
+    # would otherwise replace.
+    pre_remove:
+      - ${removeGuard}/bin/workmux-remove-guard
+      - "<cleanup-node-modules>"
   ''
   + sandboxConfig;
 in
