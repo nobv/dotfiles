@@ -25,7 +25,9 @@ let
   configYaml = ''
     main_branch: main
     base_branch: origin/main
-    worktree_dir: ~/.workmux/{project}
+    # worktree_dir is left at workmux's default (<project>__worktrees/ beside
+    # the repo) so a worktree lands in the same den desk as its repo; a path
+    # through ~/Desk would follow whichever desk is current instead.
     nerdfont: true
 
     # Append new windows at the end instead of next to the current one, so

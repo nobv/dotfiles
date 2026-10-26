@@ -174,7 +174,7 @@ All code-changing work happens inside a `workmux` worktree, is validated rootles
 - **Skip**: questions/investigation only, a single trivial edit, a config value tweak, a typo fix
 
 ### Change flow
-1. Create the worktree: `workmux add <type>/<short-kebab-description>` following Conventional Commits (e.g. `workmux add feat/todoist-mcp`); same types as commits. Unlike the legacy `EnterWorktree` tool, the branch name is used **as-is** — no `worktree-` prefix, no `/`→`+` mangling — so it's already Conventional Commits–compliant and never needs renaming. This creates the worktree under `~/.workmux/dotfiles/<handle>` (see `.workmux.yaml` for pane layout and file operations) and switches the current tmux window to it.
+1. Create the worktree: `workmux add <type>/<short-kebab-description>` following Conventional Commits (e.g. `workmux add feat/todoist-mcp`); same types as commits. Unlike the legacy `EnterWorktree` tool, the branch name is used **as-is** — no `worktree-` prefix, no `/`→`+` mangling — so it's already Conventional Commits–compliant and never needs renaming. This creates the worktree under `~/.dotfiles__worktrees/<handle>` (workmux's default `<project>__worktrees/`, beside the repo) (see `.workmux.yaml` for pane layout and file operations) and switches the current tmux window to it.
 2. Implement inside the worktree — edit modules in `modules/<category>/<module>/default.nix`.
 3. Validate **without root**, entirely within the worktree:
    - `just nix check` (`nix flake check`) — syntax
