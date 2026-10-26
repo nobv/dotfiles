@@ -235,7 +235,7 @@ in
           # Same picker, scoped to Obsidian vault notes. Overrides next-window —
           # harmless, since `prefix n` does the same thing. $HOME is expanded
           # by the shell display-popup -E runs under, not hardcoded (public repo).
-          bind-key C-n display-popup -w 80% -h 80% -T " notes " -E "TMUX_FILE_PICKER_FD_FLAGS='-H --type f -e md' tmux-file-picker \"$HOME/Documents/ObsidianVault\""
+          bind-key C-n display-popup -w 80% -h 80% -T " notes " -E "TMUX_FILE_PICKER_FD_FLAGS='-H --type f -e md' tmux-file-picker \"$HOME/Bookshelf/notes\""
 
           # C-y: browse scrollback as searchable command+output blocks, paste back.
           bind-key C-y display-popup -w 60% -h 60% -T " snaglord " -E "tmux-snaglord"
