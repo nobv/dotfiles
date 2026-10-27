@@ -247,7 +247,7 @@ in
 
           # workmux's recommended tmux keybindings (https://workmux.raine.dev/guide).
           # C-s overrides tmux-resurrect's manual save — continuum already
-          # autosaves every 5 minutes, so only the "save now" escape hatch is lost.
+          # autosaves every minute, so only the "save now" escape hatch is lost.
           bind-key C-s display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " workmux " -E "workmux dashboard"
           bind-key C-w display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " workmux " -E "workmux dashboard --tab worktrees"
           bind-key C-t run-shell "workmux sidebar"
@@ -323,7 +323,7 @@ in
               set -g @continuum-restore 'on'
               # Minutes. A restore resumes the agent sessions recorded at the
               # last save, so keep it short.
-              set -g @continuum-save-interval '5'
+              set -g @continuum-save-interval '1'
             '';
           }
           {
