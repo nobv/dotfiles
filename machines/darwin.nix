@@ -32,9 +32,8 @@
       );
   };
 
-  # /usr/bin/curl reads /etc/ssl/cert.pem, which macOS has not updated and still
-  # trusts the roots compromised by the eMudhra intermediates (2026-10). Point
-  # it at the Nix bundle (nix-darwin distrusts them) instead of editing that file.
+  # /usr/bin/curl reads /etc/ssl/cert.pem, which macOS has not updated for the
+  # eMudhra distrust (2026-10). Point it at the Nix bundle instead.
   environment.variables.SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
 
   system = {
