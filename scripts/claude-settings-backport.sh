@@ -11,17 +11,18 @@ CONFIG_DIR="${CLAUDE_CONFIG_DIR:-${HOME}/.claude}"
 LIVE="${CONFIG_DIR}/settings.json"
 REPO_REL="modules/ai/claude-code/settings.json"
 BRANCH="chore/claude-settings-backport"
-DRY_RUN=false NO_PR=false NO_MERGE=false ALL=false EDIT=false
+DRY_RUN=false CHECK=false NO_PR=false NO_MERGE=false ALL=false EDIT=false
 
 parse_args() {
   while [ $# -gt 0 ]; do
     case "$1" in
       --dry-run) DRY_RUN=true ;;
+      --check)   CHECK=true ;;
       --no-pr)   NO_PR=true ;;
       --no-merge) NO_MERGE=true ;;
       --all)     ALL=true ;;
       --edit)    EDIT=true ;;
-      -h|--help) echo "usage: claude-settings-backport.sh [repo-settings-path] [--dry-run|--no-pr|--no-merge|--all|--edit]"; exit 0 ;;
+      -h|--help) echo "usage: claude-settings-backport.sh [repo-settings-path] [--dry-run|--check|--no-pr|--no-merge|--all|--edit]"; exit 0 ;;
       -*) log_error "unknown flag: $1"; exit 1 ;;
       *) REPO_REL="$1" ;;
     esac
@@ -143,6 +144,14 @@ main() {
 
   if $DRY_RUN; then
     log_info "差分候補(--dry-run):"; printf '  - %s\n' "${keys[@]}"; exit 0
+  fi
+
+  # switch の symlink 張り直し(force = true)で消える前に止める。
+  if $CHECK; then
+    log_error "ライブ settings.json にだけある変更があります: $LIVE"
+    printf '  - %s\n' "${keys[@]}"
+    log_info "取り込む: just claude backport / 破棄する: rm $LIVE"
+    exit 1
   fi
 
   # 対話プロンプト前に前提を確認して早期失敗させる(gh 不在・オフライン)。

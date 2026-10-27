@@ -39,7 +39,7 @@ This is a Nix Darwin configuration using flakes and Home Manager for macOS syste
 
 ### just commands (recommended)
 The `Justfile` uses modules under `just/`, plus module-local ones that sit with what they drive (`modules/productivity/alfred/alfred.just`). Recipes are invoked as `just <module> <recipe>` (e.g. `just apm lock`); the `::` form (`just apm::lock`) is equivalent. Run `just` to list everything, `just --list <module>` for one group.
-- Apply everything (ff `main` → switch → apm sync → claude plugins → alfred sync): `just apply`
+- Apply everything (ff `main` → claude drift check → switch → apm sync → claude plugins → alfred sync): `just apply`
 - Apply configuration: `just nix switch`
 - Build without root (worktree-safe validation): `just nix build`
 - Dry-run activation (needs root; pre-`switch` check on `main`): `just nix dry-run`
@@ -52,6 +52,7 @@ The `Justfile` uses modules under `just/`, plus module-local ones that sit with 
 - Fast-forward `main`: `just git sync`
 - apm: `just apm sync` (install locked) · `just apm lock` (relock) · `just apm update` · `just apm outdated` · `just apm audit`
 - Claude native plugins: `just claude plugins` (primary config dir + every profile under `~/.config/claude/profiles/*`)
+- Claude settings drift: `just claude drift` (fails when live `~/.claude/settings.json` has become a real file with changes the next switch would discard) · `just claude backport` (takes them into the repo)
 - Alfred workflows: `just alfred sync` (installs whatever `modules/productivity/alfred/workflows.txt` lists but the machine is missing; skips silently where Alfred is not set up) · `just alfred add` (after installing one from the Gallery, records it in the manifest — commit the diff)
 
 To target a different machine, set the env var (CLI `MACHINE=…` does not work across modules): `DOTFILES_MACHINE=work just nix switch`
@@ -160,8 +161,7 @@ The `scripts/enable-module.sh` script provides an interactive interface for mana
 
 ## Commit Guidelines
 - Use Conventional Commits: `<type>(<optional scope>): <description>`
-- Keep commit messages to a single line only
-- **Do not include** Claude Code attribution (`🤖 Generated with...` or `Co-Authored-By: Claude`) in commit messages
+- Keep the commit message to a single subject line; trailers such as `Co-Authored-By:` are fine
 - Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert
 - Examples: `feat(homebrew): add packages`, `fix(wezterm): correct config`, `chore: update .gitignore`
 

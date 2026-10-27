@@ -9,9 +9,10 @@ mod alfred 'modules/productivity/alfred/alfred.just'
 default:
     @just --list
 
-# Full apply: fast-forward main, rebuild, then sync apm packages, Claude Code plugins and Alfred workflows
+# Full apply: fast-forward main, check Claude settings drift, rebuild, then sync apm packages, Claude Code plugins and Alfred workflows
 apply:
     just git sync
+    just claude drift
     just nix switch
     just apm sync
     just claude plugins
