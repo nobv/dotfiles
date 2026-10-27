@@ -3,6 +3,7 @@
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
+  "teammateMode": "tmux",
   "permissions": {
     "allow": [
       "Bash(codex exec:*)"
@@ -10,7 +11,19 @@
     "deny": [
       "Bash(sudo:*)",
       "Bash(just switch)",
-      "Bash(just switch:*)"
+      "Bash(just switch:*)",
+      "Read(~/.ssh/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.kube/**)",
+      "Read(~/.docker/config.json)",
+      "Read(~/.config/gcloud/**)",
+      "Read(~/.config/gh/hosts.yml)",
+      "Read(~/.config/op/**)",
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(!.env.example)",
+      "Read(.envrc.local)"
     ],
     "defaultMode": "auto"
   },
