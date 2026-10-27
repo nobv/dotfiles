@@ -178,8 +178,11 @@ in
           # darkens the actual colours of every cell at draw time, including
           # ones a TUI coloured itself — a plain fg/bg override only reached
           # cells left at the default colour, so agent output stayed bright.
-          set -g window-style 'dim=40%'
-          set -g window-active-style 'fg=terminal,bg=terminal'
+          # The active pane is pinned to near-black rather than the terminal's
+          # background (Ghostty's #14151b reads greyish), and it needs explicit
+          # colours: with "default" tmux falls back to window-style for fg/bg.
+          set -g window-style 'bg=#000000,dim=40%'
+          set -g window-active-style 'fg=terminal,bg=#0a0a10'
 
           # The active pane's top border carries its title. It used to be a
           # filled bar, which JankyBorders made redundant — that already outlines
