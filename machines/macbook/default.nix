@@ -170,6 +170,7 @@
       affine.enable = false;
       alfred.enable = true;
       anki.enable = true;
+      antinote.enable = true;
       capacities.enable = false;
       clickup.enable = false;
       d2.enable = true;
