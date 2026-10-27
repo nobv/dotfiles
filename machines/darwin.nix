@@ -32,17 +32,9 @@
       );
   };
 
-  # Roots with compromised eMudhra intermediates (2026-10), as NixOS does in
-  # nixpkgs#576390. Redundant once cacert >= 3.131.1 is in nixpkgs-unstable.
-  security.pki.caCertificateBlacklist = [
-    "Comodo AAA Services root"
-    "emSign ECC Root CA - G3"
-    "emSign Root CA - C1"
-    "emSign ECC Root CA - C3"
-  ];
-
   # /usr/bin/curl reads /etc/ssl/cert.pem, which macOS has not updated and still
-  # trusts the roots above. Point it at the Nix bundle instead of editing that file.
+  # trusts the roots compromised by the eMudhra intermediates (2026-10). Point
+  # it at the Nix bundle (nix-darwin distrusts them) instead of editing that file.
   environment.variables.SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
 
   system = {
