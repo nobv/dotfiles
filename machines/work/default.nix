@@ -25,7 +25,7 @@
         settingsSource = "machines/work/claude-code/settings.json";
       };
       gemini.enable = false;
-      orca.enable = true;
+      orca.enable = false;
       perplexity.enable = false;
     };
 
@@ -57,7 +57,7 @@
         fd.enable = true;
         fzf.enable = true;
         gnused.enable = true;
-        herdr.enable = true;
+        herdr.enable = false;
         jq.enable = true;
         navi.enable = true;
         parallel.enable = true;

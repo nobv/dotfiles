@@ -21,7 +21,7 @@
       claude-code.enable = true;
       codex.enable = true;
       gemini.enable = true;
-      orca.enable = true;
+      orca.enable = false;
       perplexity.enable = true;
       poe.enable = false;
     };
@@ -68,7 +68,7 @@
         fzf.enable = true;
         gnused.enable = true;
         herdr = {
-          enable = true;
+          enable = false;
           service.enable = true;
         };
         jq.enable = true;
