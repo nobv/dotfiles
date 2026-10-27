@@ -41,6 +41,14 @@ let
       rev = "8d2e84b0d76f0494b8851bef5057a536c0ba76c7";
       hash = "sha256-7Wm1M+yf8hIQGtPSbOyQ84b+yz5DYyGk2//0Fp6TBr8=";
     };
+    # Upstream resets a pane by writing window-style "bg=default" on it, which
+    # shadows the global window-style (the dim below); unset it instead.
+    postPatch = ''
+      substituteInPlace scripts/agent-state.sh scripts/pane-focus-in.sh scripts/reset_all.sh \
+        --replace-fail \
+          'set-option -p -t "$pane_id" window-style "bg=default"' \
+          'set-option -p -u -t "$pane_id" window-style'
+    '';
   };
   # fzf popup for inserting file paths into an AI agent's pane; not
   # packaged elsewhere, so wrap it with its deps. coreutils-prefixed (not
@@ -160,12 +168,13 @@ in
           # Thicken pane borders (makes agent-indicator's state colors easier to see)
           set -g pane-border-lines heavy
 
-          # Dim inactive panes so the focused one stands out. window-style only
-          # covers cells the running program left at default fg/bg (most
-          # prompt/TUI output sets its own colors, so this alone is subtle) —
-          # the border below is the primary focus cue.
-          set -g window-style 'fg=#44475a,bg=#0a0a10'
-          set -g window-active-style 'fg=#f8f8f2,bg=#282a36'
+          # Keep the terminal's colours instead of tmux 3.8's builtin themes.
+          set -g theme terminal
+
+          # dim= also darkens text a program coloured itself. The active style
+          # needs explicit colours: "default" falls back to window-style's.
+          set -g window-style 'bg=#000000,dim=40%'
+          set -g window-active-style 'fg=terminal,bg=#0a0a10'
 
           # The active pane's top border carries its title. It used to be a
           # filled bar, which JankyBorders made redundant — that already outlines

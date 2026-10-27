@@ -7,7 +7,8 @@ font-thicken-strength = 100
 adjust-cell-height = 5%
 theme = dracula
 background = 14151b
-minimum-contrast = 2.5
+# Off: it brightens the text tmux dims in inactive panes.
+minimum-contrast = 1
 
 confirm-close-surface = false
 
