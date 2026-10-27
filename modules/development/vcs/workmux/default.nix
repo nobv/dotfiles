@@ -45,6 +45,13 @@ let
       position: left
       layout: tiles
 
+    # The default dark row highlight is close to tmux's active-pane bg
+    # (#282a36, modules/terminal/tmux), so the selected sidebar row vanished.
+    # #6272a4 matches the current-window tab in the status line.
+    theme:
+      custom:
+        highlight_row_bg: "#6272a4"
+
     # Reuses the authenticated Claude Code CLI; haiku keeps naming calls cheap.
     auto_name:
       command: "claude --model haiku -p"
