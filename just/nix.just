@@ -40,9 +40,10 @@ update-input INPUT:
 show:
     nix flake show
 
-# Enter the development shell
+# Enter the development shell. The profile is a GC root for the pre-commit that
+# the shellHook installs into .git/hooks, so `just nix gc` can't delete it.
 dev:
-    nix develop
+    nix develop --profile "$(git rev-parse --git-common-dir)/nix-dev-profile"
 
 # Interactive module enable/disable
 modules:
