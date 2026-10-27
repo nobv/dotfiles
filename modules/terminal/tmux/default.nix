@@ -41,10 +41,8 @@ let
       rev = "8d2e84b0d76f0494b8851bef5057a536c0ba76c7";
       hash = "sha256-7Wm1M+yf8hIQGtPSbOyQ84b+yz5DYyGk2//0Fp6TBr8=";
     };
-    # Upstream "resets" a pane's background by writing a pane-level
-    # window-style "bg=default", which then shadows the global window-style
-    # (the inactive-pane dim below) on that pane for good. Unset the pane
-    # option instead so the pane falls back to the global style.
+    # Upstream resets a pane by writing window-style "bg=default" on it, which
+    # shadows the global window-style (the dim below); unset it instead.
     postPatch = ''
       substituteInPlace scripts/agent-state.sh scripts/pane-focus-in.sh scripts/reset_all.sh \
         --replace-fail \
@@ -170,17 +168,11 @@ in
           # Thicken pane borders (makes agent-indicator's state colors easier to see)
           set -g pane-border-lines heavy
 
-          # tmux 3.8 ships builtin light/dark themes that change the default
-          # colours; keep the terminal's (Dracula) colours as before.
+          # Keep the terminal's colours instead of tmux 3.8's builtin themes.
           set -g theme terminal
 
-          # Dim inactive panes so the focused one stands out. dim= (tmux 3.8)
-          # darkens the actual colours of every cell at draw time, including
-          # ones a TUI coloured itself — a plain fg/bg override only reached
-          # cells left at the default colour, so agent output stayed bright.
-          # The active pane is pinned to near-black rather than the terminal's
-          # background (Ghostty's #14151b reads greyish), and it needs explicit
-          # colours: with "default" tmux falls back to window-style for fg/bg.
+          # dim= also darkens text a program coloured itself. The active style
+          # needs explicit colours: "default" falls back to window-style's.
           set -g window-style 'bg=#000000,dim=40%'
           set -g window-active-style 'fg=terminal,bg=#0a0a10'
 
