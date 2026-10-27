@@ -128,6 +128,10 @@ merge_pr() {
 main() {
   parse_args "$@"
   command -v jq >/dev/null 2>&1 || { log_error "jq not found"; exit 1; }
+  # 消えていれば switch が張り直すだけで、失う変更はない。
+  if $CHECK && [ ! -e "$LIVE" ]; then
+    log_info "ライブ settings.json がありません(switch で作られます): $LIVE"; exit 0
+  fi
   [ -f "$LIVE" ] || { log_error "live settings.json not found: $LIVE"; exit 1; }
   [ -f "$REPO_REL" ] || { log_error "repo settings.json not found: $REPO_REL"; exit 1; }
   jq empty "$LIVE" 2>/dev/null || { log_error "invalid JSON: $LIVE"; exit 1; }
