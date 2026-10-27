@@ -50,6 +50,19 @@ let
           'set-option -p -u -t "$pane_id" window-style'
     '';
   };
+  # Relaunches Claude Code / Codex in their original panes with the same
+  # conversation after tmux-resurrect restores the layout (not in nixpkgs)
+  tmux-assistant-resurrect = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux-assistant-resurrect";
+    version = "unstable-2026-10-26";
+    rtpFilePath = "tmux-assistant-resurrect.tmux";
+    src = pkgs.fetchFromGitHub {
+      owner = "timvw";
+      repo = "tmux-assistant-resurrect";
+      rev = "b8e73bb7ec0b606522815f36b4a020ae64e7c99d";
+      hash = "sha256-KSWh7nQ9xFV60TX3ewIK+a2AzpfNqsjy58J0lq1LRxM=";
+    };
+  };
   # fzf popup for inserting file paths into an AI agent's pane; not
   # packaged elsewhere, so wrap it with its deps. coreutils-prefixed (not
   # coreutils) is required: --git-root uses GNU-only grealpath/--relative-to.
@@ -98,6 +111,9 @@ in
       # so symlink it to the nix store path at a stable location
       home.file.".tmux/plugins/tmux-agent-indicator".source =
         "${tmux-agent-indicator}/share/tmux-plugins/tmux-agent-indicator";
+      # Same for tmux-assistant-resurrect's SessionStart/SessionEnd hooks.
+      home.file.".tmux/plugins/tmux-assistant-resurrect".source =
+        "${tmux-assistant-resurrect}/share/tmux-plugins/tmux-assistant-resurrect";
 
       home.packages = [ tmux-file-picker ];
 
@@ -231,7 +247,7 @@ in
 
           # workmux's recommended tmux keybindings (https://workmux.raine.dev/guide).
           # C-s overrides tmux-resurrect's manual save — continuum already
-          # autosaves every 30s, so only the "save now" escape hatch is lost.
+          # autosaves every 5 minutes, so only the "save now" escape hatch is lost.
           bind-key C-s display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " workmux " -E "workmux dashboard"
           bind-key C-w display-popup -d "#{pane_current_path}" -w 90% -h 90% -T " workmux " -E "workmux dashboard --tab worktrees"
           bind-key C-t run-shell "workmux sidebar"
@@ -286,11 +302,28 @@ in
             '';
           }
           {
+            plugin = tmux-assistant-resurrect; # https://github.com/timvw/tmux-assistant-resurrect
+            extraConfig = ''
+              # Without these it writes its hooks into ~/.claude/settings.json
+              # (a symlink into this repo), ~/.cursor and ~/.config/opencode on
+              # every start. The Claude hooks are declared in
+              # modules/ai/claude-code/settings.json instead, written so its
+              # opt-out cleanup does not recognise them as its own.
+              set -g @assistant-resurrect-claude 'off'
+              set -g @assistant-resurrect-cursor 'off'
+              set -g @assistant-resurrect-opencode 'off'
+              # Profiles (CLAUDE_CONFIG_DIR) resume against their own history.
+              set -g @assistant-resurrect-capture-env 'CLAUDE_CONFIG_DIR'
+            '';
+          }
+          {
             plugin = continuum; # https://github.com/tmux-plugins/tmux-continuum
             extraConfig = ''
               set -g @continuum-boot 'on'
               set -g @continuum-restore 'on'
-              set -g @continuum-save-interval '30'
+              # Minutes. A restore resumes the agent sessions recorded at the
+              # last save, so keep it short.
+              set -g @continuum-save-interval '5'
             '';
           }
           {
