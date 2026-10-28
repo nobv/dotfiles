@@ -41,9 +41,11 @@ let
     dashboard:
       preview_size: 60
 
+    # Pinned because the derived default left every sidebar pane at 1 column.
     sidebar:
       position: left
       layout: tiles
+      width: 40
 
     # The default dark row highlight is close to tmux's active-pane bg
     # (#282a36, modules/terminal/tmux), so the selected sidebar row vanished.
