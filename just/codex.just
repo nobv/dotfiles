@@ -1,4 +1,5 @@
-set working-directory := '../../..'
+# Codex recipes. Run from the repo root (modules live under just/).
+set working-directory := '..'
 
 # Preview claude-mem hook repairs; pass --apply to replace the listed symlinks
 repair-hooks *ARGS:
