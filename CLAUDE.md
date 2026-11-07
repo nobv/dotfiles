@@ -54,6 +54,7 @@ The `Justfile` uses modules under `just/`, plus module-local ones that sit with 
 - Claude native plugins: `just claude plugins` (primary config dir + every profile under `~/.config/claude/profiles/*`)
 - Claude settings drift: `just claude drift` (fails when live `~/.claude/settings.json` has become a real file with changes the next switch would discard) · `just claude backport` (takes them into the repo)
 - Crit Codex plugin: `just crit sync` (install or refresh; skips where crit or Codex is missing)
+- Codex plugin hook repair: `just codex repair-hooks` (preview) · `just codex repair-hooks --apply` (replace claude-mem dependency bin links; rerun after updates if needed)
 - Alfred workflows: `just alfred sync` (installs whatever `modules/productivity/alfred/workflows.txt` lists but the machine is missing; skips silently where Alfred is not set up) · `just alfred add` (after installing one from the Gallery, records it in the manifest — commit the diff)
 
 To target a different machine, set the env var (CLI `MACHINE=…` does not work across modules): `DOTFILES_MACHINE=work just nix switch`
