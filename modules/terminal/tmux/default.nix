@@ -92,6 +92,29 @@ let
         }
     '';
   };
+  # Evens out a just-split pane's siblings, but only when there are 3+ of
+  # them. split-window already halves the target pane, so with 2 siblings
+  # there is nothing to do — and running `select-layout -E` anyway makes it
+  # climb to the grandparent cell, which tmux 3.8 miscomputes when that cell
+  # holds a nested split (the other panes grow until they overflow the
+  # window). tmux comes from the server's PATH so the client always matches
+  # the running server.
+  tmux-split-even = pkgs.writeShellApplication {
+    name = "tmux-split-even";
+    runtimeInputs = [ pkgs.jq ];
+    text = ''
+      pane="$1"
+      layout="$(tmux display-message -p -t "$pane" '#{window_layout}')"
+      # Children of the cell that directly holds the pane; 0 if the layout
+      # is not the JSON form (then leave the split as tmux made it).
+      n="$(jq -r --arg id "$pane" \
+        '[.. | objects | select(.c? and any(.c[]; .I? == $id)) | .c | length] | first // 0' \
+        <<<"$layout" 2>/dev/null || echo 0)"
+      if [ "$n" -ge 3 ]; then
+        tmux select-layout -t "$pane" -E
+      fi
+    '';
+  };
 in
 {
   options.modules.terminal.tmux = {
@@ -156,14 +179,15 @@ in
           # all the way out to the outer shell
           set -g detach-on-destroy off
 
-          # | splits the current pane into columns, - into rows. `select-layout
-          # -E` then evens out only the new pane's siblings (the panes sharing
-          # its parent cell), so nesting survives. The named layouts
+          # | splits the current pane into columns, - into rows. tmux-split-even
+          # then evens out only the new pane's siblings (the panes sharing its
+          # parent cell), so nesting survives; see its definition for why it
+          # does not just run `select-layout -E`. The named layouts
           # (even-horizontal / even-vertical) must not be used here: they
           # rebuild the whole window as one flat row/column, flattening every
           # nested split.
-          bind | split-window -h -c "#{pane_current_path}" \; select-layout -E
-          bind - split-window -v -c "#{pane_current_path}" \; select-layout -E
+          bind | split-window -h -c "#{pane_current_path}" \; run-shell "${tmux-split-even}/bin/tmux-split-even '#{pane_id}'"
+          bind - split-window -v -c "#{pane_current_path}" \; run-shell "${tmux-split-even}/bin/tmux-split-even '#{pane_id}'"
 
           # Re-even the remaining siblings when a pane closes (explicit
           # kill-pane or the pane's shell/process exiting on its own). `-E` is
