@@ -104,9 +104,6 @@ in
                 force = true;
               };
               ".claude/CLAUDE.md".source = mkSymlink sharedClaudeMd;
-              ".claude/commands/difit.md".source = mkSymlink "modules/ai/claude-code/commands/difit.md";
-              # difit/difit-review skills now come from upstream via apm
-              # (yoshiko-pg/difit/skills/*); see modules/ai/apm/apm.yml.
               ".config/cship.toml".source = mkSymlink "modules/ai/claude-code/cship.toml";
             }
           ]

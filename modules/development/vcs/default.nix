@@ -8,7 +8,6 @@
 {
   imports = [
     ./crit
-    ./difit
     ./fork
     ./gh-dash
     ./git
