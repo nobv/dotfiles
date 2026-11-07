@@ -12,6 +12,10 @@ LIVE="${CONFIG_DIR}/settings.json"
 REPO_REL="modules/ai/claude-code/settings.json"
 BRANCH="chore/claude-settings-backport"
 DRY_RUN=false CHECK=false NO_PR=false NO_MERGE=false ALL=false EDIT=false
+# 対話プロンプトの入力元(テストで差し替える)。
+PROMPT_IN="${PROMPT_IN:-/dev/tty}"
+# prepare_branch 前のブランチ。失敗時に restore_on_error がここへ戻す。
+ORIG_REF=""
 
 parse_args() {
   while [ $# -gt 0 ]; do
@@ -72,8 +76,10 @@ select_keys() {
     if $ALL; then APPROVED+=("$k"); continue; fi
     printf '\n=== %s (live value) ===\n' "$k"
     jq --arg k "$k" '.[$k]' "$live"
-    read -r -p "取り込む? [y/N] " ans </dev/tty || ans=""
-    [[ "$ans" =~ ^[Yy]$ ]] && APPROVED+=("$k")
+    read -r -p "取り込む? [y/N] " ans <"$PROMPT_IN" || ans=""
+    # `[[ ]] && APPROVED+=` だと最後のキーを N にしたとき関数が 1 を返し、
+    # set -e で main ごと落ちるため if で書く。
+    if [[ "$ans" =~ ^[Yy]$ ]]; then APPROVED+=("$k"); fi
   done
 }
 
@@ -87,6 +93,27 @@ commit_message() {
   printf 'chore(claude): backport settings.json (%s)' "$joined"
 }
 
+# EXIT trap。異常終了なら repo 側の書きかけを退避・破棄して ORIG_REF に戻す。
+# 取り込み元のライブ settings.json は触らないので、再実行すれば同じ差分が出る。
+restore_on_error() {
+  local rc="$1" backup
+  [ "$rc" -eq 0 ] && return 0
+  [ -n "$ORIG_REF" ] || exit "$rc"
+  if [ -f "$REPO_REL" ] && ! git diff --quiet HEAD -- "$REPO_REL" 2>/dev/null; then
+    backup="$(mktemp "${TMPDIR:-/tmp}/claude-settings-backport.XXXXXX")"
+    cp "$REPO_REL" "$backup"
+    log_warning "書きかけの $REPO_REL を退避しました: $backup"
+  fi
+  git reset --quiet -- "$REPO_REL" 2>/dev/null || true
+  git checkout --quiet -- "$REPO_REL" 2>/dev/null || true
+  if git checkout --quiet "$ORIG_REF" 2>/dev/null; then
+    log_warning "失敗したため $ORIG_REF に戻しました。"
+  else
+    log_error "$ORIG_REF に戻せませんでした。git status を確認してください。"
+  fi
+  exit "$rc"
+}
+
 prepare_branch() {
   if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null 2>&1; then
     git fetch origin "$BRANCH" --quiet
@@ -98,7 +125,9 @@ prepare_branch() {
 
 commit_and_push() {
   git add "$REPO_REL"
-  git commit -m "$(commit_message)" --quiet
+  # pre-commit の設定(.pre-commit-config.yaml)は dev shell の中でしか生成されず、
+  # 外では hook が必ず失敗する。設定がある環境ではこの変数は何もしない。
+  PRE_COMMIT_ALLOW_NO_CONFIG=1 git commit -m "$(commit_message)" --quiet
   $NO_PR && { log_success "commit まで完了(--no-pr)。"; return 0; }
   git push -u origin "$BRANCH" --quiet
 }
@@ -167,6 +196,8 @@ main() {
     log_info "取り込むキーが選択されませんでした。"; exit 0
   fi
 
+  ORIG_REF="$(git symbolic-ref --quiet --short HEAD || git rev-parse HEAD)"
+  trap 'restore_on_error $?' EXIT
   prepare_branch
 
   apply_keys "$REPO_REL" "$LIVE" "${APPROVED[@]}"
