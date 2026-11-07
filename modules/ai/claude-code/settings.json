@@ -159,6 +159,11 @@
   "tui": "fullscreen",
   "theme": "dark",
   "editorMode": "vim",
-  "autoCompactEnabled": false,
-  "agentPushNotifEnabled": true
+  "autoCompactEnabled": true,
+  "agentPushNotifEnabled": true,
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  }
 }
