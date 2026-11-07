@@ -108,11 +108,18 @@
     "padding": 0
   },
   "enabledPlugins": {
+    "crit@crit": true,
     "claude-mem@thedotmack": true,
     "workmux-status@workmux": true,
     "git-surgeon@git-surgeon": true
   },
   "extraKnownMarketplaces": {
+    "crit": {
+      "source": {
+        "source": "github",
+        "repo": "tomasz-tomczyk/crit"
+      }
+    },
     "thedotmack": {
       "source": {
         "source": "github",

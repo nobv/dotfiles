@@ -110,6 +110,7 @@
     "padding": 0
   },
   "enabledPlugins": {
+    "crit@crit": true,
     "claude-mem@thedotmack": true,
     "ralph-loop@claude-plugins-official": true,
     "linear@claude-plugins-official": true,
@@ -121,6 +122,12 @@
     "git-surgeon@git-surgeon": true
   },
   "extraKnownMarketplaces": {
+    "crit": {
+      "source": {
+        "source": "github",
+        "repo": "tomasz-tomczyk/crit"
+      }
+    },
     "thedotmack": {
       "source": {
         "source": "github",
