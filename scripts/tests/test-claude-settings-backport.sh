@@ -106,4 +106,57 @@ chmod +x "$stub/gh"
 PATH="$stub:$PATH" BRANCH="chore/claude-settings-backport" merge_pr && rc=0 || rc=1
 assert_eq "$rc" "0" "merge_pr: returns 0 (fallback) on merge failure"
 
+# --- select_keys (interactive): last key answered N must not fail ---
+d="$(fixture_dir)"
+cat > "$d/live.json" <<'JSON'
+{ "a": 1, "b": 2 }
+JSON
+ALL=false
+# 通常ファイルだと read のたびに開き直して先頭行を読むため、/dev/tty と同じく
+# ストリームとして読めるパイプ(process substitution)で答えを渡す。
+if PROMPT_IN=<(printf 'y\nN\n') select_keys "$d/live.json" a b >/dev/null 2>&1; then rc=0; else rc=1; fi
+assert_eq "$rc" "0" "select_keys: returns 0 when last key is declined"
+assert_eq "${APPROVED[*]}" "a" "select_keys: only y-answered keys approved"
+
+# 一時 git repo(REPO_REL を commit 済み、main ブランチ)を作る。
+make_repo() {
+  local r; r="$(mktemp -d)"
+  git -C "$r" init -q -b main
+  git -C "$r" config user.name t; git -C "$r" config user.email t@example.com
+  printf '{"k":1}\n' > "$r/s.json"
+  git -C "$r" add s.json; git -C "$r" commit -qm init
+  printf '%s' "$r"
+}
+
+# --- commit_and_push: pre-commit hook without config does not block ---
+r="$(make_repo)"
+cat > "$r/.git/hooks/pre-commit" <<'SH'
+#!/usr/bin/env bash
+# pre-commit 本体の挙動を模す: 設定が無く PRE_COMMIT_ALLOW_NO_CONFIG も無ければ失敗
+[ -f .pre-commit-config.yaml ] || [ -n "${PRE_COMMIT_ALLOW_NO_CONFIG:-}" ] || exit 1
+SH
+chmod +x "$r/.git/hooks/pre-commit"
+printf '{"k":2}\n' > "$r/s.json"
+if (cd "$r" && APPROVED=(k) && REPO_REL=s.json NO_PR=true commit_and_push >/dev/null 2>&1); then rc=0; else rc=1; fi
+assert_eq "$rc" "0" "commit_and_push: commits despite missing pre-commit config"
+assert_eq "$(git -C "$r" log -1 --format=%s)" "chore(claude): backport settings.json (k)" "commit_and_push: commit created"
+
+# --- restore_on_error: failure returns to ORIG_REF and discards half-applied edit ---
+r="$(make_repo)"
+git -C "$r" checkout -q -b chore/claude-settings-backport
+printf '{"k":3}\n' > "$r/s.json"; git -C "$r" add s.json
+(cd "$r" && REPO_REL=s.json ORIG_REF=main TMPDIR="$r" restore_on_error 1 >/dev/null 2>&1) && rc=0 || rc=$?
+assert_eq "$rc" "1" "restore_on_error: preserves failing exit code"
+assert_eq "$(git -C "$r" branch --show-current)" "main" "restore_on_error: back on ORIG_REF"
+assert_eq "$(git -C "$r" status --porcelain -- s.json)" "" "restore_on_error: repo file restored"
+backup="$(ls "$r"/claude-settings-backport.* 2>/dev/null | head -1)"
+assert_eq "$(cat "$backup" 2>/dev/null)" '{"k":3}' "restore_on_error: half-applied edit backed up"
+
+# --- restore_on_error: success is a no-op ---
+r="$(make_repo)"
+git -C "$r" checkout -q -b chore/claude-settings-backport
+if (cd "$r" && REPO_REL=s.json ORIG_REF=main restore_on_error 0); then rc=0; else rc=1; fi
+assert_eq "$rc" "0" "restore_on_error: returns 0 on success"
+assert_eq "$(git -C "$r" branch --show-current)" "chore/claude-settings-backport" "restore_on_error: stays on branch on success"
+
 echo "PASS=$PASS FAIL=$FAIL"; [ "$FAIL" -eq 0 ]
