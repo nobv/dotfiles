@@ -1459,40 +1459,6 @@ dependencies:
     .claude/skills/next-best-practices/self-hosting.md: sha256:f59e9afa0ff4dcbe20374dff13517ccec3ac6a239ef6d02e0ee8863cf9fc7082
     .claude/skills/next-best-practices/suspense-boundaries.md: sha256:63e2e7125b1a1a9d652dd301814ad7140f8ab3ad6726b2b53df76a89d9bc262a
   content_hash: sha256:4bf1b21f7a66848642c150cab284f24c004ad6da0f717eed4fe9db74eaa6b6a8
-- repo_url: yoshiko-pg/difit
-  name: difit
-  host: github.com
-  resolved_commit: 59df3692ff4aa8f96df84b98e17171fa452a0b04
-  resolved_ref: 59df369
-  version: unknown
-  virtual_path: skills/difit
-  is_virtual: true
-  package_type: claude_skill
-  deployed_files:
-  - .claude/skills/difit
-  - .claude/skills/difit/SKILL.md
-  - .claude/skills/difit/agents/openai.yaml
-  deployed_file_hashes:
-    .claude/skills/difit/SKILL.md: sha256:8171ee2b19d85ba4702e4a0d190e63803ec9d5e91416530c78a63ba86808c97b
-    .claude/skills/difit/agents/openai.yaml: sha256:305d35f2ee4dda20d4c7fbe1eb18fda366f3e84d9ff84b2111d4faa3a608007f
-  content_hash: sha256:d7183ec34bc1b776e8e54cf34efd1bf8be8b04bdb424e5efcfbb3faa5f095db7
-- repo_url: yoshiko-pg/difit
-  name: difit
-  host: github.com
-  resolved_commit: 59df3692ff4aa8f96df84b98e17171fa452a0b04
-  resolved_ref: 59df369
-  version: unknown
-  virtual_path: skills/difit-review
-  is_virtual: true
-  package_type: claude_skill
-  deployed_files:
-  - .claude/skills/difit-review
-  - .claude/skills/difit-review/SKILL.md
-  - .claude/skills/difit-review/agents/openai.yaml
-  deployed_file_hashes:
-    .claude/skills/difit-review/SKILL.md: sha256:778555921c3d63e932d987a2b2181442b2f4a21767692a621d94a1b536cddfe8
-    .claude/skills/difit-review/agents/openai.yaml: sha256:8436c3a9d6f88c3c2852856f4a1cf4be19ca2f3f44bc5d629d43612ba57ab70b
-  content_hash: sha256:4f95a432d8a359a2c3a8d320b98c871dda13d03b8583fe202528890e767e8c30
 deployments:
 - kind: project-relative
   target: agents
@@ -3357,60 +3323,6 @@ deployments:
   - manaflow-ai/cmux/skills/cmux
   active_owner: manaflow-ai/cmux/skills/cmux
   content_hash: sha256:ec84fc1c437320234ba8192c43e173910ea44dc77dd47d5229c37c95ca5c07bd
-- kind: project-relative
-  target: claude
-  value: .claude/skills/difit
-  runtime: null
-  scope: project
-  owners:
-  - yoshiko-pg/difit/skills/difit
-  active_owner: yoshiko-pg/difit/skills/difit
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/difit-review
-  runtime: null
-  scope: project
-  owners:
-  - yoshiko-pg/difit/skills/difit-review
-  active_owner: yoshiko-pg/difit/skills/difit-review
-  content_hash: null
-- kind: project-relative
-  target: claude
-  value: .claude/skills/difit-review/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - yoshiko-pg/difit/skills/difit-review
-  active_owner: yoshiko-pg/difit/skills/difit-review
-  content_hash: sha256:778555921c3d63e932d987a2b2181442b2f4a21767692a621d94a1b536cddfe8
-- kind: project-relative
-  target: claude
-  value: .claude/skills/difit-review/agents/openai.yaml
-  runtime: null
-  scope: project
-  owners:
-  - yoshiko-pg/difit/skills/difit-review
-  active_owner: yoshiko-pg/difit/skills/difit-review
-  content_hash: sha256:8436c3a9d6f88c3c2852856f4a1cf4be19ca2f3f44bc5d629d43612ba57ab70b
-- kind: project-relative
-  target: claude
-  value: .claude/skills/difit/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - yoshiko-pg/difit/skills/difit
-  active_owner: yoshiko-pg/difit/skills/difit
-  content_hash: sha256:8171ee2b19d85ba4702e4a0d190e63803ec9d5e91416530c78a63ba86808c97b
-- kind: project-relative
-  target: claude
-  value: .claude/skills/difit/agents/openai.yaml
-  runtime: null
-  scope: project
-  owners:
-  - yoshiko-pg/difit/skills/difit
-  active_owner: yoshiko-pg/difit/skills/difit
-  content_hash: sha256:305d35f2ee4dda20d4c7fbe1eb18fda366f3e84d9ff84b2111d4faa3a608007f
 - kind: project-relative
   target: claude
   value: .claude/skills/doc-coauthoring

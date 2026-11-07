@@ -93,7 +93,6 @@
         gh-dash.enable = true;
         pre-commit.enable = true;
         crit.enable = true;
-        difit.enable = true;
         git-surgeon.enable = true;
         workmux = {
           enable = true;
