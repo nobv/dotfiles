@@ -140,6 +140,7 @@
 
     productivity = {
       alfred.enable = true;
+      antinote.enable = true;
       capacities.enable = false;
       heptabase.enable = false;
       linear-linear.enable = true;
