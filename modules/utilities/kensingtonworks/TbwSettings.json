@@ -6,34 +6,62 @@
         "*": {
           "config": {
             "acceleration": true,
-            "accelerationRate": 30,
+            "accelerationRate": 40,
             "commands": [
               [
                 1,
                 {
                   "command": "mouse_leftClick",
-                  "params": null
+                  "params": {}
                 }
               ],
               [
                 2,
                 {
                   "command": "mouse_rightClick",
-                  "params": null
+                  "params": {}
+                }
+              ],
+              [
+                3,
+                {
+                  "command": "noAction",
+                  "params": {}
                 }
               ],
               [
                 4,
                 {
                   "command": "mouse_middleClick",
-                  "params": null
+                  "params": {}
+                }
+              ],
+              [
+                5,
+                {
+                  "command": "noAction",
+                  "params": {}
                 }
               ],
               [
                 8,
                 {
                   "command": "mouse_button4Click",
-                  "params": null
+                  "params": {}
+                }
+              ],
+              [
+                10,
+                {
+                  "command": "noAction",
+                  "params": {}
+                }
+              ],
+              [
+                12,
+                {
+                  "command": "noAction",
+                  "params": {}
                 }
               ],
               [
@@ -59,17 +87,17 @@
               ]
             ],
             "customModifiers": "cmd",
-            "customacceleration": true,
-            "customaccelerationRate": 20,
+            "customacceleration": false,
+            "customaccelerationRate": 0,
             "customspeed": 50,
             "id": 0,
-            "inertialScroll": false,
+            "inertialScroll": true,
             "inertialScrollFactor": 0,
             "inertialScrollNullSteps": 0,
             "inertialScrollTimer": 0,
             "lockedAxisModifiers": "ctrl",
             "scrollInvert": true,
-            "scrollLines": 100,
+            "scrollLines": 45,
             "slowDivider": 0,
             "slowModifiers": "",
             "snapModifiers": "",
@@ -124,7 +152,7 @@
     ]
   ],
   "platform": "darwin",
-  "timestamp": 1794544238,
+  "timestamp": 1794544527,
   "trayIcon": true,
   "versionMajor": 2,
   "versionMinor": 0
