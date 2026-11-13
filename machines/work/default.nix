@@ -208,6 +208,7 @@
       flux.enable = true;
       google-japanese-ime.enable = true;
       karabiner-elements.enable = true;
+      kensingtonworks.enable = true;
       logi-options-plus.enable = true;
       meetingbar.enable = true;
       thaw.enable = true;

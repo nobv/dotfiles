@@ -253,6 +253,7 @@
       insta360-link-controller.enable = true;
       istat-menus.enable = true;
       karabiner-elements.enable = true;
+      kensingtonworks.enable = true;
       leader-key.enable = false;
       logi-options-plus.enable = true;
       meetingbar.enable = true;

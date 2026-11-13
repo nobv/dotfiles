@@ -1,45 +1,67 @@
 {
   "devices": [
     [
-      32792,
+      32982,
       {
         "*": {
           "config": {
             "acceleration": true,
-            "accelerationRate": 100,
+            "accelerationRate": 40,
             "commands": [
               [
                 1,
                 {
                   "command": "mouse_leftClick",
-                  "params": null
+                  "params": {}
                 }
               ],
               [
                 2,
                 {
                   "command": "mouse_rightClick",
-                  "params": null
+                  "params": {}
+                }
+              ],
+              [
+                3,
+                {
+                  "command": "noAction",
+                  "params": {}
                 }
               ],
               [
                 4,
                 {
-                  "command": "mouse_button4Click",
-                  "params": {
-                    "label": "",
-                    "modifiers": ""
-                  }
+                  "command": "mouse_middleClick",
+                  "params": {}
+                }
+              ],
+              [
+                5,
+                {
+                  "command": "noAction",
+                  "params": {}
                 }
               ],
               [
                 8,
                 {
-                  "command": "mouse_button5Click",
-                  "params": {
-                    "label": "",
-                    "modifiers": ""
-                  }
+                  "command": "mouse_button4Click",
+                  "params": {}
+                }
+              ],
+              [
+                10,
+                {
+                  "command": "noAction",
+                  "params": {}
+                }
+              ],
+              [
+                12,
+                {
+                  "command": "noAction",
+                  "params": {}
                 }
               ],
               [
@@ -64,13 +86,18 @@
                 }
               ]
             ],
+            "customModifiers": "cmd",
+            "customacceleration": false,
+            "customaccelerationRate": 0,
+            "customspeed": 50,
             "id": 0,
             "inertialScroll": true,
             "inertialScrollFactor": 0,
             "inertialScrollNullSteps": 0,
             "inertialScrollTimer": 0,
-            "scrollInvert": false,
-            "scrollLines": 22,
+            "lockedAxisModifiers": "ctrl",
+            "scrollInvert": true,
+            "scrollLines": 45,
             "slowDivider": 0,
             "slowModifiers": "",
             "snapModifiers": "",
@@ -116,7 +143,7 @@
                 "label": ""
               }
             ],
-            "speed": 70
+            "speed": 80
           },
           "fileName": "",
           "name": "*"
@@ -125,7 +152,7 @@
     ]
   ],
   "platform": "darwin",
-  "timestamp": 1641910682,
+  "timestamp": 1794544527,
   "trayIcon": true,
   "versionMajor": 2,
   "versionMinor": 0
