@@ -1,12 +1,12 @@
 {
   "devices": [
     [
-      32792,
+      32982,
       {
         "*": {
           "config": {
             "acceleration": true,
-            "accelerationRate": 100,
+            "accelerationRate": 30,
             "commands": [
               [
                 1,
@@ -25,21 +25,15 @@
               [
                 4,
                 {
-                  "command": "mouse_button4Click",
-                  "params": {
-                    "label": "",
-                    "modifiers": ""
-                  }
+                  "command": "mouse_middleClick",
+                  "params": null
                 }
               ],
               [
                 8,
                 {
-                  "command": "mouse_button5Click",
-                  "params": {
-                    "label": "",
-                    "modifiers": ""
-                  }
+                  "command": "mouse_button4Click",
+                  "params": null
                 }
               ],
               [
@@ -64,13 +58,18 @@
                 }
               ]
             ],
+            "customModifiers": "cmd",
+            "customacceleration": true,
+            "customaccelerationRate": 20,
+            "customspeed": 50,
             "id": 0,
-            "inertialScroll": true,
+            "inertialScroll": false,
             "inertialScrollFactor": 0,
             "inertialScrollNullSteps": 0,
             "inertialScrollTimer": 0,
-            "scrollInvert": false,
-            "scrollLines": 22,
+            "lockedAxisModifiers": "ctrl",
+            "scrollInvert": true,
+            "scrollLines": 100,
             "slowDivider": 0,
             "slowModifiers": "",
             "snapModifiers": "",
@@ -116,7 +115,7 @@
                 "label": ""
               }
             ],
-            "speed": 70
+            "speed": 80
           },
           "fileName": "",
           "name": "*"
@@ -125,7 +124,7 @@
     ]
   ],
   "platform": "darwin",
-  "timestamp": 1641910682,
+  "timestamp": 1794544238,
   "trayIcon": true,
   "versionMajor": 2,
   "versionMinor": 0
