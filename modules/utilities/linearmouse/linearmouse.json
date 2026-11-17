@@ -1,0 +1,40 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.13.0",
+  "schemes" : [
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse"
+        }
+      },
+      "scrolling" : {
+        "reverse" : true
+      }
+    },
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0x80d6",
+          "productName" : "Kensington SlimBlade Pro Trackball(2.4GHz Receiver)",
+          "vendorID" : "0x47d"
+        }
+      },
+      "scrolling" : {
+        "acceleration" : 1,
+        "distance" : "auto",
+        "reverse" : true,
+        "smoothed" : {
+          "acceleration" : 1.1,
+          "bouncing" : true,
+          "enabled" : true,
+          "inertia" : 0.74,
+          "preset" : "easeInOut",
+          "response" : 0.68,
+          "speed" : 1.02
+        },
+        "speed" : 0
+      }
+    }
+  ]
+}
