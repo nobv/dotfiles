@@ -22,7 +22,7 @@ in
       # Runtime
       # nodejs_22
       # nodejs_23
-      nodejs-bin
+      nodejs_24
       biome
 
       # LSP servers
