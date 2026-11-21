@@ -3,7 +3,6 @@
   "env": {
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
-  "teammateMode": "tmux",
   "permissions": {
     "allow": [
       "Bash(codex exec:*)"
@@ -155,15 +154,16 @@
   },
   "language": "japanese",
   "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    }
+  },
   "advisorModel": "fable",
   "tui": "fullscreen",
   "theme": "dark",
   "editorMode": "vim",
   "autoCompactEnabled": true,
-  "agentPushNotifEnabled": true,
-  "modelSettings": {
-    "claude-opus-5-5": {
-      "effortLevel": "medium"
-    }
-  }
+  "teammateMode": "tmux",
+  "agentPushNotifEnabled": true
 }
