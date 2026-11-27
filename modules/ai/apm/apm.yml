@@ -5,6 +5,8 @@ author: nobv
 # Which agent platforms to deploy to:
 targets:
   - claude
+  - codex
+  - antigravity
 
 dependencies:
   apm:
