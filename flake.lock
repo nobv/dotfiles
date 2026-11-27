@@ -25,11 +25,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1787362861,
-        "narHash": "sha256-tGXXXSXX68nrFaoQpEpx03YiUnprtDqmpL28Gjdlh8U=",
+        "lastModified": 1794151098,
+        "narHash": "sha256-G3sqLGQuq4J2XVUTgC81aKKICOPV2nvV9NyNEcPN2/g=",
         "ref": "refs/heads/main",
-        "rev": "21e73fd1337c68c04a250d7ac678d616989c0460",
-        "revCount": 117,
+        "rev": "3a6bb76440558243a46f01bc9f4253efb55e43f9",
+        "revCount": 123,
         "type": "git",
         "url": "ssh://git@github.com/nobv/den"
       },

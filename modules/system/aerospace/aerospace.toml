@@ -1,15 +1,14 @@
-# Place a copy of this config to ~/.aerospace.toml
-# After that, you can edit ~/.aerospace.toml to your liking
+# AeroSpace template rendered by Home Manager.
+# Apply source changes through the Nix configuration. When den is enabled, Nix
+# prepends the exec-on-workspace-change hook, so don't define it here.
 
 # See: https://nikitabobko.github.io/AeroSpace/guide#config-version
 config-version = 2
 
-# This file is an out-of-store symlink into the dotfiles repo, so an edit is live the
-# moment it is saved; auto-reload makes AeroSpace pick it up without a reload-config
-# call. Two gotchas: this is a top-level key, so it must stay above every table (put it
-# below one and TOML scopes it into that table — 'Unknown key'), and the watcher only
-# starts after one manual reload, so run 'aerospace reload-config' once after adopting it.
-auto-reload-config = true
+# Keep the file watcher off: Home Manager links this file as a Nix store symlink,
+# and swapping that symlink never notifies AeroSpace's watcher. The onChange hook
+# in default.nix reloads AeroSpace after each rendered config change instead.
+auto-reload-config = false
 
 # 'break' and 'shelf' are the workspaces AeroSpace itself knows about — the
 # domain-independent ones (see desk-model note below). Keep them alive even when
@@ -18,20 +17,22 @@ auto-reload-config = true
 persistent-workspaces = ['break', 'shelf']
 
 # Desk model: each desk (domain) owns one AeroSpace workspace, switched exclusively
-# via the desk CLI — never bind desk switching to an AeroSpace key here. A window's
-# default home is its own desk's tiled surface (no on-window-detected rule needed).
+# via the desk CLI (which moves ~/Desk) — never bind desk switching to an AeroSpace
+# key here. Manual workspace navigation only peeks; it never changes the active desk.
+# A window's default home is its own desk's tiled surface (no on-window-detected
+# rule needed).
 # Three exceptions, all domain-independent (design D6 addendum, wagon-scope revision):
 #   - floating windows are the "wagon": they follow you across desk switches instead
 #     of staying tiled on one desk.
 #   - 'break' is the shared workspace (bound to alt-b) for life/comms apps that don't
 #     belong to a single desk. Its residents are floating — room furniture, not
-#     wagon passengers: desk (wagon-scope) excludes break/shelf from carry by
-#     workspace, so floating no longer means "gets swept along" for them. Floating
-#     also lets a break resident be peeked from whichever desk is active (Yoink
-#     handles drag-and-drop across the switch — its panel is invisible to AeroSpace).
+#     wagon passengers: desk excludes break/shelf from carry, except for explicitly
+#     declared global floating windows. Floating also lets a break resident be
+#     peeked from whichever desk is active (Yoink handles drag-and-drop across the
+#     switch — its panel is invisible to AeroSpace).
 #   - 'shelf' is the reference surface, pinned to a non-main monitor by the
 #     force-assignment below when one exists. Same rule as break: residents are
-#     floating, not carried (desk excludes break/shelf from carry). Desks and break
+#     floating, not carried (except declared global floating windows). Desks and break
 #     time-share the main monitor; the shelf sits off to the side when a side
 #     monitor exists, and otherwise time-shares main like break does, reached via
 #     alt-s (peek, then alt-tab back). A desk gets no force-assignment (D8: no
@@ -223,13 +224,15 @@ alt-shift-l = ['join-with right', 'mode main']
 #                 alt-b. Same carry exclusion as shelf.
 #
 # floating now means two different things depending on workspace: on a desk it's the
-# carry marker (wagon), on break/shelf it's settled furniture that desk's carry logic
-# explicitly skips by workspace. Tiled with no rule = the plain desk-scoped default.
+# carry marker (wagon), on break/shelf it's settled furniture. Private den config can
+# opt an app into global_floating: its floating windows follow every workspace change,
+# manual navigation included, and are carried out of break/shelf too.
+# Tiled with no rule = the plain desk-scoped default.
 #
 # One rule per category, not one per app: the bundle-id list IS the rule, so there is no
 # separate list that could drift out of sync with it. Sorting a new app means dropping
-# its id into the right alternation and saving — auto-reload does the rest. Three points
-# of mechanics, all load-bearing:
+# its id into the right alternation and applying the Nix configuration.
+# Three points of mechanics, all load-bearing:
 #   - the regex must be double-quoted inside the single-quoted expression. '\.' reads as
 #     an escape in AeroSpace's shell expression language and '$' is reserved in a bare
 #     word; neither survives outside the inner quotes.
