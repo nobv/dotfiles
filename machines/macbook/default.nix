@@ -15,12 +15,12 @@
   # Enable modules using actual directory structure paths
   modules = {
     ai = {
+      antigravity-cli.enable = true;
       apm.enable = true;
       chatgpt.enable = true;
       claude.enable = true;
       claude-code.enable = true;
       codex.enable = true;
-      gemini.enable = true;
       orca.enable = false;
       perplexity.enable = true;
       poe.enable = false;

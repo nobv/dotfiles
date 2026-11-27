@@ -15,6 +15,7 @@
   # Enable modules using actual directory structure paths
   modules = {
     ai = {
+      antigravity-cli.enable = true;
       apm.enable = true;
       chatgpt.enable = false;
       claude.enable = true;
@@ -24,7 +25,6 @@
         # Seeded from machines/work/claude-code/settings.json.example.
         settingsSource = "machines/work/claude-code/settings.json";
       };
-      gemini.enable = false;
       orca.enable = false;
       perplexity.enable = false;
     };
